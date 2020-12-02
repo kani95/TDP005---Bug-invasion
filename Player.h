@@ -7,8 +7,9 @@ class Player : public Character{
 public:
     //sf::CircleShape shape(50);
     Player();
-    void move() override;
-    bool check_inside_leaf(sf::Vector2<float> limit);
+    void move(float const dirx, float const diry) override;
+
+    //bool check_inside_leaf(sf::Vector2<float> limit);
 
 
 };

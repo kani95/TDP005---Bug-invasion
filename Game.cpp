@@ -101,16 +101,33 @@ void Game::poll_events()
 void Game::update()
 {
     poll_events();
-//    if (player.check_inside_leaf(leaf.position))
-//    {
-        player.move();
-//    }
+   //if (player.check_inside_leaf(leaf.position)) {
+
+
+       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+           player.move(0.f, -1.f);
+           // position.y += -2;
+       }
+
+       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+           player.move(-1.f, 0.f);
+           // position.x += -2;
+       }
+       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+           player.move(0.f, 1.f);
+           // position.y += 2;
+       }
+       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+           player.move(1.f, 0.f);
+           // position.x += 2;
+       }
+ //  }
 }
 
 
 void Game::render()
 {
-    player.shape.setPosition(player.position);
+    //player.shape.setPosition(player.position);
     window -> clear();
     window -> draw(leaf.shape);
     window -> draw(player.shape);

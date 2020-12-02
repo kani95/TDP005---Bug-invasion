@@ -4,11 +4,11 @@
 #include "Object.h"
 #include "Object.cpp"
 
-class Character : public Object{
+class Character : public Object {
 public:
     Character();
 
-    virtual void move() = 0;
+    virtual void move(float const, float const) = 0;
 
 
 protected:
@@ -16,6 +16,7 @@ protected:
     bool status;
     bool can_shoot;
     int score;
+    float movespeed;
 };
 
 

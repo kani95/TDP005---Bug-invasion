@@ -3,40 +3,27 @@
 
 Player::Player()
     :Character()
-{}
-
-
-void Player::move()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-        position.y += -2;
-    }
-
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        position.x += -2;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    {
-
-        position.y += 2;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        position.x += 2;
-    }
-
-    std::cout << position.x << " " << position.y << std::endl;
-    // std::cout << this -> shape.getGlobalBounds().height << "Height " << this -> shape.getGlobalBounds().width << " Width";
+    shape.setPosition(position);
 }
 
 
-bool Player::check_inside_leaf(sf::Vector2<float> limit)
+void Player::move(float const dirx, float const diry)
 {
-    if (this->position.x < limit.x && this->position.y < limit.y)
+   // sf::Clock clock;
+   // float delta_time = clock.restart().asSeconds();
+    shape.setPosition(shape.getPosition().x + (dirx * movespeed), shape.getPosition().y + (diry * movespeed));
+    //shape.setPosition(shape.getPosition().x + (delta_time * movespeed), shape.getPosition().y + (movespeed*delta_time));
+    std::cout << shape.getPosition().x << " " << shape.getPosition().y << std::endl;
+
+}
+
+
+/*bool Player::check_inside_leaf(sf::Vector2<float> limit)
+{
+    if (this->shape.getPosition().x < limit.x && this->shape.getPosition().y < limit.y)
     {
         return false;
     }
     return true;
-}
+}*/
