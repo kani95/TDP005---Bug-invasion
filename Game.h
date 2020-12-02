@@ -3,7 +3,7 @@
 
 // run game engine class
 
-class Game {
+class Game{
 private:
     sf::RenderWindow* window;
     sf::VideoMode video_mode;
@@ -11,11 +11,13 @@ private:
 
     void init_vars();
     void init_window();
+
+
 public:
     Game();
     virtual ~Game();
 
-    const bool window_status() const;
+    [[nodiscard]] bool window_status() const;
     void poll_events();
     void update();
     void render();
