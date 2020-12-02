@@ -1,8 +1,8 @@
 #include "Object.h"
 
 Object::Object()
-    :position{300,300}, speed{}, area{}, shape{}
+    :position{500,500}, area{}, speed{}, shape{}
 {
-    shape.setSize(sf::Vector2(100.f, 400.f));
+    shape.setSize(sf::Vector2(10.f, 40.f));
 }
 

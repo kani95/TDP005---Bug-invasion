@@ -1,6 +1,9 @@
 #ifndef MAIN_CPP_GAME_H
 #define MAIN_CPP_GAME_H
 #include "Player.h"
+#include "Player.cpp"
+#include "Leaf.h"
+#include "Leaf.cpp"
 // run game engine class
 
 class Game{
@@ -13,7 +16,8 @@ private:
     void init_window();
 
     //Player* player = new Player{};
-    Player* player;
+     Player player;
+     Leaf leaf;
 
 
 public:

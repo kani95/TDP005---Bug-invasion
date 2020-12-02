@@ -1,42 +1,46 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
 
-
 void Game::init_vars()
 {
-    this -> window = {nullptr};
+    window = {nullptr};
 }
 
 void Game::init_window()
 {
-    this -> video_mode.height = 600;
-    this -> video_mode.width = 800;
-    this -> window = new sf::RenderWindow(sf::VideoMode(this -> video_mode), "Game");
+
+    video_mode.height = 600;
+    video_mode.width = 800;
+    window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
+    window -> setKeyRepeatEnabled(false);
+    window -> setFramerateLimit(60);
+    window -> setVerticalSyncEnabled(true);
 }
 
 Game::Game()
+ : player()
 {
-    this -> init_vars();
-    this -> init_window();
+    init_vars();
+    init_window();
 }
 
 Game::~Game()
 {
-    delete this -> window;
+    delete window;
 }
 
 
 bool Game::window_status() const
 {
-    return this -> window -> isOpen();
+    return window -> isOpen();
 }
 
 
 void Game::poll_events()
 {
-    while (this -> window -> pollEvent(this -> event))
+    while (window -> pollEvent( event))
     {
-        switch (this -> event.type)
+        switch (event.type)
         {
             case sf::Event::Closed:
                 this -> window -> close();
@@ -87,6 +91,7 @@ void Game::poll_events()
                 break;
             case sf::Event::Count:
                 break;
+
         }
     }
 
@@ -95,16 +100,20 @@ void Game::poll_events()
 
 void Game::update()
 {
-    this -> poll_events();
-    player->move();
+    poll_events();
+//    if (player.check_inside_leaf(leaf.position))
+//    {
+        player.move();
+//    }
 }
 
 
 void Game::render()
 {
-    this -> window -> clear();
-
-
-    this -> window -> display();
+    player.shape.setPosition(player.position);
+    window -> clear();
+    window -> draw(leaf.shape);
+    window -> draw(player.shape);
+    window -> display();
 }
 

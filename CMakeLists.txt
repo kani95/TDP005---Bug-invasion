@@ -3,4 +3,4 @@ project(game)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(game main.cpp)
+add_executable(game main.cpp Leaf.cpp Leaf.h)
