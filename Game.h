@@ -1,16 +1,17 @@
 #ifndef MAIN_CPP_GAME_H
 #define MAIN_CPP_GAME_H
-
+#include "Player.h"
 // run game engine class
 
 class Game{
 private:
-    sf::RenderWindow* window;
+    sf::RenderWindow* window{};
     sf::VideoMode video_mode;
-    sf::Event event;
+    sf::Event event{};
 
     void init_vars();
     void init_window();
+    Player player;
 
 
 public:
