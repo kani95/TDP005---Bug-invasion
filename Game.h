@@ -11,7 +11,9 @@ private:
 
     void init_vars();
     void init_window();
-    Player player;
+
+    //Player* player = new Player{};
+    Player* player;
 
 
 public:

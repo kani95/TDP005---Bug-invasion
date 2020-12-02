@@ -11,6 +11,7 @@ protected:
 sf::Vector2f position;
 sf::Vector2f area;
 sf::Vector2f speed;
+sf::RectangleShape shape;
 };
 
 

@@ -96,6 +96,7 @@ void Game::poll_events()
 void Game::update()
 {
     this -> poll_events();
+    player->move();
 }
 
 

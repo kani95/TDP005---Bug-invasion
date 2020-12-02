@@ -28,6 +28,7 @@ void Player::move()
 }
 
 
+/*
 sf::Vector2f get_pos(sf::Vector2f direction)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -51,7 +52,4 @@ sf::Vector2f get_pos(sf::Vector2f direction)
 
     return direction;
 }
-
-sf::CircleShape Player::shape() {
-    return sf::CircleShape();
-}
+*/

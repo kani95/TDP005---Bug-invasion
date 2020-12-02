@@ -4,7 +4,7 @@
 
 class Player : public Character{
 public:
-    sf::CircleShape shape(50);
+    //sf::CircleShape shape(50);
     Player();
     void move() override;
 
