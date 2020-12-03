@@ -1,14 +1,15 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 void Game::init_vars()
 {
     window = {nullptr};
+    float dt;
 }
 
 void Game::init_window()
 {
-
     video_mode.height = 600;
     video_mode.width = 800;
     window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
@@ -33,6 +34,16 @@ Game::~Game()
 bool Game::window_status() const
 {
     return window -> isOpen();
+}
+
+
+void Game::update_tick()
+{
+    /* Update the time var with the time it takes to make
+     * one update call and than one render one frame */
+    system("cls");
+    std::cout << frame_time << std::endl;
+    frame_time = tick.restart().asMilliseconds();
 }
 
 
@@ -116,4 +127,3 @@ void Game::render()
     window -> draw(player.shape);
     window -> display();
 }
-

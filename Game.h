@@ -18,12 +18,16 @@ private:
      Player player;
      Leaf leaf;
 
+     sf::Clock tick;
+     // how long it take for the game to make one update call and one render call
+     float frame_time;
 
 public:
     Game();
     virtual ~Game();
 
     [[nodiscard]] bool window_status() const;
+    void update_tick();
     void poll_events();
     void update();
     void render();
