@@ -2,27 +2,29 @@
 
 void PlayState::update(float const& frame_time)
 {
-
+    std::cout << "Hello mate" << std::endl;
 }
 
 
-void GameState::render(sf::RenderTarget* = target)
+void PlayState::render(sf::RenderTarget* target)
 {
 
 }
 
-PlayState::PlayState(sf::RenderWindow* window) {
+/*PlayState::PlayState(sf::RenderWindow* window) {
 
-}
+}*/
 
-PlayState::~PlayState() {
+//PlayState::~PlayState() ;
 
-}
-
-void PlayState::render(sf::RenderTarget *target) {
-
-}
 
 void PlayState::quit_state() {
 
 }
+
+PlayState::PlayState(sf::RenderWindow *window)
+    : State(window){
+
+}
+
+PlayState::~PlayState() = default;

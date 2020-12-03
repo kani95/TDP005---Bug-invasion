@@ -11,14 +11,15 @@ private:
     std::vector<sf::Texture*> textures;
 
 public:
-    State(sf::RenderWindow* window);
+    explicit State(sf::RenderWindow* window);
     virtual ~State();
 
-    //virtual void quit_state = 0;
+    //
+    virtual void quit_state() = 0;
     virtual void update(float const& frame_time) = 0;
     // if nothing is give in the parameter render to window
     // else render to specific target
-    virtual void render(sf::RenderTarget* target = nullptr) = 0;
+    virtual void render(sf::RenderTarget* target) = 0;
 };
 
 
