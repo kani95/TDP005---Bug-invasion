@@ -2,7 +2,6 @@
 #define MAIN_CPP_CHARACTER_H
 #include <SFML/Graphics.hpp>
 #include "Object.h"
-#include "Object.cpp"
 
 class Character : public Object{
 public:

@@ -1,9 +1,8 @@
 #ifndef MAIN_CPP_GAME_H
 #define MAIN_CPP_GAME_H
+#include "Object.h"
 #include "Player.h"
-#include "Player.cpp"
 #include "Leaf.h"
-#include "Leaf.cpp"
 // run game engine class
 
 class Game{

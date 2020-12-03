@@ -1,7 +1,6 @@
 #ifndef MAIN_CPP_PLAYER_H
 #define MAIN_CPP_PLAYER_H
 #include "Character.h"
-#include "Character.cpp"
 
 class Player : public Character{
 public:
