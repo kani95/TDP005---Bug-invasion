@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "Player.h"
 #include "Leaf.h"
+#include "PlayState.h"
 // run game engine class
 
 class Game{
@@ -13,6 +14,7 @@ private:
 
     void init_vars();
     void init_window();
+    void init_states();
 
     //Player* player = new Player{};
      Player player;
@@ -22,8 +24,10 @@ private:
      // how long it take for the game to make one update call and one render call
      float frame_time;
 
+     std::stack<State*> states;
+
 public:
-    Game();
+    Game(sf::RenderWindow* window);
     virtual ~Game();
 
     [[nodiscard]] bool window_status() const;

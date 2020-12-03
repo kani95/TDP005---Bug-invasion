@@ -17,7 +17,11 @@ set (SOURCE_FILES
         Object.cpp
         Object.h
         Player.cpp
-        Player.h)
+        Player.h
+        PlayState.cpp
+        PlayState.h
+        State.cpp
+        State.h)
 
 add_executable(game ${SOURCE_FILES})
 target_link_libraries(game sfml-graphics sfml-window sfml-system)
