@@ -18,12 +18,33 @@ void Player::move(float const dirx, float const diry)
 
 }
 
+bool Player::check_inside_leaf(sf::RectangleShape const& box) {
 
-/*bool Player::check_inside_leaf(sf::Vector2<float> limit)
-{
-    if (this->shape.getPosition().x < limit.x && this->shape.getPosition().y < limit.y)
+    bool right = (shape.getPosition().x + shape.getSize().x > (box.getPosition().x + box.getSize().x));
+    bool left = (shape.getPosition().x < box.getPosition().x);
+    bool down = (shape.getPosition().y + shape.getSize().y > (box.getPosition().y + box.getSize().y));
+    bool up = (shape.getPosition().y < box.getPosition().y);
+
+    if (right)
     {
+        shape.setPosition(shape.getPosition().x - (movespeed), shape.getPosition().y);
         return false;
     }
+     else if (left)
+     {
+        shape.setPosition(shape.getPosition().x + (movespeed), shape.getPosition().y);
+        return false;
+     }
+     else if (down)
+    {
+        shape.setPosition(shape.getPosition().x, shape.getPosition().y - (movespeed));
+        return false;
+    }
+    else if (up)
+    {
+        shape.setPosition(shape.getPosition().x, shape.getPosition().y + (movespeed));
+        return false;
+    }
+
     return true;
-}*/
+}

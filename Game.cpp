@@ -101,7 +101,7 @@ void Game::poll_events()
 void Game::update()
 {
     poll_events();
-   //if (player.check_inside_leaf(leaf.position)) {
+   if (player.check_inside_leaf(leaf.shape)) {
 
 
        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -121,7 +121,7 @@ void Game::update()
            player.move(1.f, 0.f);
            // position.x += 2;
        }
- //  }
+   }
 }
 
 
