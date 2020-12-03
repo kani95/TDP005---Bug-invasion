@@ -1,6 +1,9 @@
-#include <SFML/Graphics.hpp>
-#include "Game.cpp"
+// #include <SFML/Graphics.hpp>
+#include "Game.h"
 
+// 1. vad gör vi fel med cmake?
+// 2. rörelse med player hackigt varför
+// 3. hur kan vi tänka att avgöra gränserna för bladet, hur kan vi mäta det
 
 int main()
 {
@@ -12,6 +15,8 @@ int main()
 
     while (game.window_status())
     {
+        game.update_tick();
+
         game.update();
 
         game.render();
