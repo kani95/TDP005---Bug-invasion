@@ -33,12 +33,19 @@ void Player::update(sf::RectangleShape const& box)
         }
     }
     if (timer < 70)
-        timer++;
+        ++timer;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= 70)
     {
         add_shot();
         timer = 0;
+    }
+
+    for(unsigned int i{0}; i < player_shots.size(); ++i)
+    {
+       // std::cout << "SHOT_1  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
+        player_shots.at(i).move();
+       // std::cout << "SHOT_2  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
     }
 }
 

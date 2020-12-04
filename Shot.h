@@ -1,6 +1,7 @@
 #ifndef GAME_H_SHOT_H
 #define GAME_H_SHOT_H
 #include "Object.h"
+#include <vector>
 
 class Shot : public Object
 {
@@ -13,8 +14,10 @@ public:
     int get_top();
     int get_bot();*/
 
-    void draw(sf::RenderWindow & window);
+    //void render(sf::RenderTarget* & window);
+    //void update(Shot & new_shot);
 
+private:
 };
 
 

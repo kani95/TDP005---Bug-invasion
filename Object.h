@@ -1,6 +1,7 @@
 #ifndef MAIN_CPP_OBJECT_H
 #define MAIN_CPP_OBJECT_H
 #include <SFML/Graphics.hpp>
+//#include "PlayState.h"
 
 
 class Object {

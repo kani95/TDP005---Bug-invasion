@@ -7,6 +7,7 @@
 #include "Ant.h"
 #include "Shot.h"
 #include <iostream>
+#include <vector>
 
 class PlayState : public State {
 private:
@@ -17,8 +18,8 @@ public:
     Player player;
     Leaf leaf;
     Ant ant;
-    //std::vector<Shot> player_shots;
-
+    Shot shot;
+    std::vector<Shot> player_shots;
 
 
     void quit_state() override;
