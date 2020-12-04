@@ -6,12 +6,13 @@ Shot::Shot()
 {
     shape.setSize(sf::Vector2f(5.f,10.f));
     speed.x = 0;
-    speed.y = 10;
+    speed.y = -6.5;
 }
 
 void Shot::move()
 {
-    shape.move(shape.getPosition().x + speed.x, shape.getPosition().y + speed.y);
+    //shape.move(shape.getPosition().x + speed.x, shape.getPosition().y + speed.y);
+    shape.move(speed.x, speed.y);
 }
 
 /*int Shot::get_right()

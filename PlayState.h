@@ -17,7 +17,7 @@ public:
     Player player;
     Leaf leaf;
     Ant ant;
-    std::vector<Shot> player_shots;
+    //std::vector<Shot> player_shots;
 
 
 

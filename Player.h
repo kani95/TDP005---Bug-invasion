@@ -13,7 +13,7 @@ public:
     bool check_inside_leaf(sf::RectangleShape const& box);
 
     void add_shot();
-    std::vector<Shot> get_player_shots();
+    std::vector<Shot> & get_player_shots();
 
     float get_dirx();
     float get_diry();

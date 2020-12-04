@@ -62,7 +62,7 @@ void Player::add_shot()
     player_shots.push_back(new_shot);
 }
 
-std::vector<Shot> Player::get_player_shots()
+std::vector<Shot> & Player::get_player_shots()
 {
     return player_shots;
 }

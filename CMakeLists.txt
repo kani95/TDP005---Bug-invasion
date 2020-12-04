@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 project(game)
-
+#[[ target include direcotries]]
 set (SOURCE_FILES
         Ant.cpp
         Ant.h
@@ -25,7 +25,9 @@ set (SOURCE_FILES
         PlayState.cpp
         PlayState.h
         State.cpp
-        State.h Shot.cpp Shot.h)
+        State.h
+        Shot.cpp
+        Shot.h)
 
 add_executable(game ${SOURCE_FILES})
 target_link_libraries(game sfml-graphics sfml-window sfml-system)
