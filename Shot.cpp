@@ -1,5 +1,6 @@
 #include "Shot.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 Shot::Shot()
         : Object()
@@ -32,8 +33,13 @@ int Shot::get_bot()
     return shape.getPosition().y + shape.getSize().y;
 }*/
 
-void Shot::draw(sf::RenderWindow & window)
+/*void Shot::update(Shot & new_shot)
 {
-    window.draw(shape);
-}
+
+}*/
+
+/*void Shot::render(sf::RenderTarget* & window)
+{
+
+}*/
 
