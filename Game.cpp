@@ -2,11 +2,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+
 void Game::init_vars()
 {
     window = {nullptr};
     init_states();
 }
+
 
 void Game::init_window()
 {
@@ -19,17 +21,20 @@ void Game::init_window()
     window -> setVerticalSyncEnabled(false);
 }
 
+
 void Game::init_states()
 {
     states.push(new PlayState(window));
 }
 
+
 Game::Game()
- :player(), frame_time{}
+ :frame_time{}
 {
     init_vars();
     init_window();
 }
+
 
 Game::~Game()
 {
@@ -49,6 +54,9 @@ bool Game::window_status() const
 }
 
 
+// ignore stupid clion warnings
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wswitch"
 void Game::poll_events()
 {
     while (window -> pollEvent( event))
@@ -61,6 +69,7 @@ void Game::poll_events()
     }
 
 }
+#pragma clang diagnostic pop
 
 
 void Game::update_tick()
@@ -76,27 +85,7 @@ void Game::update()
 {
     poll_events();
 
-   if (player.check_inside_leaf(leaf.shape)) {
 
-
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-           player.move(0.f, -1.f);
-           // position.y += -2;
-       }
-
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-           player.move(-1.f, 0.f);
-           // position.x += -2;
-       }
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-           player.move(0.f, 1.f);
-           // position.y += 2;
-       }
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-           player.move(1.f, 0.f);
-           // position.x += 2;
-       }
-   }
 
 
     if (! states.empty())
@@ -109,7 +98,6 @@ void Game::update()
 
 void Game::render()
 {
-    //player.shape.setPosition(player.position);
     window -> clear();
 
     if (! states.empty())
@@ -117,7 +105,5 @@ void Game::render()
         states.top() -> render(window);
     }
 
-    window -> draw(leaf.shape);
-    window -> draw(player.shape);
     window -> display();
 }
