@@ -5,7 +5,6 @@ Ant::Ant()
 :Enemy(), score{}
 {
     shape.setFillColor(sf::Color::Red);
-    shape.setPosition(20,20);
 }
 
 int Ant::get_score() {
