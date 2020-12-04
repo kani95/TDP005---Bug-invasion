@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "Player.h"
 #include "Leaf.h"
+#include "Ant.h"
 #include <iostream>
 
 class PlayState : public State {
@@ -14,6 +15,7 @@ public:
     ~PlayState() override;
     Player player;
     Leaf leaf;
+    Ant ant;
 
     void quit_state() override;
     void update(float const& frame_time) override;

@@ -13,6 +13,7 @@ void PlayState::render(sf::RenderTarget* target)
 
     target -> draw(leaf.shape);
     target -> draw(player.shape);
+    target -> draw(ant.shape);
 }
 
 

@@ -76,6 +76,7 @@ void Game::update_tick()
 {
     /* Update the time var with the time it takes to make
      * one update call and than one render one frame */
+
     std::cout << frame_time << std::endl;
     frame_time = tick.restart().asMilliseconds();
 }
@@ -84,9 +85,6 @@ void Game::update_tick()
 void Game::update()
 {
     poll_events();
-
-
-
 
     if (! states.empty())
     {

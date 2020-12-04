@@ -7,8 +7,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 project(game)
 
 set (SOURCE_FILES
+        Ant.cpp
+        Ant.h
         Character.cpp
         Character.h
+        Enemy.cpp
+        Enemy.h
         Game.cpp
         Game.h
         Leaf.cpp
