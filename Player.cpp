@@ -18,6 +18,18 @@ void Player::move(float const dirx, float const diry)
 
 }
 
+void Player::add_shot()
+{
+    Shot new_shot{};
+    new_shot.shape.setPosition(get_dirx(),get_diry());
+    player_shots.push_back(new_shot);
+}
+
+std::vector<Shot> Player::get_player_shots()
+{
+    return player_shots;
+}
+
 bool Player::check_inside_leaf(sf::RectangleShape const& box) {
 
     bool right = (shape.getPosition().x + shape.getSize().x > (box.getPosition().x + box.getSize().x));
@@ -30,12 +42,12 @@ bool Player::check_inside_leaf(sf::RectangleShape const& box) {
         shape.setPosition(shape.getPosition().x - (movespeed), shape.getPosition().y);
         return false;
     }
-     else if (left)
-     {
+    else if (left)
+    {
         shape.setPosition(shape.getPosition().x + (movespeed), shape.getPosition().y);
         return false;
-     }
-     else if (down)
+    }
+    else if (down)
     {
         shape.setPosition(shape.getPosition().x, shape.getPosition().y - (movespeed));
         return false;
@@ -47,4 +59,19 @@ bool Player::check_inside_leaf(sf::RectangleShape const& box) {
     }
 
     return true;
+}
+
+float Player::get_dirx()
+{
+    return shape.getPosition().x;
+}
+
+float Player::get_diry()
+{
+    return shape.getPosition().y;
+}
+
+void Player::draw(sf::RenderWindow & window)
+{
+    window.draw(shape);
 }

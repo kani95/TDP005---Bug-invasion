@@ -25,7 +25,7 @@ void Game::init_states()
 }
 
 Game::Game()
- :player(), frame_time{}
+ :player(), frame_time{}, timer{70}
 {
     init_vars();
     init_window();
@@ -83,7 +83,6 @@ void Game::update()
            player.move(0.f, -1.f);
            // position.y += -2;
        }
-
        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
            player.move(-1.f, 0.f);
            // position.x += -2;
@@ -96,8 +95,17 @@ void Game::update()
            player.move(1.f, 0.f);
            // position.x += 2;
        }
+
    }
 
+   if (timer < 70)
+       timer++;
+
+   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= 70)
+   {
+       player.add_shot();
+       timer = 0;
+   }
 
     if (! states.empty())
     {
@@ -118,6 +126,16 @@ void Game::render()
     }
 
     window -> draw(leaf.shape);
+
+    player_shots = player.get_player_shots();
+
+    for(unsigned int i{0}; i < player_shots.size(); ++i)
+    {
+        player_shots.at(i).shape.move(0.f,20.f);
+        window -> draw(player_shots.at(i).shape);
+    }
     window -> draw(player.shape);
     window -> display();
+
+    tick.restart();
 }
