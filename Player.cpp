@@ -1,11 +1,47 @@
 #include "Player.h"
 #include <iostream>
 
+
 Player::Player()
-    :Character()
+    :Character(), timer{70}
 {
     shape.setPosition(position);
 }
+
+
+void Player::update(sf::RectangleShape const& box)
+{
+    if (check_inside_leaf(box)) {
+
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            move(0.f, -1.f);
+            // position.y += -2;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            move(-1.f, 0.f);
+            // position.x += -2;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            move(0.f, 1.f);
+            // position.y += 2;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            move(1.f, 0.f);
+            // position.x += 2;
+        }
+    }
+    if (timer < 70)
+        timer++;
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= 70)
+    {
+        add_shot();
+        timer = 0;
+    }
+}
+
 
 
 void Player::move(float const dirx, float const diry)
@@ -18,6 +54,7 @@ void Player::move(float const dirx, float const diry)
 
 }
 
+
 void Player::add_shot()
 {
     Shot new_shot{};
@@ -29,6 +66,8 @@ std::vector<Shot> Player::get_player_shots()
 {
     return player_shots;
 }
+
+
 
 bool Player::check_inside_leaf(sf::RectangleShape const& box) {
 

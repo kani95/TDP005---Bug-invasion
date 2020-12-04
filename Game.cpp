@@ -2,11 +2,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+
 void Game::init_vars()
 {
     window = {nullptr};
     init_states();
 }
+
 
 void Game::init_window()
 {
@@ -19,17 +21,20 @@ void Game::init_window()
     window -> setVerticalSyncEnabled(false);
 }
 
+
 void Game::init_states()
 {
     states.push(new PlayState(window));
 }
 
+
 Game::Game()
- :player(), frame_time{}, timer{70}
+ :frame_time{}
 {
     init_vars();
     init_window();
 }
+
 
 Game::~Game()
 {
@@ -49,6 +54,9 @@ bool Game::window_status() const
 }
 
 
+// ignore stupid clion warnings
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wswitch"
 void Game::poll_events()
 {
     while (window -> pollEvent( event))
@@ -61,12 +69,14 @@ void Game::poll_events()
     }
 
 }
+#pragma clang diagnostic pop
 
 
 void Game::update_tick()
 {
     /* Update the time var with the time it takes to make
      * one update call and than one render one frame */
+
     std::cout << frame_time << std::endl;
     frame_time = tick.restart().asMilliseconds();
 }
@@ -76,48 +86,15 @@ void Game::update()
 {
     poll_events();
 
-   if (player.check_inside_leaf(leaf.shape)) {
-
-
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-           player.move(0.f, -1.f);
-           // position.y += -2;
-       }
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-           player.move(-1.f, 0.f);
-           // position.x += -2;
-       }
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-           player.move(0.f, 1.f);
-           // position.y += 2;
-       }
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-           player.move(1.f, 0.f);
-           // position.x += 2;
-       }
-
-   }
-
-   if (timer < 70)
-       timer++;
-
-   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= 70)
-   {
-       player.add_shot();
-       timer = 0;
-   }
-
     if (! states.empty())
     {
         states.top() -> update(frame_time);
     }
-
 }
 
 
 void Game::render()
 {
-    //player.shape.setPosition(player.position);
     window -> clear();
 
     if (! states.empty())
@@ -125,17 +102,7 @@ void Game::render()
         states.top() -> render(window);
     }
 
-    window -> draw(leaf.shape);
-
-    player_shots = player.get_player_shots();
-
-    for(unsigned int i{0}; i < player_shots.size(); ++i)
-    {
-        player_shots.at(i).shape.move(0.f,20.f);
-        window -> draw(player_shots.at(i).shape);
-    }
-    window -> draw(player.shape);
     window -> display();
 
-    tick.restart();
+    //tick.restart();
 }

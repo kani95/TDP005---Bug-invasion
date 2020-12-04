@@ -1,8 +1,6 @@
 #ifndef MAIN_CPP_GAME_H
 #define MAIN_CPP_GAME_H
-#include "Object.h"
-#include "Player.h"
-#include "Leaf.h"
+
 #include "PlayState.h"
 #include "Shot.h"
 // run game engine class
@@ -18,11 +16,6 @@ private:
     void init_vars();
     void init_window();
     void init_states();
-
-    //Player* player = new Player{};
-     Player player;
-     Leaf leaf;
-     std::vector<Shot> player_shots;
 
      sf::Clock tick;
      // how long it take for the game to make one update call and one render call
@@ -40,6 +33,4 @@ public:
     void update();
     void render();
 };
-
-
 #endif //MAIN_CPP_GAME_H

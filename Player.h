@@ -6,10 +6,10 @@
 
 class Player : public Character{
 public:
-    //sf::CircleShape shape(50);
     Player();
     void move(float const dirx, float const diry) override;
 
+    void update(sf::RectangleShape const& box);
     bool check_inside_leaf(sf::RectangleShape const& box);
 
     void add_shot();
@@ -18,12 +18,12 @@ public:
     float get_dirx();
     float get_diry();
 
+
     void draw(sf::RenderWindow & window);
 
 private:
     std::vector<Shot> player_shots;
+    int timer;
    // Shot new_shot;
 };
-
-
 #endif //MAIN_CPP_PLAYER_H
