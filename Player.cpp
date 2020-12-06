@@ -57,7 +57,7 @@ void Player::move(float const dirx, float const diry)
    // float delta_time = clock.restart().asSeconds();
     shape.setPosition(shape.getPosition().x + (dirx * movespeed), shape.getPosition().y + (diry * movespeed));
     //shape.setPosition(shape.getPosition().x + (delta_time * movespeed), shape.getPosition().y + (movespeed*delta_time));
-    std::cout << shape.getPosition().x << " " << shape.getPosition().y << std::endl;
+    //std::cout << shape.getPosition().x << " " << shape.getPosition().y << std::endl;
 
 }
 

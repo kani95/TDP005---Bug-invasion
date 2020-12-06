@@ -3,8 +3,11 @@
 #ifndef GAME_ENEMY_H
 #define GAME_ENEMY_H
 #include "Character.h"
+#include "vector"
+#include <memory>
 
-class Enemy : public Character{
+
+class Enemy : public Character {
 public:
     Enemy();
     //virtual ~Enemy() = 0;
@@ -15,8 +18,7 @@ public:
     virtual void update() = 0;
     // virtual void drop_loot() = 0;
 
-
-
+    //std::vector<Enemy*> all_spiders;
 };
 
 

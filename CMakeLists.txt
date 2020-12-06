@@ -27,7 +27,9 @@ set (SOURCE_FILES
         State.cpp
         State.h
         Shot.cpp
-        Shot.h)
+        Shot.h
+        Spider.cpp
+        Spider.h)
 
 add_executable(game ${SOURCE_FILES})
 target_link_libraries(game sfml-graphics sfml-window sfml-system)

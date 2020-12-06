@@ -1,5 +1,5 @@
 #include "Enemy.h"
 
 Enemy::Enemy()
-    :Character()
+    :Character()//, all_spiders{}
 {}

@@ -16,22 +16,24 @@ void Shot::move()
     shape.move(speed.x, speed.y);
 }
 
-/*int Shot::get_right()
+float Shot::get_right()
 {
     return shape.getPosition().x + shape.getSize().x;
 }
-int Shot::get_left()
+
+float Shot::get_left()
 {
     Shoot:return shape.getPosition().x;
 }
-int Shot::get_top()
+float Shot::get_top()
 {
     return shape.getPosition().y;
 }
-int Shot::get_bot()
+
+float Shot::get_bot()
 {
     return shape.getPosition().y + shape.getSize().y;
-}*/
+}
 
 /*void Shot::update(Shot & new_shot)
 {

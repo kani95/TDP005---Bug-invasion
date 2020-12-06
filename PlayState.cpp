@@ -3,8 +3,10 @@
 
 void PlayState::update(float const& frame_time)
 {
-    std::cout << "Hello mate" << std::endl;
+    //std::cout << "Hello mate" << std::endl;
     player.update(leaf.shape);
+    spider.update();
+    //all_spiders = spider.get_all_spiders();
     //player_shots = player.get_player_shots();
    // std::vector<Shot> & player_shots{player.get_player_shots()};
 
@@ -20,15 +22,21 @@ void PlayState::update(float const& frame_time)
 void PlayState::render(sf::RenderTarget* target)
 {
     player_shots = player.get_player_shots();
+    all_spiders = spider.get_all_spiders();
 
     target -> draw(leaf.shape);
-    for(auto shot : player_shots)
+    for (auto & shot : player_shots)
     {
+        ant.check_coll(shot);
         target -> draw(shot.shape);
     }
     target -> draw(player.shape);
     target -> draw(ant.shape);
+    for (auto & spi: all_spiders) {
+        target->draw(spi.shape);
+    }
 }
+
 
 
 void PlayState::quit_state() {

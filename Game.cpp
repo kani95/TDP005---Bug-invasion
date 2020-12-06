@@ -77,7 +77,7 @@ void Game::update_tick()
     /* Update the time var with the time it takes to make
      * one update call and than one render one frame */
 
-    std::cout << frame_time << std::endl;
+    //std::cout << frame_time << std::endl;
     frame_time = tick.restart().asMilliseconds();
 }
 

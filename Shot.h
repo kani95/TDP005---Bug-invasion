@@ -9,10 +9,10 @@ public:
     Shot();
     void move();
 
- /*   int get_right();
-    int get_left();
-    int get_top();
-    int get_bot();*/
+    float get_right();
+    float get_left();
+    float get_top();
+    float get_bot();
 
     //void render(sf::RenderTarget* & window);
     //void update(Shot & new_shot);

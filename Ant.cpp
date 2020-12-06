@@ -1,10 +1,12 @@
 #include "Ant.h"
+#include "Shot.h"
 
 
 Ant::Ant()
 :Enemy(), score{}
 {
     shape.setFillColor(sf::Color::Red);
+    shape.setPosition(250,100);
 }
 
 int Ant::get_score() {
@@ -16,7 +18,17 @@ void Ant::move(float const, float const) {
 }
 
 void Ant::update() {
+}
 
+void Ant::check_coll(Shot & shot)
+{
+    if(shot.get_right() > shape.getPosition().x &&
+       shot.get_top() < shape.getPosition().y + shape.getSize().y
+       && shot.get_bot() > shape.getPosition().y && shot.get_left()
+                                                    < shape.getPosition().x + shape.getSize().x)
+    {
+        shape.setPosition(0,0);
+    }
 }
 
 //Ant::~Ant() = default;
