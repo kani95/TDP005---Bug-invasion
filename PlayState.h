@@ -20,7 +20,7 @@ public:
     Object(window);
     Player player;
     Leaf leaf;
-    Ant ant;
+    // Ant ant;
     Shot shot;
     AntSwarm swarm;
     std::vector<Shot> player_shots;

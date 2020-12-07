@@ -30,11 +30,14 @@ void PlayState::render(sf::RenderTarget* target)
     target -> draw(leaf.shape);
     for (auto & shot : player_shots)
     {
-        ant.check_coll(shot);
-        target -> draw(shot.shape);
+        for (auto ant_l : swarm.ant_swarm) {
+            ant_l.check_coll(shot);
+            target -> draw(shot.shape);
+        }
+
     }
     target -> draw(player.shape);
-    target -> draw(ant.shape);
+    //target -> draw(ant.shape);
     for (auto & spi: all_spiders) {
         target->draw(spi.shape);
     }

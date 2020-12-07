@@ -13,14 +13,18 @@ AntSwarm::AntSwarm()
         ant.shape.setPosition(prev_x, prev_y);
         ant_swarm.push_back(ant);
 
-        if (i > 10)
+        // second row
+        if (i == 9)
         {
+            std::cout << "HERE" << std::endl;
             prev_x = 200.f;
             prev_y = 120.f;
         }
-        else if (i > 20)
+        // third row
+        else if (i == 19)
         {
-            prev_x = 240.f;
+            std::cout << "HERE" << std::endl;
+            prev_x = 220.f;
             prev_y = 170.f;
         }
     }
