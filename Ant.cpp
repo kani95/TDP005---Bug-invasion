@@ -31,9 +31,9 @@ void Ant::check_coll(Shot & shot)
     }
 }
 
-void Ant::render()
+void Ant::render(sf::RenderTarget* target)
 {
-    window -> draw(ant.shape);
+    target -> draw(shape);
 }
 
 //Ant::~Ant() = default;

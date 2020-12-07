@@ -3,22 +3,33 @@
 AntSwarm::AntSwarm()
     :ant_swarm{}
 {
-    float prev_x {220};
-    float prev_y {70};
-    for (int i{}; i < 30; i++)
+    float prev_x {220.f};
+    float prev_y {70.f};
+    for (int i{0}; i < 30; i++)
     {
-        prev_x += 10;
+        prev_x = prev_x + 40.f;
+        std::cout << prev_x << std::endl;
         Ant ant;
-        ant.shape.move(prev_x, prev_y);
+        ant.shape.setPosition(prev_x, prev_y);
         ant_swarm.push_back(ant);
 
-        if (prev_x = 320)
+        if (i > 10)
         {
-            prev_x = 230;
-            prev_y = 90;
+            prev_x = 200.f;
+            prev_y = 120.f;
         }
-
+        else if (i > 20)
+        {
+            prev_x = 240.f;
+            prev_y = 170.f;
+        }
     }
+}
+
+
+int AntSwarm::get_size_swarm() const
+{
+    return ant_swarm.size();
 }
 
 
@@ -30,10 +41,11 @@ void AntSwarm::update() {
     }
 }
 
-void AntSwarm::render()
+
+void AntSwarm::render(sf::RenderTarget* target)
 {
     for (Ant & ant : ant_swarm)
     {
-        ant.render();
+        ant.render(target);
     }
 }

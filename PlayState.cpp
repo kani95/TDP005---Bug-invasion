@@ -7,6 +7,7 @@ void PlayState::update(float const& frame_time)
     player.update(leaf.shape);
     spider.update();
     swarm.update();
+    std::cout << swarm.get_size_swarm() << std::endl;
     //all_spiders = spider.get_all_spiders();
     //player_shots = player.get_player_shots();
    // std::vector<Shot> & player_shots{player.get_player_shots()};
@@ -24,7 +25,7 @@ void PlayState::render(sf::RenderTarget* target)
 {
     player_shots = player.get_player_shots();
     all_spiders = spider.get_all_spiders();
-    target -> draw(swarm.render());
+    swarm.render(target);
 
     target -> draw(leaf.shape);
     for (auto & shot : player_shots)
