@@ -12,6 +12,7 @@ public:
     int get_score() override;
     void move(float const, float const) override;
     void update() override;
+    void render();
 
     void check_coll(Shot & shot);
 

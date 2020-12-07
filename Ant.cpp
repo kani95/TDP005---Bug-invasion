@@ -6,15 +6,15 @@ Ant::Ant()
 :Enemy(), score{}
 {
     shape.setFillColor(sf::Color::Red);
-    shape.setPosition(250,100);
+    shape.setPosition(220, 70);
 }
 
 int Ant::get_score() {
     return score;
 }
 
-void Ant::move(float const, float const) {
-
+void Ant::move(float const x, float const y) {
+    shape.move(x, y);
 }
 
 void Ant::update() {
@@ -29,6 +29,11 @@ void Ant::check_coll(Shot & shot)
     {
         shape.setPosition(0,0);
     }
+}
+
+void Ant::render()
+{
+    window -> draw(ant.shape);
 }
 
 //Ant::~Ant() = default;

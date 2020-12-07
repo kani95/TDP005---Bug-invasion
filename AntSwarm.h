@@ -6,8 +6,11 @@
 class AntSwarm {
 public:
     AntSwarm();
-    //std::vector<Ant> ant_swarm{};
+    std::vector<Ant> ant_swarm{};
+    void update();
+    void render();
 };
+
 
 
 #endif //GAME_ANTSWARM_H
