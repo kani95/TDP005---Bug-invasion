@@ -13,6 +13,10 @@ public:
     void set_start_pos();
     //void add_second();
     bool check_coll(Shot & shot);
+    void get_movement();
+
+
+   void check_coll_screen();
 
     //std::vector<Spider>& get_all_spiders();
 private:

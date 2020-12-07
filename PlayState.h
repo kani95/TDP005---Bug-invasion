@@ -30,5 +30,7 @@ public:
     void update(float const& frame_time) override;
     void render(sf::RenderTarget* target) override;
 
+    std::vector<sf::RectangleShape> transform(std::vector<Spider> & all_spiders);
+
 };
 #endif //MAIN_CPP_PLAYSTATE_H

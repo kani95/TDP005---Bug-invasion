@@ -9,8 +9,7 @@ Player::Player()
     shape.setPosition(position);
 }
 
-
-void Player::update(sf::RectangleShape const& box)
+void Player::update(sf::RectangleShape const& box, std::vector<sf::RectangleShape> all_spiders)
 {
     if (check_inside_leaf(box)) {
 
@@ -44,10 +43,10 @@ void Player::update(sf::RectangleShape const& box)
     for(unsigned int i{0}; i < player_shots.size(); ++i)
     {
        // std::cout << "SHOT_1  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
-       // if (!player_shots.at(i).check_coll(all_spiders))
+       if (!player_shots.at(i).check_coll(all_spiders))
             player_shots.at(i).move();
-      //  else
-      //      player_shots.erase(begin(player_shots) + i);
+        else
+            player_shots.erase(begin(player_shots) + i);
        // std::cout << "SHOT_2  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
     }
 }

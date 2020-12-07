@@ -3,13 +3,14 @@
 #include "Character.h"
 #include "Shot.h"
 #include <vector>
+#include "Spider.h"
 
 class Player : public Character{
 public:
     Player();
     void move(float const dirx, float const diry) override;
 
-    void update(sf::RectangleShape const& box);
+    void update(sf::RectangleShape const& box, std::vector<sf::RectangleShape> all_spiders);
     bool check_inside_leaf(sf::RectangleShape const& box);
 
     void add_shot();
@@ -17,7 +18,6 @@ public:
 
     float get_dirx();
     float get_diry();
-
 
     void draw(sf::RenderWindow & window);
 

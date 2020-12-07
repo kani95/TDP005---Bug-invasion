@@ -4,6 +4,7 @@
 #include <vector>
 //#include "Spider.h"
 
+
 class Shot : public Object
 {
 public:
@@ -15,7 +16,7 @@ public:
     float get_top();
     float get_bot();
 
-   // bool check_coll(std::vector<Spider> & all_spiders);
+   bool check_coll(std::vector<sf::RectangleShape> all_spiders);
 
     //void render(sf::RenderTarget* & window);
     //void update(Shot & new_shot);

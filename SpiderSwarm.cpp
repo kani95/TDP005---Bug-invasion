@@ -22,13 +22,15 @@ void SpiderSwarm::update(std::vector<Shot> & player_shots)
     for (Shot &shot : player_shots) {
         for (size_t i{};  i < all_spiders.size(); ++i) {
             if (!all_spiders.at(i).check_coll(shot)) {
+                all_spiders.at(i).check_coll_screen();
                 all_spiders.at(i).update();
             }
-            else
-            {
+            else {
                 all_spiders.erase(begin(all_spiders) + i);
             }
         }
+
+
     }
     add_second();
 }
