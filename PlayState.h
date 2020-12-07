@@ -8,7 +8,7 @@
 #include "Shot.h"
 #include <iostream>
 #include <vector>
-#include "Spider.h"
+#include "SpiderSwarm.h"
 
 class PlayState : public State {
 private:
@@ -22,7 +22,8 @@ public:
     Shot shot;
     std::vector<Shot> player_shots;
     std::vector<Spider> all_spiders;
-    Spider spider;
+    //Spider spider;
+    SpiderSwarm spiderswarm;
 
 
     void quit_state() override;

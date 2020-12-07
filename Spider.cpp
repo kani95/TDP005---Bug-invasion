@@ -1,13 +1,12 @@
 #include "Spider.h"
 #include <iostream>
 #include <random>
-#include "Player.h"
 
 Spider::Spider()
         : Enemy(), score{}
 {
     shape.setFillColor(sf::Color::Blue);
-    shape.setPosition(300,200);
+   // shape.setPosition(300,200);
 }
 
 int Spider::get_score()
@@ -33,34 +32,9 @@ void Spider::set_start_pos()
 
 void Spider::update()
 {
-    if (timer >= 700)
-    {
-        Spider spider{};
-        spider.set_start_pos();
-        all_spiders.push_back(spider);
-        //std::cout << all_spiders.size() << "SIZE";
-       // std::cout << all_spiders.at(0).shape.getPosition().x << "WWWWWWWWWWWWWWWWW1";
-        timer = 0;
-    }
-
-    for (auto &spider : all_spiders)
-    {
-        spider.move(-1, 0);
-
+        move(-0.08, 0);
         //std::cout << spider.shape.getPosition().x << "WWWWWWWWWWWWWWWWW2";
-     }
 
-    add_second();
-}
-
-void Spider::add_second()
-{
-    ++timer;
-}
-
-std::vector<Spider>& Spider::get_all_spiders()
-{
-    return all_spiders;
 }
 
 bool Spider::check_coll(Shot & shot)
@@ -70,6 +44,7 @@ bool Spider::check_coll(Shot & shot)
        && shot.get_bot() > shape.getPosition().y && shot.get_left()
                                                     < shape.getPosition().x + shape.getSize().x)
     {
+        //shape.setPosition(30,30);
         return true;
     }
     return false;

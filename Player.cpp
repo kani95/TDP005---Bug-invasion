@@ -2,6 +2,7 @@
 #include <iostream>
 
 
+
 Player::Player()
     :Character(), timer{70}
 {
@@ -12,7 +13,6 @@ Player::Player()
 void Player::update(sf::RectangleShape const& box)
 {
     if (check_inside_leaf(box)) {
-
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             move(0.f, -1.f);
@@ -44,10 +44,14 @@ void Player::update(sf::RectangleShape const& box)
     for(unsigned int i{0}; i < player_shots.size(); ++i)
     {
        // std::cout << "SHOT_1  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
-        player_shots.at(i).move();
+       // if (!player_shots.at(i).check_coll(all_spiders))
+            player_shots.at(i).move();
+      //  else
+      //      player_shots.erase(begin(player_shots) + i);
        // std::cout << "SHOT_2  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
     }
 }
+
 
 
 

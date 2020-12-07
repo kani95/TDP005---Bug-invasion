@@ -1,6 +1,7 @@
 #include "Shot.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Spider.h"
 
 Shot::Shot()
         : Object()
@@ -34,6 +35,20 @@ float Shot::get_bot()
 {
     return shape.getPosition().y + shape.getSize().y;
 }
+/*
+bool Shot::check_coll(std::vector<Spider> & all_spiders)
+{
+    for (Spider & spider : all_spiders) {
+        if (get_right() > spider.shape.getPosition().x &&
+            get_top() < spider.shape.getPosition().y + spider.shape.getSize().y
+            && get_bot() > spider.shape.getPosition().y && get_left()
+                                                           < spider.shape.getPosition().x + spider.shape.getSize().x) {
+            //shape.setPosition(30, 30);
+            return true;
+        }
+    }
+    return false;
+}*/
 
 /*void Shot::update(Shot & new_shot)
 {

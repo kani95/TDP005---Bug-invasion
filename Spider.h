@@ -11,14 +11,14 @@ public:
     void move(float const, float const) override;
     void update() override;
     void set_start_pos();
-    void add_second();
+    //void add_second();
     bool check_coll(Shot & shot);
 
-    std::vector<Spider>& get_all_spiders();
+    //std::vector<Spider>& get_all_spiders();
 private:
     int score;
-    int timer;
-    std::vector<Spider> all_spiders;
+    //int timer;
+   // std::vector<Spider> all_spiders;
 };
 
 #endif
