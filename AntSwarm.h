@@ -14,6 +14,9 @@ public:
     void check_collison(std::vector<Shot> & player_shots);
 
     int get_size_swarm() const;
+    std::vector<Shot> ant_shots{};
+
+    std::vector<Shot> & get_ant_shots();
 };
 
 #endif //GAME_ANTSWARM_H

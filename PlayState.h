@@ -24,6 +24,7 @@ public:
     Shot shot;
     AntSwarm swarm;
     std::vector<Shot> player_shots;
+    std::vector<Shot> ant_shots;
     std::vector<Spider> all_spiders;
     //Spider spider;
     SpiderSwarm spiderswarm;

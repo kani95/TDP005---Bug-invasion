@@ -9,7 +9,7 @@ class Shot : public Object
 {
 public:
     Shot();
-    void move();
+    void move(float x, float y);
 
     float get_right();
     float get_left();
@@ -22,7 +22,8 @@ public:
     //void render(sf::RenderTarget* & window);
     //void update(Shot & new_shot);
 
-private:
+protected:
+
 };
 
 

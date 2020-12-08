@@ -9,7 +9,6 @@ public:
 
     virtual void move(float const, float const) = 0;
 
-
 protected:
     int hp;
     bool status;

@@ -19,7 +19,7 @@ void Ant::move(float const x, float const y) {
 
 void Ant::update()
 {
-
+   shape.setPosition(shape.getPosition().x, shape.getPosition().y);
 }
 
 bool Ant::check_coll(Shot & shot)
@@ -39,6 +39,19 @@ bool Ant::check_coll(Shot & shot)
 void Ant::render(sf::RenderTarget* target)
 {
     target -> draw(shape);
+}
+
+bool Ant::can_shoot()
+{
+    int value{(std::rand() % 200) + 1};
+    if (value == 3)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //Ant::~Ant() = default;
