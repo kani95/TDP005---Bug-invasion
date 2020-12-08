@@ -3,37 +3,27 @@
 
 void PlayState::update(float const& frame_time)
 {
+
     //std::cout << "Hello mate" << std::endl;
 
     auto vec_shape_spider = transform(all_spiders);
     auto vec_shape_ant = transform_ant(all_ants);
     player.update(leaf.shape, vec_shape_spider, vec_shape_ant);
+
     spiderswarm.update(player_shots);
 
     // !!! The update call should be made by each ant individually much more cleaner so
-    swarm.update(player_shots);
+    antswarm.update(player_shots);
 
-
-  //  std::cout << swarm.get_size_swarm() << std::endl;
-
-    //all_spiders = spider.get_all_spiders();
-    //player_shots = player.get_player_shots();
-    //  std::vector<Shot> & player_shots{player.get_player_shots()};
-
- /*   for(unsigned int i{0}; i < player_shots.size(); ++i)
-    {
-        std::cout << "SHOT_1  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
-        player_shots.at(i).move();
-        std::cout << "SHOT_2  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
-    }*/
 }
 
 
 void PlayState::render(sf::RenderTarget* target)
 {
     player_shots = player.get_player_shots();
+    ant_shots = antswarm.get_ant_shots();
     all_spiders = spiderswarm.get_all_spiders();
-    all_ants = swarm.get_all_ants();
+    all_ants = antswarm.get_all_ants();
 
     target -> draw(leaf.shape);
 
@@ -42,8 +32,13 @@ void PlayState::render(sf::RenderTarget* target)
         target -> draw(shot_.shape);
     }
 
+    antswarm.render(target);
 
-    swarm.render(target);
+    for (auto & ant_shot : ant_shots)
+    {
+        target -> draw(ant_shot.shape);
+    }
+
 
     target -> draw(player.shape);
     // target -> draw(ant.shape);

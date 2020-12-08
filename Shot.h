@@ -9,7 +9,7 @@ class Shot : public Object
 {
 public:
     Shot();
-    void move();
+    void move(float x, float y);
 
     float get_right();
     float get_left();
@@ -19,10 +19,13 @@ public:
    bool check_coll(std::vector<sf::RectangleShape> const& all_spiders);
    //bool check_coll_screen();
 
+   bool check_is_dead();
     //void render(sf::RenderTarget* & window);
     //void update(Shot & new_shot);
 
-private:
+protected:
+    bool mark_for_delete{};
+
 };
 
 

@@ -54,11 +54,12 @@ void Player::update(sf::RectangleShape const& box,
     for(unsigned int i{0}; i < player_shots.size(); ++i)
     {
        // std::cout << "SHOT_1  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
+
        if (!player_shots.at(i).check_coll(all_spiders) && !player_shots.at(i).check_coll(all_ants))
-               player_shots.at(i).move();
+           player_shots.at(i).move(0.f, -6.5f);
        else
             player_shots.erase(begin(player_shots) + i);
-        std::cout << player_shots.size();
+        //std::cout << player_shots.size();
        // std::cout << "SHOT_2  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
     }
 }

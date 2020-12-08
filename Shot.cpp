@@ -6,29 +6,35 @@ Shot::Shot()
         : Object()
 {
     shape.setSize(sf::Vector2f(5.f,10.f));
-    speed.x = 0;
-    speed.y = -6.5;
+/*    speed.x = 0;
+    speed.y = -6.5;*/
 }
 
-void Shot::move()
+
+void Shot::move(float x, float y)
 {
     //shape.move(shape.getPosition().x + speed.x, shape.getPosition().y + speed.y);
-    shape.move(speed.x, speed.y);
+    shape.move(x, y);
 }
+
 
 float Shot::get_right()
 {
     return shape.getPosition().x + shape.getSize().x;
 }
 
+
 float Shot::get_left()
 {
-    Shoot:return shape.getPosition().x;
+    return shape.getPosition().x;
 }
+
+
 float Shot::get_top()
 {
     return shape.getPosition().y;
 }
+
 
 float Shot::get_bot()
 {
@@ -45,9 +51,11 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
             //shape.setPosition(30, 30);
             return true;
         }
+
+        //1920 x 1080
     }
 
-    bool down = (shape.getPosition().y + shape.getSize().y > (600));
+    bool down = (shape.getPosition().y + shape.getSize().y > (1080));
     bool up = (shape.getPosition().y < 0);
 
     if (down)
@@ -63,31 +71,8 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
     return false;
 }
 
-/*bool Shot::check_coll_screen()
+
+bool Shot::check_is_dead()
 {
-    bool down = (shape.getPosition().y + shape.getSize().y > (600));
-    bool up = (shape.getPosition().y < 0);
-
-
-    if (down)
-    {
-        return true;
-    }
-    else if (up)
-    {
-
-        return true;
-    }
-
-    return false;
-}*/
-/*void Shot::update(Shot & new_shot)
-{
-
-}*/
-
-/*void Shot::render(sf::RenderTarget* & window)
-{
-
-}*/
-
+    return (shape.getPosition().y + shape.getSize().y > (1080));
+}

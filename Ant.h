@@ -11,9 +11,10 @@ public:
     //~Ant() override;
 
     int get_score() override;
-    void move(float const, float const) override;
+    void move(float , float) override;
     void update() override;
     void render(sf::RenderTarget* target);
+    static bool can_shoot();
 
     bool check_coll(Shot & shot);
 

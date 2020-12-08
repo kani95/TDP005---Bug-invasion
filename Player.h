@@ -8,7 +8,7 @@
 class Player : public Character{
 public:
     Player();
-    void move(float const dirx, float const diry) override;
+    void move(float dirx, float diry) override;
 
     void update(sf::RectangleShape const& box,
                 std::vector<sf::RectangleShape> const& all_spiders,

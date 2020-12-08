@@ -16,6 +16,9 @@ public:
     std::vector<Ant>& get_all_ants();
 
     int get_size_swarm() const;
+    std::vector<Shot> ant_shots{};
+
+    std::vector<Shot> & get_ant_shots();
 };
 
 #endif //GAME_ANTSWARM_H
