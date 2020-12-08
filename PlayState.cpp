@@ -7,10 +7,17 @@ void PlayState::update(float const& frame_time)
     player.update(leaf.shape);
     spider.update();
     swarm.update();
+
+    for (auto & shot_ : player_shots)
+    {
+        swarm.check_collison(shot_);
+    }
+
+
     std::cout << swarm.get_size_swarm() << std::endl;
     //all_spiders = spider.get_all_spiders();
     //player_shots = player.get_player_shots();
-   // std::vector<Shot> & player_shots{player.get_player_shots()};
+    //  std::vector<Shot> & player_shots{player.get_player_shots()};
 
     /*for(unsigned int i{0}; i < player_shots.size(); ++i)
     {
@@ -25,21 +32,21 @@ void PlayState::render(sf::RenderTarget* target)
 {
     player_shots = player.get_player_shots();
     all_spiders = spider.get_all_spiders();
-    swarm.render(target);
 
     target -> draw(leaf.shape);
-    for (auto & shot : player_shots)
-    {
-        for (auto ant_l : swarm.ant_swarm) {
-            ant_l.check_coll(shot);
-            target -> draw(shot.shape);
-        }
 
+    for (auto & shot_ : player_shots)
+    {
+            target -> draw(shot_.shape);
     }
+
+
+    swarm.render(target);
+
     target -> draw(player.shape);
-    //target -> draw(ant.shape);
+    // target -> draw(ant.shape);
     for (auto & spi: all_spiders) {
-        target->draw(spi.shape);
+        target -> draw(spi.shape);
     }
 }
 

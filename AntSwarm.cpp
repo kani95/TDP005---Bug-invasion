@@ -16,14 +16,12 @@ AntSwarm::AntSwarm()
         // second row
         if (i == 9)
         {
-            std::cout << "HERE" << std::endl;
             prev_x = 200.f;
             prev_y = 120.f;
         }
         // third row
         else if (i == 19)
         {
-            std::cout << "HERE" << std::endl;
             prev_x = 220.f;
             prev_y = 170.f;
         }
@@ -51,5 +49,17 @@ void AntSwarm::render(sf::RenderTarget* target)
     for (Ant & ant : ant_swarm)
     {
         ant.render(target);
+    }
+}
+
+
+void AntSwarm::check_collison(Shot & shot)
+{
+    for (Ant & ant : ant_swarm)
+    {
+        if (ant.check_coll(shot))
+        {
+            ant.shape.setPosition(0,0);
+        }
     }
 }

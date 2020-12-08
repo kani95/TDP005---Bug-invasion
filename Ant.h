@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Shot.h"
 
+
 // type 1 enemy
 class Ant : public Enemy {
 public:
@@ -14,7 +15,7 @@ public:
     void update() override;
     void render(sf::RenderTarget* target);
 
-    void check_coll(Shot & shot);
+    bool check_coll(Shot & shot);
 
 
 private:

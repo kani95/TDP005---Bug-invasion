@@ -11,6 +11,8 @@ public:
     void update();
     void render(sf::RenderTarget* target);
 
+    void check_collison(Shot & shot);
+
     int get_size_swarm() const;
 };
 
