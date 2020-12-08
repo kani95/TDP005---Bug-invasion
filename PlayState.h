@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Leaf.h"
 #include "Ant.h"
+#include "AntSwarm.h"
 #include "Shot.h"
 #include <iostream>
 #include <vector>
@@ -16,10 +17,12 @@ private:
 public:
     explicit PlayState(sf::RenderWindow* window);
     ~PlayState() override;
+    Object(window);
     Player player;
     Leaf leaf;
-    Ant ant;
+    // Ant ant;
     Shot shot;
+    AntSwarm swarm;
     std::vector<Shot> player_shots;
     std::vector<Spider> all_spiders;
     //Spider spider;

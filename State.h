@@ -5,6 +5,7 @@
 #include "stack"
 #include "map"
 
+
 class State{
 private:
     sf::RenderWindow* window;

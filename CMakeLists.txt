@@ -9,6 +9,8 @@ project(game)
 set (SOURCE_FILES
         Ant.cpp
         Ant.h
+        AntSwarm.cpp
+        AntSwarm.h
         Character.cpp
         Character.h
         Enemy.cpp
