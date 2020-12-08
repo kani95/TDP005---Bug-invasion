@@ -2,5 +2,5 @@
 
 
 Character::Character()
-    :Object(), hp{}, status{true}, can_shoot{}, score{}, movespeed{1.f}
+    :Object(), hp{3}, status{true}, can_shoot{}, score{}, movespeed{1.f}
 {}

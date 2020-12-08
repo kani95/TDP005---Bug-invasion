@@ -5,8 +5,9 @@ void PlayState::update(float const& frame_time)
 {
     //std::cout << "Hello mate" << std::endl;
 
-    auto vec_shape = transform(all_spiders);
-    player.update(leaf.shape, vec_shape);
+    auto vec_shape_spider = transform(all_spiders);
+    auto vec_shape_ant = transform_ant(all_ants);
+    player.update(leaf.shape, vec_shape_spider, vec_shape_ant);
     spiderswarm.update(player_shots);
 
     // !!! The update call should be made by each ant individually much more cleaner so
@@ -32,12 +33,13 @@ void PlayState::render(sf::RenderTarget* target)
 {
     player_shots = player.get_player_shots();
     all_spiders = spiderswarm.get_all_spiders();
+    all_ants = swarm.get_all_ants();
 
     target -> draw(leaf.shape);
 
     for (auto & shot_ : player_shots)
     {
-            target -> draw(shot_.shape);
+        target -> draw(shot_.shape);
     }
 
 
@@ -63,15 +65,28 @@ PlayState::PlayState(sf::RenderWindow *window)
 
 PlayState::~PlayState() = default;
 
-
-std::vector<sf::RectangleShape> PlayState::transform(std::vector<Spider> & all_spiders)
+template<typename T>
+std::vector<sf::RectangleShape> PlayState::transform(std::vector<T> const& to_copy_vec)
 {
-    std::vector<sf::RectangleShape> vec_shape;
+    std::vector<sf::RectangleShape> vec_shape{};
 
-    for (auto spider : all_spiders)
+    for (T element : to_copy_vec)
     {
-        vec_shape.push_back(spider.shape);
+        vec_shape.push_back(element.shape);
     }
 
     return vec_shape;
 }
+
+/*
+std::vector<sf::RectangleShape> PlayState::transform_ant(std::vector<Ant> & all_ants)
+{
+    std::vector<sf::RectangleShape> vec_shape;
+
+    for (auto ant : all_ants)
+    {
+        vec_shape.push_back(ant.shape);
+    }
+
+    return vec_shape;
+}*/

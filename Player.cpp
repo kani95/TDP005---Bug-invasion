@@ -4,12 +4,15 @@
 
 
 Player::Player()
-    :Character(), timer{70}
+    :Character(), timer{70}, immunity{false}
 {
     shape.setPosition(position);
+    shape.setPosition(300.f,450.f);
 }
 
-void Player::update(sf::RectangleShape const& box, std::vector<sf::RectangleShape> all_spiders)
+void Player::update(sf::RectangleShape const& box,
+                    std::vector<sf::RectangleShape> const& all_spiders,
+                    std::vector<sf::RectangleShape> const& all_ants)
 {
     if (check_inside_leaf(box)) {
 
@@ -31,8 +34,14 @@ void Player::update(sf::RectangleShape const& box, std::vector<sf::RectangleShap
             // position.x += 2;
         }
     }
-    if (timer < 70)
+    if (timer < 70) {
         ++timer;
+        ++timer_dmg;
+    }
+    //TAKE DAMAGE TIMER
+    if(timer_dmg < 30) {
+        ++ timer_dmg;
+    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= 70)
     {
@@ -40,11 +49,12 @@ void Player::update(sf::RectangleShape const& box, std::vector<sf::RectangleShap
         timer = 0;
     }
 
+    check_coll(all_ants, all_spiders);
 
     for(unsigned int i{0}; i < player_shots.size(); ++i)
     {
        // std::cout << "SHOT_1  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
-       if (!player_shots.at(i).check_coll(all_spiders))
+       if (!player_shots.at(i).check_coll(all_spiders) && !player_shots.at(i).check_coll(all_ants))
                player_shots.at(i).move();
        else
             player_shots.erase(begin(player_shots) + i);
@@ -53,6 +63,37 @@ void Player::update(sf::RectangleShape const& box, std::vector<sf::RectangleShap
     }
 }
 
+void Player::check_coll(std::vector<sf::RectangleShape> const& all_ants,
+                              std::vector<sf::RectangleShape> const& all_spiders)
+{
+    for (auto & spider : all_spiders)
+    {
+        std::cout << "HP, before: " << hp;
+        if (check_enemy_coll(spider))
+        {
+            // HUR UTFÖRA EN OPERATION PER GAMELOOP???
+             if (hp == 3 && timer_dmg >= 30)
+             {
+                 hp = 2;
+                 timer_dmg = 0;
+
+             }
+             else if (hp == 2 && timer_dmg >= 30)
+             {
+                 hp = 1;
+                 timer_dmg = 0;
+             }
+             else if (hp == 1 && timer_dmg >= 30)
+             {
+                 hp = 0;
+                 timer_dmg = 0;
+             }
+        }
+
+    }
+
+    std::cout << " HP, after: " << hp;
+}
 
 
 
@@ -80,8 +121,8 @@ std::vector<Shot> & Player::get_player_shots()
 }
 
 
-
 bool Player::check_inside_leaf(sf::RectangleShape const& box) {
+
 
     bool right = (shape.getPosition().x + shape.getSize().x > (box.getPosition().x + box.getSize().x));
     bool left = (shape.getPosition().x < box.getPosition().x);
@@ -126,3 +167,19 @@ void Player::draw(sf::RenderWindow & window)
 {
     window.draw(shape);
 }
+
+bool Player::check_enemy_coll(sf::RectangleShape const& enemy) {
+    if (shape.getPosition().x + shape.getSize().x > enemy.getPosition().x &&
+        shape.getPosition().y < enemy.getPosition().y + enemy.getSize().y &&
+        shape.getPosition().y + shape.getSize().y > enemy.getPosition().y &&
+        shape.getPosition().x < enemy.getPosition().x + enemy.getSize().x) {
+        //shape.setPosition(30, 30);
+        return true;
+    }
+    return false;
+}
+/*
+int Player::take_damage()
+{
+     return hp - 1 ;
+}*/

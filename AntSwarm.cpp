@@ -59,14 +59,17 @@ void AntSwarm::check_collison(std::vector<Shot> & player_shots)
 {
     for (auto & shot : player_shots)
     {
-        for (Ant & ant : ant_swarm)
+        for (size_t i{}; i < ant_swarm.size(); ++i)
         {
-            if (ant.check_coll(shot))
+            if (ant_swarm.at(i).check_coll(shot))
             {
-                ant.shape.setPosition(0,0);
+                ant_swarm.erase(begin(ant_swarm) + i);
             }
         }
     }
+}
 
-
+std::vector<Ant>& AntSwarm::get_all_ants()
+{
+    return ant_swarm;
 }

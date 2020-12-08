@@ -35,7 +35,7 @@ float Shot::get_bot()
     return shape.getPosition().y + shape.getSize().y;
 }
 
-bool Shot::check_coll(std::vector<sf::RectangleShape> all_spiders)
+bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
 {
     for (auto & spider : all_spiders) {
         if (get_right() > spider.getPosition().x &&

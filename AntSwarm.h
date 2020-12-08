@@ -13,6 +13,8 @@ public:
 
     void check_collison(std::vector<Shot> & player_shots);
 
+    std::vector<Ant>& get_all_ants();
+
     int get_size_swarm() const;
 };
 
