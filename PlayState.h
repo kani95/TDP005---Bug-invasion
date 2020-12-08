@@ -11,7 +11,7 @@
 #include <vector>
 #include "SpiderSwarm.h"
 
-template <typename T>
+
 class PlayState : public State {
 private:
 
@@ -36,8 +36,8 @@ public:
     void render(sf::RenderTarget* target) override;
 
 
-    std::vector<sf::RectangleShape> transform(std::vector<T> & all_spiders);
-    //std::vector<sf::RectangleShape> transform_ant(std::vector<Ant> & all_ants);
+    std::vector<sf::RectangleShape> transform(std::vector<Spider> const& all_spiders);
+    std::vector<sf::RectangleShape> transform_ant(std::vector<Ant> const& all_ants);
 
 };
 #endif //MAIN_CPP_PLAYSTATE_H

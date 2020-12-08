@@ -68,7 +68,7 @@ void Player::check_coll(std::vector<sf::RectangleShape> const& all_ants,
 {
     for (auto & spider : all_spiders)
     {
-        std::cout << "HP, before: " << hp;
+       // std::cout << "HP, before: " << hp;
         if (check_enemy_coll(spider))
         {
             // HUR UTFÖRA EN OPERATION PER GAMELOOP???
@@ -92,7 +92,7 @@ void Player::check_coll(std::vector<sf::RectangleShape> const& all_ants,
 
     }
 
-    std::cout << " HP, after: " << hp;
+  //  std::cout << " HP, after: " << hp;
 }
 
 

@@ -65,12 +65,11 @@ PlayState::PlayState(sf::RenderWindow *window)
 
 PlayState::~PlayState() = default;
 
-template<typename T>
-std::vector<sf::RectangleShape> PlayState::transform(std::vector<T> const& to_copy_vec)
+std::vector<sf::RectangleShape> PlayState::transform(std::vector<Spider> const& to_copy_vec)
 {
     std::vector<sf::RectangleShape> vec_shape{};
 
-    for (T element : to_copy_vec)
+    for (Spider element : to_copy_vec)
     {
         vec_shape.push_back(element.shape);
     }
@@ -78,8 +77,7 @@ std::vector<sf::RectangleShape> PlayState::transform(std::vector<T> const& to_co
     return vec_shape;
 }
 
-/*
-std::vector<sf::RectangleShape> PlayState::transform_ant(std::vector<Ant> & all_ants)
+std::vector<sf::RectangleShape> PlayState::transform_ant(std::vector<Ant> const& all_ants)
 {
     std::vector<sf::RectangleShape> vec_shape;
 
@@ -89,4 +87,4 @@ std::vector<sf::RectangleShape> PlayState::transform_ant(std::vector<Ant> & all_
     }
 
     return vec_shape;
-}*/
+}
