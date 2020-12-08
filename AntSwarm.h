@@ -8,10 +8,10 @@ class AntSwarm {
 public:
     AntSwarm();
     std::vector<Ant> ant_swarm{};
-    void update();
+    void update(std::vector<Shot> & player_shots);
     void render(sf::RenderTarget* target);
 
-    void check_collison(Shot & shot);
+    void check_collison(std::vector<Shot> & player_shots);
 
     int get_size_swarm() const;
 };

@@ -6,12 +6,8 @@ void PlayState::update(float const& frame_time)
     //std::cout << "Hello mate" << std::endl;
     player.update(leaf.shape);
     spider.update();
-    swarm.update();
-
-    for (auto & shot_ : player_shots)
-    {
-        swarm.check_collison(shot_);
-    }
+    // !!! The update call should be made by each ant individually much more cleaner so
+    swarm.update(player_shots);
 
 
     std::cout << swarm.get_size_swarm() << std::endl;

@@ -17,7 +17,9 @@ void Ant::move(float const x, float const y) {
     shape.move(x, y);
 }
 
-void Ant::update() {
+void Ant::update()
+{
+
 }
 
 bool Ant::check_coll(Shot & shot)

@@ -35,8 +35,10 @@ int AntSwarm::get_size_swarm() const
 }
 
 
-void AntSwarm::update() {
+void AntSwarm::update(std::vector<Shot> & player_shots)
+{
 
+    check_collison(player_shots);
     for (Ant & ant : ant_swarm)
     {
         ant.update();
@@ -53,13 +55,18 @@ void AntSwarm::render(sf::RenderTarget* target)
 }
 
 
-void AntSwarm::check_collison(Shot & shot)
+void AntSwarm::check_collison(std::vector<Shot> & player_shots)
 {
-    for (Ant & ant : ant_swarm)
+    for (auto & shot : player_shots)
     {
-        if (ant.check_coll(shot))
+        for (Ant & ant : ant_swarm)
         {
-            ant.shape.setPosition(0,0);
+            if (ant.check_coll(shot))
+            {
+                ant.shape.setPosition(0,0);
+            }
         }
     }
+
+
 }
