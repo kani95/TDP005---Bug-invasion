@@ -19,10 +19,12 @@ public:
    bool check_coll(std::vector<sf::RectangleShape> all_spiders);
    //bool check_coll_screen();
 
+   bool check_is_dead();
     //void render(sf::RenderTarget* & window);
     //void update(Shot & new_shot);
 
 protected:
+    bool mark_for_delete{};
 
 };
 

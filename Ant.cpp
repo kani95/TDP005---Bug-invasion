@@ -19,7 +19,7 @@ void Ant::move(float const x, float const y) {
 
 void Ant::update()
 {
-   shape.setPosition(shape.getPosition().x, shape.getPosition().y);
+   // shape.setPosition(shape.getPosition().x + 1.f, shape.getPosition().y + 1.f);
 }
 
 bool Ant::check_coll(Shot & shot)
@@ -29,7 +29,7 @@ bool Ant::check_coll(Shot & shot)
        && shot.get_bot() > shape.getPosition().y && shot.get_left()
                                                     < shape.getPosition().x + shape.getSize().x)
     {
-/*        std::cout << "i should be reset" << std::endl;
+/*      std::cout << "i should be reset" << std::endl;
         shape.setPosition(0,0);*/
         return true;
     }

@@ -52,9 +52,11 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> all_spiders)
             //shape.setPosition(30, 30);
             return true;
         }
+
+        //1920 x 1080
     }
 
-    bool down = (shape.getPosition().y + shape.getSize().y > (600));
+    bool down = (shape.getPosition().y + shape.getSize().y > (1080));
     bool up = (shape.getPosition().y < 0);
 
     if (down)
@@ -68,4 +70,10 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> all_spiders)
     }
 
     return false;
+}
+
+
+bool Shot::check_is_dead()
+{
+    return (shape.getPosition().y + shape.getSize().y > (1080));
 }

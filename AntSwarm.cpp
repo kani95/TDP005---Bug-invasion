@@ -39,17 +39,12 @@ void AntSwarm::update(std::vector<Shot> & player_shots)
 {
 
     check_collison(player_shots);
-    std::cout << "DAMN SON: "<< ant_shots.size() << std::endl;
     for (Ant & ant : ant_swarm)
     {
         ant.update();
         if (ant.can_shoot())
         {
             Shot new_shot;
-            //new_shot.speed(0, 6,5);
-            // new_shot.shape.setPosition(get_dirx(),get_diry());
-            //shape.getPosition().x
-
             new_shot.shape.setPosition(ant.shape.getPosition().x, ant.shape.getPosition().y);
             ant_shots.push_back(new_shot);
         }
@@ -59,7 +54,12 @@ void AntSwarm::update(std::vector<Shot> & player_shots)
     // update shots
     for(unsigned int i{0}; i < ant_shots.size(); ++i)
     {
+        if (ant_shots.at(i).check_is_dead())
+        {
+            ant_shots.erase(ant_shots.begin() + i);
+        }
         ant_shots.at(i).move(0.f, 5.f);
+
     }
 }
 
@@ -86,6 +86,7 @@ void AntSwarm::check_collison(std::vector<Shot> & player_shots)
         }
     }
 }
+
 
 std::vector<Shot> &AntSwarm::get_ant_shots()
 {
