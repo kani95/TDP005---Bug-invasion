@@ -7,8 +7,8 @@ Spider::Spider()
 {
     shape.setFillColor(sf::Color::Blue);
    // shape.setPosition(300,200);
-   speed.x = -0.1;
-   speed.y = 0;
+   speed.x = -2;
+   speed.y = 0.5;
 }
 
 
@@ -26,9 +26,10 @@ void Spider::set_start_pos()
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution dis(100,250);
-    float start_x {static_cast<float>(dis(gen))};
-    float start_y {static_cast<float>(dis(gen))};
+    std::uniform_int_distribution dis_x(200,700);
+    std::uniform_int_distribution dis_y(400,500);
+    float start_x {static_cast<float>(dis_x(gen))};
+    float start_y {static_cast<float>(dis_y(gen))};
     shape.setPosition(start_x,start_y);
    // std::cout << start_x << ":x " << start_y << ":y ";
 }
@@ -87,44 +88,50 @@ bool Spider::check_coll(Shot & shot)
 
 void Spider::check_coll_screen()
 {
-    bool right = (shape.getPosition().x + shape.getSize().x > (800));
-    bool left = (shape.getPosition().x < 0);
+    bool right = (shape.getPosition().x + shape.getSize().x > (710));
+    bool left = (shape.getPosition().x < 210);
     bool down = (shape.getPosition().y + shape.getSize().y > (600));
-    bool up = (shape.getPosition().y < 0);
+    bool up = (shape.getPosition().y < 300);
 
     if (right)
     {
         //shape.setPosition(shape.getPosition().x - (movespeed), shape.getPosition().y);
         speed.x = -1 * speed.x;
-        speed.y += 0.3;
+        speed.y += 1;
         move(speed.x, speed.y);
-        speed.y -= 0.3;
+        speed.y -= 1;
       //  return true;
     }
     else if (left)
     {
         speed.x = -1 * speed.x;
-        speed.y += 0.3;
+        speed.y += 1;
         move(speed.x, speed.y);
-        speed.y -= 0.3;
+        speed.y -= 1;
         // shape.setPosition(shape.getPosition().x + (movespeed), shape.getPosition().y);
      //   return true;
     }
     else if (down)
     {
         speed.x = -1 * speed.x;
-        speed.y += 0.06;
+        speed.y  = -1 * speed.y;
         move(speed.x, speed.y);
-        speed.y -= 0.06;
+      //  speed.y -= 1;
+     /*   speed.x = -1 * speed.x;
+        speed.y = -1 * speed.y;
+        move(speed.x, speed.y);*/
         // shape.setPosition(shape.getPosition().x, shape.getPosition().y - (movespeed));
     //    return true;
     }
     else if (up)
     {
         speed.x = -1 * speed.x;
-        speed.y += 0.06;
+        speed.y = -1 * speed.y;
         move(speed.x, speed.y);
-        speed.y -= 0.06;
+      //  speed.y -= 1;
+        /*speed.x = -1 * speed.x;
+        speed.y = -1 * speed.y;
+        move(speed.x, speed.y);*/
         // shape.setPosition(shape.getPosition().x, shape.getPosition().y + (movespeed));
       //  return true;
     }

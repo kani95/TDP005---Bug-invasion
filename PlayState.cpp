@@ -7,6 +7,8 @@ void PlayState::update(float const& frame_time)
     auto vec_shape = transform(all_spiders);
     player.update(leaf.shape, vec_shape);
     spiderswarm.update(player_shots);
+
+
     //all_spiders = spider.get_all_spiders();
     //player_shots = player.get_player_shots();
    // std::vector<Shot> & player_shots{player.get_player_shots()};
@@ -37,7 +39,6 @@ void PlayState::render(sf::RenderTarget* target)
         target->draw(spi.shape);
     }
 }
-
 
 
 void PlayState::quit_state() {

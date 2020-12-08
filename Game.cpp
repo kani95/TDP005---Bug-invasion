@@ -17,8 +17,8 @@ void Game::init_window()
     //sf::ContextSettings::antialiasingLevel(2);
     window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
     window -> setKeyRepeatEnabled(false);
-    window -> setFramerateLimit(120);
-    window -> setVerticalSyncEnabled(false);
+    window -> setFramerateLimit(60);
+    window -> setVerticalSyncEnabled(true);
 }
 
 
