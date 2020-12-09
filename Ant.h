@@ -9,9 +9,10 @@ public:
     Ant();
     //~Ant() override;
 
+
     int get_score() const override;
-    void move(float const, float const) override;
-    void update() override;
+    void move(float , float) override;
+    void update(const sf::RenderTarget* window) override;
     void render(sf::RenderTarget* target) const;
     bool can_shoot() const;
 

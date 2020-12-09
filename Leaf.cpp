@@ -6,7 +6,7 @@ Leaf::Leaf()
 {
 
     this -> shape.setSize(sf::Vector2(300.f,300.f));
-    this -> shape.setPosition(sf::Vector2(250.f,300.f));
+    this -> shape.setPosition(sf::Vector2(250.f,290.f));
 
     this -> shape.setFillColor(sf::Color::Green);
     //std::cout << this -> shape.getSize().x << " " << this -> shape.getSize().y;

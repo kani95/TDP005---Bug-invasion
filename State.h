@@ -20,7 +20,7 @@ public:
     virtual void update(float const& frame_time) = 0;
     // if nothing is give in the parameter render to window
     // else render to specific target
-    virtual void render(sf::RenderTarget* target) = 0;
+    virtual void render(sf::RenderTarget*  target) = 0;
 };
 
 

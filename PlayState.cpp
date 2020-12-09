@@ -10,10 +10,10 @@ void PlayState::update(float const& frame_time)
     auto vec_shape_ant = transform_ant(all_ants);
     player.update(leaf.shape, vec_shape_spider, vec_shape_ant, ant_shots);
 
-    spiderswarm.update(player_shots);
+    spiderswarm.update(window,player_shots);
 
     // !!! The update call should be made by each ant individually much more cleaner so
-    antswarm.update(player_shots);
+    antswarm.update(window, player_shots);
 
 }
 

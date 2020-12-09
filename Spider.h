@@ -9,7 +9,7 @@ public:
     Spider();
     int get_score() const override;
     void move(float const, float const) override;
-    void update() override;
+    void update(const sf::RenderTarget* window) override;
     void set_start_pos();
     //void add_second();
     bool check_coll(Shot & shot);

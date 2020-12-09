@@ -8,31 +8,38 @@ Player::Player()
     shape.setPosition(300.f,450.f);
 }
 
+
+void Player::update_input()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        move(-1.f, 0.f);
+        // position.x += -2;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        move(1.f, 0.f);
+        // position.x += 2;
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        move(0.f, 1.f);
+        // position.y += 2;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        move(0.f, -1.f);
+        // position.y += -2;
+    }
+}
+
+
 void Player::update(sf::RectangleShape const& box,
                     std::vector<sf::RectangleShape> const& all_spiders,
                     std::vector<sf::RectangleShape> const& all_ants,
                     std::vector<Shot> const& ant_shots)
 {
-    if (check_inside_leaf(box)) {
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            move(0.f, -1.f);
-            // position.y += -2;
-        }
+    update_input();
+    check_inside_leaf(box);
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            move(-1.f, 0.f);
-            // position.x += -2;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            move(0.f, 1.f);
-            // position.y += 2;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            move(1.f, 0.f);
-            // position.x += 2;
-        }
-    }
     if (timer < 70) {
         ++timer;
     }
@@ -68,21 +75,21 @@ void Player::check_coll(std::vector<Shot> const& ant_shots,
 {
     for (auto & spider : all_spiders)
     {
-      //  std::cout << "HP, before: " << hp;
+        std::cout << "HP, before: " << hp;
         if (check_enemy_coll(spider))
         {
            take_damage();
         }
     }
 
-    for (auto shot : ant_shots)
+    for (auto const& shot : ant_shots)
     {
         if(check_enemy_coll(shot.shape))
         {
             take_damage();
         }
     }
-   // std::cout << " HP, after: " << hp;
+    std::cout << " HP, after: " << hp;
 }
 
 void Player::move(float const dirx, float const diry)
@@ -109,38 +116,70 @@ std::vector<Shot> & Player::get_player_shots()
 }
 
 
-bool Player::check_inside_leaf(sf::RectangleShape const& box) {
+void Player::check_inside_leaf(sf::RectangleShape const& box) {
 
+    //bool right = (shape.getPosition().x + shape.getSize().x > (box.getPosition().x + box.getSize().x));
+    //bool left = (shape.getPosition().x < box.getPosition().x);
+    //bool down = (shape.getPosition().y + shape.getSize().y > (box.getPosition().y + box.getSize().y));
+    //bool up = (shape.getPosition().y < box.getPosition().y);
 
-    bool right = (shape.getPosition().x + shape.getSize().x >
-                  (box.getPosition().x + box.getSize().x));
-    bool left = (shape.getPosition().x < box.getPosition().x);
-    bool down = (shape.getPosition().y + shape.getSize().y >
-                 (box.getPosition().y + box.getSize().y));
-    bool up = (shape.getPosition().y < box.getPosition().y);
-
-    if (right)
+    // RIGHT
+/*    if (shape.getPosition().x + shape.getSize().x >= (box.getPosition().x + box.getSize().x))
     {
         shape.setPosition(shape.getPosition().x - (movespeed), shape.getPosition().y);
-        return false;
+        //shape.setPosition(box.getGlobalBounds().width - (shape.getSize().x), shape.getPosition().y);
     }
-    else if (left)
+    // LEFT
+    if (shape.getPosition().x <= box.getPosition().x)
     {
         shape.setPosition(shape.getPosition().x + (movespeed), shape.getPosition().y);
-        return false;
     }
-    else if (down)
+    // DOWN
+    if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
     {
         shape.setPosition(shape.getPosition().x, shape.getPosition().y - (movespeed));
-        return false;
     }
-    else if (up)
+    // UP
+    if (shape.getPosition().y <= box.getPosition().y)
     {
         shape.setPosition(shape.getPosition().x, shape.getPosition().y + (movespeed));
-        return false;
+    }*/
+
+
+
+    //std::cout << shape.getPosition().x << " " << shape.getPosition().y << std::endl;
+    //std::cout << box.getGlobalBounds().height << " " << box.getGlobalBounds().top << std::endl;
+    // LEFT
+    if (shape.getGlobalBounds().left <= box.getGlobalBounds().left)
+    {
+        shape.setPosition(box.getGlobalBounds().left, shape.getGlobalBounds().top);
+    }
+    // RIGHT
+    //if (shape.getGlobalBounds().left + shape.getGlobalBounds().width >= box.getGlobalBounds().left + box.getGlobalBounds().width)
+    if ((shape.getPosition().x + shape.getSize().x >= (box.getPosition().x + box.getSize().x)))
+    {
+        //shape.setPosition(box.getGlobalBounds().width - shape.getGlobalBounds().width, shape.getPosition().y);
+        shape.setPosition(box.getSize().x + box.getPosition().x - shape.getGlobalBounds().width, shape.getGlobalBounds().top);
+    }
+    // UP
+    if (shape.getGlobalBounds().top <= box.getGlobalBounds().top)
+    {
+       shape.setPosition(shape.getGlobalBounds().left, box.getGlobalBounds().top);
+    }
+    // DOWN
+    if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
+    {
+     //   std::cout << "hereeeeeeeeeeeeee " << std::endl;
+        shape.setPosition(shape.getPosition().x, box.getGlobalBounds().height + box.getGlobalBounds().top - shape.getGlobalBounds().height);
     }
 
-    return true;
+    // DOWN
+    //if(shape.getGlobalBounds().top + shape.getGlobalBounds().height >= box.getSize().y)
+/*    if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
+    {
+        shape.setPosition(shape.getGlobalBounds().left, box.getGlobalBounds().height - shape.getGlobalBounds().height);
+    }*/
+
 }
 
 float Player::get_dirx()

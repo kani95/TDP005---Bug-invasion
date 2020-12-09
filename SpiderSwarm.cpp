@@ -7,7 +7,7 @@ SpiderSwarm::SpiderSwarm()
     all_spiders.push_back(spider);*/
 }
 
-void SpiderSwarm::update(std::vector<Shot> & player_shots)
+void SpiderSwarm::update(const sf::RenderTarget* window, std::vector<Shot> & player_shots)
 {
     if (timer >= 700)
     {
@@ -24,7 +24,7 @@ void SpiderSwarm::update(std::vector<Shot> & player_shots)
         for (Spider & spider : all_spiders)
         {
             spider.check_coll_screen();
-            spider.update();
+            spider.update(window);
         }
     }
 
@@ -32,7 +32,7 @@ void SpiderSwarm::update(std::vector<Shot> & player_shots)
         for (size_t i{}; i < all_spiders.size(); ++i) {
             if (!all_spiders.at(i).check_coll(shot)) {
                 all_spiders.at(i).check_coll_screen();
-                all_spiders.at(i).update();
+                all_spiders.at(i).update(window);
             } else {
                 all_spiders.erase(begin(all_spiders) + i);
             }
