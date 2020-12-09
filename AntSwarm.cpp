@@ -64,9 +64,9 @@ void AntSwarm::update(std::vector<Shot> & player_shots)
 }
 
 
-void AntSwarm::render(sf::RenderTarget* target)
+void AntSwarm::render(sf::RenderTarget* target) const
 {
-    for (Ant & ant : ant_swarm)
+    for (Ant const& ant : ant_swarm)
     {
         ant.render(target);
     }

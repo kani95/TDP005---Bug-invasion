@@ -3,21 +3,19 @@
 #include "Enemy.h"
 #include "Shot.h"
 
-
 // type 1 enemy
 class Ant : public Enemy {
 public:
     Ant();
     //~Ant() override;
 
-    int get_score() override;
-    void move(float , float) override;
+    int get_score() const override;
+    void move(float const, float const) override;
     void update() override;
-    void render(sf::RenderTarget* target);
-    static bool can_shoot();
+    void render(sf::RenderTarget* target) const;
+    bool can_shoot() const;
 
-    bool check_coll(Shot & shot);
-
+    bool check_coll(Shot & shot) const;
 
 private:
     int score;

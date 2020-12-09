@@ -9,11 +9,13 @@ Ant::Ant()
     shape.setPosition(220, 70);
 }
 
-int Ant::get_score() {
+int Ant::get_score() const
+{
     return score;
 }
 
-void Ant::move(float const x, float const y) {
+void Ant::move(float const x, float const y)
+{
     shape.move(x, y);
 }
 
@@ -22,12 +24,12 @@ void Ant::update()
    // shape.setPosition(shape.getPosition().x + 1.f, shape.getPosition().y + 1.f);
 }
 
-bool Ant::check_coll(Shot & shot)
+bool Ant::check_coll(Shot & shot) const
 {
     if(shot.get_right() > shape.getPosition().x &&
-       shot.get_top() < shape.getPosition().y + shape.getSize().y
-       && shot.get_bot() > shape.getPosition().y && shot.get_left()
-                                                    < shape.getPosition().x + shape.getSize().x)
+       shot.get_top() < shape.getPosition().y + shape.getSize().y &&
+       shot.get_bot() > shape.getPosition().y &&
+       shot.get_left() < shape.getPosition().x + shape.getSize().x)
     {
 /*      std::cout << "i should be reset" << std::endl;
         shape.setPosition(0,0);*/
@@ -36,12 +38,12 @@ bool Ant::check_coll(Shot & shot)
     return  false;
 }
 
-void Ant::render(sf::RenderTarget* target)
+void Ant::render(sf::RenderTarget* target) const
 {
     target -> draw(shape);
 }
 
-bool Ant::can_shoot()
+bool Ant::can_shoot() const
 {
     int value{(std::rand() % 200) + 1};
     if (value == 3)

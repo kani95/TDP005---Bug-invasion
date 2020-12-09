@@ -8,7 +8,7 @@ void PlayState::update(float const& frame_time)
 
     auto vec_shape_spider = transform(all_spiders);
     auto vec_shape_ant = transform_ant(all_ants);
-    player.update(leaf.shape, vec_shape_spider, vec_shape_ant);
+    player.update(leaf.shape, vec_shape_spider, vec_shape_ant, ant_shots);
 
     spiderswarm.update(player_shots);
 

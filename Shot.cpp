@@ -46,8 +46,8 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
     for (auto & spider : all_spiders) {
         if (get_right() > spider.getPosition().x &&
             get_top() < spider.getPosition().y + spider.getSize().y
-            && get_bot() > spider.getPosition().y && get_left()
-                                                     < spider.getPosition().x + spider.getSize().x) {
+            && get_bot() > spider.getPosition().y &&
+            get_left() < spider.getPosition().x + spider.getSize().x) {
             //shape.setPosition(30, 30);
             return true;
         }

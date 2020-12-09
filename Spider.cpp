@@ -12,7 +12,7 @@ Spider::Spider()
 }
 
 
-int Spider::get_score()
+int Spider::get_score() const
 {
  return score;
 }

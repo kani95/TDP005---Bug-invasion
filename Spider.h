@@ -7,7 +7,7 @@
 class Spider : public Enemy {
 public:
     Spider();
-    int get_score() override;
+    int get_score() const override;
     void move(float const, float const) override;
     void update() override;
     void set_start_pos();
