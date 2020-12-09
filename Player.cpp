@@ -56,18 +56,6 @@ void Player::update(sf::RectangleShape const& box,
 
     check_coll(ant_shots, all_spiders);
     check_player_shots_coll(all_spiders,all_ants);
-
-  /*  for(unsigned int i{0}; i < player_shots.size(); ++i)
-    {
-       // std::cout << "SHOT_1  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
-
-       if (!player_shots.at(i).check_coll(all_spiders) && !player_shots.at(i).check_coll(all_ants))
-           player_shots.at(i).move(0.f, -6.5f);
-       else
-            player_shots.erase(begin(player_shots) + i);
-        //std::cout << player_shots.size();
-       // std::cout << "SHOT_2  " << player_shots.at(i).shape.getPosition().x << " " << player_shots.at(i).shape.getPosition().y << std::endl;
-    }*/
 }
 
 void Player::check_coll(std::vector<Shot> const& ant_shots,
@@ -145,20 +133,14 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
         shape.setPosition(shape.getPosition().x, shape.getPosition().y + (movespeed));
     }*/
 
-
-
-    //std::cout << shape.getPosition().x << " " << shape.getPosition().y << std::endl;
-    //std::cout << box.getGlobalBounds().height << " " << box.getGlobalBounds().top << std::endl;
     // LEFT
     if (shape.getGlobalBounds().left <= box.getGlobalBounds().left)
     {
         shape.setPosition(box.getGlobalBounds().left, shape.getGlobalBounds().top);
     }
     // RIGHT
-    //if (shape.getGlobalBounds().left + shape.getGlobalBounds().width >= box.getGlobalBounds().left + box.getGlobalBounds().width)
     if ((shape.getPosition().x + shape.getSize().x >= (box.getPosition().x + box.getSize().x)))
     {
-        //shape.setPosition(box.getGlobalBounds().width - shape.getGlobalBounds().width, shape.getPosition().y);
         shape.setPosition(box.getSize().x + box.getPosition().x - shape.getGlobalBounds().width, shape.getGlobalBounds().top);
     }
     // UP
@@ -169,17 +151,9 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
     // DOWN
     if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
     {
-     //   std::cout << "hereeeeeeeeeeeeee " << std::endl;
+
         shape.setPosition(shape.getPosition().x, box.getGlobalBounds().height + box.getGlobalBounds().top - shape.getGlobalBounds().height);
     }
-
-    // DOWN
-    //if(shape.getGlobalBounds().top + shape.getGlobalBounds().height >= box.getSize().y)
-/*    if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
-    {
-        shape.setPosition(shape.getGlobalBounds().left, box.getGlobalBounds().height - shape.getGlobalBounds().height);
-    }*/
-
 }
 
 float Player::get_dirx()
@@ -196,6 +170,9 @@ void Player::draw(sf::RenderWindow & window)
 {
     window.draw(shape);
 }
+
+// skicka in player referens till antswarm och spiderswarm.
+// Ta skada,
 
 void Player::check_player_shots_coll(std::vector<sf::RectangleShape> const& all_spiders,
                              std::vector<sf::RectangleShape> const& all_ants)

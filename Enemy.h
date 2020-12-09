@@ -6,13 +6,10 @@
 #include "vector"
 #include <memory>
 
-
-
 class Enemy : public Character {
 public:
     Enemy();
     //virtual ~Enemy() = 0;
-
 
     virtual int get_score() const = 0;
     virtual void move(float const, float const) = 0;
