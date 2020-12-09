@@ -12,6 +12,13 @@
 #include "SpiderSwarm.h"
 
 
+// 1. hp problem
+// 2. när skriver vi ut ett nytt fönster?
+// 3. shots collision vi gör det på många ställer
+// 4. hur kan vi sapara shots i playstate? , vecshape, collision check happends in player
+// 5. läsa in från fil?
+
+
 class PlayState : public State {
 private:
 
@@ -23,12 +30,12 @@ public:
     Leaf leaf;
     // Ant ant;
     Shot shot;
-    AntSwarm antswarm;
+    AntSwarm ant_swarm;
     std::vector<Shot> player_shots;
     std::vector<Shot> ant_shots;
     std::vector<Spider> all_spiders;
     //Spider spider;
-    SpiderSwarm spiderswarm;
+    SpiderSwarm spider_swarm;
     std::vector<Ant> all_ants;
 
 

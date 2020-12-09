@@ -21,7 +21,6 @@ void Ant::move(float const x, float const y) {
 void Ant::update(const sf::RenderTarget* target)
 {
 
-    
 }
 
 bool Ant::check_coll(Shot & shot)
@@ -56,4 +55,13 @@ bool Ant::can_shoot()
     }
 }
 
+
+void Ant::set_id(unsigned short int new_id)
+{
+    id = new_id;
+}
+
+unsigned short Ant::get_id() {
+    return id;
+}
 //Ant::~Ant() = default;

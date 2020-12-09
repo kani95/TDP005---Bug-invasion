@@ -8,6 +8,7 @@
 class Ant : public Enemy {
 public:
     Ant();
+    // check if ant collides with a player shot
     //~Ant() override;
 
     int get_score() override;
@@ -17,10 +18,12 @@ public:
     static bool can_shoot();
 
     bool check_coll(Shot & shot);
-
+    void set_id(unsigned short int new_id);
+    unsigned short get_id();
 
 private:
     int score;
+    unsigned short int id;
 };
 
 #endif //GAME_ANT_H

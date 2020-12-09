@@ -74,5 +74,6 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
 
 bool Shot::check_is_dead()
 {
+    // change to rendertarget.get bla bla
     return (shape.getPosition().y + shape.getSize().y > (1080));
 }
