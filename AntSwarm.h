@@ -8,7 +8,7 @@ class AntSwarm {
 public:
     AntSwarm();
     std::vector<Ant> ant_swarm{};
-    void update(std::vector<Shot> & player_shots);
+    void update(const sf::RenderTarget* window, std::vector<Shot> & player_shots) ;
     void render(sf::RenderTarget* target);
 
     void check_collison(std::vector<Shot> & player_shots);

@@ -12,7 +12,7 @@ public:
 
     int get_score() override;
     void move(float , float) override;
-    void update() override;
+    void update(const sf::RenderTarget* window) override;
     void render(sf::RenderTarget* target);
     static bool can_shoot();
 

@@ -17,9 +17,11 @@ void Ant::move(float const x, float const y) {
     shape.move(x, y);
 }
 
-void Ant::update()
+
+void Ant::update(const sf::RenderTarget* target)
 {
-   // shape.setPosition(shape.getPosition().x + 1.f, shape.getPosition().y + 1.f);
+
+    
 }
 
 bool Ant::check_coll(Shot & shot)

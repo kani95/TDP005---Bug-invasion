@@ -10,11 +10,13 @@ public:
     Player();
     void move(float dirx, float diry) override;
 
+    void update_input();
+
     void update(sf::RectangleShape const& box,
                 std::vector<sf::RectangleShape> const& all_spiders,
                 std::vector<sf::RectangleShape> const& all_ants);
 
-    bool check_inside_leaf(sf::RectangleShape const& box);
+    void check_inside_leaf(sf::RectangleShape const& box);
     void check_coll(std::vector<sf::RectangleShape> const& all_ants,
                           std::vector<sf::RectangleShape> const& all_spiders);
     bool check_enemy_coll(sf::RectangleShape const& all_spiders);

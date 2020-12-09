@@ -18,7 +18,7 @@ private:
 public:
     explicit PlayState(sf::RenderWindow* window);
     ~PlayState() override;
-    Object(window);
+    const sf::RenderTarget(*window);
     Player player;
     Leaf leaf;
     // Ant ant;

@@ -35,13 +35,13 @@ int AntSwarm::get_size_swarm() const
 }
 
 
-void AntSwarm::update(std::vector<Shot> & player_shots)
+void AntSwarm::update(const sf::RenderTarget* window, std::vector<Shot> & player_shots)
 {
 
     check_collison(player_shots);
     for (Ant & ant : ant_swarm)
     {
-        ant.update();
+        ant.update(window);
         if (ant.can_shoot())
         {
             Shot new_shot;
