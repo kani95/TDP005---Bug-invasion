@@ -34,7 +34,8 @@ void Player::update_input()
 void Player::update(sf::RectangleShape const& box,
                     std::vector<sf::RectangleShape> const& all_spiders,
                     std::vector<sf::RectangleShape> const& all_ants,
-                    std::vector<Shot> const& ant_shots)
+                    std::vector<Shot> const& ant_shots,
+                    std::vector<Shot> & player_shots)
 {
 
     update_input();
@@ -50,30 +51,25 @@ void Player::update(sf::RectangleShape const& box,
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= 70)
     {
-        add_shot();
+        add_shot(player_shots);
         timer = 0;
     }
 
     check_coll(ant_shots, all_spiders);
-    check_player_shots_coll(all_spiders,all_ants);
+    check_player_shots_coll(all_spiders,all_ants, player_shots);
 }
 
 void Player::check_coll(std::vector<Shot> const& ant_shots,
-                              std::vector<sf::RectangleShape> const& all_spiders)
-{
-    for (auto & spider : all_spiders)
-    {
+                              std::vector<sf::RectangleShape> const& all_spiders) {
+    for (auto &spider : all_spiders) {
         std::cout << "HP, before: " << hp;
-        if (check_enemy_coll(spider))
-        {
-           take_damage();
+        if (check_enemy_coll(spider)) {
+            take_damage();
         }
     }
 
-    for (auto const& shot : ant_shots)
-    {
-        if(check_enemy_coll(shot.shape))
-        {
+    for (auto const &shot : ant_shots) {
+        if (check_enemy_coll(shot.shape)) {
             take_damage();
         }
     }
@@ -91,17 +87,21 @@ void Player::move(float const dirx, float const diry)
 
 }
 
-void Player::add_shot()
+
+void Player::add_shot(std::vector<Shot> & player_shots)
 {
     Shot new_shot{};
     new_shot.shape.setPosition(get_dirx(),get_diry());
     player_shots.push_back(new_shot);
 }
 
+/*
 std::vector<Shot> & Player::get_player_shots()
 {
+    std::cout << "PLayer size" << player_shots.size() << std::endl;
     return player_shots;
 }
+*/
 
 
 void Player::check_inside_leaf(sf::RectangleShape const& box) {
@@ -133,6 +133,7 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
         shape.setPosition(shape.getPosition().x, shape.getPosition().y + (movespeed));
     }*/
 
+
     // LEFT
     if (shape.getGlobalBounds().left <= box.getGlobalBounds().left)
     {
@@ -151,7 +152,6 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
     // DOWN
     if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
     {
-
         shape.setPosition(shape.getPosition().x, box.getGlobalBounds().height + box.getGlobalBounds().top - shape.getGlobalBounds().height);
     }
 }
@@ -172,10 +172,10 @@ void Player::draw(sf::RenderWindow & window)
 }
 
 // skicka in player referens till antswarm och spiderswarm.
-// Ta skada,
 
 void Player::check_player_shots_coll(std::vector<sf::RectangleShape> const& all_spiders,
-                             std::vector<sf::RectangleShape> const& all_ants)
+                             std::vector<sf::RectangleShape> const& all_ants,
+                             std::vector<Shot> & player_shots)
 {
     for (unsigned int i{0}; i < player_shots.size(); ++i)
     {
@@ -188,7 +188,7 @@ void Player::check_player_shots_coll(std::vector<sf::RectangleShape> const& all_
         {
             player_shots.erase(begin(player_shots) + i);
         }
-        std::cout << player_shots.size();
+      //  std::cout << player_shots.size();
     }
 }
 

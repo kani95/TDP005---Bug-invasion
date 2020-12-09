@@ -8,22 +8,23 @@ void PlayState::update(float const& frame_time)
 
     auto vec_shape_spider = transform(all_spiders);
     auto vec_shape_ant = transform_ant(all_ants);
-    player.update(leaf.shape, vec_shape_spider, vec_shape_ant, ant_shots);
 
-    spiderswarm.update(window,player_shots);
+    player.update(leaf.shape, vec_shape_spider, vec_shape_ant, ant_shots, player_shots);
+    // player_shots = player.get_player_shots();
+    // send in a player reference to swarm, if it takes dmg call player take dmg
+    spider_swarm.update(window, player_shots);
+
 
     // !!! The update call should be made by each ant individually much more cleaner so
-    antswarm.update(window, player_shots);
-
+    ant_swarm.update(window, player_shots);
 }
 
 
 void PlayState::render(sf::RenderTarget* target)
 {
-    player_shots = player.get_player_shots();
-    ant_shots = antswarm.get_ant_shots();
-    all_spiders = spiderswarm.get_all_spiders();
-    all_ants = antswarm.get_all_ants();
+    ant_shots = ant_swarm.get_ant_shots();
+    all_spiders = spider_swarm.get_all_spiders();
+    all_ants = ant_swarm.get_all_ants();
 
     target -> draw(leaf.shape);
 
@@ -32,7 +33,7 @@ void PlayState::render(sf::RenderTarget* target)
         target -> draw(shot_.shape);
     }
 
-    antswarm.render(target);
+    ant_swarm.render(target);
 
     for (auto & ant_shot : ant_shots)
     {
@@ -45,6 +46,7 @@ void PlayState::render(sf::RenderTarget* target)
     for (auto & spi: all_spiders) {
         target -> draw(spi.shape);
     }
+
 }
 
 

@@ -64,15 +64,14 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
     }
     else if (up)
     {
-
         return true;
     }
-
     return false;
 }
 
 
 bool Shot::check_is_dead()
 {
+    // change to rendertarget.get bla bla
     return (shape.getPosition().y + shape.getSize().y > (1080));
 }
