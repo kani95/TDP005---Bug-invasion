@@ -64,10 +64,8 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
     }
     else if (up)
     {
-
         return true;
     }
-
     return false;
 }
 

@@ -35,7 +35,8 @@ void Player::update_input()
 
 void Player::update(sf::RectangleShape const& box,
                     std::vector<sf::RectangleShape> const& all_spiders,
-                    std::vector<sf::RectangleShape> const& all_ants)
+                    std::vector<sf::RectangleShape> const& all_ants,
+                    std::vector<Shot> & player_shots)
 {
 
     update_input();
@@ -52,7 +53,7 @@ void Player::update(sf::RectangleShape const& box,
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= 70)
     {
-        add_shot();
+        add_shot(player_shots);
         timer = 0;
     }
 
@@ -97,10 +98,7 @@ void Player::check_coll(std::vector<sf::RectangleShape> const& all_ants,
                  timer_dmg = 0;
              }
         }
-
     }
-
-  //  std::cout << " HP, after: " << hp;
 }
 
 
@@ -116,17 +114,20 @@ void Player::move(float const dirx, float const diry)
 }
 
 
-void Player::add_shot()
+void Player::add_shot(std::vector<Shot> & player_shots)
 {
     Shot new_shot{};
     new_shot.shape.setPosition(get_dirx(),get_diry());
     player_shots.push_back(new_shot);
 }
 
+/*
 std::vector<Shot> & Player::get_player_shots()
 {
+    std::cout << "PLayer size" << player_shots.size() << std::endl;
     return player_shots;
 }
+*/
 
 
 void Player::check_inside_leaf(sf::RectangleShape const& box) {
@@ -162,7 +163,6 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
 
 
     //std::cout << shape.getPosition().x << " " << shape.getPosition().y << std::endl;
-    std::cout << box.getGlobalBounds().height << " " << box.getGlobalBounds().top << std::endl;
     // LEFT
     if (shape.getGlobalBounds().left <= box.getGlobalBounds().left)
     {
@@ -183,7 +183,6 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
     // DOWN
     if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
     {
-        std::cout << "hereeeeeeeeeeeeee " << std::endl;
         shape.setPosition(shape.getPosition().x, box.getGlobalBounds().height + box.getGlobalBounds().top - shape.getGlobalBounds().height);
     }
 

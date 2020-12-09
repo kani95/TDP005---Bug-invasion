@@ -80,10 +80,20 @@ int AntSwarm::get_size_swarm() const
 void AntSwarm::update(const sf::RenderTarget* window, std::vector<Shot> & player_shots)
 {
 
-    check_collison(player_shots);
-    for (Ant & ant : ant_swarm)
+    //check_collison_player_shots(player_shots);
+    // for (Ant & ant : ant_swarm)
+    for(unsigned int i{0}; i < ant_swarm.size(); ++i)
     {
+        Ant ant{ant_swarm.at(i)};
+
+        if (check_collison_player_shots(player_shots, ant))
+        {
+            ant_swarm.erase(begin(ant_swarm) + i);
+            continue;
+        }
+
         ant.update(window);
+
         if (ant.can_shoot())
         {
             Shot new_shot;
@@ -102,7 +112,6 @@ void AntSwarm::update(const sf::RenderTarget* window, std::vector<Shot> & player
             // check if player took dmg;
             // call player function take dmg;
             // check if ant took dmg from player
-
         }
         ant_shots.at(i).move(0.f, 5.f);
 
@@ -119,18 +128,21 @@ void AntSwarm::render(sf::RenderTarget* target)
 }
 
 
-void AntSwarm::check_collison(std::vector<Shot> & player_shots)
+bool AntSwarm::check_collison_player_shots(std::vector<Shot> & player_shots, Ant & ant)
 {
-    for (auto & shot : player_shots)
+    //for (auto & shot : player_shots)
+    for(unsigned int i{0}; i < player_shots.size(); ++i)
     {
-        for (size_t i{}; i < ant_swarm.size(); ++i)
+        Shot shot{player_shots.at(i)};
+        if (ant.check_coll(shot))
         {
-            if (ant_swarm.at(i).check_coll(shot))
-            {
-                ant_swarm.erase(begin(ant_swarm) + i);
-            }
+            std::cout << "ant swarm 1 __" <<player_shots.size() << std::endl;
+            player_shots.erase(begin(player_shots) + i);
+            std::cout << "ant swarm 2 __" <<player_shots.size() << std::endl;
+            return true;
         }
     }
+    return false;
 }
 
 

@@ -12,7 +12,7 @@ public:
     void render(sf::RenderTarget* target);
     std::pair<unsigned short int, unsigned short int> find_furthest_ant();
 
-    void check_collison(std::vector<Shot> & player_shots);
+    static bool check_collison_player_shots(std::vector<Shot> & player_shots, Ant & ant);
 
     std::vector<Ant>& get_all_ants();
 

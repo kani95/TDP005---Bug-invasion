@@ -28,13 +28,17 @@ void SpiderSwarm::update(const sf::RenderTarget* window, std::vector<Shot> & pla
         }
     }
 
-    for (Shot shot : player_shots) {
+    //for (Shot shot : player_shots)
+    for(unsigned int j{0}; j < player_shots.size(); ++j)
+    {
+        Shot shot{player_shots.at(j)};
         for (size_t i{}; i < all_spiders.size(); ++i) {
             if (!all_spiders.at(i).check_coll(shot)) {
                 all_spiders.at(i).check_coll_screen();
                 all_spiders.at(i).update(window);
             } else {
                 all_spiders.erase(begin(all_spiders) + i);
+                player_shots.erase(begin(player_shots) + j);
             }
         }
     }
