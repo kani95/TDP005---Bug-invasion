@@ -2,6 +2,8 @@
 #define GAME_ANT_H
 #include "Enemy.h"
 #include "Shot.h"
+#include "Player.h"
+#include "Shot.h"
 
 // type 1 enemy
 class Ant : public Enemy {
@@ -13,7 +15,9 @@ public:
 
     int get_score() const override;
     void move(float , float) override;
-    void update(const sf::RenderTarget* window) override;
+    void update(const sf::RenderTarget* window,
+                std::vector<Shot> & player_shots,
+                Character* player) override;
 
     void render(sf::RenderTarget* target) const;
     bool can_shoot() const;

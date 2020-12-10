@@ -8,10 +8,13 @@ public:
     Character();
 
     virtual void move(float const, float const) = 0;
-
+    virtual void take_damage();
+    void shake_shape();
+    int get_hp();
+    bool status{true};
 protected:
     int hp;
-    bool status;
+
     bool can_shoot;
     int score;
     float movespeed;

@@ -12,7 +12,7 @@ void PlayState::update(float const& frame_time)
     // player_shots = player.get_player_shots();
     // send in a player reference to swarm, if it takes dmg call player take dmg
 
-    spider_swarm.update(window, player_shots, player);
+    spider_swarm.update(window, player_shots, &player);
 
     // !!! The update call should be made by each ant individually much more cleaner so
     ant_swarm.update(window, player, player_shots);
@@ -24,6 +24,7 @@ void PlayState::render(sf::RenderTarget* target)
     ant_shots = ant_swarm.get_ant_shots();
     all_spiders = spider_swarm.get_all_spiders();
     all_ants = ant_swarm.get_all_ants();
+
 
     target -> draw(leaf.shape);
 

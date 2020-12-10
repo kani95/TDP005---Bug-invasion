@@ -1,5 +1,4 @@
 #include "Ant.h"
-#include "Shot.h"
 #include <iostream>
 
 Ant::Ant()
@@ -7,6 +6,7 @@ Ant::Ant()
 {
     shape.setFillColor(sf::Color::Red);
     shape.setPosition(220, 70);
+    hp = 2;
 }
 
 int Ant::get_score() const
@@ -20,9 +20,14 @@ void Ant::move(float const x, float const y)
 }
 
 
-void Ant::update(const sf::RenderTarget* target)
+void Ant::update(const sf::RenderTarget* target,
+                 std::vector<Shot> & player_shots,
+                 Character* player)
 {
-
+    if (hp <= 0)
+    {
+        status = false;
+    }
 }
 
 bool Ant::check_coll(Shot & shot) const

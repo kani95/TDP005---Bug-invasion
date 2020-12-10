@@ -17,11 +17,6 @@ int Spider::get_score() const
  return score;
 }
 
-void Spider::move( float const dirx, float const diry)
-{
-    shape.move(dirx,diry);
-}
-
 void Spider::set_start_pos()
 {
     std::random_device rd;
@@ -33,6 +28,61 @@ void Spider::set_start_pos()
     shape.setPosition(start_x,start_y);
    // std::cout << start_x << ":x " << start_y << ":y ";
 }
+
+
+
+void Spider::check_coll_screen()
+{
+    bool right = (shape.getPosition().x + shape.getSize().x > (710));
+    bool left = (shape.getPosition().x < 210);
+    bool down = (shape.getPosition().y + shape.getSize().y > (600));
+    bool up = (shape.getPosition().y < 300);
+
+    if (right)
+    {
+        //shape.setPosition(shape.getPosition().x - (movespeed), shape.getPosition().y);
+        speed.x = -1 * speed.x;
+        speed.y += 1;
+        move(speed.x, speed.y);
+        speed.y -= 1;
+        //  return true;
+    }
+    else if (left)
+    {
+        speed.x = -1 * speed.x;
+        speed.y += 1;
+        move(speed.x, speed.y);
+        speed.y -= 1;
+        // shape.setPosition(shape.getPosition().x + (movespeed), shape.getPosition().y);
+        //   return true;
+    }
+    else if (down)
+    {
+        speed.x = -1 * speed.x;
+        speed.y  = -1 * speed.y;
+        move(speed.x, speed.y);
+        //  speed.y -= 1;
+        /*   speed.x = -1 * speed.x;
+           speed.y = -1 * speed.y;
+           move(speed.x, speed.y);*/
+        // shape.setPosition(shape.getPosition().x, shape.getPosition().y - (movespeed));
+        //    return true;
+    }
+    else if (up)
+    {
+        speed.x = -1 * speed.x;
+        speed.y = -1 * speed.y;
+        move(speed.x, speed.y);
+        //  speed.y -= 1;
+        /*speed.x = -1 * speed.x;
+        speed.y = -1 * speed.y;
+        move(speed.x, speed.y);*/
+        // shape.setPosition(shape.getPosition().x, shape.getPosition().y + (movespeed));
+        //  return true;
+    }
+    // return false;
+}
+
 
 void Spider::get_movement()
 {
@@ -65,13 +115,12 @@ void Spider::get_movement()
     }*/
 }
 
-void Spider::update(const sf::RenderTarget* window)
-{
-    get_movement();
-    move(speed.x,speed.y);
-    //std::cout << spider.shape.getPosition().x << "WWWWWWWWWWWWWWWWW2";
 
+void Spider::move( float const dirx, float const diry)
+{
+    shape.move(dirx,diry);
 }
+
 
 bool Spider::check_coll(sf::RectangleShape & enemy)
 {
@@ -86,55 +135,40 @@ bool Spider::check_coll(sf::RectangleShape & enemy)
     return false;
 }
 
-void Spider::check_coll_screen()
-{
-    bool right = (shape.getPosition().x + shape.getSize().x > (710));
-    bool left = (shape.getPosition().x < 210);
-    bool down = (shape.getPosition().y + shape.getSize().y > (600));
-    bool up = (shape.getPosition().y < 300);
 
-    if (right)
+void Spider::check_coll_player_shots(std::vector<Shot> & player_shots, Character * player)
+{
+    for (size_t j{0}; j < player_shots.size(); ++j)
     {
-        //shape.setPosition(shape.getPosition().x - (movespeed), shape.getPosition().y);
-        speed.x = -1 * speed.x;
-        speed.y += 1;
-        move(speed.x, speed.y);
-        speed.y -= 1;
-      //  return true;
+        Shot &shot{player_shots.at(j)};
+
+        if (check_coll(shot.shape))
+        {
+            // all_spiders.erase(begin(all_spiders) + i);
+            player_shots.erase(begin(player_shots) + j);
+            status = false;
+            //delete this;
+        }
+        if (check_coll(player -> shape))
+        {
+            player -> take_damage();
+        }
     }
-    else if (left)
-    {
-        speed.x = -1 * speed.x;
-        speed.y += 1;
-        move(speed.x, speed.y);
-        speed.y -= 1;
-        // shape.setPosition(shape.getPosition().x + (movespeed), shape.getPosition().y);
-     //   return true;
-    }
-    else if (down)
-    {
-        speed.x = -1 * speed.x;
-        speed.y  = -1 * speed.y;
-        move(speed.x, speed.y);
-      //  speed.y -= 1;
-     /*   speed.x = -1 * speed.x;
-        speed.y = -1 * speed.y;
-        move(speed.x, speed.y);*/
-        // shape.setPosition(shape.getPosition().x, shape.getPosition().y - (movespeed));
-    //    return true;
-    }
-    else if (up)
-    {
-        speed.x = -1 * speed.x;
-        speed.y = -1 * speed.y;
-        move(speed.x, speed.y);
-      //  speed.y -= 1;
-        /*speed.x = -1 * speed.x;
-        speed.y = -1 * speed.y;
-        move(speed.x, speed.y);*/
-        // shape.setPosition(shape.getPosition().x, shape.getPosition().y + (movespeed));
-      //  return true;
-    }
-   // return false;
 }
+
+
+void Spider::update(const sf::RenderTarget* window,
+                    std::vector<Shot> & player_shots,
+                    Character* player)
+{
+    check_coll_screen();
+    //get_movement();
+    move(speed.x,speed.y);
+    check_coll_player_shots(player_shots, player);
+}
+
+
+
+
+
 
