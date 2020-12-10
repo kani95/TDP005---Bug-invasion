@@ -65,7 +65,7 @@ void Spider::get_movement()
     }*/
 }
 
-void Spider::update(const sf::RenderTarget* window)
+void Spider::update(const sf::RenderTarget* window, Shot & shot)
 {
     get_movement();
     move(speed.x,speed.y);

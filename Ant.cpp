@@ -21,9 +21,12 @@ void Ant::move(float const x, float const y)
 }
 
 
-void Ant::update(const sf::RenderTarget* target)
+void Ant::update(const sf::RenderTarget* target, Shot & shot)
 {
-
+    if (hp <= 0)
+    {
+        status = false;
+    }
 }
 
 bool Ant::check_coll(Shot & shot) const

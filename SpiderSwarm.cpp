@@ -19,20 +19,33 @@ void SpiderSwarm::update(const sf::RenderTarget* window,
         timer = 0;
     }
 
-    for (size_t j{0}; j < player_shots.size(); ++j) {
-        Shot &shot{player_shots.at(j)};
 
-        for (size_t i{}; i < all_spiders.size(); ++i) {
-            Spider &spider{all_spiders.at(i)};
+
+    for (size_t i{}; i < all_spiders.size(); ++i) {
+        Spider &spider{all_spiders.at(i)};
+
+        spider.check_coll_screen();
+        //spider.update(window, shot);
+
+        for (size_t j{0}; j < player_shots.size(); ++j) {
+            Shot &shot{player_shots.at(j)};
 
             if (spider.check_coll(shot.shape)) {
                 all_spiders.erase(begin(all_spiders) + i);
                 player_shots.erase(begin(player_shots) + j);
             }
+
+
+            if (spider.check_coll(player.shape)) {
+                player.take_damage();
+            }
+
+            //spider.check_coll_screen();
+            spider.update(window, shot);
         }
     }
 
-    for (size_t i{}; i < all_spiders.size(); ++i) {
+/*    for (size_t i{}; i < all_spiders.size(); ++i) {
         Spider &spider{all_spiders.at(i)};
 
         if (spider.check_coll(player.shape)) {
@@ -40,8 +53,8 @@ void SpiderSwarm::update(const sf::RenderTarget* window,
         }
 
         spider.check_coll_screen();
-        spider.update(window);
-    }
+
+    }*/
   /*  if (player_shots.size() == 0)
     {
         for (Spider & spider : all_spiders)
