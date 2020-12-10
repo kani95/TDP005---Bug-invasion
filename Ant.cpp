@@ -1,5 +1,4 @@
 #include "Ant.h"
-#include "Shot.h"
 #include <iostream>
 
 Ant::Ant()
@@ -21,7 +20,9 @@ void Ant::move(float const x, float const y)
 }
 
 
-void Ant::update(const sf::RenderTarget* target)
+void Ant::update(const sf::RenderTarget* target,
+                 std::vector<Shot> & player_shots,
+                 Character* player)
 {
     if (hp <= 0)
     {

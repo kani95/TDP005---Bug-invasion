@@ -21,6 +21,7 @@ void Character::shake_shape()
     if (!status)
     {
         // shape.setOutlineColor(sf::Color::Transparent);
-        shape.setScale(100, 100);
+        shape.setScale(2, 2);
+        status = true;
     }
 }

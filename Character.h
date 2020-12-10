@@ -11,10 +11,10 @@ public:
     virtual void take_damage();
     void shake_shape();
     int get_hp();
-
+    bool status{true};
 protected:
     int hp;
-    bool status{false};
+
     bool can_shoot;
     int score;
     float movespeed;

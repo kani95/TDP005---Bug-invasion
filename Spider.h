@@ -9,10 +9,13 @@ public:
     Spider();
     int get_score() const override;
     void move(float const, float const) override;
-    void update(const sf::RenderTarget* window) override;
+    void update(const sf::RenderTarget* window,
+                std::vector<Shot> & player_shots,
+                Character* player) override;
     void set_start_pos();
     //void add_second();
     bool check_coll(sf::RectangleShape & enemy);
+    void check_coll_player_shots(std::vector<Shot> & player_shots, Character * player);
     void get_movement();
 
 

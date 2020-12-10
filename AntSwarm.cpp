@@ -143,6 +143,10 @@ void AntSwarm::update(const sf::RenderTarget* window,
         if (check_collison_player_shots(player_shots, ant))
         {
             ant.take_damage();
+            ant.status = false;
+            ant.shake_shape();
+
+
             if (ant.get_hp() <= 0)
             {
                 ant_swarm.erase(begin(ant_swarm) + i);
