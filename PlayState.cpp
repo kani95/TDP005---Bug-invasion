@@ -11,7 +11,7 @@ void PlayState::update(float const& frame_time)
     player.update(leaf.shape, vec_shape_spider, vec_shape_ant, player_shots);
     // player_shots = player.get_player_shots();
     // send in a player reference to swarm, if it takes dmg call player take dmg
-    spider_swarm.update(window, player_shots);
+    spider_swarm.update(, player_shots);
 
     // !!! The update call should be made by each ant individually much more cleaner so
     ant_swarm.update(window, player_shots);
@@ -59,6 +59,7 @@ PlayState::PlayState(sf::RenderWindow *window)
 
 
 PlayState::~PlayState() = default;
+
 
 std::vector<sf::RectangleShape> PlayState::transform(std::vector<Spider> const& to_copy_vec)
 {
