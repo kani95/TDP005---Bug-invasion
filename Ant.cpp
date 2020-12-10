@@ -21,7 +21,7 @@ void Ant::move(float const x, float const y)
 }
 
 
-void Ant::update(const sf::RenderTarget* target, Shot & shot)
+void Ant::update(const sf::RenderTarget* target)
 {
     if (hp <= 0)
     {

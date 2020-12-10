@@ -9,10 +9,12 @@ public:
 
     virtual void move(float const, float const) = 0;
     virtual void take_damage();
+    void shake_shape();
+    int get_hp();
 
 protected:
     int hp;
-    bool status{true};
+    bool status{false};
     bool can_shoot;
     int score;
     float movespeed;

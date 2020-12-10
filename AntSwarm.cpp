@@ -5,7 +5,7 @@ AntSwarm::AntSwarm()
 {
     float prev_x {220.f};
     float prev_y {70.f};
-    for (unsigned short int i{0}; i < 30; i++)
+    for (unsigned short int i{0}; i < 2; i++)
     {
         prev_x = prev_x + 40.f;
         //std::cout << prev_x << std::endl;
@@ -132,20 +132,22 @@ void AntSwarm::move_swarm(const sf::RenderTarget* window)
 }
 
 
-void AntSwarm::update(const sf::RenderTarget* window, Player & player,
+void AntSwarm::update(const sf::RenderTarget* window,
+                      Player & player,
                       std::vector<Shot> & player_shots)
 {
-    //check_collison_player_shots(player_shots);
-    // for (Ant & ant : ant_swarm)
-
     for(unsigned int i{0}; i < ant_swarm.size(); ++i)
     {
-        Ant ant{ant_swarm.at(i)};
+        Ant & ant{ant_swarm.at(i)};
 
         if (check_collison_player_shots(player_shots, ant))
         {
-            ant_swarm.erase(begin(ant_swarm) + i);
-            continue;
+            ant.take_damage();
+            if (ant.get_hp() <= 0)
+            {
+                ant_swarm.erase(begin(ant_swarm) + i);
+                continue;
+            }
         }
 
        // ant.update(window);
@@ -157,10 +159,9 @@ void AntSwarm::update(const sf::RenderTarget* window, Player & player,
             ant_shots.push_back(new_shot);
         }
     }
-  //  std::cout << "here " << std::endl;
-    //window -> getSize();
-    move_swarm(window);
-    // update shots
+
+    // move_swarm(window);
+
     for(unsigned int i{0}; i < ant_shots.size(); ++i)
     {
         Shot & shot {ant_shots.at(i)};
