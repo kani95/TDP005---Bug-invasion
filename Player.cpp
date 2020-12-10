@@ -2,7 +2,7 @@
 #include <iostream>
 
 Player::Player()
-    :Character(), timer{70}, immunity{false}
+    :Character(), timer{70}, immunity{false}, timer_dmg{}
 {
     shape.setPosition(position);
     shape.setPosition(300.f,450.f);

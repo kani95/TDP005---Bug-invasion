@@ -2,10 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-
 void Game::init_vars()
 {
-    window = {nullptr};
+ //   window = {nullptr};
     init_states();
 }
 
@@ -15,7 +14,8 @@ void Game::init_window()
     video_mode.height = 600;
     video_mode.width = 800;
     //sf::ContextSettings::antialiasingLevel(2);
-    window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
+    window = new sf::RenderWindow(sf::VideoMode(video_mode), "menu");
+   // window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
     window -> setKeyRepeatEnabled(false);
     window -> setFramerateLimit(60);
     window -> setVerticalSyncEnabled(true);
@@ -25,14 +25,16 @@ void Game::init_window()
 void Game::init_states()
 {
     states.push(new PlayState(window));
+    states.push(new MenuState(window));
 }
 
 
 Game::Game()
- :frame_time{}
+ :frame_time{}, window{}
 {
-    init_vars();
+
     init_window();
+    init_vars();
 }
 
 
@@ -40,13 +42,12 @@ Game::~Game()
 {
     delete window;
 
-    while (states.empty())
+    while (!states.empty())
     {
         delete states.top(); // removes the date the pointer is holding
         states.pop(); // removes the pointer
     }
 }
-
 
 bool Game::window_status() const
 {
@@ -64,10 +65,16 @@ void Game::poll_events()
         switch (event.type)
         {
             case sf::Event::Closed:
-                this -> window -> close();
+               clear_stack();
+              //  window -> close();
+                break;
         }
     }
 
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    {
+        clear_stack();
+    }
 }
 #pragma clang diagnostic pop
 
@@ -89,6 +96,15 @@ void Game::update()
     if (! states.empty())
     {
         states.top() -> update(frame_time);
+        if (states.top() -> get_is_done())
+        {
+           delete states.top();
+           states.pop();
+        }
+        else if(states.top() -> get_exit_status())
+        {
+            clear_stack();
+        }
     }
 }
 
@@ -105,4 +121,18 @@ void Game::render()
     window -> display();
 
     //tick.restart();
+}
+
+void Game::clear_stack()
+{
+   // delete window;
+
+    while (!states.empty())
+    {
+        delete states.top(); // removes the date the pointer is holding
+        states.top() = nullptr;
+        states.pop(); // removes the pointer
+    }
+
+    window -> close();
 }

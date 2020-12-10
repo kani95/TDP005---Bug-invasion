@@ -3,7 +3,6 @@
 
 void PlayState::update(float const& frame_time)
 {
-
     //std::cout << "Hello mate" << std::endl;
 
     auto vec_shape_spider = transform(all_spiders);
@@ -54,6 +53,10 @@ void PlayState::quit_state() {
 
 }
 
+bool PlayState::get_is_done()
+{
+    return is_done;
+}
 
 PlayState::PlayState(sf::RenderWindow *window)
     : State(window)
@@ -86,3 +89,10 @@ std::vector<sf::RectangleShape> PlayState::transform_ant(std::vector<Ant> const&
 
     return vec_shape;
 }
+
+bool PlayState::get_exit_status()
+{
+    return exit_status;
+}
+
+

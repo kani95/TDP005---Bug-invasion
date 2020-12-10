@@ -3,11 +3,13 @@
 
 #include "PlayState.h"
 #include "Shot.h"
+#include "MenuState.h"
 // run game engine class
 
-class Game{
+class Game {
 private:
     sf::RenderWindow* window{};
+   // sf::RenderWindow* menu;
     sf::VideoMode video_mode;
     sf::Event event{};
 
@@ -32,5 +34,6 @@ public:
     void poll_events();
     void update();
     void render();
+    void clear_stack();
 };
 #endif //MAIN_CPP_GAME_H

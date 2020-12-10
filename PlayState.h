@@ -37,12 +37,17 @@ public:
     //Spider spider;
     SpiderSwarm spider_swarm;
     std::vector<Ant> all_ants;
+    bool is_done = false;
+    bool exit_status = false;
 
+/*    void move_down() = delete;
+    void move_up() = delete;*/
 
     void quit_state() override;
     void update(float const& frame_time) override;
     void render(sf::RenderTarget* target) override;
-
+    bool get_is_done() override;
+    bool get_exit_status() override;
 
     std::vector<sf::RectangleShape> transform(std::vector<Spider> const& all_spiders);
     std::vector<sf::RectangleShape> transform_ant(std::vector<Ant> const& all_ants);

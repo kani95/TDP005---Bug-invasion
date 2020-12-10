@@ -6,7 +6,7 @@
 #include "map"
 
 
-class State{
+class State {
 private:
     sf::RenderWindow* window;
     std::vector<sf::Texture*> textures;
@@ -21,6 +21,11 @@ public:
     // if nothing is give in the parameter render to window
     // else render to specific target
     virtual void render(sf::RenderTarget*  target) = 0;
+    virtual bool get_is_done() = 0;
+    virtual bool get_exit_status() = 0;
+
+   /* virtual void move_down() = 0;
+    virtual void move_up() = 0;*/
 };
 
 

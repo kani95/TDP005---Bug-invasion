@@ -31,7 +31,7 @@ set (SOURCE_FILES
         Shot.cpp
         Shot.h
         Spider.cpp
-        Spider.h SpiderSwarm.cpp SpiderSwarm.h)
+        Spider.h SpiderSwarm.cpp SpiderSwarm.h MenuState.cpp MenuState.h)
 
 add_executable(game ${SOURCE_FILES})
 target_link_libraries(game sfml-graphics sfml-window sfml-system)
