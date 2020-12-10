@@ -1,4 +1,5 @@
 #include "SpiderSwarm.h"
+#include <iostream>
 
 SpiderSwarm::SpiderSwarm()
         : all_spiders{}, timer{}
@@ -7,42 +8,73 @@ SpiderSwarm::SpiderSwarm()
     all_spiders.push_back(spider);*/
 }
 
-void SpiderSwarm::update(const sf::RenderTarget* window, std::vector<Shot> & player_shots)
+void SpiderSwarm::update(const sf::RenderTarget* window,
+                         std::vector<Shot> & player_shots, Player & player)
 {
     if (timer >= 700)
     {
         Spider spider{};
         spider.set_start_pos();
         all_spiders.push_back(spider);
-        //std::cout << all_spiders.size() << "SIZE";
-        // std::cout << all_spiders.at(0).shape.getPosition().x << "WWWWWWWWWWWWWWWWW1";
         timer = 0;
     }
 
-    if (player_shots.size() == 0)
-    {
-        for (Spider & spider : all_spiders)
-        {
-            spider.check_coll_screen();
-            spider.update(window);
-        }
-    }
+    for (size_t j{0}; j < player_shots.size(); ++j) {
+        Shot &shot{player_shots.at(j)};
 
-    //for (Shot shot : player_shots)
-    for(unsigned int j{0}; j < player_shots.size(); ++j)
-    {
-        Shot shot{player_shots.at(j)};
         for (size_t i{}; i < all_spiders.size(); ++i) {
-            if (!all_spiders.at(i).check_coll(shot)) {
-                all_spiders.at(i).check_coll_screen();
-                all_spiders.at(i).update(window);
-            } else {
+            Spider &spider{all_spiders.at(i)};
+
+            if (spider.check_coll(shot.shape)) {
                 all_spiders.erase(begin(all_spiders) + i);
                 player_shots.erase(begin(player_shots) + j);
             }
         }
     }
 
+    for (size_t i{}; i < all_spiders.size(); ++i) {
+        Spider &spider{all_spiders.at(i)};
+
+        if (spider.check_coll(player.shape)) {
+            player.take_damage();
+        }
+
+        spider.check_coll_screen();
+        spider.update(window);
+    }
+  /*  if (player_shots.size() == 0)
+    {
+        for (Spider & spider : all_spiders)
+        {
+            //player.check_spider_coll(spider);
+            if (spider.check_coll(player.shape))
+            {
+                player.take_damage();
+            }
+            spider.check_coll_screen();
+            spider.update(window);
+        }
+    }
+    else {
+        //for (Shot shot : player_shots)
+        for (size_t j{0}; j < player_shots.size(); ++j) {
+            Shot &shot{player_shots.at(j)};
+            //std::cout << player_shots.size();
+            for (size_t i{}; i < all_spiders.size(); ++i) {
+                Spider &spider{all_spiders.at(i)};
+
+                if (spider.check_coll(shot.shape)) {
+                    all_spiders.erase(begin(all_spiders) + i);
+                    player_shots.erase(begin(player_shots) + j);
+                } else if (spider.check_coll(player.shape)) {
+                    player.take_damage();
+                } else {
+                    spider.check_coll_screen();
+                    spider.update(window);
+                }
+            }
+        }
+    }*/
     add_second();
 }
 

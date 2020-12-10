@@ -12,7 +12,7 @@ public:
     void update(const sf::RenderTarget* window) override;
     void set_start_pos();
     //void add_second();
-    bool check_coll(Shot & shot);
+    bool check_coll(sf::RectangleShape & enemy);
     void get_movement();
 
 

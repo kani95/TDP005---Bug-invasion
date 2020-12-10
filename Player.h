@@ -18,10 +18,10 @@ public:
                 std::vector<Shot> const& ant_shots,
                 std::vector<Shot> & player_shots);
 
-
+  //  std::vector<sf::RectangleShape> const& all_spiders
     void check_inside_leaf(sf::RectangleShape const& box);
-    void check_coll(std::vector<Shot> const& ant_shots,
-                    std::vector<sf::RectangleShape> const& all_spiders);
+    bool check_ant_shots_coll(Shot & shot);
+    bool check_spider_coll(Spider & spider);
     bool check_enemy_coll(sf::RectangleShape const& all_spiders);
     void check_player_shots_coll(std::vector<sf::RectangleShape> const& all_spiders,
                                          std::vector<sf::RectangleShape> const& all_ants,

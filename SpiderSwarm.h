@@ -8,7 +8,8 @@ class SpiderSwarm {
 
 public:
     SpiderSwarm();
-    void update(const sf::RenderTarget* window, std::vector<Shot> & player_shots);
+    void update(const sf::RenderTarget* window,
+                std::vector<Shot> & player_shots , Player & player);
     void add_second();
     std::vector<Spider>& get_all_spiders();
 

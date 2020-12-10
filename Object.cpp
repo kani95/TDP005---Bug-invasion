@@ -14,5 +14,3 @@ Object::Object()
     {
         shape.setSize(sf::Vector2f(10.f, 40.f));
     }
-
-

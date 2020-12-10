@@ -7,8 +7,8 @@ Spider::Spider()
 {
     shape.setFillColor(sf::Color::Blue);
    // shape.setPosition(300,200);
-   speed.x = -2;
-   speed.y = 0.5;
+   speed.x = -0.5;
+   speed.y = 0.1;
 }
 
 
@@ -73,12 +73,12 @@ void Spider::update(const sf::RenderTarget* window)
 
 }
 
-bool Spider::check_coll(Shot & shot)
+bool Spider::check_coll(sf::RectangleShape & enemy)
 {
-    if(shot.get_right() > shape.getPosition().x &&
-       shot.get_top() < shape.getPosition().y + shape.getSize().y
-       && shot.get_bot() > shape.getPosition().y && shot.get_left()
-                                                    < shape.getPosition().x + shape.getSize().x)
+    if(shape.getPosition().x + shape.getSize().x > enemy.getPosition().x &&
+       shape.getPosition().y < enemy.getPosition().y + enemy.getSize().y &&
+       shape.getPosition().y + shape.getSize().y > enemy.getPosition().y &&
+       shape.getPosition().x < enemy.getPosition().x + enemy.getSize().x)
     {
         //shape.setPosition(30,30);
         return true;

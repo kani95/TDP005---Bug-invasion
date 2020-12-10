@@ -36,7 +36,7 @@ bool Ant::check_coll(Shot & shot) const
         shape.setPosition(0,0);*/
         return true;
     }
-    return  false;
+    return false;
 }
 
 void Ant::render(sf::RenderTarget* target) const

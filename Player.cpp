@@ -55,26 +55,45 @@ void Player::update(sf::RectangleShape const& box,
         timer = 0;
     }
 
-    check_coll(ant_shots, all_spiders);
-    check_player_shots_coll(all_spiders,all_ants, player_shots);
-}
+ //   check_coll(ant_shots, all_spiders);
+   // check_player_shots_coll(all_spiders,all_ants, player_shots);
+    for (size_t i{0}; i < player_shots.size(); ++i)
+    {
+        player_shots.at(i).move(0.f, -6.5f);
 
-void Player::check_coll(std::vector<Shot> const& ant_shots,
-                              std::vector<sf::RectangleShape> const& all_spiders) {
-    for (auto &spider : all_spiders) {
-        std::cout << "HP, before: " << hp;
-        if (check_enemy_coll(spider)) {
-            take_damage();
+        if (player_shots.at(i).check_is_dead())
+        {
+            player_shots.erase(begin(player_shots) + i);
         }
     }
+  //  std::cout << player_shots.size();
+  std::cout << hp;
+}
 
-    for (auto const &shot : ant_shots) {
-        if (check_enemy_coll(shot.shape)) {
-            take_damage();
-        }
+/*bool Player::check_ant_shots_coll(Shot & shot)
+{
+    //std::cout << "HP, before: " << hp;
+    if (check_enemy_coll(shot.shape)) {
+        take_damage();
+        return true;
+    }
+    //std::cout << " HP, after: " << hp;
+    return false;
+
+}*/
+
+/*bool Player::check_spider_coll(Spider & spider)
+{
+    std::cout << "HP, before: " << hp;
+    if (check_enemy_coll(spider.shape))
+    {
+        take_damage();
+        return true;
     }
     std::cout << " HP, after: " << hp;
-}
+    return false;
+}*/
+
 
 void Player::move(float const dirx, float const diry)
 {
@@ -95,6 +114,7 @@ void Player::add_shot(std::vector<Shot> & player_shots)
     player_shots.push_back(new_shot);
 }
 
+
 /*
 std::vector<Shot> & Player::get_player_shots()
 {
@@ -105,34 +125,6 @@ std::vector<Shot> & Player::get_player_shots()
 
 
 void Player::check_inside_leaf(sf::RectangleShape const& box) {
-
-    //bool right = (shape.getPosition().x + shape.getSize().x > (box.getPosition().x + box.getSize().x));
-    //bool left = (shape.getPosition().x < box.getPosition().x);
-    //bool down = (shape.getPosition().y + shape.getSize().y > (box.getPosition().y + box.getSize().y));
-    //bool up = (shape.getPosition().y < box.getPosition().y);
-
-    // RIGHT
-/*    if (shape.getPosition().x + shape.getSize().x >= (box.getPosition().x + box.getSize().x))
-    {
-        shape.setPosition(shape.getPosition().x - (movespeed), shape.getPosition().y);
-        //shape.setPosition(box.getGlobalBounds().width - (shape.getSize().x), shape.getPosition().y);
-    }
-    // LEFT
-    if (shape.getPosition().x <= box.getPosition().x)
-    {
-        shape.setPosition(shape.getPosition().x + (movespeed), shape.getPosition().y);
-    }
-    // DOWN
-    if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
-    {
-        shape.setPosition(shape.getPosition().x, shape.getPosition().y - (movespeed));
-    }
-    // UP
-    if (shape.getPosition().y <= box.getPosition().y)
-    {
-        shape.setPosition(shape.getPosition().x, shape.getPosition().y + (movespeed));
-    }*/
-
 
     // LEFT
     if (shape.getGlobalBounds().left <= box.getGlobalBounds().left)
@@ -173,24 +165,6 @@ void Player::draw(sf::RenderWindow & window)
 
 // skicka in player referens till antswarm och spiderswarm.
 
-void Player::check_player_shots_coll(std::vector<sf::RectangleShape> const& all_spiders,
-                             std::vector<sf::RectangleShape> const& all_ants,
-                             std::vector<Shot> & player_shots)
-{
-    for (unsigned int i{0}; i < player_shots.size(); ++i)
-    {
-        if (!player_shots.at(i).check_coll(all_spiders) &&
-            !player_shots.at(i).check_coll(all_ants))
-        {
-            player_shots.at(i).move(0.f, -6.5f);
-        }
-        else
-        {
-            player_shots.erase(begin(player_shots) + i);
-        }
-      //  std::cout << player_shots.size();
-    }
-}
 
 bool Player::check_enemy_coll(sf::RectangleShape const& enemy) {
     if (shape.getPosition().x + shape.getSize().x > enemy.getPosition().x &&

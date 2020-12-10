@@ -2,14 +2,15 @@
 #define GAME_ANTSWARM_H
 #include "Ant.h"
 #include <iostream>
-
+#include "Player.h"
 
 class AntSwarm {
 public:
     AntSwarm();
 
 
-    void update(const sf::RenderTarget* window, std::vector<Shot> & player_shots) ;
+    void update(const sf::RenderTarget* window, Player & player,
+                std::vector<Shot> & player_shots);
     void render(sf::RenderTarget* target);
     std::pair<unsigned short int, unsigned short int> find_furthest_ant();
 
