@@ -36,13 +36,13 @@ int AntSwarm::get_size_swarm() const
 }
 
 
-/*std::pair<unsigned short int, unsigned short int> AntSwarm::find_furthest_ant()
+std::pair<Ant, Ant> AntSwarm::find_furthest_ants()
 {
     // init vars to the first ant of the vector, x coords
     // this will crash if no ants are in the vector
 
-    unsigned short int ant_right_id{ant_swarm.at(0).get_id()};
-    unsigned short int ant_left_id{ant_swarm.at(0).get_id()};
+    Ant & ant_right{ant_swarm.at(0)};
+    Ant & ant_left{ant_swarm.at(0)};
     float furthest_right{ant_swarm.at(0).shape.getPosition().x};
     float furthest_left{ant_swarm.at(0).shape.getPosition().x};
 
@@ -52,29 +52,57 @@ int AntSwarm::get_size_swarm() const
         if (current_ant_pos > furthest_right)
         {
             furthest_right = current_ant_pos;
-            ant_right_id = ant_swarm.at(i).get_id();
+            ant_right = ant_swarm.at(i);
         }
         else if (current_ant_pos < furthest_left)
         {
             furthest_left = current_ant_pos;
-            ant_left_id = ant_swarm.at(i).get_id();
+            ant_left = ant_swarm.at(i);
         }
     }
 
-    return {ant_left_id, ant_right_id};
-}*/
+    return {ant_left, ant_right};
+}
 
-/*void AntSwarm::move_swarm()
+void AntSwarm::move_swarm(const sf::RenderTarget* window)
 {
     std::pair<unsigned short int, unsigned short int> ant_left_id, ant_right_id;
-    ant_left_id{find_furthest_ant().first};
-    ant_right_id{find_furthest_ant().second};
-
-    for(unsigned int i{0}; i < get_size_swarm(); ++i)
-    {
-
+    Ant const& ant_left{find_furthest_ants().first};
+    Ant const& ant_right{find_furthest_ants().second};
+    float x_value{ant_right.shape.getPosition().x};
+    float movement{2};
+    //std::cout << "here1 " << std::endl;
+    window -> getSize().x;
+   // std::cout << "here 2" << std::endl;
+    if (is_swarm_right)
+     //   std::cout << "here " << std::endl;
+    {// TEST to move the one on the most right
+ /*       if(x_value + movement > border)
+        {
+            is_swarm_right = false;
+        }*/
     }
-}*/
+   // std::cout << "here " << std::endl;
+/*    else
+    {
+    }*/
+    if (is_swarm_right)
+    {
+        for (unsigned int i{0}; i < get_size_swarm(); ++i)
+        {
+            Ant ant{ant_swarm.at(i)};
+            ant.move(movement, 0);
+        }
+    }
+    else
+    {
+        for (unsigned int i{0}; i < get_size_swarm(); ++i)
+        {
+            Ant ant{ant_swarm.at(i)};
+            ant.move(-movement, 0);
+        }
+    }
+}
 
 
 void AntSwarm::update(const sf::RenderTarget* window, Player & player,
@@ -82,6 +110,7 @@ void AntSwarm::update(const sf::RenderTarget* window, Player & player,
 {
     //check_collison_player_shots(player_shots);
     // for (Ant & ant : ant_swarm)
+
     for(unsigned int i{0}; i < ant_swarm.size(); ++i)
     {
         Ant ant{ant_swarm.at(i)};
@@ -101,8 +130,9 @@ void AntSwarm::update(const sf::RenderTarget* window, Player & player,
             ant_shots.push_back(new_shot);
         }
     }
-
-
+  //  std::cout << "here " << std::endl;
+    //window -> getSize();
+    //move_swarm(window);
     // update shots
     for(unsigned int i{0}; i < ant_shots.size(); ++i)
     {

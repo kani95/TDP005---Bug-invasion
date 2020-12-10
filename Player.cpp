@@ -67,33 +67,8 @@ void Player::update(sf::RectangleShape const& box,
         }
     }
   //  std::cout << player_shots.size();
-  std::cout << hp;
+ // std::cout << hp;
 }
-
-/*bool Player::check_ant_shots_coll(Shot & shot)
-{
-    //std::cout << "HP, before: " << hp;
-    if (check_enemy_coll(shot.shape)) {
-        take_damage();
-        return true;
-    }
-    //std::cout << " HP, after: " << hp;
-    return false;
-
-}*/
-
-/*bool Player::check_spider_coll(Spider & spider)
-{
-    std::cout << "HP, before: " << hp;
-    if (check_enemy_coll(spider.shape))
-    {
-        take_damage();
-        return true;
-    }
-    std::cout << " HP, after: " << hp;
-    return false;
-}*/
-
 
 void Player::move(float const dirx, float const diry)
 {
