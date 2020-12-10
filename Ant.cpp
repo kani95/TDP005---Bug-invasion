@@ -7,6 +7,7 @@ Ant::Ant()
 {
     shape.setFillColor(sf::Color::Red);
     shape.setPosition(220, 70);
+    hp = 2;
 }
 
 int Ant::get_score() const

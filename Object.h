@@ -13,6 +13,8 @@ public:
     sf::Vector2f speed;
     sf::RectangleShape shape;
 
+
+
     //sf::RenderTarget &window;
 };
 

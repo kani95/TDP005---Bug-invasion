@@ -33,7 +33,7 @@ public:
     float get_dirx();
     float get_diry();
 
-    void take_damage();
+    void take_damage() override;
 
     void draw(sf::RenderWindow & window);
 

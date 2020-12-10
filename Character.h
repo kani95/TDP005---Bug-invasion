@@ -8,10 +8,11 @@ public:
     Character();
 
     virtual void move(float const, float const) = 0;
+    virtual void take_damage();
 
 protected:
     int hp;
-    bool status;
+    bool status{true};
     bool can_shoot;
     int score;
     float movespeed;
