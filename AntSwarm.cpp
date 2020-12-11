@@ -154,7 +154,7 @@ void AntSwarm::update(const sf::RenderTarget* window,
             }
         }
 
-       // ant.update(window);
+        //ant.update(window);
 
         if (ant.can_shoot())
         {
@@ -164,7 +164,7 @@ void AntSwarm::update(const sf::RenderTarget* window,
         }
     }
 
-    // move_swarm(window);
+   // move_swarm(window);
 
     for(unsigned int i{0}; i < ant_shots.size(); ++i)
     {
