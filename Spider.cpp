@@ -5,7 +5,8 @@
 Spider::Spider()
         : Enemy(), score{}
 {
-    shape.setFillColor(sf::Color::Blue);
+    shape.setScale(10,40);
+    shape.setColor(sf::Color::Blue);
    // shape.setPosition(300,200);
    speed.x = -0.5;
    speed.y = 0.1;
@@ -32,9 +33,9 @@ void Spider::set_start_pos()
 
 void Spider::check_coll_screen()
 {
-    bool right = (shape.getPosition().x + shape.getSize().x > (710));
+    bool right = (shape.getPosition().x + shape.getScale().x > (710));
     bool left = (shape.getPosition().x < 210);
-    bool down = (shape.getPosition().y + shape.getSize().y > (600));
+    bool down = (shape.getPosition().y + shape.getScale().y > (600));
     bool up = (shape.getPosition().y < 300);
 
     if (right)
@@ -121,12 +122,12 @@ void Spider::move( float const dirx, float const diry)
 }
 
 
-bool Spider::check_coll(sf::RectangleShape & enemy)
+bool Spider::check_coll(sf::Sprite & enemy)
 {
-    if(shape.getPosition().x + shape.getSize().x > enemy.getPosition().x &&
-       shape.getPosition().y < enemy.getPosition().y + enemy.getSize().y &&
-       shape.getPosition().y + shape.getSize().y > enemy.getPosition().y &&
-       shape.getPosition().x < enemy.getPosition().x + enemy.getSize().x)
+    if(shape.getPosition().x + shape.getScale().x > enemy.getPosition().x
+       && shape.getPosition().y < enemy.getPosition().y + enemy.getScale().y
+       && shape.getPosition().y + shape.getScale().y > enemy.getPosition().y
+       && shape.getPosition().x < enemy.getPosition().x + enemy.getScale().x)
     {
         //shape.setPosition(30,30);
         return true;

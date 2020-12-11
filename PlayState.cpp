@@ -21,6 +21,7 @@ void PlayState::render(sf::RenderTarget* target)
     all_ants = ant_swarm.get_all_ants();
 
 
+
     target -> draw(leaf.shape);
 
     for (auto & shot_ : player_shots)

@@ -13,7 +13,7 @@ public:
     int get_hp();
     bool status{true};
     bool is_dead();
-    bool check_enemy_coll(sf::RectangleShape const& enemy);
+    bool check_enemy_coll(sf::Sprite const& enemy);
 
 protected:
     int hp;

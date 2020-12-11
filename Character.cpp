@@ -39,12 +39,12 @@ bool Character::is_dead()
 }
 
 
-bool Character::check_enemy_coll(sf::RectangleShape const& enemy)
+bool Character::check_enemy_coll(sf::Sprite const& enemy)
 {
-    if (shape.getPosition().x + shape.getSize().x > enemy.getPosition().x &&
-        shape.getPosition().y < enemy.getPosition().y + enemy.getSize().y &&
-        shape.getPosition().y + shape.getSize().y > enemy.getPosition().y &&
-        shape.getPosition().x < enemy.getPosition().x + enemy.getSize().x) {
+    if (shape.getPosition().x + shape.getScale().x > enemy.getPosition().x
+        && shape.getPosition().y < enemy.getPosition().y + shape.getScale().y
+        && shape.getPosition().y + shape.getScale().y > enemy.getPosition().y 
+        && shape.getPosition().x < enemy.getPosition().x + shape.getScale().x) {
         //shape.setPosition(30, 30);
         return true;
     }

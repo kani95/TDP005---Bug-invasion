@@ -15,7 +15,7 @@ public:
                 Character* player) override;
     void set_start_pos();
     //void add_second();
-    bool check_coll(sf::RectangleShape & enemy);
+    bool check_coll(sf::Sprite & enemy);
     void check_coll_player_shots(std::vector<Shot> & player_shots, Character * player);
     void get_movement();
 

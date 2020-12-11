@@ -3,7 +3,8 @@
 Ant::Ant()
 :Enemy(), score{}
 {
-    shape.setFillColor(sf::Color::Red);
+    shape.setScale(10,40);
+    shape.setColor(sf::Color::Red);
     shape.setPosition(220, 70);
     hp = 2;
 }
@@ -33,9 +34,9 @@ void Ant::render(sf::RenderTarget* target) const
 bool Ant::check_coll(Shot & shot)
 {
     if(shot.get_right() > shape.getPosition().x
-       && shot.get_top() < shape.getPosition().y + shape.getSize().y
+       && shot.get_top() < shape.getPosition().y + shape.getScale().y
        && shot.get_bot() > shape.getPosition().y
-       && shot.get_left() < shape.getPosition().x + shape.getSize().x)
+       && shot.get_left() < shape.getPosition().x + shape.getScale().x)
     {
 /*      std::cout << "i should be reset" << std::endl;
         shape.setPosition(0,0);*/

@@ -12,12 +12,12 @@ public:
 
     void update_input();
 
-    void update(sf::RectangleShape const& box,
+    void update(sf::Sprite const& box,
                 std::vector<Shot> & player_shots);
 
   //  std::vector<sf::RectangleShape> const& all_spiders
-    void check_inside_leaf(sf::RectangleShape const& box);
-    bool check_enemy_coll(sf::RectangleShape const& enemy);
+    void check_inside_leaf(sf::Sprite const& box);
+    bool check_enemy_coll(sf::Sprite const& enemy);
 /*    bool check_ant_shots_coll(Shot & shot);
     bool check_spider_coll(Spider & spider);
     bool check_enemy_coll(sf::RectangleShape const& all_spiders);

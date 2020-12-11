@@ -5,7 +5,7 @@
 Shot::Shot()
         : Object()
 {
-    shape.setSize(sf::Vector2f(5.f,10.f));
+    shape.setScale(sf::Vector2f(6.f,6.f));
 /*    speed.x = 0;
     speed.y = -6.5;*/
 }
@@ -20,7 +20,7 @@ void Shot::move(float x, float y)
 
 float Shot::get_right()
 {
-    return shape.getPosition().x + shape.getSize().x;
+    return shape.getPosition().x + shape.getScale().x;
 }
 
 
@@ -38,16 +38,16 @@ float Shot::get_top()
 
 float Shot::get_bot()
 {
-    return shape.getPosition().y + shape.getSize().y;
+    return shape.getPosition().y + shape.getScale().y;
 }
 
-bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
+bool Shot::check_coll(std::vector<sf::Sprite> const& all_spiders)
 {
     for (auto & spider : all_spiders) {
         if (get_right() > spider.getPosition().x
-            && get_top() < spider.getPosition().y + spider.getSize().y
+            && get_top() < spider.getPosition().y + spider.getScale().y
             && get_bot() > spider.getPosition().y
-            && get_left() < spider.getPosition().x + spider.getSize().x)
+            && get_left() < spider.getPosition().x + spider.getScale().x)
         {
             //shape.setPosition(30, 30);
             return true;
@@ -56,7 +56,7 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
         //1920 x 1080
     }
 
-    bool down = (shape.getPosition().y + shape.getSize().y > (1080));
+    bool down = (shape.getPosition().y + shape.getScale().y > (1080));
     bool up = (shape.getPosition().y < 0);
 
     if (down)
@@ -74,6 +74,6 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
 bool Shot::check_is_dead()
 {
     // change to rendertarget.get bla bla
-    return (shape.getPosition().y + shape.getSize().y > (1080) ||
-            shape.getPosition().y + shape.getSize().y < 0);
+    return (shape.getPosition().y + shape.getScale().y > (1080) ||
+            shape.getPosition().y + shape.getScale().y < 0);
 }
