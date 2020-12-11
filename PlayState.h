@@ -49,8 +49,5 @@ public:
     bool get_is_done() override;
     bool get_exit_status() override;
 
-    std::vector<sf::RectangleShape> transform(std::vector<Spider> const& all_spiders);
-    std::vector<sf::RectangleShape> transform_ant(std::vector<Ant> const& all_ants);
-
 };
 #endif //MAIN_CPP_PLAYSTATE_H

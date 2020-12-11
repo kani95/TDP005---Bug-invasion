@@ -11,6 +11,7 @@ public:
     void move(float const, float const) override;
     void update(const sf::RenderTarget* window,
                 std::vector<Shot> & player_shots,
+                std::vector<Shot> & ant_shots,
                 Character* player) override;
     void set_start_pos();
     //void add_second();

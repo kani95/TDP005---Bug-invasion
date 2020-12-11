@@ -12,6 +12,9 @@ public:
     void shake_shape();
     int get_hp();
     bool status{true};
+    bool is_dead();
+    bool check_enemy_coll(sf::RectangleShape const& enemy);
+
 protected:
     int hp;
 

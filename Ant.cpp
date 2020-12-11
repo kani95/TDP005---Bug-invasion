@@ -1,5 +1,4 @@
 #include "Ant.h"
-#include <iostream>
 
 Ant::Ant()
 :Enemy(), score{}
@@ -9,10 +8,12 @@ Ant::Ant()
     hp = 2;
 }
 
+
 int Ant::get_score() const
 {
     return score;
 }
+
 
 void Ant::move(float const x, float const y)
 {
@@ -20,22 +21,21 @@ void Ant::move(float const x, float const y)
 }
 
 
-void Ant::update(const sf::RenderTarget* target,
-                 std::vector<Shot> & player_shots,
-                 Character* player)
+void Ant::render(sf::RenderTarget* target) const
 {
-    if (hp <= 0)
-    {
-        status = false;
-    }
+    target -> draw(shape);
 }
 
-bool Ant::check_coll(Shot & shot) const
+
+// UPDATE HELPER FUNCTIONS
+
+
+bool Ant::check_coll(Shot & shot)
 {
-    if(shot.get_right() > shape.getPosition().x &&
-       shot.get_top() < shape.getPosition().y + shape.getSize().y &&
-       shot.get_bot() > shape.getPosition().y &&
-       shot.get_left() < shape.getPosition().x + shape.getSize().x)
+    if(shot.get_right() > shape.getPosition().x
+       && shot.get_top() < shape.getPosition().y + shape.getSize().y
+       && shot.get_bot() > shape.getPosition().y
+       && shot.get_left() < shape.getPosition().x + shape.getSize().x)
     {
 /*      std::cout << "i should be reset" << std::endl;
         shape.setPosition(0,0);*/
@@ -44,12 +44,43 @@ bool Ant::check_coll(Shot & shot) const
     return false;
 }
 
-void Ant::render(sf::RenderTarget* target) const
+
+bool Ant::check_collison_player_shots(std::vector<Shot> & player_shots)
 {
-    target -> draw(shape);
+    //for (auto & shot : player_shots)
+    for(unsigned int i{0}; i < player_shots.size(); ++i)
+    {
+        Shot & shot{player_shots.at(i)};
+        if (check_coll(shot))
+        {
+            player_shots.erase(begin(player_shots) + i);
+            return true;
+        }
+    }
+    return false;
 }
 
-bool Ant::can_shoot() const
+
+bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * player)
+{
+    for(unsigned int i{0}; i < ant_shots.size(); ++i)
+    {
+        Shot & shot{ant_shots.at(i)};
+        if (player -> check_enemy_coll(shot.shape) || shot.check_is_dead())
+        {
+            ant_shots.erase(begin(ant_shots) + i);
+            return true;
+        }
+        else
+        {
+            shot.move(0.f, 0.3);
+        }
+    }
+    return false;
+}
+
+
+bool Ant::can_shoot()
 {
     int value{(std::rand() % 200) + 1};
     if (value == 3)
@@ -63,12 +94,30 @@ bool Ant::can_shoot() const
 }
 
 
-void Ant::set_id(unsigned short int new_id)
+void Ant::update(const sf::RenderTarget* target,
+                 std::vector<Shot> & player_shots,
+                 std::vector<Shot> & ant_shots,
+                 Character* player)
 {
-    id = new_id;
+    if (check_collison_player_shots(player_shots))
+    {
+        take_damage();
+    }
+
+    if (check_collison_ant_shots(ant_shots, player))
+    {
+        player -> take_damage();
+    }
+
+
+    if (can_shoot())
+    {
+        Shot new_shot{};
+        new_shot.shape.setPosition(shape.getPosition().x, shape.getPosition().y);
+        ant_shots.push_back(new_shot);
+    }
 }
 
-unsigned short Ant::get_id() {
-    return id;
-}
+
+
 //Ant::~Ant() = default;

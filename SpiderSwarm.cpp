@@ -8,9 +8,10 @@ SpiderSwarm::SpiderSwarm()
     all_spiders.push_back(spider);*/
 }
 
-void SpiderSwarm::update(const sf::RenderTarget* window,
-                         std::vector<Shot> & player_shots,
-                         Character* player)
+void SpiderSwarm::update(const sf::RenderTarget* target,
+                 std::vector<Shot> & player_shots,
+                 std::vector<Shot> & ant_shots,
+                 Character* player)
 {
     if (timer >= 700)
     {
@@ -21,10 +22,12 @@ void SpiderSwarm::update(const sf::RenderTarget* window,
     }
 
 
-    for (size_t i{}; i < all_spiders.size(); ++i) {
+    for (size_t i{}; i < all_spiders.size(); ++i)
+    {
         Spider &spider{all_spiders.at(i)};
 
-        spider.update(window, player_shots, player);
+        spider.update(target, player_shots, ant_shots,player);
+
         if (!spider.status)
         {
             all_spiders.erase(begin(all_spiders) + i);

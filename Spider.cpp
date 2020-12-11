@@ -30,7 +30,6 @@ void Spider::set_start_pos()
 }
 
 
-
 void Spider::check_coll_screen()
 {
     bool right = (shape.getPosition().x + shape.getSize().x > (710));
@@ -157,13 +156,14 @@ void Spider::check_coll_player_shots(std::vector<Shot> & player_shots, Character
 }
 
 
-void Spider::update(const sf::RenderTarget* window,
-                    std::vector<Shot> & player_shots,
-                    Character* player)
+void  Spider::update(const sf::RenderTarget* window,
+            std::vector<Shot> & player_shots,
+            std::vector<Shot> & ant_shots,
+            Character* player)
 {
     check_coll_screen();
     //get_movement();
-    move(speed.x,speed.y);
+    move(speed.x, speed.y);
     check_coll_player_shots(player_shots, player);
 }
 
