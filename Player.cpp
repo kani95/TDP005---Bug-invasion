@@ -32,12 +32,8 @@ void Player::update_input()
 
 
 void Player::update(sf::RectangleShape const& box,
-                    std::vector<sf::RectangleShape> const& all_spiders,
-                    std::vector<sf::RectangleShape> const& all_ants,
-                    std::vector<Shot> const& ant_shots,
                     std::vector<Shot> & player_shots)
 {
-
     update_input();
     check_inside_leaf(box);
 
@@ -67,8 +63,9 @@ void Player::update(sf::RectangleShape const& box,
         }
     }
   //  std::cout << player_shots.size();
- // std::cout << hp;
+  //std::cout << hp;
 }
+
 
 void Player::move(float const dirx, float const diry)
 {
@@ -123,15 +120,18 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
     }
 }
 
+
 float Player::get_dirx()
 {
     return shape.getPosition().x;
 }
 
+
 float Player::get_diry()
 {
     return shape.getPosition().y;
 }
+
 
 void Player::draw(sf::RenderWindow & window)
 {
@@ -141,16 +141,8 @@ void Player::draw(sf::RenderWindow & window)
 // skicka in player referens till antswarm och spiderswarm.
 
 
-bool Player::check_enemy_coll(sf::RectangleShape const& enemy) {
-    if (shape.getPosition().x + shape.getSize().x > enemy.getPosition().x &&
-        shape.getPosition().y < enemy.getPosition().y + enemy.getSize().y &&
-        shape.getPosition().y + shape.getSize().y > enemy.getPosition().y &&
-        shape.getPosition().x < enemy.getPosition().x + enemy.getSize().x) {
-        //shape.setPosition(30, 30);
-        return true;
-    }
-    return false;
-}
+
+
 
 void Player::take_damage()
 {

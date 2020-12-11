@@ -5,13 +5,12 @@ AntSwarm::AntSwarm()
 {
     float prev_x {220.f};
     float prev_y {70.f};
-    for (unsigned short int i{0}; i < 2; i++)
+    for (unsigned short int i{0}; i < 30; i++)
     {
         prev_x = prev_x + 40.f;
         //std::cout << prev_x << std::endl;
         Ant ant{};
         ant.shape.setPosition(prev_x, prev_y);
-        ant.set_id(i);
         ant_swarm.push_back(ant);
 
         // second row
@@ -67,7 +66,7 @@ void AntSwarm::move_swarm(const sf::RenderTarget* window)
     float x_value_left{find_furthest_ants().second};
     float x_value_right{find_furthest_ants().first};
 
-    std::cout << border_hit << std::endl;
+    // std::cout << border_hit << std::endl;
 
     float x_movement{2};
     float y_movement{0};
@@ -132,63 +131,28 @@ void AntSwarm::move_swarm(const sf::RenderTarget* window)
 }
 
 
-void AntSwarm::update(const sf::RenderTarget* window,
-                      Player & player,
-                      std::vector<Shot> & player_shots)
+void AntSwarm::update(const sf::RenderTarget* target,
+                 std::vector<Shot> & player_shots,
+                 std::vector<Shot> & ant_shots,
+                 Character* player)
 {
+
     for(unsigned int i{0}; i < ant_swarm.size(); ++i)
     {
         Ant & ant{ant_swarm.at(i)};
 
-        if (check_collison_player_shots(player_shots, ant))
+
+        ant.update(target, player_shots,ant_shots, player);
+
+        if (ant.is_dead())
         {
-            ant.take_damage();
-            ant.status = false;
-            ant.shake_shape();
-
-
-            if (ant.get_hp() <= 0)
-            {
-                ant_swarm.erase(begin(ant_swarm) + i);
-                continue;
-            }
-        }
-
-       // ant.update(window);
-
-        if (ant.can_shoot())
-        {
-            Shot new_shot{};
-            new_shot.shape.setPosition(ant.shape.getPosition().x, ant.shape.getPosition().y);
-            ant_shots.push_back(new_shot);
+            ant_swarm.erase(begin(ant_swarm) + i);
         }
     }
 
-    // move_swarm(window);
-
-    for(unsigned int i{0}; i < ant_shots.size(); ++i)
-    {
-        Shot & shot {ant_shots.at(i)};
-
-        if (shot.check_is_dead())
-        {
-            ant_shots.erase(begin(ant_shots) + i);
-            // check if player took dmg;
-            // call player function take dmg;
-            // check if ant took dmg from player
-        }
-        else if (player.check_enemy_coll(shot.shape))
-        {
-            ant_shots.erase(begin(ant_shots) + i);
-            player.take_damage();
-        }
-        else
-        {
-           shot.move(0.f, 5.f);
-        }
-     //std::cout << ant_shots.size();
-    }
+    move_swarm(target);
 }
+
 
 void AntSwarm::render(sf::RenderTarget* target)
 {
@@ -199,30 +163,7 @@ void AntSwarm::render(sf::RenderTarget* target)
 }
 
 
-bool AntSwarm::check_collison_player_shots(std::vector<Shot> & player_shots, Ant & ant)
-{
-    //for (auto & shot : player_shots)
-    for(unsigned int i{0}; i < player_shots.size(); ++i)
-    {
-        Shot & shot{player_shots.at(i)};
-        if (ant.check_coll(shot))
-        {
-            player_shots.erase(begin(player_shots) + i);
-            return true;
-        }
-    }
-    return false;
-}
-
-
 std::vector<Ant>& AntSwarm::get_all_ants()
 {
     return ant_swarm;
 }
-
-
-std::vector<Shot> &AntSwarm::get_ant_shots()
-{
-    return ant_shots;
-}
-

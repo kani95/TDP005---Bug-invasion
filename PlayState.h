@@ -44,8 +44,5 @@ public:
     void render(sf::RenderTarget* target) override;
 
 
-    std::vector<sf::RectangleShape> transform(std::vector<Spider> const& all_spiders);
-    std::vector<sf::RectangleShape> transform_ant(std::vector<Ant> const& all_ants);
-
 };
 #endif //MAIN_CPP_PLAYSTATE_H

@@ -4,32 +4,32 @@
 #include "Shot.h"
 #include "Player.h"
 #include "Shot.h"
+#include <iostream>
 
 // type 1 enemy
 class Ant : public Enemy {
 public:
     Ant();
-    // check if ant collides with a player shot
-    //~Ant() override;
 
 
     int get_score() const override;
     void move(float , float) override;
+    void render(sf::RenderTarget* target) const;
     void update(const sf::RenderTarget* window,
                 std::vector<Shot> & player_shots,
+                std::vector<Shot> & ant_shots,
                 Character* player) override;
 
-    void render(sf::RenderTarget* target) const;
-    bool can_shoot() const;
+    bool check_collison_player_shots(std::vector<Shot> & player_shots);
+    bool check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * player);
 
-    bool check_coll(Shot & shot) const;
-    void set_id(unsigned short int new_id);
-    unsigned short get_id();
+    static bool can_shoot() ;
+
+    bool check_coll(Shot & shot);
 
 
 private:
     int score;
-    unsigned short int id;
 };
 
 #endif //GAME_ANT_H

@@ -14,7 +14,10 @@ public:
 
     virtual int get_score() const = 0;
     virtual void move(float const, float const) = 0;
-    virtual void update(const sf::RenderTarget* window, std::vector<Shot> & player_shots, Character* player) = 0;
+    virtual void update(const sf::RenderTarget* window,
+                        std::vector<Shot> & player_shots,
+                        std::vector<Shot> & ant_shots,
+                        Character* player) = 0;
     // virtual void drop_loot() = 0;
 
     //std::vector<Enemy*> all_spiders;
