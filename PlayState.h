@@ -36,7 +36,6 @@ public:
 
 /*    void move_down() = delete;
     void move_up() = delete;*/
-
     void quit_state() override;
     void update(float const& frame_time) override;
     void update_total_score();
@@ -45,6 +44,10 @@ public:
     bool get_exit_status() override;
     sf::Clock game_clock;
     unsigned long int total_score;
+
+
+    sf::Font font;
+    sf::Text score_text;
 
 };
 #endif //MAIN_CPP_PLAYSTATE_H

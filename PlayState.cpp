@@ -44,6 +44,8 @@ void PlayState::render(sf::RenderTarget* target)
     for (auto & spi: all_spiders) {
         target -> draw(spi.shape);
     }
+
+    target -> draw(score_text);
 }
 
 
@@ -57,8 +59,19 @@ bool PlayState::get_is_done()
 }
 
 PlayState::PlayState(sf::RenderWindow *window)
-    : State{window}, game_clock{}, total_score{}
-    {}
+    : State{window}, game_clock{}, total_score{}, font{}, score_text{}
+    {
+
+    if (font.loadFromFile("ARCADECLASSIC.TTF")) {
+        std::cerr << "Failed to load font in PlayState.";
+    };
+
+    score_text.setFont(font);
+    score_text.setCharacterSize(23);
+    score_text.setFillColor(sf::Color::White);
+    score_text.setString("SCORE");
+
+}
 
 
 PlayState::~PlayState() = default;
@@ -84,4 +97,6 @@ void PlayState::update_total_score()
 
     total_score += player.get_score() * multiplier;
     player.set_score(0);
+    score_text.setString("SCORE      " + std::to_string(total_score));
 }
+
