@@ -1,18 +1,14 @@
 #include "Ant.h"
 
 Ant::Ant()
-:Enemy(), score{}
+:Enemy()
 {
     shape.setFillColor(sf::Color::Red);
     shape.setPosition(220, 70);
     hp = 2;
+    score = 100;
 }
 
-
-int Ant::get_score() const
-{
-    return score;
-}
 
 
 void Ant::move(float const x, float const y)
@@ -66,7 +62,16 @@ bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * pl
     for(unsigned int i{0}; i < ant_shots.size(); ++i)
     {
         Shot & shot{ant_shots.at(i)};
-        if (player -> check_enemy_coll(shot.shape) || shot.check_is_dead())
+
+        // These have to be seperate other wise player will take damage
+        // everytime a shot is deleted outside the borders!
+
+        if (shot.check_is_dead())
+        {
+            ant_shots.erase(begin(ant_shots) + i);
+        }
+
+        if (player -> check_enemy_coll(shot.shape))
         {
             ant_shots.erase(begin(ant_shots) + i);
             return true;
@@ -108,7 +113,6 @@ void Ant::update(const sf::RenderTarget* target,
     {
         player -> take_damage();
     }
-
 
     if (can_shoot())
     {

@@ -30,6 +30,7 @@ void SpiderSwarm::update(const sf::RenderTarget* target,
 
         if (!spider.status)
         {
+            player -> increase_score(spider.get_score());
             all_spiders.erase(begin(all_spiders) + i);
         }
     }

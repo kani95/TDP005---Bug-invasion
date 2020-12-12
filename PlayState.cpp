@@ -3,6 +3,7 @@
 
 void PlayState::update(float const& frame_time)
 {
+    std::cout << "Score: " << player.get_score() << std::endl;
     player.update(leaf.shape, player_shots);
     // player_shots = player.get_player_shots();
     // send in a player reference to swarm, if it takes dmg call player take dmg

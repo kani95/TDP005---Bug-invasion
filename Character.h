@@ -9,6 +9,8 @@ public:
 
     virtual void move(float const, float const) = 0;
     virtual void take_damage();
+    unsigned long int get_score();
+    void increase_score(long unsigned int plus_score);
     void shake_shape();
     int get_hp();
     bool status{true};
@@ -16,10 +18,9 @@ public:
     bool check_enemy_coll(sf::RectangleShape const& enemy);
 
 protected:
+    long unsigned int score;
     int hp;
-
     bool can_shoot;
-    int score;
     float movespeed;
 };
 

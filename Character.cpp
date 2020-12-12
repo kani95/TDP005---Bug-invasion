@@ -2,7 +2,7 @@
 
 
 Character::Character()
-    :Object(), hp{3}, status{true}, can_shoot{}, score{}, movespeed{1.f}
+    :Object(), score{}, hp{3}, status{true}, can_shoot{}, movespeed{1.f}
 {}
 
 void Character::take_damage()
@@ -10,6 +10,13 @@ void Character::take_damage()
     hp -= 1;
     shake_shape();
 }
+
+
+void Character::increase_score(long unsigned int plus_score)
+{
+    score += plus_score;
+}
+
 
 int Character::get_hp()
 {
@@ -50,3 +57,9 @@ bool Character::check_enemy_coll(sf::RectangleShape const& enemy)
     }
     return false;
 }
+
+unsigned long int Character::get_score()
+{
+    return score;
+}
+

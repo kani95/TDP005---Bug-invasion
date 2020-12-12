@@ -63,7 +63,7 @@ void Player::update(sf::RectangleShape const& box,
         }
     }
   //  std::cout << player_shots.size();
-  //std::cout << hp;
+  std::cout << "HP: " << hp << " ";
 }
 
 
@@ -139,9 +139,6 @@ void Player::draw(sf::RenderWindow & window)
 }
 
 // skicka in player referens till antswarm och spiderswarm.
-
-
-
 
 
 void Player::take_damage()

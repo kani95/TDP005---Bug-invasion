@@ -7,7 +7,6 @@
 class Spider : public Enemy {
 public:
     Spider();
-    int get_score() const override;
     void move(float const, float const) override;
     void update(const sf::RenderTarget* window,
                 std::vector<Shot> & player_shots,
@@ -24,7 +23,6 @@ public:
 
     //std::vector<Spider>& get_all_spiders();
 private:
-    int score;
     //int timer;
    // std::vector<Spider> all_spiders;
 };

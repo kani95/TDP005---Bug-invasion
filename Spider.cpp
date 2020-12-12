@@ -3,19 +3,16 @@
 #include <random>
 
 Spider::Spider()
-        : Enemy(), score{}
+        : Enemy()
 {
     shape.setFillColor(sf::Color::Blue);
    // shape.setPosition(300,200);
    speed.x = -0.5;
    speed.y = 0.1;
+   score = 300;
 }
 
 
-int Spider::get_score() const
-{
- return score;
-}
 
 void Spider::set_start_pos()
 {

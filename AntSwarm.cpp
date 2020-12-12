@@ -138,14 +138,16 @@ void AntSwarm::update(const sf::RenderTarget* target,
 {
 
     for(unsigned int i{0}; i < ant_swarm.size(); ++i) {
-        Ant &ant{ant_swarm.at(i)};
+        Ant & ant{ant_swarm.at(i)};
 
 
         ant.update(target, player_shots, ant_shots, player);
 
 
         if (ant.is_dead()) {
+            player -> increase_score(ant.get_score());
             ant_swarm.erase(begin(ant_swarm) + i);
+
         }
     }
         move_swarm(target);

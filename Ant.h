@@ -12,7 +12,7 @@ public:
     Ant();
 
 
-    int get_score() const override;
+
     void move(float , float) override;
     void render(sf::RenderTarget* target) const;
     void update(const sf::RenderTarget* window,
@@ -29,7 +29,6 @@ public:
 
 
 private:
-    int score;
 };
 
 #endif //GAME_ANT_H
