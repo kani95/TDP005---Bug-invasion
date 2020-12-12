@@ -5,9 +5,14 @@
 #include <vector>
 #include "Spider.h"
 
-class Player : public Character{
+class Player : public Character {
 public:
-    Player();
+    Player() = default;
+    Player(sf::Vector2f const& pos, sf::Vector2f const& dir,
+           sf::Vector2f const& dim, float const movespeed,
+           int const hp, int const att_timer,
+           sf::Vector2f const& shot_dim,
+           sf::Vector2f const& shot_dir);
     void move(float dirx, float diry) override;
 
     void update_input();
@@ -17,7 +22,7 @@ public:
 
   //  std::vector<sf::RectangleShape> const& all_spiders
     void check_inside_leaf(sf::RectangleShape const& box);
-    bool check_enemy_coll(sf::RectangleShape const& enemy);
+   // bool check_enemy_coll(sf::RectangleShape const& enemy);
 /*    bool check_ant_shots_coll(Shot & shot);
     bool check_spider_coll(Spider & spider);
     bool check_enemy_coll(sf::RectangleShape const& all_spiders);
@@ -26,20 +31,17 @@ public:
                                          std::vector<Shot> & player_shots);*/
 
     void add_shot(std::vector<Shot> & player_shots);
-    // std::vector<Shot> & get_player_shots();
-
     float get_dirx();
     float get_diry();
-
     void take_damage() override;
-
     void draw(sf::RenderWindow & window);
 
 private:
-    //std::vector<Shot> player_shots;
-    int timer ;
+    int timer;
     int timer_dmg;
-    bool immunity;
-   // Shot new_shot;
+    int att_timer;
+
+    sf::Vector2f shot_dim;
+    sf::Vector2f shot_dir;
 };
 #endif //MAIN_CPP_PLAYER_H

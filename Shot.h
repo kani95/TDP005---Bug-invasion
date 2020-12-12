@@ -8,7 +8,7 @@
 class Shot : public Object
 {
 public:
-    Shot();
+    Shot(sf::Vector2f const& shot_dim);
     void move(float x, float y);
 
     float get_right();
@@ -16,15 +16,15 @@ public:
     float get_top();
     float get_bot();
 
-   bool check_coll(std::vector<sf::RectangleShape> const& all_spiders);
+  // bool check_coll(std::vector<sf::RectangleShape> const& all_spiders);
    //bool check_coll_screen();
 
    bool check_is_dead();
     //void render(sf::RenderTarget* & window);
     //void update(Shot & new_shot);
 
-protected:
-    bool mark_for_delete{};
+private:
+   // bool mark_for_delete;
 
 };
 

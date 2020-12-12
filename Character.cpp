@@ -5,6 +5,19 @@ Character::Character()
     :Object(), hp{3}, status{true}, can_shoot{}, score{}, movespeed{1.f}
 {}
 
+Character::Character(int const hp)
+        : Object(), hp{hp}
+{}
+
+Character::Character(sf::Vector2f const& pos,
+                     sf::Vector2f const& dir,
+                     sf::Vector2f const& dim,
+                     float const movespeed,
+                     int const hp)
+        : Object(pos, dir, dim), status{true},
+          can_shoot{false}, score{0}, movespeed{movespeed}, hp{hp}
+{}
+
 void Character::take_damage()
 {
     hp -= 1;

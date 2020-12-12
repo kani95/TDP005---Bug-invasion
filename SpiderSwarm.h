@@ -5,9 +5,16 @@
 #include "Player.h"
 
 class SpiderSwarm {
-
 public:
-    SpiderSwarm();
+    SpiderSwarm() = default;
+
+    SpiderSwarm(sf::Vector2f const& dim,
+                sf::Vector2f const& dir,
+                sf::Vector2f const& spawn_limit_x,
+                sf::Vector2f const& spawn_limit_y,
+                int const spawn_timer,
+                int const score,
+                int const hp);
     void update(const sf::RenderTarget* target,
                      std::vector<Shot> & player_shots,
                      std::vector<Shot> & ant_shots,
@@ -17,9 +24,15 @@ public:
     std::vector<Spider>& get_all_spiders();
 
 private:
-    std::vector<Spider> all_spiders;
     int timer;
-
+    int spawn_timer;
+    int score;
+    int hp;
+    sf::Vector2f dir;
+    sf::Vector2f dim;
+    sf::Vector2f spawn_limit_x;
+    sf::Vector2f spawn_limit_y;
+    std::vector<Spider> all_spiders;
 };
 
 

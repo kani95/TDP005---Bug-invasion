@@ -2,10 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-Shot::Shot()
+Shot::Shot(sf::Vector2f const& shot_dim)
         : Object()
 {
-    shape.setSize(sf::Vector2f(5.f,10.f));
+    shape.setSize(shot_dim);
+   // shape.setSize(sf::Vector2f(5.f,10.f));
 /*    speed.x = 0;
     speed.y = -6.5;*/
 }
@@ -41,6 +42,7 @@ float Shot::get_bot()
     return shape.getPosition().y + shape.getSize().y;
 }
 
+/*
 bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
 {
     for (auto & spider : all_spiders) {
@@ -69,6 +71,7 @@ bool Shot::check_coll(std::vector<sf::RectangleShape> const& all_spiders)
     }
     return false;
 }
+*/
 
 
 bool Shot::check_is_dead()

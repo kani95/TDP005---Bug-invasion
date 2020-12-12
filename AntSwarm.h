@@ -6,7 +6,19 @@
 
 class AntSwarm {
 public:
-    AntSwarm();
+
+    AntSwarm() = default;
+    AntSwarm(sf::Vector2f & pos,
+             sf::Vector2f const& dim,
+             sf::Vector2f & dist,
+             sf::Vector2f & dir,
+             sf::Vector2f & shot_dir,
+             sf::Vector2f & shot_dim,
+             unsigned short int const total_ants,
+             int const number_of_rows,
+             int const score,
+             int const hp,
+             int const att_timer);
 
     void render(sf::RenderTarget* target);
     std::pair<float, float> find_furthest_ants();
@@ -27,6 +39,7 @@ private:
     std::vector<Ant> ant_swarm;
     bool is_swarm_right{true};
     short int border_hit{};
+    sf::Vector2f direction;
 
 };
 

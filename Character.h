@@ -6,6 +6,13 @@
 class Character : public Object {
 public:
     Character();
+    Character(int const hp);
+    Character(int const hp, sf::Vector2f const& dir);
+    Character(sf::Vector2f const& pos,
+              sf::Vector2f const& dir,
+              sf::Vector2f const& dim,
+              float const movespeed,
+              int const hp);
 
     virtual void move(float const, float const) = 0;
     virtual void take_damage();
@@ -17,7 +24,6 @@ public:
 
 protected:
     int hp;
-
     bool can_shoot;
     int score;
     float movespeed;

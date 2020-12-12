@@ -9,10 +9,11 @@
 
 class Enemy : public Character {
 public:
-    Enemy();
+
+    Enemy() = default;
+    Enemy(int const score, int const hp);
     //virtual ~Enemy() = 0;
 
-    virtual int get_score() const = 0;
     virtual void move(float const, float const) = 0;
     virtual void update(const sf::RenderTarget* window,
                         std::vector<Shot> & player_shots,
@@ -21,6 +22,8 @@ public:
     // virtual void drop_loot() = 0;
 
     //std::vector<Enemy*> all_spiders;
+
+    int get_score() const;
 
 private:
     int score;

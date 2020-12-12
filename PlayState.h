@@ -9,6 +9,8 @@
 #include "Shot.h"
 #include <iostream>
 #include <vector>
+#include <string>
+#include <fstream>
 #include "SpiderSwarm.h"
 
 
@@ -23,18 +25,16 @@ class PlayState : public State {
 private:
 
 public:
-    explicit PlayState(sf::RenderWindow* window);
+    PlayState(sf::RenderWindow* window, std::string const& filename);
     ~PlayState() override;
     const sf::RenderTarget(*window);
-    Player player;
-    Leaf leaf;
-    // Ant ant;
-    Shot shot;
+    Player* player;
+    Leaf* leaf;
+
     AntSwarm ant_swarm;
     std::vector<Shot> player_shots;
     std::vector<Shot> ant_shots;
     std::vector<Spider> all_spiders;
-    //Spider spider;
     SpiderSwarm spider_swarm;
     std::vector<Ant> all_ants;
     bool is_done = false;
@@ -43,11 +43,13 @@ public:
 /*    void move_down() = delete;
     void move_up() = delete;*/
 
+    void read_lvl(std::string const& filename);
     void quit_state() override;
     void update(float const& frame_time) override;
     void render(sf::RenderTarget* target) override;
     bool get_is_done() override;
     bool get_exit_status() override;
+
 
 };
 #endif //MAIN_CPP_PLAYSTATE_H

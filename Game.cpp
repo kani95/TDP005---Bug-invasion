@@ -14,7 +14,7 @@ void Game::init_window()
     video_mode.height = 600;
     video_mode.width = 800;
     //sf::ContextSettings::antialiasingLevel(2);
-    window = new sf::RenderWindow(sf::VideoMode(video_mode), "menu");
+    window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
    // window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
     window -> setKeyRepeatEnabled(false);
     window -> setFramerateLimit(60);
@@ -24,7 +24,7 @@ void Game::init_window()
 
 void Game::init_states()
 {
-    states.push(new PlayState(window));
+    states.push(new PlayState(window, "example.txt"));
     states.push(new MenuState(window));
 }
 
@@ -66,7 +66,6 @@ void Game::poll_events()
         {
             case sf::Event::Closed:
                clear_stack();
-              //  window -> close();
                 break;
         }
     }

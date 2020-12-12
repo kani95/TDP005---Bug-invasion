@@ -1,29 +1,39 @@
 #include "AntSwarm.h"
 
-AntSwarm::AntSwarm()
-    :ant_swarm{}
+AntSwarm::AntSwarm(sf::Vector2f & pos,
+                   sf::Vector2f const& dim,
+                   sf::Vector2f & dist,
+                   sf::Vector2f & dir,
+                   sf::Vector2f & shot_dir,
+                   sf::Vector2f & shot_dim,
+                   unsigned short int const total_ants,
+                   int const number_of_rows,
+                   int const score,
+                   int const hp,
+                   int const att_timer)
+    :ant_swarm{}, direction{dir}
 {
-    float prev_x {220.f};
-    float prev_y {70.f};
-    for (unsigned short int i{0}; i < 30; i++)
+    float prev_x {pos.x};
+    for (unsigned short int i{0}; i < total_ants; i++)
     {
-        prev_x = prev_x + 40.f;
+        Ant ant{shot_dir, shot_dim, score, hp, att_timer};
+        ant.shape.setPosition(pos);
+        pos.x += dist.x;
+        ant.shape.setSize(sf::Vector2f(dim));
         //std::cout << prev_x << std::endl;
-        Ant ant{};
-        ant.shape.setPosition(prev_x, prev_y);
         ant_swarm.push_back(ant);
 
         // second row
-        if (i == 9)
+        if (i == total_ants/number_of_rows - 1)
         {
-            prev_x = 200.f;
-            prev_y = 120.f;
+            pos.x = prev_x;
+            pos.y += (dist.y + dim.y);
         }
         // third row
-        else if (i == 19)
+        else if (i == (total_ants/number_of_rows) * 2 - 1)
         {
-            prev_x = 220.f;
-            prev_y = 170.f;
+            pos.x = prev_x;
+            pos.y += (dist.y + dim.y);
         }
     }
 }
@@ -68,8 +78,8 @@ void AntSwarm::move_swarm(const sf::RenderTarget* window)
 
     // std::cout << border_hit << std::endl;
 
-    float x_movement{2};
-    float y_movement{0};
+    float x_movement{direction.x};
+    float y_movement{direction.y};
 
     if (border_hit % 2 != 0)
     {

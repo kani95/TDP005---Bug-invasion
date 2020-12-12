@@ -9,10 +9,12 @@
 // type 1 enemy
 class Ant : public Enemy {
 public:
-    Ant();
+    Ant(sf::Vector2f const& shot_dir,
+        sf::Vector2f const& shot_dim,
+        int const score, int const hp, int const att_timer);
 
 
-    int get_score() const override;
+    //int get_score() const override;
     void move(float , float) override;
     void render(sf::RenderTarget* target) const;
     void update(const sf::RenderTarget* window,
@@ -23,13 +25,16 @@ public:
     bool check_collison_player_shots(std::vector<Shot> & player_shots);
     bool check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * player);
 
-    static bool can_shoot() ;
+    bool can_shoot();
 
     bool check_coll(Shot & shot);
 
 
 private:
-    int score;
+
+    int att_timer;
+    sf::Vector2f shot_dir;
+    sf::Vector2f shot_dim;
 };
 
 #endif //GAME_ANT_H

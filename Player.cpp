@@ -1,11 +1,27 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player()
-    :Character(), timer{70}, immunity{false}, timer_dmg{}
+/*Player::Player()
+    :Character(), timer{70}, timer_dmg{}
 {
     shape.setPosition(position);
     shape.setPosition(300.f,450.f);
+}*/
+
+
+Player::Player(sf::Vector2f const& pos, sf::Vector2f const& dir,
+               sf::Vector2f const& dim, float const movespeed,
+               int const hp, int const att_timer, sf::Vector2f const& shot_dim,
+               sf::Vector2f const& shot_dir)
+        :Character(pos, dir, dim, movespeed, hp), att_timer{att_timer}, timer{},
+         timer_dmg{}, shot_dim{shot_dim}, shot_dir{shot_dir}
+{
+    if(!texture.loadFromFile("player.png"))
+    {
+        std::cerr << "No load";
+    }
+    shape.setTexture(&texture);
+    //shape.setPosition(pos);
 }
 
 
@@ -37,15 +53,15 @@ void Player::update(sf::RectangleShape const& box,
     update_input();
     check_inside_leaf(box);
 
-    if (timer < 70) {
+    if (timer < att_timer) {
         ++timer;
     }
     //TAKE DAMAGE TIMER
-    if(timer_dmg < 30) {
-        ++ timer_dmg;
+    if(timer_dmg < 35) {
+        ++timer_dmg;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= 70)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= att_timer)
     {
         add_shot(player_shots);
         timer = 0;
@@ -55,7 +71,7 @@ void Player::update(sf::RectangleShape const& box,
    // check_player_shots_coll(all_spiders,all_ants, player_shots);
     for (size_t i{0}; i < player_shots.size(); ++i)
     {
-        player_shots.at(i).move(0.f, -6.5f);
+        player_shots.at(i).move(shot_dir.x, shot_dir.y);
 
         if (player_shots.at(i).check_is_dead())
         {
@@ -63,7 +79,7 @@ void Player::update(sf::RectangleShape const& box,
         }
     }
   //  std::cout << player_shots.size();
-  //std::cout << hp;
+ // std::cout << hp;
 }
 
 
@@ -81,8 +97,8 @@ void Player::move(float const dirx, float const diry)
 
 void Player::add_shot(std::vector<Shot> & player_shots)
 {
-    Shot new_shot{};
-    new_shot.shape.setPosition(get_dirx(),get_diry());
+    Shot new_shot{shot_dim};
+    new_shot.shape.setPosition(get_dirx() + (shape.getSize().x / 2), get_diry());
     player_shots.push_back(new_shot);
 }
 
@@ -120,7 +136,6 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
     }
 }
 
-
 float Player::get_dirx()
 {
     return shape.getPosition().x;
@@ -140,25 +155,21 @@ void Player::draw(sf::RenderWindow & window)
 
 // skicka in player referens till antswarm och spiderswarm.
 
-
-
-
-
 void Player::take_damage()
 {
     // HUR UTFÖRA EN OPERATION PER GAMELOOP???
-    if (hp == 3 && timer_dmg >= 30)
+    if (hp == 3 && timer_dmg >= 35)
     {
         hp = 2;
         timer_dmg = 0;
 
     }
-    else if (hp == 2 && timer_dmg >= 30)
+    else if (hp == 2 && timer_dmg >= 35)
     {
         hp = 1;
         timer_dmg = 0;
     }
-    else if (hp == 1 && timer_dmg >= 30)
+    else if (hp == 1 && timer_dmg >= 35)
     {
         hp = 0;
         timer_dmg = 0;

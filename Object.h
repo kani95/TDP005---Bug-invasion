@@ -6,14 +6,16 @@ class Object {
 public:
     // explicit Object(sf::RenderTarget & window);
     Object();
+    Object(sf::Vector2f const& pos, sf::Vector2f const& dim);
+    Object(sf::Vector2f const & pos, sf::Vector2f const& dir,
+           sf::Vector2f const& dim);
 
 //protected:
     sf::Vector2f position;
-    sf::Vector2f area;
-    sf::Vector2f speed;
+    sf::Vector2f direction;
     sf::RectangleShape shape;
-
-
+   // sf::Sprite shape;
+    sf::Texture texture;
 
     //sf::RenderTarget &window;
 };

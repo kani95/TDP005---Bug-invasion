@@ -1,17 +1,13 @@
 #include "Ant.h"
 
-Ant::Ant()
-:Enemy(), score{}
+Ant::Ant(sf::Vector2f const& shot_dir,
+         sf::Vector2f const& shot_dim,
+         int const score, int const hp, int const att_timer)
+:Enemy(score, hp), shot_dim(shot_dim), shot_dir(shot_dir), att_timer{att_timer}
 {
     shape.setFillColor(sf::Color::Red);
-    shape.setPosition(220, 70);
-    hp = 2;
-}
-
-
-int Ant::get_score() const
-{
-    return score;
+    //shape.setPosition(220, 70);
+    //hp = 2;
 }
 
 
@@ -66,14 +62,18 @@ bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * pl
     for(unsigned int i{0}; i < ant_shots.size(); ++i)
     {
         Shot & shot{ant_shots.at(i)};
-        if (player -> check_enemy_coll(shot.shape) || shot.check_is_dead())
+        if (player -> check_enemy_coll(shot.shape))
         {
             ant_shots.erase(begin(ant_shots) + i);
             return true;
         }
+        else if(shot.check_is_dead())
+        {
+            ant_shots.erase(begin(ant_shots) + i);
+        }
         else
         {
-            shot.move(0.f, 0.3);
+            shot.move(shot_dir.x, shot_dir.y);
         }
     }
     return false;
@@ -82,7 +82,7 @@ bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * pl
 
 bool Ant::can_shoot()
 {
-    int value{(std::rand() % 200) + 1};
+    int value{(std::rand() % att_timer) + 1};
     if (value == 3)
     {
         return true;
@@ -112,8 +112,8 @@ void Ant::update(const sf::RenderTarget* target,
 
     if (can_shoot())
     {
-        Shot new_shot{};
-        new_shot.shape.setPosition(shape.getPosition().x, shape.getPosition().y);
+        Shot new_shot{shot_dim};
+        new_shot.shape.setPosition(shape.getPosition().x + (shape.getSize().x / 2), shape.getPosition().y);
         ant_shots.push_back(new_shot);
     }
 }

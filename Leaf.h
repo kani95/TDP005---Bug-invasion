@@ -5,7 +5,8 @@
 class Leaf :  public Object
 {
 public:
-    Leaf();
+    Leaf() = default;
+    Leaf(sf::Vector2f const& pos, sf::Vector2f const& dim);
 };
 
 
