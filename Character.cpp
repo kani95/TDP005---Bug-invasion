@@ -14,7 +14,14 @@ void Character::take_damage()
 
 void Character::increase_score(long unsigned int plus_score)
 {
+    //if (game_)
     score += plus_score;
+}
+
+
+void Character::set_score(int new_score)
+{
+    score = new_score;
 }
 
 

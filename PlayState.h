@@ -39,9 +39,12 @@ public:
 
     void quit_state() override;
     void update(float const& frame_time) override;
+    void update_total_score();
     void render(sf::RenderTarget* target) override;
     bool get_is_done() override;
     bool get_exit_status() override;
+    sf::Clock game_clock;
+    unsigned long int total_score;
 
 };
 #endif //MAIN_CPP_PLAYSTATE_H

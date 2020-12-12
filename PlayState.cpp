@@ -3,7 +3,9 @@
 
 void PlayState::update(float const& frame_time)
 {
-    std::cout << "Score: " << player.get_score() << std::endl;
+    update_total_score();
+    std::cout << game_clock.getElapsedTime().asSeconds() << std::endl;
+    std::cout << total_score << std::endl;
     player.update(leaf.shape, player_shots);
     // player_shots = player.get_player_shots();
     // send in a player reference to swarm, if it takes dmg call player take dmg
@@ -55,13 +57,11 @@ bool PlayState::get_is_done()
 }
 
 PlayState::PlayState(sf::RenderWindow *window)
-    : State(window)
+    : State{window}, game_clock{}, total_score{}
     {}
 
 
 PlayState::~PlayState() = default;
-
-
 
 
 bool PlayState::get_exit_status()
@@ -70,3 +70,18 @@ bool PlayState::get_exit_status()
 }
 
 
+void PlayState::update_total_score()
+{
+    int multiplier{1};
+    if (game_clock.getElapsedTime().asSeconds() < 60)
+    {
+        multiplier = 3;
+    }
+    else if (game_clock.getElapsedTime().asSeconds() < 120)
+    {
+        multiplier = 2;
+    }
+
+    total_score += player.get_score() * multiplier;
+    player.set_score(0);
+}

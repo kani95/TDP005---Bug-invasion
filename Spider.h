@@ -12,6 +12,7 @@ public:
                 std::vector<Shot> & player_shots,
                 std::vector<Shot> & ant_shots,
                 Character* player) override;
+
     void set_start_pos();
     //void add_second();
     bool check_coll(sf::RectangleShape & enemy);

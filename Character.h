@@ -11,6 +11,8 @@ public:
     virtual void take_damage();
     unsigned long int get_score();
     void increase_score(long unsigned int plus_score);
+
+    void set_score(int new_score);
     void shake_shape();
     int get_hp();
     bool status{true};

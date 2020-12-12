@@ -9,9 +9,9 @@ SpiderSwarm::SpiderSwarm()
 }
 
 void SpiderSwarm::update(const sf::RenderTarget* target,
-                 std::vector<Shot> & player_shots,
-                 std::vector<Shot> & ant_shots,
-                 Character* player)
+                         std::vector<Shot> & player_shots,
+                         std::vector<Shot> & ant_shots,
+                         Character* player)
 {
     if (timer >= 700)
     {
