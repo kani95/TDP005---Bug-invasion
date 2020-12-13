@@ -17,6 +17,8 @@ set (SOURCE_FILES
         Enemy.h
         Game.cpp
         Game.h
+        LeaderboardState.cpp
+        LeaderboardState.h
         Leaf.cpp
         Leaf.h
         main.cpp

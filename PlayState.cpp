@@ -62,7 +62,8 @@ PlayState::PlayState(sf::RenderWindow *window)
     : State{window}, game_clock{}, total_score{}, font{}, score_text{}
     {
 
-    if (font.loadFromFile("ARCADECLASSIC.TTF")) {
+    if (font.loadFromFile("ARCADECLASSIC.TTF"))
+    {
         std::cerr << "Failed to load font in PlayState.";
     };
 
@@ -101,5 +102,9 @@ void PlayState::update_total_score()
                          +  std::to_string(total_score)
                          + "\nLIVES      "
                          + std::to_string(player.get_hp()));
+}
+
+bool PlayState::get_leaderboard_status() {
+    return leader_board;
 }
 

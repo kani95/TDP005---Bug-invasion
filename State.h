@@ -23,6 +23,7 @@ public:
     virtual void render(sf::RenderTarget*  target) = 0;
     virtual bool get_is_done() = 0;
     virtual bool get_exit_status() = 0;
+    virtual bool get_leaderboard_status() = 0;
 
    /* virtual void move_down() = 0;
     virtual void move_up() = 0;*/

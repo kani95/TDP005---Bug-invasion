@@ -4,7 +4,7 @@
 
 MenuState::MenuState(sf::RenderWindow *window)
            : State(window), selected_choice{}, font{}, choices{}, is_done{false},
-             exit_status{false}
+             exit_status{false}, leaderboard_status{false}
 {
     init_menu(window);
 }
@@ -32,14 +32,14 @@ void MenuState::init_menu(sf::RenderWindow* window)
 
         choices[i].setFont(font);
 
-        choices[i].setPosition(sf::Vector2f(window -> getSize().x / 2 - 70,
-                                            (window -> getSize().y /
-                                             (MAX_NUMBER_OF_ITEMS + 1) * (i + 1))));
+        choices[i].setPosition(sf::Vector2f(
+                window -> getSize().x / 2.f - 70.f,
+                (window -> getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * (i + 1.f))));
     }
 
     choices[0].setString("New game");
-    // choices[1].setString("Leaderboard");
-    choices[1].setString("Exit");
+    choices[1].setString("Leaderboard");
+    choices[2].setString("Exit");
 }
 
 
@@ -47,16 +47,18 @@ void MenuState::input()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         move_down();
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         move_up();
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
         if (get_selected_choice() == 0)
         {
             is_done = true;
         }
         else if (get_selected_choice() == 1)
+        {
+            leaderboard_status = true;
+        }
+        else if (get_selected_choice() == 2)
         {
             exit_status = true;
         }
@@ -88,7 +90,7 @@ void MenuState::render(sf::RenderTarget*  target)
     }
 }
 
-int MenuState::get_selected_choice()
+int MenuState::get_selected_choice() const
 {
     return selected_choice;
 }
@@ -117,4 +119,9 @@ void MenuState::move_down()
         ++selected_choice;
         choices[selected_choice].setFillColor(sf::Color::Red);
     }
+}
+
+
+bool MenuState::get_leaderboard_status() {
+    return leaderboard_status;
 }

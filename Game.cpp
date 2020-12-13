@@ -30,7 +30,7 @@ void Game::init_states()
 
 
 Game::Game()
- :frame_time{}, window{}
+ :frame_time{}, window{}, timer{}
 {
 
     init_window();
@@ -48,6 +48,7 @@ Game::~Game()
         states.pop(); // removes the pointer
     }
 }
+
 
 bool Game::window_status() const
 {
@@ -104,6 +105,11 @@ void Game::update()
         else if(states.top() -> get_exit_status())
         {
             clear_stack();
+        }
+        else if (states.top() -> get_leaderboard_status())
+        {
+
+            states.push(new LeaderboardState(window));
         }
     }
 }

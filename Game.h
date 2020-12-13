@@ -4,7 +4,10 @@
 #include "PlayState.h"
 #include "Shot.h"
 #include "MenuState.h"
+#include "LeaderboardState.h"
 // run game engine class
+
+enum class all_states {menu};
 
 class Game {
 private:
@@ -18,6 +21,7 @@ private:
     void init_vars();
     void init_window();
     void init_states();
+
 
      sf::Clock tick;
      // how long it take for the game to make one update call and one render call

@@ -33,6 +33,7 @@ public:
     std::vector<Ant> all_ants;
     bool is_done = false;
     bool exit_status = false;
+    bool leader_board = false;
 
 /*    void move_down() = delete;
     void move_up() = delete;*/
@@ -42,6 +43,9 @@ public:
     void render(sf::RenderTarget* target) override;
     bool get_is_done() override;
     bool get_exit_status() override;
+    bool get_leaderboard_status() override;
+
+
     sf::Clock game_clock;
     unsigned long int total_score;
 
