@@ -97,6 +97,9 @@ void PlayState::update_total_score()
 
     total_score += player.get_score() * multiplier;
     player.set_score(0);
-    score_text.setString("SCORE      " + std::to_string(total_score));
+    score_text.setString("SCORE      "
+                         +  std::to_string(total_score)
+                         + "\nLIVES      "
+                         + std::to_string(player.get_hp()));
 }
 
