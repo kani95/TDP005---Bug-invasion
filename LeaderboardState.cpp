@@ -5,17 +5,26 @@
 #include "LeaderboardState.h"
 
 LeaderboardState::LeaderboardState(sf::RenderWindow * window)
-        :State(window), is_done{false}, exit_status{false}, leaderboard_status{false}, string_score{}
+        :State(window), is_done{false}, exit_status{false}, leaderboard_status{false}, v_score{}
 {
     std::cout << "here" << std::endl;
     std::ifstream scores("Leaderboard.txt");
 
-    while (getline (scores, string_score))
+
+    unsigned long int score{};
+
+    while (scores >> score)
     {
-        std::cout << string_score;
+        //v_score.push_back(std::stol(score));
+        //v_scores.push_back(name, score);
     }
 
     scores.close();
+
+/*    for (auto i : v_scores)
+    {
+        std::cout << i << std::endl;
+    }*/
 }
 
 

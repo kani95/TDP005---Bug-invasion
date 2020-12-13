@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 
 class LeaderboardState : public State{
@@ -20,10 +21,10 @@ public:
 
 
 private:
-    bool is_done{};
-    bool exit_status{};
-    bool leaderboard_status{};
-    std::string string_score{};
+    bool is_done;
+    bool exit_status;
+    bool leaderboard_status;
+    std::vector<unsigned long int> v_score;
 };
 
 

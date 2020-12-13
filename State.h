@@ -4,6 +4,9 @@
 #include <vector>
 #include "stack"
 #include "map"
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#include<iostream>
 
 
 class State {
@@ -25,8 +28,8 @@ public:
     virtual bool get_exit_status() = 0;
     virtual bool get_leaderboard_status() = 0;
 
-   /* virtual void move_down() = 0;
-    virtual void move_up() = 0;*/
+    /* virtual void move_down() = 0;
+     virtual void move_up() = 0;*/
 };
 
 

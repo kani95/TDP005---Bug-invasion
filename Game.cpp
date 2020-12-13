@@ -40,13 +40,7 @@ Game::Game()
 
 Game::~Game()
 {
-    delete window;
-
-    while (!states.empty())
-    {
-        delete states.top(); // removes the date the pointer is holding
-        states.pop(); // removes the pointer
-    }
+    clear_stack();
 }
 
 
@@ -108,7 +102,6 @@ void Game::update()
         }
         else if (states.top() -> get_leaderboard_status())
         {
-
             states.push(new LeaderboardState(window));
         }
     }

@@ -62,17 +62,16 @@ PlayState::PlayState(sf::RenderWindow *window)
     : State{window}, game_clock{}, total_score{}, font{}, score_text{}
     {
 
-    if (font.loadFromFile("ARCADECLASSIC.TTF"))
-    {
-        std::cerr << "Failed to load font in PlayState.";
-    };
+        if (!font.loadFromFile("ARCADECLASSIC.TTF"))
+        {
+            std::cerr << "Failed to load font in PlayState.";
+        };
 
-    score_text.setFont(font);
-    score_text.setCharacterSize(23);
-    score_text.setFillColor(sf::Color::White);
-    score_text.setString("SCORE");
-
-}
+        score_text.setFont(font);
+        score_text.setCharacterSize(23);
+        score_text.setFillColor(sf::Color::White);
+        score_text.setString("SCORE");
+    }
 
 
 PlayState::~PlayState() = default;

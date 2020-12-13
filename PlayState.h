@@ -12,7 +12,6 @@
 #include "SpiderSwarm.h"
 
 
-
 class PlayState : public State {
 private:
 

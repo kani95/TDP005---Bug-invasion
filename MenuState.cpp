@@ -4,7 +4,7 @@
 
 MenuState::MenuState(sf::RenderWindow *window)
            : State(window), selected_choice{}, font{}, choices{}, is_done{false},
-             exit_status{false}, leaderboard_status{false}
+             exit_status{false}, leaderboard_status{false}, event{}
 {
     init_menu(window);
 }
@@ -16,6 +16,7 @@ void MenuState::init_menu(sf::RenderWindow* window)
 {
     if (!font.loadFromFile("ARCADECLASSIC.TTF"))
     {
+        std::cerr << "Failed to load font in MenuState" << std::endl;
         // Handle error
     }
 
@@ -45,10 +46,28 @@ void MenuState::init_menu(sf::RenderWindow* window)
 
 void MenuState::input()
 {
+
+/*    if (event.type == sf::Event::KeyReleased)
+    {
+        if (event.key.code == sf::Keyboard::Up)
+        {
+            std::cout << "das" << std::endl;
+            std::cout << "control:" << event.key.control << std::endl;
+            std::cout << "alt:" << event.key.alt << std::endl;
+            std::cout << "shift:" << event.key.shift << std::endl;
+            std::cout << "system:" << event.key.system << std::endl;
+        }
+    }*/
+    // https://www.sfml-dev.org/tutorials/2.5/window-events.php
+
+
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         move_down();
+        sf::sleep(sf::milliseconds(150));
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         move_up();
+        sf::sleep(sf::milliseconds(150));
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
         if (get_selected_choice() == 0)
         {

@@ -40,6 +40,7 @@ private:
     sf::Font font;
     sf::Text choices[MAX_NUMBER_OF_ITEMS];
     bool leaderboard_status;
+    sf::Event event;
     //const sf::RenderTarget(*window);
 };
 
