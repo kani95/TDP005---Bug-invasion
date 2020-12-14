@@ -20,12 +20,14 @@ AntSwarm::AntSwarm(std::string const& text,
     float prev_x {pos.x};
     for (unsigned short int i{0}; i < total_ants; i++)
     {
-        Ant* ant {new Ant{text, shot_text, shot_dir, shot_dim, score, hp, att_timer}};
-        ant -> shape.setPosition(pos);
+       // std::unique_ptr<Ant> ant(std::make_unique<Ant>(text, shot_text, shot_dir, shot_dim, score, hp, att_timer));
+      // Ant* ant{new Ant{text, shot_text, shot_dir, shot_dim, score, hp, att_timer}};
+        Ant ant{text, shot_text, shot_dir, shot_dim, score, hp, att_timer};
+        ant.shape.setPosition(pos);
         pos.x += dist.x;
-        ant -> shape.setScale(dim);
+        ant . shape.setScale(dim);
         //std::cout << prev_x << std::endl;
-        ant_swarm.push_back(*ant);
+        ant_swarm.push_back(ant);
 
         // second row
         if (i == total_ants/number_of_rows - 1)

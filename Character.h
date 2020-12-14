@@ -26,6 +26,7 @@ protected:
     bool can_shoot;
     int score;
     float movespeed;
+    sf::Clock clock;
 };
 
 

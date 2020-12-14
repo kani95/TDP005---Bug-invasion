@@ -7,7 +7,9 @@
 
 Character::Character(int const hp)
         : Object(), hp{hp}
-{}
+{
+    clock.restart().asSeconds();
+}
 
 Character::Character(std::string const& text, sf::Vector2f const& pos,
                      sf::Vector2f const& dir,
@@ -21,11 +23,14 @@ Character::Character(std::string const& text, sf::Vector2f const& pos,
 void Character::take_damage()
 {
     hp -= 1;
+    shape.setColor(sf::Color::Red);
+    clock.restart().asSeconds();
     shake_shape();
 }
 
 int Character::get_hp()
 {
+
     return hp;
 }
 
@@ -33,10 +38,15 @@ void Character::shake_shape()
 {
     if (!status)
     {
+        //shape.setColor(sf::Color::Red);
         // shape.setOutlineColor(sf::Color::Transparent);
-        shape.setScale(2, 2);
-        status = true;
+       // shape.setScale(2, 2);
+        status = false;
     }
+   /* else
+    {
+        shape.setColor(sf::Color::Transparent);
+    }*/
 }
 
 bool Character::is_dead()

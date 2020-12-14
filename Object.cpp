@@ -10,23 +10,16 @@
 Object::Object(std::string const& text, sf::Vector2f const& dim)
         : position{220,220}, direction{}, shape{}
 {
+    init_texture(text);
     shape.setScale(dim);
-    if(!texture.loadFromFile(text))
-    {
-        std::cerr << "No load";
-    }
-    shape.setTexture(texture);
+
   // shape.setScale(sf::Vector2f(10.f, 40.f));
 }
 
 Object::Object(std::string const& text, sf::Vector2f const& pos, sf::Vector2f const& dim)
         : position{pos}
 {
-    if(!texture.loadFromFile(text))
-    {
-        std::cerr << "Failed to load texture";
-    }
-    shape.setTexture(texture);
+    init_texture(text);
     shape.setPosition(position);
     shape.setScale(dim);
 }
@@ -36,12 +29,16 @@ Object::Object(std::string const& text, sf::Vector2f const& pos,
                sf::Vector2f const& dim)
         : position{pos}, direction{dir}
 {
-    if(!texture.loadFromFile(text))
-    {
-        std::cerr << "Failed to load texture";
-    }
-    shape.setTexture(texture);
+    init_texture(text);
     shape.setPosition(position);
     shape.setScale(dim);
 }
 
+void Object::init_texture(std::string const& file_name)
+{
+    if(!texture->loadFromFile(file_name))
+    {
+        std::cerr << "Failed to load texture";
+    }
+    shape.setTexture(*texture);
+}

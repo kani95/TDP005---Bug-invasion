@@ -181,7 +181,7 @@ void PlayState::read_lvl(std::string const& filename)
 PlayState::~PlayState()
 {
    delete player;
-    delete leaf;
+   delete leaf;
   /*  for (Shot & shot : player_shots)
     {
         if(shot.remove_status)

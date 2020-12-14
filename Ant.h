@@ -36,6 +36,7 @@ private:
     sf::Vector2f shot_dir;
     sf::Vector2f shot_dim;
     std::string shot_text;
+   // sf::Clock clock;
 };
 
 #endif //GAME_ANT_H

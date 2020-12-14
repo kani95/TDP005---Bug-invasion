@@ -5,6 +5,7 @@
 // 2. rörelse med player hackigt varför
 // 3. hur kan vi tänka att avgöra gränserna för bladet, hur kan vi mäta det
 
+
 int main()
 {
     //sf::RenderWindow window{sf::VideoMode(1024, 768), "Hello World!"};

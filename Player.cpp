@@ -57,6 +57,10 @@ void Player::update_input()
 void Player::update(sf::Sprite const& box,
                     std::vector<Shot> & player_shots)
 {
+    if (clock.getElapsedTime().asSeconds() >= 0.3)
+    {
+        shape.setColor(sf::Color::White);
+    }
     update_input();
     check_inside_leaf(box);
 
@@ -83,7 +87,9 @@ void Player::update(sf::Sprite const& box,
         if (player_shots.at(i).check_is_dead())
         {
             //delete &player_shots.at(i);
-            player_shots.at(i).remove_status = true;
+          //  player_shots.at(i).remove_status = true;
+         // shots_removed.emplace(shots_removed.begin() + i, std::move(&player_shots.at(i)));
+          player_shots.erase(player_shots.begin() + i);
             //delete &player_shots.at(i);
             //!!!!!MEMORY LEAK!!!!!
             //player_shots.erase(begin(player_shots) + i);
@@ -109,10 +115,11 @@ void Player::move(float const dirx, float const diry)
 
 void Player::add_shot(std::vector<Shot> & player_shots)
 {
-    std::unique_ptr<Shot> new_shot(std::make_unique<Shot>(shot_text,shot_dim));
-   // Shot* new_shot {new Shot{shot_text,shot_dim}};
-    new_shot -> shape.setPosition(get_dirx() + (shape.getGlobalBounds().width / 2), get_diry());
-    player_shots.push_back(*new_shot);
+   // std::unique_ptr<Shot> new_shot(std::make_unique<Shot>(shot_text,shot_dim));
+    Shot new_shot{shot_text, shot_dim};
+    //Shot* new_shot {new Shot{shot_text,shot_dim}};
+    new_shot . shape.setPosition(get_dirx() + (shape.getGlobalBounds().width / 2), get_diry());
+    player_shots.push_back(new_shot);
 }
 
 
@@ -174,6 +181,10 @@ void Player::draw(sf::RenderWindow & window)
 void Player::take_damage()
 {
     // HUR UTFÖRA EN OPERATION PER GAMELOOP???
+
+    shape.setColor(sf::Color::Red);
+    clock.restart().asSeconds();
+
     if (hp == 3 && timer_dmg >= 35)
     {
         hp = 2;

@@ -11,11 +11,12 @@ Spider::Spider(std::string const& text,
                int const hp)
         : Enemy(score,hp), spw_lmt_x{spawn_limit_x}, spw_lmt_y{spawn_limit_y}
 {
-    if(!texture.loadFromFile("spider.png"))
+   /* if(!texture loadFromFile("spider.png"))
     {
         std::cerr << "No load";
     }
-    shape.setTexture(texture);
+    shape.setTexture(texture);*/
+   init_texture(text);
    // shape.setScale(10,40);
     //shape.setColor(sf::Color::Blue);
    // shape.setPosition(300,200);

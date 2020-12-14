@@ -7,11 +7,12 @@ Ant::Ant(std::string const& text,
          int const score, int const hp, int const att_timer)
 :Enemy(score, hp), shot_dim(shot_dim), shot_dir(shot_dir), att_timer{att_timer}, shot_text{shot_text}
 {
-    if(!texture.loadFromFile(text))
+  /*  if(!texture.loadFromFile(text))
     {
         std::cerr << "No load";
     }
-    shape.setTexture(texture);
+    shape.setTexture(texture);*/
+    init_texture(text);
 /*<<<<<<< HEAD
     shape.setFillColor(sf::Color::Red);
     //shape.setPosition(220, 70);
@@ -21,6 +22,8 @@ Ant::Ant(std::string const& text,
   //  shape.setColor(sf::Color::Red);
     //shape.setPosition(220, 70);
   //  hp = 2;
+
+  clock.restart().asSeconds();
 }
 
 
@@ -123,6 +126,11 @@ void Ant::update(const sf::RenderTarget* target,
                  std::vector<Shot> & ant_shots,
                  Character* player)
 {
+    if(clock.getElapsedTime().asSeconds() >= 0.3)
+    {
+        shape.setColor(sf::Color::White);
+    }
+
     if (check_collison_player_shots(player_shots))
     {
         take_damage();
@@ -136,9 +144,11 @@ void Ant::update(const sf::RenderTarget* target,
 
     if (can_shoot())
     {
-        Shot* new_shot {new Shot{shot_text, shot_dim}};
-        new_shot -> shape.setPosition(shape.getPosition().x + (shape.getGlobalBounds().width / 2), shape.getPosition().y);
-        ant_shots.push_back(*new_shot);
+        //std::unique_ptr<Shot> new_shot(std::make_unique<Shot>(shot_text,shot_dim));
+        Shot new_shot{shot_text,shot_dim};
+        //Shot* new_shot {new Shot{shot_text, shot_dim}};
+        new_shot . shape.setPosition(shape.getPosition().x + (shape.getGlobalBounds().width / 2), shape.getPosition().y);
+        ant_shots.push_back(new_shot);
     }
 }
 

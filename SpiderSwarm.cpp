@@ -22,8 +22,10 @@ void SpiderSwarm::update(const sf::RenderTarget* target,
     if (timer >= spawn_timer)
     {
         // spawn_limit,
-        Spider* spider {new Spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp}};
-        all_spiders.push_back(*spider);
+       // std::unique_ptr<Spider> spider(std::make_unique<Spider>(text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp));
+       Spider spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp};
+       // Spider* spider {new Spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp}};
+        all_spiders.push_back(spider);
         timer = 0;
     }
 
