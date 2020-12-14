@@ -79,6 +79,8 @@ void LeaderboardState::update(const float &frame_time)
 
 void LeaderboardState::render_scores(std::vector<unsigned long> const& vector_scores, sf::RenderTarget* target)
 {
+
+    std::cout << target -> getSize().x << std::endl;
     for (int i{}; i < 11; i++)
     {
         std::string curr{std::to_string(vector_scores.at(i))};
@@ -86,7 +88,7 @@ void LeaderboardState::render_scores(std::vector<unsigned long> const& vector_sc
         score_text.setString(std::to_string(i) + " " + curr);
         score_text.setPosition(sf::Vector2f(
                 target -> getSize().x / 2.f - 70.f,
-                target -> getSize().y / (18.f) * (i + 4.f)));
+                target -> getSize().y / (18.f) * ((float)i + 4.f)));
 
         target -> draw(score_text);
     }

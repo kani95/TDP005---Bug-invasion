@@ -26,6 +26,7 @@ public:
                        sf::RenderTarget* target);
     void render(sf::RenderTarget*  target) override;
 
+    // MOVE TO STATE
     bool get_is_done() override;
     bool get_exit_status() override;
     bool get_leaderboard_status() override;

@@ -9,6 +9,13 @@ void Game::init_vars()
 }
 
 
+// är intersect okej?
+// inläsning av fil
+// resize
+// kompletteringar
+// ta in ett namn?
+
+
 void Game::init_window()
 {
     video_mode.height = 1080;
@@ -63,6 +70,10 @@ void Game::poll_events()
                clear_stack();
               //  window -> close();
                 break;
+
+/*            case sf::Event::Resized:
+                sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+                window -> setView(sf::View(visibleArea));*/
         }
     }
 
