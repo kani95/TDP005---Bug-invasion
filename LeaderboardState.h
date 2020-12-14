@@ -27,16 +27,12 @@ public:
     void render(sf::RenderTarget*  target) override;
 
     // MOVE TO STATE
-    bool get_is_done() override;
-    bool get_exit_status() override;
-    bool get_leaderboard_status() override;
+
     void quit_state() override;
 
 
 private:
-    bool is_done;
-    bool exit_status;
-    bool leaderboard_status;
+
     std::vector<unsigned long int> v_score;
     sf::Font font;
     sf::Text score_text;

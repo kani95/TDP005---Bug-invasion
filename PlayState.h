@@ -20,9 +20,9 @@ private:
 public:
     PlayState(sf::RenderWindow* window, std::string const& filename);
     ~PlayState() override;
-    const sf::RenderTarget(*window);
-    Player* player;
-    Leaf* leaf;
+    const sf::RenderTarget(*window){};
+    Player* player{};
+    Leaf* leaf{};
 
     AntSwarm ant_swarm;
     std::vector<Shot> player_shots;
@@ -44,9 +44,6 @@ public:
     void update(float const& frame_time) override;
     void update_total_score();
     void render(sf::RenderTarget* target) override;
-    bool get_is_done() override;
-    bool get_exit_status() override;
-    bool get_leaderboard_status() override;
 
 
     sf::Clock game_clock;

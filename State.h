@@ -11,8 +11,11 @@
 
 class State {
 protected:
-    sf::RenderWindow* window;
+    sf::RenderWindow* window{};
     std::vector<sf::Texture*> textures;
+    bool is_done;
+    bool exit_status;
+    bool leaderboard_status;
 
 public:
     explicit State(sf::RenderWindow* window);
@@ -24,12 +27,13 @@ public:
     // if nothing is give in the parameter render to window
     // else render to specific target
     virtual void render(sf::RenderTarget*  target) = 0;
-    virtual bool get_is_done() = 0;
-    virtual bool get_exit_status() = 0;
-    virtual bool get_leaderboard_status() = 0;
+    bool get_is_done() const;
+    bool get_exit_status() const;
+    bool get_leaderboard_status() const;
 
     /* virtual void move_down() = 0;
      virtual void move_up() = 0;*/
+
 };
 
 

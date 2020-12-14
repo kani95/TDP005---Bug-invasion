@@ -70,12 +70,6 @@ void PlayState::quit_state() {
 
 }
 
-bool PlayState::get_is_done()
-{
-    return is_done;
-}
-
-
 /*
 PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
     : State(window)
@@ -85,7 +79,7 @@ PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
 */
 
 PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
-        : State{window}, game_clock{}, total_score{}, font{}, score_text{}
+        : State{window}, game_clock{}, total_score{}, font{}, score_text{} /*window{window}*/
 {
 
     if (!font.loadFromFile("ARCADECLASSIC.TTF"))
@@ -215,11 +209,6 @@ PlayState::~PlayState()
     }*/
 }
 
-bool PlayState::get_exit_status()
-{
-    return exit_status;
-}
-
 
 void PlayState::update_total_score()
 {
@@ -239,9 +228,5 @@ void PlayState::update_total_score()
                          +  std::to_string(total_score)
                          + "\nLIVES      "
                          + std::to_string(player->get_hp()));
-}
-
-bool PlayState::get_leaderboard_status() {
-    return leader_board;
 }
 

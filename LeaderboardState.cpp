@@ -1,8 +1,7 @@
 #include "LeaderboardState.h"
 
 LeaderboardState::LeaderboardState(sf::RenderWindow * window)
-        :State(window), is_done{false}, exit_status{false},
-        leaderboard_status{false}, v_score{},score_text{},
+        :State(window), v_score{},score_text{},
         font{}, back_button{}, top_score_text{}
 {
     // load font should be defined in state
@@ -100,24 +99,6 @@ void LeaderboardState::render(sf::RenderTarget *target)
     target -> draw(top_score_text);
     target -> draw(back_button);
     render_scores(v_score, target);
-}
-
-
-bool LeaderboardState::get_is_done()
-{
-    return is_done;
-}
-
-
-bool LeaderboardState::get_exit_status()
-{
-    return exit_status;
-}
-
-
-bool LeaderboardState::get_leaderboard_status()
-{
-    return leaderboard_status;
 }
 
 

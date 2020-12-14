@@ -24,10 +24,6 @@ public:
     void move_up();
     void move_down();
 
-    bool get_is_done() override;
-    bool get_exit_status() override;
-    bool get_leaderboard_status() override;
-
     int get_selected_choice() const;
 
 
@@ -35,11 +31,8 @@ public:
 
 private:
     int selected_choice;
-    bool is_done;
-    bool exit_status;
     sf::Font font;
     sf::Text choices[MAX_NUMBER_OF_ITEMS];
-    bool leaderboard_status;
     sf::Event event;
     //const sf::RenderTarget(*window);
 };

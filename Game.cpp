@@ -8,13 +8,13 @@ void Game::init_vars()
     init_states();
 }
 
-
 // är intersect okej?
 // inläsning av fil
 // resize
 // kompletteringar
 // ta in ett namn?
-
+// är sleep okej?
+// sf event text enter sf::Event::TextEntered
 
 void Game::init_window()
 {
@@ -70,9 +70,10 @@ void Game::poll_events()
                clear_stack();
                 break;
 
-/*            case sf::Event::Resized:
+                // move to leaderbordstate maybe
+            case sf::Event::Resized:
                 sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-                window -> setView(sf::View(visibleArea));*/
+                window -> setView(sf::View(visibleArea));
         }
     }
 
