@@ -8,7 +8,8 @@
 class Player : public Character {
 public:
     Player() = default;
-    Player(sf::Vector2f const& pos, sf::Vector2f const& dir,
+    Player(std::string const& text, std::string const& shot_text,
+           sf::Vector2f const& pos, sf::Vector2f const& dir,
            sf::Vector2f const& dim, float const movespeed,
            int const hp, int const att_timer,
            sf::Vector2f const& shot_dim,
@@ -17,12 +18,17 @@ public:
 
     void update_input();
 
-    void update(sf::RectangleShape const& box,
+    void update(sf::Sprite const& box,
                 std::vector<Shot> & player_shots);
 
   //  std::vector<sf::RectangleShape> const& all_spiders
+/*<<<<<<< HEAD
     void check_inside_leaf(sf::RectangleShape const& box);
    // bool check_enemy_coll(sf::RectangleShape const& enemy);
+=======*/
+    void check_inside_leaf(sf::Sprite const& box);
+   // bool check_enemy_coll(sf::Sprite const& enemy);
+
 /*    bool check_ant_shots_coll(Shot & shot);
     bool check_spider_coll(Spider & spider);
     bool check_enemy_coll(sf::RectangleShape const& all_spiders);
@@ -43,5 +49,7 @@ private:
 
     sf::Vector2f shot_dim;
     sf::Vector2f shot_dir;
+
+    std::string shot_text;
 };
 #endif //MAIN_CPP_PLAYER_H

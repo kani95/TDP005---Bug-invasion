@@ -5,10 +5,9 @@
 
 class Character : public Object {
 public:
-    Character();
+    //Character();
     Character(int const hp);
-    Character(int const hp, sf::Vector2f const& dir);
-    Character(sf::Vector2f const& pos,
+    Character(std::string const& text ,sf::Vector2f const& pos,
               sf::Vector2f const& dir,
               sf::Vector2f const& dim,
               float const movespeed,
@@ -20,7 +19,7 @@ public:
     int get_hp();
     bool status{true};
     bool is_dead();
-    bool check_enemy_coll(sf::RectangleShape const& enemy);
+    bool check_enemy_coll(sf::Sprite const& enemy);
 
 protected:
     int hp;

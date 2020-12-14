@@ -1,20 +1,20 @@
 #include "Character.h"
 
 
-Character::Character()
+/*Character::Character()
     :Object(), hp{3}, status{true}, can_shoot{}, score{}, movespeed{1.f}
-{}
+{}*/
 
 Character::Character(int const hp)
         : Object(), hp{hp}
 {}
 
-Character::Character(sf::Vector2f const& pos,
+Character::Character(std::string const& text, sf::Vector2f const& pos,
                      sf::Vector2f const& dir,
                      sf::Vector2f const& dim,
                      float const movespeed,
                      int const hp)
-        : Object(pos, dir, dim), status{true},
+        : Object(text, pos, dir, dim), status{true},
           can_shoot{false}, score{0}, movespeed{movespeed}, hp{hp}
 {}
 
@@ -52,12 +52,13 @@ bool Character::is_dead()
 }
 
 
-bool Character::check_enemy_coll(sf::RectangleShape const& enemy)
+bool Character::check_enemy_coll(sf::Sprite const& enemy)
 {
-    if (shape.getPosition().x + shape.getSize().x > enemy.getPosition().x &&
-        shape.getPosition().y < enemy.getPosition().y + enemy.getSize().y &&
-        shape.getPosition().y + shape.getSize().y > enemy.getPosition().y &&
-        shape.getPosition().x < enemy.getPosition().x + enemy.getSize().x) {
+    /*if (shape.getPosition().x + shape.getScale().x > enemy.getPosition().x
+        && shape.getPosition().y < enemy.getPosition().y + shape.getScale().y
+        && shape.getPosition().y + shape.getScale().y > enemy.getPosition().y
+        && shape.getPosition().x < enemy.getPosition().x + shape.getScale().x)*/
+    if(shape.getGlobalBounds().intersects(enemy.getGlobalBounds())){
         //shape.setPosition(30, 30);
         return true;
     }

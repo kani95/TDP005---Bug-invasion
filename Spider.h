@@ -6,7 +6,8 @@
 
 class Spider : public Enemy {
 public:
-    Spider(sf::Vector2f const& dim,
+    Spider(std::string const& text,
+           sf::Vector2f const& dim,
            sf::Vector2f const& dir,
            sf::Vector2f const& spawn_limit_x,
            sf::Vector2f const& spawn_limit_y,
@@ -21,7 +22,7 @@ public:
     void set_start_pos(sf::Vector2f const& spw_lmt_x,
                        sf::Vector2f const& spw_lmt_y);
     //void add_second();
-    bool check_coll(sf::RectangleShape & enemy);
+    bool check_coll(sf::Sprite & enemy);
     void check_coll_player_shots(std::vector<Shot> & player_shots, Character * player);
     void get_movement();
 

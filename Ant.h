@@ -9,8 +9,8 @@
 // type 1 enemy
 class Ant : public Enemy {
 public:
-    Ant(sf::Vector2f const& shot_dir,
-        sf::Vector2f const& shot_dim,
+    Ant(std::string const& text, std::string const& shot_text,
+        sf::Vector2f const& shot_dir, sf::Vector2f const& shot_dim,
         int const score, int const hp, int const att_timer);
 
 
@@ -35,6 +35,7 @@ private:
     int att_timer;
     sf::Vector2f shot_dir;
     sf::Vector2f shot_dim;
+    std::string shot_text;
 };
 
 #endif //GAME_ANT_H

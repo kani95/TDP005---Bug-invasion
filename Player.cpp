@@ -4,24 +4,31 @@
 /*Player::Player()
     :Character(), timer{70}, timer_dmg{}
 {
+    shape.setScale(10,40);
     shape.setPosition(position);
+<<<<<<< HEAD
     shape.setPosition(300.f,450.f);
 }*/
 
 
-Player::Player(sf::Vector2f const& pos, sf::Vector2f const& dir,
+Player::Player(std::string const& text, std::string const& shot_text,
+               sf::Vector2f const& pos, sf::Vector2f const& dir,
                sf::Vector2f const& dim, float const movespeed,
                int const hp, int const att_timer, sf::Vector2f const& shot_dim,
                sf::Vector2f const& shot_dir)
-        :Character(pos, dir, dim, movespeed, hp), att_timer{att_timer}, timer{},
-         timer_dmg{}, shot_dim{shot_dim}, shot_dir{shot_dir}
+        :Character(text, pos, dir, dim, movespeed, hp), att_timer{att_timer}, timer{},
+         timer_dmg{}, shot_dim{shot_dim}, shot_dir{shot_dir}, shot_text{shot_text}
 {
-    if(!texture.loadFromFile("player.png"))
+   /* if(!texture.loadFromFile("player.png"))
     {
         std::cerr << "No load";
     }
-    shape.setTexture(&texture);
+    shape.setTexture(texture);*/
     //shape.setPosition(pos);
+/*
+    shape.setPosition(0.f,0.f);
+    shape.setColor(sf::Color::White);*/
+
 }
 
 
@@ -47,7 +54,7 @@ void Player::update_input()
 }
 
 
-void Player::update(sf::RectangleShape const& box,
+void Player::update(sf::Sprite const& box,
                     std::vector<Shot> & player_shots)
 {
     update_input();
@@ -75,11 +82,16 @@ void Player::update(sf::RectangleShape const& box,
 
         if (player_shots.at(i).check_is_dead())
         {
-            player_shots.erase(begin(player_shots) + i);
+            //delete &player_shots.at(i);
+            player_shots.at(i).remove_status = true;
+            //delete &player_shots.at(i);
+            //!!!!!MEMORY LEAK!!!!!
+            //player_shots.erase(begin(player_shots) + i);
         }
     }
   //  std::cout << player_shots.size();
  // std::cout << hp;
+
 }
 
 
@@ -97,9 +109,10 @@ void Player::move(float const dirx, float const diry)
 
 void Player::add_shot(std::vector<Shot> & player_shots)
 {
-    Shot new_shot{shot_dim};
-    new_shot.shape.setPosition(get_dirx() + (shape.getSize().x / 2), get_diry());
-    player_shots.push_back(new_shot);
+    std::unique_ptr<Shot> new_shot(std::make_unique<Shot>(shot_text,shot_dim));
+   // Shot* new_shot {new Shot{shot_text,shot_dim}};
+    new_shot -> shape.setPosition(get_dirx() + (shape.getGlobalBounds().width / 2), get_diry());
+    player_shots.push_back(*new_shot);
 }
 
 
@@ -112,7 +125,7 @@ std::vector<Shot> & Player::get_player_shots()
 */
 
 
-void Player::check_inside_leaf(sf::RectangleShape const& box) {
+void Player::check_inside_leaf(sf::Sprite const& box) {
 
     // LEFT
     if (shape.getGlobalBounds().left <= box.getGlobalBounds().left)
@@ -120,9 +133,10 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
         shape.setPosition(box.getGlobalBounds().left, shape.getGlobalBounds().top);
     }
     // RIGHT
-    if ((shape.getPosition().x + shape.getSize().x >= (box.getPosition().x + box.getSize().x)))
+    if ((shape.getPosition().x + shape.getGlobalBounds().width >= box.getGlobalBounds().width + box.getPosition().x))
     {
-        shape.setPosition(box.getSize().x + box.getPosition().x - shape.getGlobalBounds().width, shape.getGlobalBounds().top);
+        shape.setPosition(box.getGlobalBounds().width + box.getPosition().x - shape.getGlobalBounds().width,
+                          shape.getGlobalBounds().top);
     }
     // UP
     if (shape.getGlobalBounds().top <= box.getGlobalBounds().top)
@@ -130,9 +144,10 @@ void Player::check_inside_leaf(sf::RectangleShape const& box) {
        shape.setPosition(shape.getGlobalBounds().left, box.getGlobalBounds().top);
     }
     // DOWN
-    if (shape.getPosition().y + shape.getSize().y >= (box.getPosition().y + box.getSize().y))
+    if (shape.getGlobalBounds().height + shape.getPosition().y >= box.getPosition().y + box.getGlobalBounds().height)
     {
-        shape.setPosition(shape.getPosition().x, box.getGlobalBounds().height + box.getGlobalBounds().top - shape.getGlobalBounds().height);
+        shape.setPosition(shape.getPosition().x, box.getGlobalBounds().height
+        + box.getGlobalBounds().top - shape.getGlobalBounds().height);
     }
 }
 
@@ -155,6 +170,7 @@ void Player::draw(sf::RenderWindow & window)
 
 // skicka in player referens till antswarm och spiderswarm.
 
+
 void Player::take_damage()
 {
     // HUR UTFÖRA EN OPERATION PER GAMELOOP???
@@ -175,3 +191,8 @@ void Player::take_damage()
         timer_dmg = 0;
     }
 }
+//
+//bool Player::check_enemy_coll(const sf::Sprite & enemy)
+//{
+//    return false;
+//}

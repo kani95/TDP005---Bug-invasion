@@ -1,27 +1,31 @@
 #include "AntSwarm.h"
 
-AntSwarm::AntSwarm(sf::Vector2f & pos,
+AntSwarm::AntSwarm(std::string const& text,
+                   std::string const& shot_text,
+                   sf::Vector2f & pos,
                    sf::Vector2f const& dim,
                    sf::Vector2f & dist,
                    sf::Vector2f & dir,
                    sf::Vector2f & shot_dir,
                    sf::Vector2f & shot_dim,
+                   int const border_limit_left,
+                   int const border_limit_right,
                    unsigned short int const total_ants,
                    int const number_of_rows,
                    int const score,
                    int const hp,
                    int const att_timer)
-    :ant_swarm{}, direction{dir}
+    :ant_swarm{}, direction{dir}, border_limit_right{border_limit_right}, border_limit_left{border_limit_left}
 {
     float prev_x {pos.x};
     for (unsigned short int i{0}; i < total_ants; i++)
     {
-        Ant ant{shot_dir, shot_dim, score, hp, att_timer};
-        ant.shape.setPosition(pos);
+        Ant* ant {new Ant{text, shot_text, shot_dir, shot_dim, score, hp, att_timer}};
+        ant -> shape.setPosition(pos);
         pos.x += dist.x;
-        ant.shape.setSize(sf::Vector2f(dim));
+        ant -> shape.setScale(dim);
         //std::cout << prev_x << std::endl;
-        ant_swarm.push_back(ant);
+        ant_swarm.push_back(*ant);
 
         // second row
         if (i == total_ants/number_of_rows - 1)
@@ -105,7 +109,7 @@ void AntSwarm::move_swarm(const sf::RenderTarget* window)
     // were to move, if the new postion is outside the screen border change direction
     if (is_swarm_right)
     {
-        if(x_value_right + x_movement > 800)
+        if(x_value_right + x_movement > border_limit_right)
         {
             is_swarm_right = false;
             border_hit += 1;
@@ -113,7 +117,7 @@ void AntSwarm::move_swarm(const sf::RenderTarget* window)
     }
     else
     {
-        if(x_value_left + x_movement < 0)
+        if(x_value_left + x_movement < border_limit_left)
         {
             is_swarm_right = true;
             border_hit += 1;
@@ -155,6 +159,7 @@ void AntSwarm::update(const sf::RenderTarget* target,
 
 
         if (ant.is_dead()) {
+            // !!! MEMORY LEAK !!!
             ant_swarm.erase(begin(ant_swarm) + i);
         }
     }

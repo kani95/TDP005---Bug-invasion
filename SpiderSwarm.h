@@ -8,7 +8,8 @@ class SpiderSwarm {
 public:
     SpiderSwarm() = default;
 
-    SpiderSwarm(sf::Vector2f const& dim,
+    SpiderSwarm(std::string const& text,
+                sf::Vector2f const& dim,
                 sf::Vector2f const& dir,
                 sf::Vector2f const& spawn_limit_x,
                 sf::Vector2f const& spawn_limit_y,
@@ -28,6 +29,7 @@ private:
     int spawn_timer;
     int score;
     int hp;
+    std::string text;
     sf::Vector2f dir;
     sf::Vector2f dim;
     sf::Vector2f spawn_limit_x;

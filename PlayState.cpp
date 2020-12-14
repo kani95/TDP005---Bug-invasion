@@ -7,7 +7,7 @@ void PlayState::update(float const& frame_time)
     // player_shots = player.get_player_shots();
     // send in a player reference to swarm, if it takes dmg call player take dmg
 
-    spider_swarm.update(window, player_shots, ant_shots, player);
+   spider_swarm.update(window, player_shots, ant_shots, player);
 
     // !!! The update call should be made by each ant individually much more cleaner so
     ant_swarm.update(window, player_shots, ant_shots, player);
@@ -23,6 +23,7 @@ void PlayState::render(sf::RenderTarget* target)
    /* sf::Texture texture;
     texture.loadFromFile("leaf.jpg");
 
+<<<<<<< HEAD
     sf::Sprite sprite;
 
     sprite.setTexture(texture);
@@ -34,6 +35,10 @@ void PlayState::render(sf::RenderTarget* target)
 
 
     target -> draw(leaf -> shape);
+/*=======
+
+    target -> draw(leaf.shape);
+>>>>>>> 1262816645ea7bbeb819e06c3e4794d52e86516d*/
 
     for (auto & shot_ : player_shots)
     {
@@ -76,23 +81,27 @@ void PlayState::read_lvl(std::string const& filename)
 {
 // IN FILE TYPE:
 // PLAYER:
-// Object type|pos.x|pos.y|dir.x|dir.y|size.x|size.y|Movespd|hp|attack_tmr|
-// |shot_dim.x|shot_dim.y|shot_dir.x|shot_dim.y|
+// Object type|texture_file|shot_texture|pos.x|pos.y|dir.x|dir.y|size.x|size.y|Movespd|hp|attack_tmr|
+// |shot_dim.x|shot_dim.y|shot_dir.x|shot_dir.y|
 
 // LEAF:
-// Object type|pos.x|pos.y|size.x|size.y|
+// Object type|texture_file|pos.x|pos.y|size.x|size.y|
 
 // ANTSWARM:
-// Object type|pos.x|pos.y|size.x|size.y|dist.x|dist.y|dir.x|dir.y|shot_dir.x|
-// |shot_dir.y|shot_dim.x|shot_dir.y|number_of_ants|number_of_rows|score|hp|attack_tmr|
+// Object type|texture_file|shot_texture|pos.x|pos.y|size.x|size.y|dist.x|dist.y|dir.x|dir.y|shot_dir.x|
+// |shot_dir.y|shot_dim.x|shot_dir.y|border_limit_left|border_limit_right|number_of_ants|number_of_rows|score|hp|attack_tmr|
 
 // SPIDERSWARM:
-// |dim.x|dim.y|dir.x|dir.y|spw_lim_x.x|spw_lim_x.y|spw_lim_y.x|spw_lim_y.y|
+// Object type|texture_file|dim.x|dim.y|dir.x|dir.y|spw_lim_x.x|spw_lim_x.y|spw_lim_y.x|spw_lim_y.y|
 // |spw_timer|score|hp|
 
     std::ifstream infile{filename};
     std::string object{};
+    std::string texture_file;
+    std::string shot_texture;
 
+    int border_limit_left{};
+    int border_limit_right{};
     int spawn_timer{};
     int att_timer{};
     int score{};
@@ -106,7 +115,10 @@ void PlayState::read_lvl(std::string const& filename)
     sf::Vector2f dimensions{};
     sf::Vector2f shot_dir{};
     sf::Vector2f shot_dim{};
+
+
     float movespeed{};
+
 
    /* bool status{};
     bool can_shot{};*/
@@ -115,33 +127,33 @@ void PlayState::read_lvl(std::string const& filename)
     {
        if (object == "Player")
        {
-           infile >> pos.x >> pos.y >> direction.x >> direction.y >>
+           infile >> texture_file >> shot_texture >> pos.x >> pos.y >> direction.x >> direction.y >>
            dimensions.x >> dimensions.y >> movespeed >> hp >> att_timer
            >> shot_dim.x >> shot_dim.y >> shot_dir.x >> shot_dir.y;
 
-           player = new Player{pos, direction, dimensions, movespeed,
+           player = new Player{texture_file, shot_texture, pos, direction, dimensions, movespeed,
                            hp, att_timer, shot_dim, shot_dir};
           // player = t_player;
            infile.ignore(1000, '\n');
        }
        if (object == "Leaf")
        {
-           infile >> pos.x >> pos.y >> dimensions.x
+           infile >> texture_file >> pos.x >> pos.y >> dimensions.x
            >> dimensions.y;
 
           // Leaf t_leaf{pos, dimensions};
-           leaf =  new Leaf{pos,dimensions};
+           leaf = new Leaf{texture_file,pos,dimensions};
            infile.ignore(1000, '\n');
        }
        if (object == "AntSwarm")
        {
-           infile >> pos.x >> pos.y >> dimensions.x >> dimensions.y >>
+           infile >> texture_file >> shot_texture >> pos.x >> pos.y >> dimensions.x >> dimensions.y >>
            distance.x >> distance.y >> direction.x >> direction.y >>
-           shot_dir.x >> shot_dir.y >> shot_dim.x >> shot_dim.y >>
-           number_of_ants >> number_of_rows >> score >> hp >> att_timer;
+           shot_dir.x >> shot_dir.y >> shot_dim.x >> shot_dim.y >> border_limit_left >>
+           border_limit_right  >> number_of_ants >> number_of_rows >> score >> hp >> att_timer;
 
-           AntSwarm t_antswarm{pos,dimensions, distance, direction,
-                               shot_dir, shot_dim,
+           AntSwarm t_antswarm{texture_file, shot_texture, pos, dimensions, distance, direction,
+                               shot_dir, shot_dim, border_limit_left, border_limit_right,
                                number_of_ants, number_of_rows, score, hp,
                                att_timer};
            ant_swarm = t_antswarm;
@@ -152,11 +164,11 @@ void PlayState::read_lvl(std::string const& filename)
            sf::Vector2f spawn_limit_x{};
            sf::Vector2f spawn_limit_y{};
 
-           infile >> dimensions.x >> dimensions.y >> direction.x >> direction.y
+           infile >> texture_file >> dimensions.x >> dimensions.y >> direction.x >> direction.y
            >> spawn_limit_x.x >> spawn_limit_x.y >> spawn_limit_y.x
            >> spawn_limit_y.y >> spawn_timer >> score >> hp;
 
-           SpiderSwarm t_spiderswarm{dimensions, direction, spawn_limit_x, spawn_limit_y,
+           SpiderSwarm t_spiderswarm{texture_file, dimensions, direction, spawn_limit_x, spawn_limit_y,
                                      spawn_timer, score, hp};
 
            spider_swarm = t_spiderswarm;
@@ -168,8 +180,15 @@ void PlayState::read_lvl(std::string const& filename)
 
 PlayState::~PlayState()
 {
-    delete player;
+   delete player;
     delete leaf;
+  /*  for (Shot & shot : player_shots)
+    {
+        if(shot.remove_status)
+        {
+            delete &shot;
+        }
+    }*/
 }
 
 bool PlayState::get_exit_status()

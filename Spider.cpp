@@ -2,7 +2,8 @@
 #include <iostream>
 #include <random>
 
-Spider::Spider(sf::Vector2f const& dim,
+Spider::Spider(std::string const& text,
+               sf::Vector2f const& dim,
                sf::Vector2f const& dir,
                sf::Vector2f const& spawn_limit_x,
                sf::Vector2f const& spawn_limit_y,
@@ -10,11 +11,17 @@ Spider::Spider(sf::Vector2f const& dim,
                int const hp)
         : Enemy(score,hp), spw_lmt_x{spawn_limit_x}, spw_lmt_y{spawn_limit_y}
 {
-    shape.setFillColor(sf::Color::Blue);
+    if(!texture.loadFromFile("spider.png"))
+    {
+        std::cerr << "No load";
+    }
+    shape.setTexture(texture);
+   // shape.setScale(10,40);
+    //shape.setColor(sf::Color::Blue);
    // shape.setPosition(300,200);
     direction.x = dir.x;
     direction.y = dir.y;
-    shape.setSize(dim);
+    shape.setScale(dim);
 
     set_start_pos(spawn_limit_x, spawn_limit_y);
 }
@@ -45,10 +52,12 @@ void Spider::set_start_pos(sf::Vector2f const& lmt_x,
 
 void Spider::check_coll_screen()
 {
-    bool right = (shape.getPosition().x + shape.getSize().x > (spw_lmt_x.y));
+
+    bool right = (shape.getPosition().x + shape.getScale().x > (spw_lmt_x.y));
     bool left = (shape.getPosition().x < spw_lmt_x.x);
-    bool down = (shape.getPosition().y + shape.getSize().y > (spw_lmt_y.y));
+    bool down = (shape.getPosition().y + shape.getScale().y > (spw_lmt_y.y));
     bool up = (shape.getPosition().y < spw_lmt_y.x);
+
 
     if (right)
     {
@@ -116,12 +125,9 @@ void Spider::move( float const dirx, float const diry)
 }
 
 
-bool Spider::check_coll(sf::RectangleShape & enemy)
+bool Spider::check_coll(sf::Sprite & enemy)
 {
-    if(shape.getPosition().x + shape.getSize().x > enemy.getPosition().x &&
-       shape.getPosition().y < enemy.getPosition().y + enemy.getSize().y &&
-       shape.getPosition().y + shape.getSize().y > enemy.getPosition().y &&
-       shape.getPosition().x < enemy.getPosition().x + enemy.getSize().x)
+    if(shape.getGlobalBounds().intersects(enemy.getGlobalBounds()))
     {
         //shape.setPosition(30,30);
         return true;

@@ -11,8 +11,8 @@ void Game::init_vars()
 
 void Game::init_window()
 {
-    video_mode.height = 600;
-    video_mode.width = 800;
+    video_mode.height = 1080;
+    video_mode.width = 1920;
     //sf::ContextSettings::antialiasingLevel(2);
     window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
    // window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");

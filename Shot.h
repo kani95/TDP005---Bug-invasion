@@ -8,21 +8,26 @@
 class Shot : public Object
 {
 public:
-    Shot(sf::Vector2f const& shot_dim);
+    Shot(std::string const& text,sf::Vector2f const& shot_dim);
     void move(float x, float y);
+
 
     float get_right();
     float get_left();
     float get_top();
     float get_bot();
 
+/*<<<<<<< HEAD
   // bool check_coll(std::vector<sf::RectangleShape> const& all_spiders);
+=======
+   bool check_coll(std::vector<sf::Sprite> const& all_spiders);
+>>>>>>> 1262816645ea7bbeb819e06c3e4794d52e86516d*/
    //bool check_coll_screen();
 
    bool check_is_dead();
     //void render(sf::RenderTarget* & window);
     //void update(Shot & new_shot);
-
+    bool remove_status;
 private:
    // bool mark_for_delete;
 

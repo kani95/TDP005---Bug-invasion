@@ -1,14 +1,34 @@
 #include "Ant.h"
 
-Ant::Ant(sf::Vector2f const& shot_dir,
+Ant::Ant(std::string const& text,
+         std::string const& shot_text,
+         sf::Vector2f const& shot_dir,
          sf::Vector2f const& shot_dim,
          int const score, int const hp, int const att_timer)
-:Enemy(score, hp), shot_dim(shot_dim), shot_dir(shot_dir), att_timer{att_timer}
+:Enemy(score, hp), shot_dim(shot_dim), shot_dir(shot_dir), att_timer{att_timer}, shot_text{shot_text}
 {
+    if(!texture.loadFromFile(text))
+    {
+        std::cerr << "No load";
+    }
+    shape.setTexture(texture);
+/*<<<<<<< HEAD
     shape.setFillColor(sf::Color::Red);
     //shape.setPosition(220, 70);
     //hp = 2;
+=======*/
+    //shape.setScale(10,40);
+  //  shape.setColor(sf::Color::Red);
+    //shape.setPosition(220, 70);
+  //  hp = 2;
 }
+
+
+/*int Ant::get_score() const
+{
+    return score;
+>>>>>>> 1262816645ea7bbeb819e06c3e4794d52e86516d
+}*/
 
 
 void Ant::move(float const x, float const y)
@@ -25,13 +45,14 @@ void Ant::render(sf::RenderTarget* target) const
 
 // UPDATE HELPER FUNCTIONS
 
-
 bool Ant::check_coll(Shot & shot)
 {
-    if(shot.get_right() > shape.getPosition().x
-       && shot.get_top() < shape.getPosition().y + shape.getSize().y
-       && shot.get_bot() > shape.getPosition().y
-       && shot.get_left() < shape.getPosition().x + shape.getSize().x)
+
+/*    if(shot.get_right() >= shape.getGlobalBounds().width + shape.getPosition().x
+       && shot.get_top() <= shape.getGlobalBounds().top
+       && shot.get_bot() >= shape.getPosition().y + shape.getGlobalBounds().height
+       && shot.get_left() <= shape.getGlobalBounds().left)*/
+    if(shot.shape.getGlobalBounds().intersects(shape.getGlobalBounds()))
     {
 /*      std::cout << "i should be reset" << std::endl;
         shape.setPosition(0,0);*/
@@ -49,6 +70,7 @@ bool Ant::check_collison_player_shots(std::vector<Shot> & player_shots)
         Shot & shot{player_shots.at(i)};
         if (check_coll(shot))
         {
+            // !!! MEMORY LEAK !!!
             player_shots.erase(begin(player_shots) + i);
             return true;
         }
@@ -64,11 +86,13 @@ bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * pl
         Shot & shot{ant_shots.at(i)};
         if (player -> check_enemy_coll(shot.shape))
         {
+            // !!!MEMORY LEAK!!!
             ant_shots.erase(begin(ant_shots) + i);
             return true;
         }
         else if(shot.check_is_dead())
         {
+            // !!!MEMORY LEAK!!!
             ant_shots.erase(begin(ant_shots) + i);
         }
         else
@@ -112,9 +136,9 @@ void Ant::update(const sf::RenderTarget* target,
 
     if (can_shoot())
     {
-        Shot new_shot{shot_dim};
-        new_shot.shape.setPosition(shape.getPosition().x + (shape.getSize().x / 2), shape.getPosition().y);
-        ant_shots.push_back(new_shot);
+        Shot* new_shot {new Shot{shot_text, shot_dim}};
+        new_shot -> shape.setPosition(shape.getPosition().x + (shape.getGlobalBounds().width / 2), shape.getPosition().y);
+        ant_shots.push_back(*new_shot);
     }
 }
 

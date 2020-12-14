@@ -1,7 +1,8 @@
 #include "SpiderSwarm.h"
 #include <iostream>
 
-SpiderSwarm::SpiderSwarm(sf::Vector2f const& dim,
+SpiderSwarm::SpiderSwarm(std::string const& text,
+                         sf::Vector2f const& dim,
                          sf::Vector2f const& dir,
                          sf::Vector2f const& spawn_limit_x,
                          sf::Vector2f const& spawn_limit_y,
@@ -9,7 +10,8 @@ SpiderSwarm::SpiderSwarm(sf::Vector2f const& dim,
                          int const score,
                          int const hp)
         : all_spiders{}, timer{}, spawn_timer{spawn_timer}, score{score},
-          hp{hp}, dir{dir}, dim{dim}, spawn_limit_y{spawn_limit_y}, spawn_limit_x{spawn_limit_x}
+          hp{hp}, dir{dir}, dim{dim}, spawn_limit_y{spawn_limit_y}, spawn_limit_x{spawn_limit_x},
+          text{text}
 {}
 
 void SpiderSwarm::update(const sf::RenderTarget* target,
@@ -20,8 +22,8 @@ void SpiderSwarm::update(const sf::RenderTarget* target,
     if (timer >= spawn_timer)
     {
         // spawn_limit,
-        Spider spider{dim, dir, spawn_limit_x, spawn_limit_y, score, hp};
-        all_spiders.push_back(spider);
+        Spider* spider {new Spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp}};
+        all_spiders.push_back(*spider);
         timer = 0;
     }
 
