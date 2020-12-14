@@ -2,14 +2,14 @@
 #define GAME_H_MENUSTATE_H
 #include "State.h"
 
-#define MAX_NUMBER_OF_ITEMS 2
+#define MAX_NUMBER_OF_ITEMS 3
 
 class MenuState : public State
 {
 public:
    // MenuState(float const height, float const weight);
 
-    MenuState(sf::RenderWindow* window);
+    explicit MenuState(sf::RenderWindow* window);
     ~MenuState() override;
 
     void init_menu(sf::RenderWindow* window);
@@ -18,7 +18,7 @@ public:
 
     void update(float const& frame_time) override;
     void render(sf::RenderTarget* target) override;
-    void quit_state();
+    void quit_state() override;
 
 
     void move_up();
@@ -26,7 +26,9 @@ public:
 
     bool get_is_done() override;
     bool get_exit_status() override;
-    int get_selected_choice();
+    bool get_leaderboard_status() override;
+
+    int get_selected_choice() const;
 
 
 
@@ -37,6 +39,8 @@ private:
     bool exit_status;
     sf::Font font;
     sf::Text choices[MAX_NUMBER_OF_ITEMS];
+    bool leaderboard_status;
+    sf::Event event;
     //const sf::RenderTarget(*window);
 };
 

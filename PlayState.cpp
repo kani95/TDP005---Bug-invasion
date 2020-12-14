@@ -3,7 +3,10 @@
 
 void PlayState::update(float const& frame_time)
 {
+
     player -> update(leaf -> shape, player_shots);
+    update_total_score();
+
     // player_shots = player.get_player_shots();
     // send in a player reference to swarm, if it takes dmg call player take dmg
 
@@ -58,6 +61,8 @@ void PlayState::render(sf::RenderTarget* target)
     for (auto & spi: all_spiders) {
         target -> draw(spi.shape);
     }
+
+    target -> draw(score_text);
 }
 
 
@@ -70,12 +75,33 @@ bool PlayState::get_is_done()
     return is_done;
 }
 
+
+/*
 PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
     : State(window)
     {
         read_lvl(filename);
     }
+*/
 
+PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
+        : State{window}, game_clock{}, total_score{}, font{}, score_text{}
+{
+
+    if (!font.loadFromFile("ARCADECLASSIC.TTF"))
+    {
+        std::cerr << "Failed to load font in PlayState.";
+    };
+
+    score_text.setFont(font);
+    score_text.setCharacterSize(23);
+    score_text.setFillColor(sf::Color::White);
+    score_text.setString("SCORE");
+
+    read_lvl(filename);
+}
+
+//PlayState::~PlayState() = default;
 
 void PlayState::read_lvl(std::string const& filename)
 {
@@ -115,8 +141,6 @@ void PlayState::read_lvl(std::string const& filename)
     sf::Vector2f dimensions{};
     sf::Vector2f shot_dir{};
     sf::Vector2f shot_dim{};
-
-
     float movespeed{};
 
 
@@ -196,4 +220,28 @@ bool PlayState::get_exit_status()
     return exit_status;
 }
 
+
+void PlayState::update_total_score()
+{
+    int multiplier{1};
+    if (game_clock.getElapsedTime().asSeconds() < 60)
+    {
+        multiplier = 3;
+    }
+    else if (game_clock.getElapsedTime().asSeconds() < 120)
+    {
+        multiplier = 2;
+    }
+
+    total_score += player->get_score() * multiplier;
+    player->set_score(0);
+    score_text.setString("SCORE      "
+                         +  std::to_string(total_score)
+                         + "\nLIVES      "
+                         + std::to_string(player->get_hp()));
+}
+
+bool PlayState::get_leaderboard_status() {
+    return leader_board;
+}
 

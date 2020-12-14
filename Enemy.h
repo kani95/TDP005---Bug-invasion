@@ -5,6 +5,7 @@
 #include "Character.h"
 #include "vector"
 #include "Shot.h"
+//#include "Player.h"
 #include <memory>
 
 class Enemy : public Character {
@@ -13,6 +14,8 @@ public:
     Enemy() = default;
     Enemy(int const score, int const hp);
     //virtual ~Enemy() = 0;
+
+    virtual int get_score() const;
 
     virtual void move(float const, float const) = 0;
     virtual void update(const sf::RenderTarget* window,
@@ -23,9 +26,9 @@ public:
 
     //std::vector<Enemy*> all_spiders;
 
-    int get_score() const;
 
-private:
+protected:
+
     int score;
 };
 

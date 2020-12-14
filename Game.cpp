@@ -9,6 +9,13 @@ void Game::init_vars()
 }
 
 
+// är intersect okej?
+// inläsning av fil
+// resize
+// kompletteringar
+// ta in ett namn?
+
+
 void Game::init_window()
 {
     video_mode.height = 1080;
@@ -30,7 +37,7 @@ void Game::init_states()
 
 
 Game::Game()
- :frame_time{}, window{}
+ :frame_time{}, window{}, timer{}
 {
 
     init_window();
@@ -40,14 +47,9 @@ Game::Game()
 
 Game::~Game()
 {
-    delete window;
-
-    while (!states.empty())
-    {
-        delete states.top(); // removes the date the pointer is holding
-        states.pop(); // removes the pointer
-    }
+    clear_stack();
 }
+
 
 bool Game::window_status() const
 {
@@ -67,13 +69,17 @@ void Game::poll_events()
             case sf::Event::Closed:
                clear_stack();
                 break;
+
+/*            case sf::Event::Resized:
+                sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+                window -> setView(sf::View(visibleArea));*/
         }
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+/*    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
     {
         clear_stack();
-    }
+    }*/
 }
 #pragma clang diagnostic pop
 
@@ -97,12 +103,17 @@ void Game::update()
         states.top() -> update(frame_time);
         if (states.top() -> get_is_done())
         {
-           delete states.top();
-           states.pop();
+            std::cout << "true" << std::endl;
+            delete states.top();
+            states.pop();
         }
         else if(states.top() -> get_exit_status())
         {
             clear_stack();
+        }
+        else if (states.top() -> get_leaderboard_status())
+        {
+            states.push(new LeaderboardState(window));
         }
     }
 }

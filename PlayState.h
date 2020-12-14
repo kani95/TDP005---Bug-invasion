@@ -14,13 +14,6 @@
 #include "SpiderSwarm.h"
 
 
-// 1. hp problem
-// 2. när skriver vi ut ett nytt fönster?
-// 3. shots collision vi gör det på många ställer
-// 4. hur kan vi sapara shots i playstate? , vecshape, collision check happends in player
-// 5. läsa in från fil?
-
-
 class PlayState : public State {
 private:
 
@@ -39,16 +32,29 @@ public:
     std::vector<Ant> all_ants;
     bool is_done = false;
     bool exit_status = false;
+    bool leader_board = false;
 
 /*    void move_down() = delete;
     void move_up() = delete;*/
 
+
     void read_lvl(std::string const& filename);
+
     void quit_state() override;
     void update(float const& frame_time) override;
+    void update_total_score();
     void render(sf::RenderTarget* target) override;
     bool get_is_done() override;
     bool get_exit_status() override;
+    bool get_leaderboard_status() override;
+
+
+    sf::Clock game_clock;
+    unsigned long int total_score;
+
+
+    sf::Font font;
+    sf::Text score_text;
 
 
 };

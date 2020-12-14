@@ -4,10 +4,13 @@
 #include <vector>
 #include "stack"
 #include "map"
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#include<iostream>
 
 
 class State {
-private:
+protected:
     sf::RenderWindow* window;
     std::vector<sf::Texture*> textures;
 
@@ -23,9 +26,10 @@ public:
     virtual void render(sf::RenderTarget*  target) = 0;
     virtual bool get_is_done() = 0;
     virtual bool get_exit_status() = 0;
+    virtual bool get_leaderboard_status() = 0;
 
-   /* virtual void move_down() = 0;
-    virtual void move_up() = 0;*/
+    /* virtual void move_down() = 0;
+     virtual void move_up() = 0;*/
 };
 
 

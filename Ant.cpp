@@ -1,11 +1,15 @@
 #include "Ant.h"
 
+
 Ant::Ant(std::string const& text,
          std::string const& shot_text,
          sf::Vector2f const& shot_dir,
          sf::Vector2f const& shot_dim,
          int const score, int const hp, int const att_timer)
 :Enemy(score, hp), shot_dim(shot_dim), shot_dir(shot_dir), att_timer{att_timer}, shot_text{shot_text}
+
+/*Ant::Ant()
+:Enemy()*/
 {
   /*  if(!texture.loadFromFile(text))
     {
@@ -15,6 +19,7 @@ Ant::Ant(std::string const& text,
     init_texture(text);
 /*<<<<<<< HEAD
     shape.setFillColor(sf::Color::Red);
+<<<<<<< HEAD
     //shape.setPosition(220, 70);
     //hp = 2;
 =======*/
@@ -32,6 +37,11 @@ Ant::Ant(std::string const& text,
     return score;
 >>>>>>> 1262816645ea7bbeb819e06c3e4794d52e86516d
 }*/
+
+
+ /*   shape.setPosition(220, 70);
+    hp = 2;
+    score = 100;*/
 
 
 void Ant::move(float const x, float const y)
@@ -87,6 +97,15 @@ bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * pl
     for(unsigned int i{0}; i < ant_shots.size(); ++i)
     {
         Shot & shot{ant_shots.at(i)};
+
+        // These have to be seperate other wise player will take damage
+        // everytime a shot is deleted outside the borders!
+/*
+        if (shot.check_is_dead())
+        {
+            ant_shots.erase(begin(ant_shots) + i);
+        }*/
+
         if (player -> check_enemy_coll(shot.shape))
         {
             // !!!MEMORY LEAK!!!
@@ -140,7 +159,6 @@ void Ant::update(const sf::RenderTarget* target,
     {
         player -> take_damage();
     }
-
 
     if (can_shoot())
     {

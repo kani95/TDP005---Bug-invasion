@@ -148,21 +148,25 @@ void AntSwarm::move_swarm(const sf::RenderTarget* window)
 
 
 void AntSwarm::update(const sf::RenderTarget* target,
-                 std::vector<Shot> & player_shots,
-                 std::vector<Shot> & ant_shots,
-                 Character* player)
+                      std::vector<Shot> & player_shots,
+                      std::vector<Shot> & ant_shots,
+                      Character* player)
 {
 
     for(unsigned int i{0}; i < ant_swarm.size(); ++i) {
-        Ant &ant{ant_swarm.at(i)};
+        Ant & ant{ant_swarm.at(i)};
 
 
-        ant.update(target, player_shots, ant_shots, player);
+        ant.update(target,player_shots, ant_shots, player);
 
 
         if (ant.is_dead()) {
+
             // !!! MEMORY LEAK !!!
+            player -> increase_score(ant.get_score());
+
             ant_swarm.erase(begin(ant_swarm) + i);
+
         }
     }
         move_swarm(target);

@@ -18,6 +18,10 @@ Character::Character(std::string const& text, sf::Vector2f const& pos,
                      int const hp)
         : Object(text, pos, dir, dim), status{true},
           can_shoot{false}, score{0}, movespeed{movespeed}, hp{hp}
+/*=======
+Character::Character()
+    :Object(), score{}, hp{3}, status{true}, can_shoot{}, movespeed{1.f}
+>>>>>>> 8976f9b23f7920cced92cbe7cd2093bcdd3c1c8d*/
 {}
 
 void Character::take_damage()
@@ -27,6 +31,20 @@ void Character::take_damage()
     clock.restart().asSeconds();
     shake_shape();
 }
+
+
+void Character::increase_score(long unsigned int plus_score)
+{
+    //if (game_)
+    score += plus_score;
+}
+
+
+void Character::set_score(int new_score)
+{
+    score = new_score;
+}
+
 
 int Character::get_hp()
 {
@@ -74,3 +92,9 @@ bool Character::check_enemy_coll(sf::Sprite const& enemy)
     }
     return false;
 }
+
+unsigned long int Character::get_score()
+{
+    return score;
+}
+

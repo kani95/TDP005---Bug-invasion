@@ -14,7 +14,9 @@ public:
         int const score, int const hp, int const att_timer);
 
 
+
     //int get_score() const override;
+
     void move(float , float) override;
     void render(sf::RenderTarget* target) const;
     void update(const sf::RenderTarget* window,
@@ -32,11 +34,13 @@ public:
 
 private:
 
+
     int att_timer;
     sf::Vector2f shot_dir;
     sf::Vector2f shot_dim;
     std::string shot_text;
    // sf::Clock clock;
+
 };
 
 #endif //GAME_ANT_H

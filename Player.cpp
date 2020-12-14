@@ -96,7 +96,10 @@ void Player::update(sf::Sprite const& box,
         }
     }
   //  std::cout << player_shots.size();
+
  // std::cout << hp;
+
+  //std::cout << "HP: " << hp << " ";
 
 }
 

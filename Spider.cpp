@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 
+
 Spider::Spider(std::string const& text,
                sf::Vector2f const& dim,
                sf::Vector2f const& dir,
@@ -10,6 +11,10 @@ Spider::Spider(std::string const& text,
                int const score,
                int const hp)
         : Enemy(score,hp), spw_lmt_x{spawn_limit_x}, spw_lmt_y{spawn_limit_y}
+/*=======
+Spider::Spider()
+        : Enemy()
+>>>>>>> 8976f9b23f7920cced92cbe7cd2093bcdd3c1c8d*/
 {
    /* if(!texture loadFromFile("spider.png"))
     {
@@ -20,12 +25,17 @@ Spider::Spider(std::string const& text,
    // shape.setScale(10,40);
     //shape.setColor(sf::Color::Blue);
    // shape.setPosition(300,200);
+
     direction.x = dir.x;
     direction.y = dir.y;
     shape.setScale(dim);
 
     set_start_pos(spawn_limit_x, spawn_limit_y);
+/*   speed.x = -0.5;
+   speed.y = 0.1;
+   score = 300;*/
 }
+
 
 /*
 int Spider::get_score() const
@@ -158,11 +168,15 @@ void Spider::check_coll_player_shots(std::vector<Shot> & player_shots, Character
     }
 }
 
-
 void Spider::update(const sf::RenderTarget* window,
             std::vector<Shot> & player_shots,
             std::vector<Shot> & ant_shots,
             Character* player)
+/*void  Spider::update(const sf::RenderTarget* window,
+                     std::vector<Shot> & player_shots,
+                     std::vector<Shot> & ant_shots,
+                     Character* player)
+>>>>>>> 8976f9b23f7920cced92cbe7cd2093bcdd3c1c8d*/
 {
     check_coll_screen();
     //get_movement();
