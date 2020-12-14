@@ -46,6 +46,9 @@ void MenuState::init_menu(sf::RenderWindow* window)
 
 void MenuState::input()
 {
+    // when selecting leaderboard this will become true forever
+    // mean that when trying to exit leaderboard, leadearboard status will still be true
+    leaderboard_status = false;
 
 /*    if (event.type == sf::Event::KeyReleased)
     {
@@ -141,6 +144,7 @@ void MenuState::move_down()
 }
 
 
-bool MenuState::get_leaderboard_status() {
+bool MenuState::get_leaderboard_status()
+{
     return leaderboard_status;
 }

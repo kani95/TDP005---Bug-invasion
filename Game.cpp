@@ -11,8 +11,8 @@ void Game::init_vars()
 
 void Game::init_window()
 {
-    video_mode.height = 600;
-    video_mode.width = 800;
+    video_mode.height = 1080;
+    video_mode.width = 1920;
     //sf::ContextSettings::antialiasingLevel(2);
     window = new sf::RenderWindow(sf::VideoMode(video_mode), "menu");
    // window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
@@ -66,10 +66,10 @@ void Game::poll_events()
         }
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+/*    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
     {
         clear_stack();
-    }
+    }*/
 }
 #pragma clang diagnostic pop
 
@@ -93,8 +93,9 @@ void Game::update()
         states.top() -> update(frame_time);
         if (states.top() -> get_is_done())
         {
-           delete states.top();
-           states.pop();
+            std::cout << "true" << std::endl;
+            delete states.top();
+            states.pop();
         }
         else if(states.top() -> get_exit_status())
         {
