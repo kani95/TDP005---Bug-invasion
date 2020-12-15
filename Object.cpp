@@ -42,3 +42,10 @@ void Object::init_texture(std::string const& file_name)
     }
     shape.setTexture(*texture);
 }
+
+void Object::render(sf::RenderWindow* window)
+{
+    window -> draw(shape);
+}
+
+

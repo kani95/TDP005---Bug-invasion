@@ -3,7 +3,7 @@
 
 
 MenuState::MenuState(sf::RenderWindow *window)
-           : State{window}, selected_choice{}, font{}, choices{}, event{}
+           : State{window}, selected_choice{}, font{}, choices{}
 {
     init_menu(window);
 }
@@ -42,12 +42,51 @@ void MenuState::init_menu(sf::RenderWindow* window)
     choices[2].setString("Exit");
 }
 
-
-void MenuState::input()
+void MenuState::poll_events(sf::Event & event)
 {
     // when selecting leaderboard this will become true forever
     // mean that when trying to exit leaderboard, leadearboard status will still be true
     leaderboard_status = false;
+
+    while (window -> pollEvent(event))
+    {
+        switch (event.type)
+        {
+            case sf::Event::Closed:
+                exit_status = true;
+                break;
+            case sf::Event::KeyReleased:
+                switch(event.key.code)
+                {
+                    case sf::Keyboard::Down:
+                        move_down();
+                        break;
+                    case sf::Keyboard::Up:
+                        move_up();
+                        break;
+                    case sf::Keyboard::Escape:
+                        exit_status = true;
+                        break;
+                    case sf::Keyboard::Enter:
+                        if (get_selected_choice() == 0) {
+                            is_done = true;
+                        } else if (get_selected_choice() == 1) {
+                            leaderboard_status = true;
+                        } else if (get_selected_choice() == 2) {
+                            exit_status = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+}
+
+void MenuState::input()
+{
+
+
     // event keypressed
 /*    while (window -> pollEvent(event))
     {
@@ -61,34 +100,8 @@ void MenuState::input()
         }
     }*/
 
-    sf::Text text1;
-    text1.setCharacterSize(50);
-    text1.setString("sfasdfasfdsf");
-    text1.setFillColor(sf::Color::White);
-    text1.setPosition(sf::Vector2f(0, 0));
-    window -> draw(text1);
 
 
-/*    while (window -> pollEvent(event))
-    {
-        std::cout << "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwsdfjas" << std::endl;
-        switch (event.type)
-        {
-            case sf::Event::KeyReleased:
-                switch (event.key.code)
-                {
-                    case sf::Keyboard::Down:
-                        std::cout << "s1dfjas" << std::endl;
-                        move_down();
-                        break;
-                    default:
-                        break;
-                }
-            default:
-                break;
-        }
-
-    }*/
 
 /*    sf::Keyboard::Key
 
@@ -119,12 +132,12 @@ void MenuState::input()
 
     // https://www.sfml-dev.org/tutorials/2.5/window-events.php
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+/*    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         move_down();
-        sf::sleep(sf::milliseconds(150));
+      //  sf::sleep(sf::milliseconds(150));
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         move_up();
-        sf::sleep(sf::milliseconds(150));
+       // sf::sleep(sf::milliseconds(150));
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
         if (get_selected_choice() == 0)
         {
@@ -138,21 +151,21 @@ void MenuState::input()
         {
             exit_status = true;
         }
-    }
+    }*/
 }
 
 
 void MenuState::update(float const& frame_time)
 {
-   input();
+   //poll_event();
 }
 
 
-void MenuState::render(sf::RenderTarget*  target)
+void MenuState::render()
 {
     for (size_t i{}; i < MAX_NUMBER_OF_ITEMS; ++i)
     {
-        target -> draw(choices[i]);
+        window -> draw(choices[i]);
     }
 }
 

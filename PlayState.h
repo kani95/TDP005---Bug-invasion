@@ -17,42 +17,32 @@
 class PlayState : public State {
 private:
 
+    void read_lvl(std::string const& filename);
+
 public:
     PlayState(sf::RenderWindow* window, std::string const& filename);
     ~PlayState() override;
-    const sf::RenderTarget(*window){};
+   // const sf::RenderTarget(*window){};
     Player* player{};
     Leaf* leaf{};
 
     AntSwarm ant_swarm;
     std::vector<Shot> player_shots;
     std::vector<Shot> ant_shots;
-    std::vector<Spider> all_spiders;
+    //std::vector<Ant> all_ants;
+    //std::vector<Spider> all_spiders;
     SpiderSwarm spider_swarm;
-    std::vector<Ant> all_ants;
-    bool is_done = false;
-    bool exit_status = false;
-    bool leader_board = false;
+    unsigned long int total_score;
 
-/*    void move_down() = delete;
-    void move_up() = delete;*/
-
-
-    void read_lvl(std::string const& filename);
 
     void quit_state() override;
     void update(float const& frame_time) override;
     void update_total_score();
-    void render(sf::RenderTarget* target) override;
-
-
-    sf::Clock game_clock;
-    unsigned long int total_score;
-
+    void render() override;
+    void poll_events(sf::Event & event);
 
     sf::Font font;
     sf::Text score_text;
-
-
+    sf::Clock game_clock;
 };
 #endif //MAIN_CPP_PLAYSTATE_H

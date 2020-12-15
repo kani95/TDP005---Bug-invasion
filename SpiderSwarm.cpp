@@ -14,26 +14,23 @@ SpiderSwarm::SpiderSwarm(std::string const& text,
           text{text}
 {}
 
-void SpiderSwarm::update(const sf::RenderTarget* target,
-                         std::vector<Shot> & player_shots,
+void SpiderSwarm::update(std::vector<Shot> & player_shots,
                          std::vector<Shot> & ant_shots,
                          Character* player)
 {
     if (timer >= spawn_timer)
     {
-        // spawn_limit,
-       // std::unique_ptr<Spider> spider(std::make_unique<Spider>(text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp));
-       Spider spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp};
-       // Spider* spider {new Spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp}};
+        // std::unique_ptr<Spider> spider(std::make_unique<Spider>(text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp));
+        Spider spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp};
         all_spiders.push_back(spider);
         timer = 0;
     }
 
     for (size_t i{}; i < all_spiders.size(); ++i)
     {
-        Spider &spider{all_spiders.at(i)};
+        Spider & spider{all_spiders.at(i)};
 
-        spider.update(target, player_shots, ant_shots,player);
+        spider.update(player_shots, ant_shots,player);
 
         if (!spider.status)
         {
@@ -41,6 +38,7 @@ void SpiderSwarm::update(const sf::RenderTarget* target,
             all_spiders.erase(begin(all_spiders) + i);
         }
     }
+
     add_second();
 }
 
@@ -50,7 +48,15 @@ void SpiderSwarm::add_second()
     ++timer;
 }
 
-std::vector<Spider>& SpiderSwarm::get_all_spiders()
+/*std::vector<Spider>& SpiderSwarm::get_all_spiders()
 {
     return all_spiders;
+}*/
+
+void SpiderSwarm::render(sf::RenderWindow* window)
+{
+    for (Spider & spider : all_spiders)
+    {
+        window -> draw(spider.shape);
+    }
 }

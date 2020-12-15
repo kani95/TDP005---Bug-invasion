@@ -29,4 +29,7 @@ Leaf::Leaf(std::string const& text, sf::Vector2f const& pos, sf::Vector2f const&
     //std::cout << this -> shape.getGlobalBounds().height << "Height " << this -> shape.getGlobalBounds().width << " Width";
 }
 
-
+/*void Leaf::render(sf::RenderWindow* window)
+{
+    window -> draw(shape);
+}*/

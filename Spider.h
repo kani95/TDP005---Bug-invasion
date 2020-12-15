@@ -19,8 +19,7 @@ public:
     //Spider();
 
     void move(float const, float const) override;
-    void update(const sf::RenderTarget* window,
-                std::vector<Shot> & player_shots,
+    void update(std::vector<Shot> & player_shots,
                 std::vector<Shot> & ant_shots,
                 Character* player) override;
 

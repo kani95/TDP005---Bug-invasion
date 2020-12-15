@@ -25,9 +25,10 @@ public:
    //bool check_coll_screen();
 
    bool check_is_dead();
-    //void render(sf::RenderTarget* & window);
+   //void render(sf::RenderWindow* window);
     //void update(Shot & new_shot);
-    bool remove_status;
+
+
 private:
    // bool mark_for_delete;
 

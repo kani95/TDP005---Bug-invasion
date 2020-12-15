@@ -168,15 +168,9 @@ void Spider::check_coll_player_shots(std::vector<Shot> & player_shots, Character
     }
 }
 
-void Spider::update(const sf::RenderTarget* window,
-            std::vector<Shot> & player_shots,
-            std::vector<Shot> & ant_shots,
-            Character* player)
-/*void  Spider::update(const sf::RenderTarget* window,
-                     std::vector<Shot> & player_shots,
-                     std::vector<Shot> & ant_shots,
-                     Character* player)
->>>>>>> 8976f9b23f7920cced92cbe7cd2093bcdd3c1c8d*/
+void Spider::update(std::vector<Shot> & player_shots,
+                    std::vector<Shot> & ant_shots,
+                    Character* player)
 {
     check_coll_screen();
     //get_movement();

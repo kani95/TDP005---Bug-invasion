@@ -1,87 +1,8 @@
 #include "PlayState.h"
 
-
-void PlayState::update(float const& frame_time)
-{
-
-    player -> update(leaf -> shape, player_shots);
-    update_total_score();
-
-    // player_shots = player.get_player_shots();
-    // send in a player reference to swarm, if it takes dmg call player take dmg
-
-   spider_swarm.update(window, player_shots, ant_shots, player);
-
-    // !!! The update call should be made by each ant individually much more cleaner so
-    ant_swarm.update(window, player_shots, ant_shots, player);
-}
-
-
-void PlayState::render(sf::RenderTarget* target)
-{
-    //ant_shots = ant_swarm.get_ant_shots();
-    all_spiders = spider_swarm.get_all_spiders();
-    all_ants = ant_swarm.get_all_ants();
-
-   /* sf::Texture texture;
-    texture.loadFromFile("leaf.jpg");
-
-<<<<<<< HEAD
-    sf::Sprite sprite;
-
-    sprite.setTexture(texture);
-
-    sprite.setScale(300,300);
-    sprite.setPosition(100,100);
-
-    target -> draw(sprite);*/
-
-
-    target -> draw(leaf -> shape);
-/*=======
-
-    target -> draw(leaf.shape);
->>>>>>> 1262816645ea7bbeb819e06c3e4794d52e86516d*/
-
-    for (auto & shot_ : player_shots)
-    {
-        target -> draw(shot_.shape);
-    }
-
-    ant_swarm.render(target);
-
-    for (auto & ant_shot : ant_shots)
-    {
-        target -> draw(ant_shot.shape);
-    }
-
-
-    target -> draw(player -> shape);
-    // target -> draw(ant.shape);
-    for (auto & spi: all_spiders) {
-        target -> draw(spi.shape);
-    }
-
-    target -> draw(score_text);
-}
-
-
-void PlayState::quit_state() {
-
-}
-
-/*
 PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
-    : State(window)
-    {
-        read_lvl(filename);
-    }
-*/
-
-PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
-        : State{window}, game_clock{}, total_score{}, font{}, score_text{} /*window{window}*/
+        : State{window}, game_clock{}, total_score{}, font{}, score_text{}
 {
-
     if (!font.loadFromFile("ARCADECLASSIC.TTF"))
     {
         std::cerr << "Failed to load font in PlayState.";
@@ -95,11 +16,10 @@ PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
     read_lvl(filename);
 }
 
-//PlayState::~PlayState() = default;
-
 void PlayState::read_lvl(std::string const& filename)
 {
-// IN FILE TYPE:
+// IN FILE TYPE IN ORDER:
+
 // PLAYER:
 // Object type|texture_file|shot_texture|pos.x|pos.y|dir.x|dir.y|size.x|size.y|Movespd|hp|attack_tmr|
 // |shot_dim.x|shot_dim.y|shot_dir.x|shot_dir.y|
@@ -116,81 +36,78 @@ void PlayState::read_lvl(std::string const& filename)
 // |spw_timer|score|hp|
 
     std::ifstream infile{filename};
+    std::string texture_file{};
+    std::string shot_texture{};
     std::string object{};
-    std::string texture_file;
-    std::string shot_texture;
 
+    float movespeed{};
+
+    unsigned short int number_of_ants{};
     int border_limit_left{};
     int border_limit_right{};
+    int number_of_rows{};
     int spawn_timer{};
     int att_timer{};
     int score{};
     int hp{};
-    unsigned short int number_of_ants{};
-    int number_of_rows{};
-    sf::Vector2f distance{};
 
-    sf::Vector2f pos{};
-    sf::Vector2f direction{};
     sf::Vector2f dimensions{};
+    sf::Vector2f direction{};
+    sf::Vector2f distance{};
     sf::Vector2f shot_dir{};
     sf::Vector2f shot_dim{};
-    float movespeed{};
-
-
-   /* bool status{};
-    bool can_shot{};*/
+    sf::Vector2f pos{};
 
     while(infile >> object)
     {
-       if (object == "Player")
-       {
-           infile >> texture_file >> shot_texture >> pos.x >> pos.y >> direction.x >> direction.y >>
-           dimensions.x >> dimensions.y >> movespeed >> hp >> att_timer
-           >> shot_dim.x >> shot_dim.y >> shot_dir.x >> shot_dir.y;
+        if (object == "Player")
+        {
+            infile >> texture_file >> shot_texture >> pos.x >> pos.y >> direction.x >>
+                   direction.y >> dimensions.x >> dimensions.y >> movespeed >> hp >> att_timer
+                   >> shot_dim.x >> shot_dim.y >> shot_dir.x >> shot_dir.y;
 
-           player = new Player{texture_file, shot_texture, pos, direction, dimensions, movespeed,
-                           hp, att_timer, shot_dim, shot_dir};
-          // player = t_player;
-           infile.ignore(1000, '\n');
-       }
-       if (object == "Leaf")
-       {
-           infile >> texture_file >> pos.x >> pos.y >> dimensions.x
-           >> dimensions.y;
+            player = new Player{texture_file, shot_texture, pos, direction,
+                                dimensions, movespeed, hp, att_timer, shot_dim, shot_dir};
 
-          // Leaf t_leaf{pos, dimensions};
-           leaf = new Leaf{texture_file,pos,dimensions};
-           infile.ignore(1000, '\n');
-       }
-       if (object == "AntSwarm")
-       {
-           infile >> texture_file >> shot_texture >> pos.x >> pos.y >> dimensions.x >> dimensions.y >>
-           distance.x >> distance.y >> direction.x >> direction.y >>
-           shot_dir.x >> shot_dir.y >> shot_dim.x >> shot_dim.y >> border_limit_left >>
-           border_limit_right  >> number_of_ants >> number_of_rows >> score >> hp >> att_timer;
+            infile.ignore(1000, '\n');
+        }
+        if (object == "Leaf")
+        {
+            infile >> texture_file >> pos.x >> pos.y >> dimensions.x
+                   >> dimensions.y;
 
-           AntSwarm t_antswarm{texture_file, shot_texture, pos, dimensions, distance, direction,
-                               shot_dir, shot_dim, border_limit_left, border_limit_right,
-                               number_of_ants, number_of_rows, score, hp,
-                               att_timer};
-           ant_swarm = t_antswarm;
-           infile.ignore(1000, '\n');
-       }
-       if (object == "SpiderSwarm")
-       {
-           sf::Vector2f spawn_limit_x{};
-           sf::Vector2f spawn_limit_y{};
+            leaf = new Leaf{texture_file,pos,dimensions};
+            infile.ignore(1000, '\n');
+        }
+        if (object == "AntSwarm")
+        {
+            infile >> texture_file >> shot_texture >> pos.x >> pos.y >> dimensions.x >> dimensions.y >>
+                   distance.x >> distance.y >> direction.x >> direction.y >>
+                   shot_dir.x >> shot_dir.y >> shot_dim.x >> shot_dim.y >> border_limit_left >>
+                   border_limit_right  >> number_of_ants >> number_of_rows >> score >> hp >> att_timer;
 
-           infile >> texture_file >> dimensions.x >> dimensions.y >> direction.x >> direction.y
-           >> spawn_limit_x.x >> spawn_limit_x.y >> spawn_limit_y.x
-           >> spawn_limit_y.y >> spawn_timer >> score >> hp;
+            AntSwarm t_antswarm{texture_file, shot_texture, pos, dimensions, distance, direction,
+                                shot_dir, shot_dim, border_limit_left, border_limit_right,
+                                number_of_ants, number_of_rows, score, hp,
+                                att_timer};
 
-           SpiderSwarm t_spiderswarm{texture_file, dimensions, direction, spawn_limit_x, spawn_limit_y,
-                                     spawn_timer, score, hp};
+            ant_swarm = t_antswarm;
+            infile.ignore(1000, '\n');
+        }
+        if (object == "SpiderSwarm")
+        {
+            sf::Vector2f spawn_limit_x{};
+            sf::Vector2f spawn_limit_y{};
 
-           spider_swarm = t_spiderswarm;
-       }
+            infile >> texture_file >> dimensions.x >> dimensions.y >> direction.x >> direction.y
+                   >> spawn_limit_x.x >> spawn_limit_x.y >> spawn_limit_y.x
+                   >> spawn_limit_y.y >> spawn_timer >> score >> hp;
+
+            SpiderSwarm t_spiderswarm{texture_file, dimensions, direction, spawn_limit_x, spawn_limit_y,
+                                      spawn_timer, score, hp};
+
+            spider_swarm = t_spiderswarm;
+        }
     }
 
     infile.close();
@@ -198,16 +115,78 @@ void PlayState::read_lvl(std::string const& filename)
 
 PlayState::~PlayState()
 {
-   delete player;
-   delete leaf;
-  /*  for (Shot & shot : player_shots)
-    {
-        if(shot.remove_status)
-        {
-            delete &shot;
-        }
-    }*/
+    delete player;
+    delete leaf;
 }
+
+void PlayState::poll_events(sf::Event & event) {
+
+    State::poll_events(event);
+
+    /* while (window -> pollEvent(event)) {
+         switch (event.type) {
+             case sf::Event::Closed:
+                 exit_status = true;
+                 break;
+             default:
+                 break;
+             case sf::Event::KeyReleased:
+                 switch (event.key.code) {
+                     case sf::Keyboard::Escape:
+                         exit_status = true;
+                         break;
+                     default:
+                         break;
+                 }
+         }
+     }*/
+
+}
+
+void PlayState::update(float const& frame_time)
+{
+
+    player -> update(leaf -> shape, player_shots, frame_time);
+    update_total_score();
+
+    // send in a player reference to swarm, if it takes dmg call player take dmg
+
+   spider_swarm.update(player_shots, ant_shots, player);
+
+    // !!! The update call should be made by each ant individually much more cleaner so
+    ant_swarm.update(player_shots, ant_shots, player);
+}
+
+
+void PlayState::render()
+{
+    //ant_shots = ant_swarm.get_ant_shots();
+    //all_spiders = spider_swarm.get_all_spiders();
+    //all_ants = ant_swarm.get_all_ants();
+
+    leaf->render(window);
+
+    for (Shot & shot : player_shots)
+    {
+        shot.render(window);
+    }
+
+    ant_swarm.render(window);
+
+    for (Shot & ant_shot : ant_shots)
+    {
+        ant_shot.render(window);
+    }
+
+    player->render(window);
+
+    spider_swarm.render(window);
+
+    window -> draw(score_text);
+
+}
+
+
 
 
 void PlayState::update_total_score()
@@ -230,3 +209,7 @@ void PlayState::update_total_score()
                          + std::to_string(player->get_hp()));
 }
 
+
+void PlayState::quit_state() {
+
+}

@@ -15,17 +15,15 @@ AntSwarm::AntSwarm(std::string const& text,
                    int const score,
                    int const hp,
                    int const att_timer)
-    :ant_swarm{}, direction{dir}, border_limit_right{border_limit_right}, border_limit_left{border_limit_left}
+    :ant_swarm{}, direction{dir}, border_limit_right{border_limit_right}, border_limit_left{border_limit_left}, shot_dir{shot_dir}
 {
     float prev_x {pos.x};
     for (unsigned short int i{0}; i < total_ants; i++)
     {
-       // std::unique_ptr<Ant> ant(std::make_unique<Ant>(text, shot_text, shot_dir, shot_dim, score, hp, att_timer));
-      // Ant* ant{new Ant{text, shot_text, shot_dir, shot_dim, score, hp, att_timer}};
-        Ant ant{text, shot_text, shot_dir, shot_dim, score, hp, att_timer};
+        Ant ant{text, shot_text, shot_dim, score, hp, att_timer};
         ant.shape.setPosition(pos);
         pos.x += dist.x;
-        ant . shape.setScale(dim);
+        ant.shape.setScale(dim);
         //std::cout << prev_x << std::endl;
         ant_swarm.push_back(ant);
 
@@ -77,7 +75,7 @@ std::pair<float, float> AntSwarm::find_furthest_ants()
 }
 
 
-void AntSwarm::move_swarm(const sf::RenderTarget* window)
+void AntSwarm::move_swarm()
 {
     float x_value_left{find_furthest_ants().second};
     float x_value_right{find_furthest_ants().first};
@@ -147,8 +145,7 @@ void AntSwarm::move_swarm(const sf::RenderTarget* window)
 }
 
 
-void AntSwarm::update(const sf::RenderTarget* target,
-                      std::vector<Shot> & player_shots,
+void AntSwarm::update(std::vector<Shot> & player_shots,
                       std::vector<Shot> & ant_shots,
                       Character* player)
 {
@@ -156,20 +153,22 @@ void AntSwarm::update(const sf::RenderTarget* target,
     for(unsigned int i{0}; i < ant_swarm.size(); ++i) {
         Ant & ant{ant_swarm.at(i)};
 
-
-        ant.update(target,player_shots, ant_shots, player);
-
+        ant.update(player_shots, ant_shots, player);
 
         if (ant.is_dead()) {
 
-            // !!! MEMORY LEAK !!!
             player -> increase_score(ant.get_score());
 
             ant_swarm.erase(begin(ant_swarm) + i);
-
         }
     }
-        move_swarm(target);
+
+    for (Shot & shot : ant_shots)
+    {
+        shot.move(shot_dir.x, shot_dir.y);
+    }
+
+    move_swarm();
 }
 
 
@@ -177,12 +176,13 @@ void AntSwarm::render(sf::RenderTarget* target)
 {
     for (Ant const& ant : ant_swarm)
     {
-        ant.render(target);
+       ant.render(target);
+      // target -> draw(ant.shape);
     }
 }
 
 
-std::vector<Ant>& AntSwarm::get_all_ants()
+/*std::vector<Ant>& AntSwarm::get_all_ants()
 {
     return ant_swarm;
-}
+}*/

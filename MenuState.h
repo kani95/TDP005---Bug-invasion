@@ -14,10 +14,11 @@ public:
 
     void init_menu(sf::RenderWindow* window);
     void input();
+    void poll_events(sf::Event & event) override;
 
 
     void update(float const& frame_time) override;
-    void render(sf::RenderTarget* target) override;
+    void render() override;
     void quit_state() override;
 
 
@@ -33,7 +34,7 @@ private:
     int selected_choice;
     sf::Font font;
     sf::Text choices[MAX_NUMBER_OF_ITEMS];
-    sf::Event event;
+
     //const sf::RenderTarget(*window);
 };
 

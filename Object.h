@@ -26,6 +26,7 @@ public:
     sf::Vector2f speed;
     sf::Sprite shape;
 
+    void render(sf::RenderWindow* window);
 
     //sf::RenderTarget &window;
 };

@@ -15,7 +15,8 @@ public:
     void load_font(std::string const& font_name);
     void load_scores(std::string const& file_name);
     static void sort_scores(std::vector<unsigned long int> & vector_scores);
-    void set_ui(sf::RenderTarget* target);
+    void set_ui(sf::RenderWindow* target);
+    void poll_events(sf::Event &event) override;
 
     // Update
     void input();
@@ -23,8 +24,8 @@ public:
 
     // Render
     void render_scores(std::vector<unsigned long int> const& vector_scores,
-                       sf::RenderTarget* target);
-    void render(sf::RenderTarget*  target) override;
+                       sf::RenderWindow* target);
+    void render() override;
 
     // MOVE TO STATE
 

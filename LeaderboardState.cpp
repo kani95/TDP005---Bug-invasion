@@ -47,7 +47,7 @@ void LeaderboardState::sort_scores(std::vector<unsigned long int> & v_scores)
 }
 
 
-void LeaderboardState::set_ui(sf::RenderTarget* target)
+void LeaderboardState::set_ui(sf::RenderWindow* target)
 {
     top_score_text.setCharacterSize(56);
     top_score_text.setString("TOP SCORES");
@@ -61,25 +61,42 @@ void LeaderboardState::set_ui(sf::RenderTarget* target)
 }
 
 
-void LeaderboardState::input()
+void LeaderboardState::poll_events(sf::Event &event)
 {
+    while (window -> pollEvent(event)) {
+        switch (event.type) {
+            case sf::Event::Closed:
+                exit_status = true;
+                break;
+            case sf::Event::KeyReleased:
+                switch (event.key.code) {
+                    case sf::Keyboard::Escape:
+                        is_done = true;
+                        break;
+                }
+        }
+    }
+}
+
+void LeaderboardState::input()
+{/*
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
     {
         is_done = true;
-    }
+    }*/
 }
 
 
 void LeaderboardState::update(const float &frame_time)
 {
-    input();
+   // input();
 }
 
 
-void LeaderboardState::render_scores(std::vector<unsigned long> const& vector_scores, sf::RenderTarget* target)
+void LeaderboardState::render_scores(std::vector<unsigned long> const& vector_scores, sf::RenderWindow* target)
 {
 
-    std::cout << target -> getSize().x << std::endl;
+   // std::cout << target -> getSize().x << std::endl;
     for (int i{}; i < 11; i++)
     {
         std::string curr{std::to_string(vector_scores.at(i))};
@@ -94,11 +111,11 @@ void LeaderboardState::render_scores(std::vector<unsigned long> const& vector_sc
 }
 
 
-void LeaderboardState::render(sf::RenderTarget *target)
+void LeaderboardState::render()
 {
-    target -> draw(top_score_text);
-    target -> draw(back_button);
-    render_scores(v_score, target);
+    window -> draw(top_score_text);
+    window -> draw(back_button);
+    render_scores(v_score, window);
 }
 
 

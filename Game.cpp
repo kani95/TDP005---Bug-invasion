@@ -2,27 +2,27 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-void Game::init_vars()
+Game::Game()
+        :frame_time{}, window{}, timer{}
 {
- //   window = {nullptr};
+
+    init_window();
     init_states();
 }
 
-// är intersect okej?
-// inläsning av fil
-// resize
-// kompletteringar
-// ta in ett namn?
-// är sleep okej?
-// sf event text enter sf::Event::TextEntered
+
+Game::~Game()
+{
+    clear_stack();
+}
+
 
 void Game::init_window()
 {
-    video_mode.height = 1080;
     video_mode.width = 1920;
+    video_mode.height = 1080;
     //sf::ContextSettings::antialiasingLevel(2);
     window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
-   // window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
     window -> setKeyRepeatEnabled(false);
     window -> setFramerateLimit(60);
     window -> setVerticalSyncEnabled(true);
@@ -36,21 +36,6 @@ void Game::init_states()
 }
 
 
-Game::Game()
- :frame_time{}, window{}, timer{}
-{
-
-    init_window();
-    init_vars();
-}
-
-
-Game::~Game()
-{
-    clear_stack();
-}
-
-
 bool Game::window_status() const
 {
     return window -> isOpen();
@@ -60,14 +45,15 @@ bool Game::window_status() const
 // ignore stupid clion warnings
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wswitch"
-void Game::poll_events()
+/*void Game::poll_events()
 {
-    while (window -> pollEvent( event))
+
+    *//*while (window -> pollEvent( event))
     {
         switch (event.type)
         {
             case sf::Event::Closed:
-               clear_stack();
+                clear_stack();
                 break;
 
                 // move to leaderbordstate maybe
@@ -75,36 +61,37 @@ void Game::poll_events()
                 sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
                 window -> setView(sf::View(visibleArea));
         }
-    }
+    }*//*
 
-/*    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+
+
+*//*    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
     {
         clear_stack();
-    }*/
-}
+    }*//*
+}*/
 #pragma clang diagnostic pop
 
-
+/*
 void Game::update_tick()
 {
-    /* Update the time var with the time it takes to make
-     * one update call and than one render one frame */
+    *//* Update the time var with the time it takes to make
+     * one update call and than one render one frame *//*
 
     //std::cout << frame_time << std::endl;
-    frame_time = tick.restart().asMilliseconds();
-}
+  //  frame_time = tick.restart().asMilliseconds();
+}*/
 
 
 void Game::update()
 {
-    poll_events();
+   // poll_events();
+    states.top() -> poll_events(event);
 
-    if (! states.empty())
+    if (!states.empty())
     {
-        states.top() -> update(frame_time);
         if (states.top() -> get_is_done())
         {
-            std::cout << "true" << std::endl;
             delete states.top();
             states.pop();
         }
@@ -116,6 +103,10 @@ void Game::update()
         {
             states.push(new LeaderboardState(window));
         }
+        else
+        {
+            states.top()->update(1.0f/tick.asSeconds());
+        }
     }
 }
 
@@ -124,20 +115,19 @@ void Game::render()
 {
     window -> clear();
 
-    if (! states.empty())
+    if (!states.empty())
     {
-        states.top() -> render(window);
+        states.top() -> render();
     }
 
     window -> display();
 
-    //tick.restart();
+ sf::Time time = clock.getElapsedTime();
+ clock.restart().asSeconds();
 }
 
 void Game::clear_stack()
 {
-   // delete window;
-
     while (!states.empty())
     {
         delete states.top(); // removes the date the pointer is holding
