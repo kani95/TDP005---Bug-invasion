@@ -5,8 +5,10 @@ State::State(sf::RenderWindow *window)
         :window{window}, is_done{false}, exit_status{false},
         leaderboard_status{false}, gameover_status{false},
         playstate_status{false}, is_game_won{false},
-        score{}
-{}
+        score{}, font{}
+{
+    load_font("ARCADECLASSIC.TTF");
+}
 
 
 void State::poll_events(sf::Event & event)
@@ -30,6 +32,13 @@ void State::poll_events(sf::Event & event)
     }
 }
 
+void State::load_font(std::string const& font_name)
+{
+    if (!font.loadFromFile(font_name))
+    {
+        std::cerr << "Failed to load font in state";
+    }
+}
 
 bool State::get_is_done() const
 {

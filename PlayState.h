@@ -44,7 +44,6 @@ public:
     void render() override;
     void poll_events(sf::Event & event);
 
-    sf::Font font;
     sf::Text score_text;
     sf::Clock game_clock;
 };

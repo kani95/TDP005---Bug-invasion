@@ -1,13 +1,8 @@
 #include "PlayState.h"
 
 PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
-        : State{window}, game_clock{}, font{}, score_text{}
+        : State{window}, game_clock{}, score_text{}
 {
-    if (!font.loadFromFile("ARCADECLASSIC.TTF"))
-    {
-        std::cerr << "Failed to load font in PlayState.";
-    };
-
     score_text.setFont(font);
     score_text.setCharacterSize(23);
     score_text.setFillColor(sf::Color::White);

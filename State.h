@@ -1,6 +1,7 @@
 #ifndef MAIN_CPP_STATE_H
 #define MAIN_CPP_STATE_H
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class State {
 
@@ -8,6 +9,7 @@ public:
     explicit State(sf::RenderWindow* window);
     virtual ~State() = default;
 
+    void load_font(std::string const& font_name);
     virtual void poll_events(sf::Event & event);
     virtual void update(float const& frame_time, sf::Event & event) = 0;
     virtual void render() = 0;
@@ -22,6 +24,7 @@ public:
 
 protected:
     sf::RenderWindow* window;
+    sf::Font font;
     bool is_done;
     bool exit_status;
     bool leaderboard_status;

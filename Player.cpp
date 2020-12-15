@@ -79,7 +79,8 @@ void Player::move(float const dirx, float const diry)
 void Player::add_shot(std::vector<Shot> & player_shots)
 {
     Shot new_shot{shot_text, shot_dim};
-    new_shot.shape.setPosition(get_dirx() + (shape.getGlobalBounds().width / 2), get_diry());
+    new_shot.shape.setPosition(get_dirx() + (shape.getGlobalBounds().width / 2 -
+                                             (new_shot.shape.getGlobalBounds().width / 2)), get_diry());
     player_shots.push_back(new_shot);
 }
 

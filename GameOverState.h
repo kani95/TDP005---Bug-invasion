@@ -17,7 +17,7 @@ public:
 
     void update(float const& frame_time, sf::Event & event) override;
     void render() override;
-    void write_score_to_file(std::string file) const;
+    void write_score_to_file(std::string const& file) const;
 
 private:
     sf::Text game_over;

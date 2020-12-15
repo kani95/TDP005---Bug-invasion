@@ -1,6 +1,7 @@
 #ifndef GAME_H_MENUSTATE_H
 #define GAME_H_MENUSTATE_H
 #include "State.h"
+#include <iostream>
 
 //#define MAX_NUMBER_OF_ITEMS 3
 
@@ -14,11 +15,8 @@ public:
     void update(float const& frame_time, sf::Event & event) override;
     void render() override;
 
-
-
 protected:
     int selected_choice;
-    sf::Font font;
    // sf::Text choices[MAX_NUMBER_OF_ITEMS];
 
     std::vector<sf::Text> choices;

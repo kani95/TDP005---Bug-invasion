@@ -3,7 +3,8 @@
 
 GameOverState::GameOverState(sf::RenderWindow *window, bool is_game_won,
                              unsigned long int total_score)
-        :MenuState(window), game_over{}, is_game_won{is_game_won}, total_score{total_score}
+        :MenuState(window), game_over{}, is_game_won{is_game_won},
+         total_score{total_score}
 {
 
     score = total_score;
@@ -14,14 +15,7 @@ GameOverState::GameOverState(sf::RenderWindow *window, bool is_game_won,
 
 void GameOverState::set_choices()
 {
-    // THIS IS TERRIBLE
-    sf::Text text;
-    choices.push_back(text);
-    choices.push_back(text);
-    choices.push_back(text);
     choices[0].setString("Retry");
-    choices[1].setString("Leaderboard");
-    choices[2].setString("Exit");
 }
 
 void GameOverState::set_ui()
@@ -36,16 +30,16 @@ void GameOverState::set_ui()
         game_over.setFillColor(sf::Color::Red);
 
         game_over.setPosition(sf::Vector2f(
-                (window -> getSize().x / 2.f) - (game_over.getGlobalBounds().width / 2),
-                10));
+                (window -> getSize().x / 2.f) -
+                (game_over.getGlobalBounds().width / 2),10));
     }
     else
     {
         game_over.setString("YOU WIN!");
         game_over.setFillColor(sf::Color::Green);
         game_over.setPosition(sf::Vector2f(
-                (window -> getSize().x / 2.f) - (game_over.getGlobalBounds().width / 2),
-                10));
+                (window -> getSize().x / 2.f) -
+                (game_over.getGlobalBounds().width / 2),10));
     }
 }
 
@@ -63,7 +57,7 @@ void GameOverState::render()
 }
 
 
-void GameOverState::write_score_to_file(std::string file) const
+void GameOverState::write_score_to_file(std::string const & file) const
 {
     std::ofstream leaderboard;
     leaderboard.open(file,  std::ios::out | std::ios::app);
@@ -73,7 +67,7 @@ void GameOverState::write_score_to_file(std::string file) const
         std::cerr << "FAILED TO OPEN LEADERBOARD.TXT IN GAMEOVERSTATE"
                   << std::endl;
     }
-    leaderboard << std::to_string(score) << "\n";
+    leaderboard << std::to_string(score) << '\n';
     leaderboard.close();
 }
 

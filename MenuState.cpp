@@ -1,12 +1,10 @@
 #include "MenuState.h"
-#include <iostream>
 
 
 MenuState::MenuState(sf::RenderWindow *window)
 
-           : State{window}, selected_choice{}, font{}, choices{}
+           : State{window}, selected_choice{}, choices{}
 {
-    set_choices();
     init_menu();
 }
 
@@ -15,11 +13,7 @@ MenuState::~MenuState() = default;
 
 void MenuState::init_menu()
 {
-    if (!font.loadFromFile("ARCADECLASSIC.TTF"))
-    {
-        std::cerr << "Failed to load font in MenuState" << std::endl;
-        // Handle error
-    }
+    set_choices();
 
     for (size_t i{}; i < choices.size(); ++i)
     {
@@ -38,14 +32,12 @@ void MenuState::init_menu()
                 window -> getSize().x / 2.f - 70.f,
                 (window -> getSize().y / (choices.size() + 1.f) * (i + 1.f))));
     }
-
-
 }
 
 void MenuState::poll_events(sf::Event & event)
 {
     // when selecting leaderboard this will become true forever
-    // mean that when trying to exit leaderboard, leadearboard status will still be true
+    // means that when trying to exit leaderboard, leadearboard status will still be true
     leaderboard_status = false;
 
     while (window -> pollEvent(event))

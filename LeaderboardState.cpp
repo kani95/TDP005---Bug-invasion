@@ -2,11 +2,11 @@
 
 LeaderboardState::LeaderboardState(sf::RenderWindow * window)
         :State(window), v_scores{},score_text{},
-        font{}, back_button{}, top_score_text{}
+         back_button{}, top_score_text{}
 {
     // load font should be defined in state
     score_text.setCharacterSize(21);
-    load_font("ARCADECLASSIC.TTF");
+    set_font();
     load_scores("Leaderboard.txt");
     sort_scores();
     if (v_scores.size() > 50) {
@@ -16,13 +16,8 @@ LeaderboardState::LeaderboardState(sf::RenderWindow * window)
 }
 
 
-void LeaderboardState::load_font(std::string const& font_name)
+void LeaderboardState::set_font()
 {
-    if (!font.loadFromFile(font_name))
-    {
-        std::cerr << "Failed to load font in PlayState.";
-    }
-
     score_text.setFont(font);
     top_score_text.setFont(font);
     back_button.setFont(font);
@@ -108,14 +103,6 @@ void LeaderboardState::poll_events(sf::Event &event)
                 }
         }
     }
-}
-
-void LeaderboardState::input()
-{/*
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-    {
-        is_done = true;
-    }*/
 }
 
 
