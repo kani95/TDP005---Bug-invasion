@@ -51,7 +51,6 @@ void Game::update_tick()
 
 
 void Game::update() {
-  //  states.top()->poll_events(event);
 //Remove top function
     states.top()->update(1.0f / tick.asSeconds(), event);
 
@@ -64,7 +63,6 @@ void Game::update() {
         } else if (states.top() -> get_leaderboard_status()) {
             states.push(new LeaderboardState(window));
         } else if (states.top() -> get_playstate_status()) {
-            // LEAK
             delete states.top();
             states.pop();
             states.push(new PlayState(window, "example.txt"));

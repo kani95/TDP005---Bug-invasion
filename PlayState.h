@@ -1,50 +1,39 @@
 #ifndef MAIN_CPP_PLAYSTATE_H
 #define MAIN_CPP_PLAYSTATE_H
 #include "State.h"
-#include "Object.h"
 #include "Player.h"
 #include "Leaf.h"
-#include "Ant.h"
 #include "AntSwarm.h"
+#include "SpiderSwarm.h"
 #include "Shot.h"
 #include <iostream>
 #include <vector>
 #include <string>
 #include <fstream>
-#include "SpiderSwarm.h"
-
 
 class PlayState : public State {
-private:
-
-    void read_lvl(std::string const& filename);
-
 public:
     PlayState(sf::RenderWindow* window, std::string const& filename);
     ~PlayState() override;
-   // const sf::RenderTarget(*window){};
-    Player* player{};
-    Leaf* leaf{};
+
+    void update(float const& frame_time, sf::Event & event) override;
+    void render() override;
+
+private:
+    Player* player;
+    Leaf* leaf;
 
     AntSwarm ant_swarm;
     std::vector<Shot> player_shots;
     std::vector<Shot> ant_shots;
-    //std::vector<Ant> all_ants;
-    //std::vector<Spider> all_spiders;
     SpiderSwarm spider_swarm;
-   // std::vector<Ant> all_ants;
-
-    bool check_game_status();
-
-
-
-    void update(float const& frame_time, sf::Event & event) override;
-    void update_total_score();
-
-    void render() override;
-    void poll_events(sf::Event & event);
 
     sf::Text score_text;
     sf::Clock game_clock;
+
+    void read_lvl(std::string const& filename);
+    bool check_game_status();
+    void update_total_score();
+    void poll_events(sf::Event & event);
 };
 #endif //MAIN_CPP_PLAYSTATE_H

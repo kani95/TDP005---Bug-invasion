@@ -31,6 +31,11 @@ void PlayState::read_lvl(std::string const& filename)
 // |spw_timer|score|hp|
 
     std::ifstream infile{filename};
+    if (!infile)
+    {
+        std::cerr << "The map-file could not be located" << std::endl;
+    }
+
     std::string texture_file{};
     std::string shot_texture{};
     std::string object{};
@@ -72,6 +77,7 @@ void PlayState::read_lvl(std::string const& filename)
                    >> dimensions.y;
 
             leaf = new Leaf{texture_file,pos,dimensions};
+
             infile.ignore(1000, '\n');
         }
         if (object == "AntSwarm")
