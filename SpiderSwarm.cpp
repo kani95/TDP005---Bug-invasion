@@ -51,6 +51,7 @@ void SpiderSwarm::add_second()
 /*std::vector<Spider>& SpiderSwarm::get_all_spiders()
 {
     return all_spiders;
+<<<<<<< HEAD
 }*/
 
 void SpiderSwarm::render(sf::RenderWindow* window)
@@ -60,3 +61,10 @@ void SpiderSwarm::render(sf::RenderWindow* window)
         window -> draw(spider.shape);
     }
 }
+
+
+int SpiderSwarm::get_size_swarm()
+{
+    return all_spiders.size();
+}
+

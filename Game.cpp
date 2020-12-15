@@ -31,7 +31,7 @@ void Game::init_window()
 
 void Game::init_states()
 {
-    states.push(new PlayState(window, "example.txt"));
+    //states.push(new PlayState(window, "example.txt"));
     states.push(new MenuState(window));
 }
 
@@ -83,29 +83,32 @@ void Game::update_tick()
 }*/
 
 
-void Game::update()
-{
-   // poll_events();
-    states.top() -> poll_events(event);
+void Game::update() {
+    // poll_events();
+    states.top()->poll_events(event);
 
-    if (!states.empty())
-    {
-        if (states.top() -> get_is_done())
-        {
+    if (!states.empty()) {
+        if (states.top()->get_is_done()) {
             delete states.top();
             states.pop();
-        }
-        else if(states.top() -> get_exit_status())
-        {
+        } else if (states.top()->get_exit_status()) {
             clear_stack();
-        }
-        else if (states.top() -> get_leaderboard_status())
-        {
+        } else if (states.top()->get_leaderboard_status()) {
             states.push(new LeaderboardState(window));
-        }
-        else
-        {
-            states.top()->update(1.0f/tick.asSeconds());
+        } else if (states.top()->get_playstate_status()) {
+            // LEAK
+            delete states.top();
+            states.pop();
+            states.push(new PlayState(window, "example.txt"));
+        } else if (states.top()->get_gameover_status()) {
+            bool is_game_won{states.top()->get_is_game_won()};
+            delete states.top();
+            states.pop();
+            states.push(new GameOverState(window, is_game_won));
+
+        } else {
+            states.top()->update(1.0f / tick.asSeconds());
+
         }
     }
 }

@@ -57,12 +57,11 @@ void Player::update(sf::Sprite const& box,
 
     for (size_t i{0}; i < player_shots.size(); ++i)
     {
+        player_shots.at(i).move(shot_dir.x, shot_dir.y);
         if (player_shots.at(i).check_is_dead())
         {
             player_shots.erase(player_shots.begin() + i);
         }
-
-        player_shots.at(i).move(shot_dir.x, shot_dir.y);
     }
 
   //  std::cout << player_shots.size();

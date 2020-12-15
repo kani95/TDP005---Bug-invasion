@@ -12,7 +12,7 @@ public:
     explicit LeaderboardState(sf::RenderWindow * window);
 
     // Constructor functions
-    void load_font(std::string const& font_name);
+    void load_font(std::string const& font_name); // !! THIS CAN BE MOVED IN STATE.h
     void load_scores(std::string const& file_name);
     static void sort_scores(std::vector<unsigned long int> & vector_scores);
     void set_ui(sf::RenderWindow* target);
@@ -26,8 +26,6 @@ public:
     void render_scores(std::vector<unsigned long int> const& vector_scores,
                        sf::RenderWindow* target);
     void render() override;
-
-    // MOVE TO STATE
 
     void quit_state() override;
 

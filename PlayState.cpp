@@ -146,6 +146,7 @@ void PlayState::poll_events(sf::Event & event) {
 void PlayState::update(float const& frame_time)
 {
 
+    check_game_status();
     player -> update(leaf -> shape, player_shots, frame_time);
     update_total_score();
 
@@ -187,8 +188,6 @@ void PlayState::render()
 }
 
 
-
-
 void PlayState::update_total_score()
 {
     int multiplier{1};
@@ -213,3 +212,22 @@ void PlayState::update_total_score()
 void PlayState::quit_state() {
 
 }
+
+
+bool PlayState::check_game_status()
+{
+    if (ant_swarm.get_size_swarm() < 1 && spider_swarm.get_size_swarm() < 1)
+    {
+        // WIN
+        gameover_status = true;
+        is_game_won = true;
+        return true;
+    }
+    else if (player -> get_hp() < 1)
+    {
+        // LOSE
+        gameover_status = true;
+    }
+    return false;
+}
+

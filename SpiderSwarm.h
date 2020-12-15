@@ -23,6 +23,9 @@ public:
    // std::vector<Spider>& get_all_spiders();
     void render(sf::RenderWindow* window);
 
+    int get_size_swarm();
+
+
 private:
     int timer;
     int spawn_timer;

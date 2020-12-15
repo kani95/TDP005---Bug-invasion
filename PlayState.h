@@ -33,11 +33,15 @@ public:
     //std::vector<Spider> all_spiders;
     SpiderSwarm spider_swarm;
     unsigned long int total_score;
+   // std::vector<Ant> all_ants;
+
+    bool check_game_status();
 
 
     void quit_state() override;
     void update(float const& frame_time) override;
     void update_total_score();
+
     void render() override;
     void poll_events(sf::Event & event);
 

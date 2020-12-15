@@ -3,11 +3,11 @@
 
 #include "PlayState.h"
 #include "Shot.h"
-#include "MenuState.h"
+//#include "MenuState.h"
 #include "LeaderboardState.h"
+#include "GameOverState.h"
+#include <stack>
 // run game engine class
-
-enum class all_states {menu};
 
 class Game {
 public:

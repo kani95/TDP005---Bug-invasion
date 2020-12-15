@@ -5,15 +5,24 @@
 #include "stack"
 #include "map"
 #include <unistd.h>
-#define GetCurrentDir getcwd
 #include<iostream>
 
 
 class State {
 
+protected:
+    sf::RenderWindow* window{};
+    std::vector<sf::Texture*> textures;
+    bool is_done;
+    bool exit_status;
+    bool leaderboard_status;
+    bool gameover_status;
+    bool playstate_status;
+    bool is_game_won;
+
 public:
     explicit State(sf::RenderWindow* window);
-    virtual ~State();
+    virtual ~State() = default;
 
     virtual void poll_events(sf::Event & event);
     virtual void quit_state() = 0;
@@ -24,12 +33,10 @@ public:
     bool get_is_done() const;
     bool get_exit_status() const;
     bool get_leaderboard_status() const;
+    bool get_gameover_status() const;
+    bool get_playstate_status() const;
+    bool get_is_game_won() const;
 
-protected:
-    sf::RenderWindow* window;
-    bool is_done;
-    bool exit_status;
-    bool leaderboard_status;
 };
 
 

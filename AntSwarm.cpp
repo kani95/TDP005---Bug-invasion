@@ -53,20 +53,17 @@ std::pair<float, float> AntSwarm::find_furthest_ants()
 {
     // !!! this will crash if no ants are in the vector !!!
 
-    float ant_left_x {ant_swarm.at(0).shape.getPosition().x};
-    float ant_right_x {ant_swarm.at(0).shape.getPosition().x};
+
+    float ant_left_x{ant_swarm.at(0).shape.getPosition().x};
+    float ant_right_x{ant_swarm.at(0).shape.getPosition().x};
 
 
-    for(unsigned int i{0}; i < get_size_swarm(); ++i)
-    {
+    for (unsigned int i{0}; i < get_size_swarm(); ++i) {
         float current_ant_pos = ant_swarm.at(i).shape.getPosition().x;
 
-        if (current_ant_pos < ant_right_x)
-        {
+        if (current_ant_pos < ant_right_x) {
             ant_right_x = current_ant_pos;
-        }
-        else if (current_ant_pos > ant_left_x)
-        {
+        } else if (current_ant_pos > ant_left_x) {
             ant_left_x = current_ant_pos;
         }
 
@@ -77,69 +74,58 @@ std::pair<float, float> AntSwarm::find_furthest_ants()
 
 void AntSwarm::move_swarm()
 {
-    float x_value_left{find_furthest_ants().second};
-    float x_value_right{find_furthest_ants().first};
-
-    // std::cout << border_hit << std::endl;
-
-    float x_movement{direction.x};
-    float y_movement{direction.y};
-
-    if (border_hit % 2 != 0)
+    if(!ant_swarm.empty())
     {
-        if (border_hit <= 5) {
-            y_movement = 10.f;
-            x_movement = 0.f;
-            border_hit += 1;
-        }
-        else
-        {
-            y_movement = -10.f;
-            x_movement = 0.f;
-            border_hit += 1;
+        float x_value_left{find_furthest_ants().second};
+        float x_value_right{find_furthest_ants().first};
+
+        // std::cout << border_hit << std::endl;
+
+        float x_movement{direction.x};
+        float y_movement{direction.y};
+
+        if (border_hit % 2 != 0) {
+            if (border_hit <= 5) {
+                y_movement = 10.f;
+                x_movement = 0.f;
+                border_hit += 1;
+            } else {
+                y_movement = -10.f;
+                x_movement = 0.f;
+                border_hit += 1;
+            }
+
+            if (border_hit > 11) {
+                border_hit = 0;
+            }
         }
 
-        if (border_hit > 11)
-        {
-            border_hit = 0;
+        // calculate the new x coordnates if the ant furthes right and left
+        // were to move, if the new postion is outside the screen border change direction
+        if (is_swarm_right) {
+            if (x_value_right + x_movement > border_limit_right) {
+                is_swarm_right = false;
+                border_hit += 1;
+            }
+        } else {
+            if (x_value_left + x_movement < border_limit_left) {
+                is_swarm_right = true;
+                border_hit += 1;
+            }
         }
-    }
-
-    // calculate the new x coordnates if the ant furthes right and left
-    // were to move, if the new postion is outside the screen border change direction
-    if (is_swarm_right)
-    {
-        if(x_value_right + x_movement > border_limit_right)
-        {
-            is_swarm_right = false;
-            border_hit += 1;
-        }
-    }
-    else
-    {
-        if(x_value_left + x_movement < border_limit_left)
-        {
-            is_swarm_right = true;
-            border_hit += 1;
-        }
-    }
 
 
-    // check which way the swarm is going to move, move each ant
-    if (is_swarm_right)
-    {
-        for (unsigned int i{0}; i < get_size_swarm(); ++i)
-        {
-            Ant & ant{ant_swarm.at(i)};
-            ant.move(x_movement, y_movement);
-        }
-    }
-    else
-    {
-        for (unsigned int i{0}; i < get_size_swarm(); ++i)
-        {
-            Ant & ant{ant_swarm.at(i)};
-            ant.move(-x_movement, y_movement);
+        // check which way the swarm is going to move, move each ant
+        if (is_swarm_right) {
+            for (unsigned int i{0}; i < get_size_swarm(); ++i) {
+                Ant &ant{ant_swarm.at(i)};
+                ant.move(x_movement, y_movement);
+            }
+        } else {
+            for (unsigned int i{0}; i < get_size_swarm(); ++i) {
+                Ant &ant{ant_swarm.at(i)};
+                ant.move(-x_movement, y_movement);
+            }
         }
     }
 }
