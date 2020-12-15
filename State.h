@@ -19,6 +19,7 @@ protected:
     bool gameover_status;
     bool playstate_status;
     bool is_game_won;
+    unsigned long int score;
 
 public:
     explicit State(sf::RenderWindow* window);
@@ -36,6 +37,8 @@ public:
     bool get_gameover_status() const;
     bool get_playstate_status() const;
     bool get_is_game_won() const;
+    unsigned long int get_score() const;
+
 
 };
 

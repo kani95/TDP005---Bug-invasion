@@ -37,7 +37,14 @@ void LeaderboardState::load_scores(std::string const& file_name)
         std::string line{};
         while (std::getline(file, line))
         {
-            v_scores.push_back(std::stol(line));
+            try
+            {
+                v_scores.push_back(std::stol(line));
+            }
+            catch (std::invalid_argument & arg)
+            {
+                std::cerr << "Empty leaderboard or couldn't translate character to long int\n";
+            }
         }
 
         file.close();
@@ -137,7 +144,7 @@ void LeaderboardState::render_scores()
     {
         std::string curr{std::to_string(v_scores.at(i))};
 
-        score_text.setString(std::to_string(i) + " " + curr);
+        score_text.setString(std::to_string(i+1) + '\t' + curr);
         score_text.setPosition(sf::Vector2f(
                 window -> getSize().x / 2.f - 70.f,
                 window -> getSize().y / (18.f) * ((float)i + 4.f)));

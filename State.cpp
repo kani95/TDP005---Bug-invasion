@@ -4,7 +4,8 @@
 State::State(sf::RenderWindow *window)
         :window{window}, is_done{false}, exit_status{false},
         leaderboard_status{false}, gameover_status{false},
-        playstate_status{false}, is_game_won{false}
+        playstate_status{false}, is_game_won{false},
+        score{0}
 {}
 
 
@@ -63,4 +64,9 @@ bool State::get_playstate_status() const
 bool State::get_is_game_won() const
 {
     return is_game_won;
+}
+
+unsigned long int State::get_score() const
+{
+    return score;
 }

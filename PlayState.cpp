@@ -1,7 +1,7 @@
 #include "PlayState.h"
 
 PlayState::PlayState(sf::RenderWindow *window, std::string const& filename)
-        : State{window}, game_clock{}, total_score{}, font{}, score_text{}
+        : State{window}, game_clock{}, font{}, score_text{}
 {
     if (!font.loadFromFile("ARCADECLASSIC.TTF"))
     {
@@ -113,11 +113,13 @@ void PlayState::read_lvl(std::string const& filename)
     infile.close();
 }
 
+
 PlayState::~PlayState()
 {
     delete player;
     delete leaf;
 }
+
 
 void PlayState::poll_events(sf::Event & event) {
 
@@ -142,6 +144,7 @@ void PlayState::poll_events(sf::Event & event) {
      }*/
 
 }
+
 
 void PlayState::update(float const& frame_time)
 {
@@ -200,12 +203,12 @@ void PlayState::update_total_score()
         multiplier = 2;
     }
 
-    total_score += player->get_score() * multiplier;
+    score += player -> get_score() * multiplier;
     player->set_score(0);
     score_text.setString("SCORE      "
-                         +  std::to_string(total_score)
+                         +  std::to_string(score)
                          + "\nLIVES      "
-                         + std::to_string(player->get_hp()));
+                         + std::to_string(player -> get_hp()));
 }
 
 

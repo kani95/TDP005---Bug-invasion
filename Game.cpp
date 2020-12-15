@@ -3,7 +3,7 @@
 #include <iostream>
 
 Game::Game()
-        :frame_time{}, window{}, timer{}
+        :frame_time{}, window{}, timer{}, score{}
 {
 
     init_window();
@@ -102,9 +102,10 @@ void Game::update() {
             states.push(new PlayState(window, "example.txt"));
         } else if (states.top()->get_gameover_status()) {
             bool is_game_won{states.top()->get_is_game_won()};
+            score = states.top() -> get_score();
             delete states.top();
             states.pop();
-            states.push(new GameOverState(window, is_game_won));
+            states.push(new GameOverState(window, is_game_won, score));
 
         } else {
             states.top()->update(1.0f / tick.asSeconds());

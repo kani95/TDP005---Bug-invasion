@@ -32,6 +32,7 @@ private:
     int timer;
     // how long it take for the game to make one update call and one render call
     float frame_time;
+    unsigned long int score;
 
     void init_window();
     void init_states();

@@ -32,7 +32,6 @@ public:
     //std::vector<Ant> all_ants;
     //std::vector<Spider> all_spiders;
     SpiderSwarm spider_swarm;
-    unsigned long int total_score;
    // std::vector<Ant> all_ants;
 
     bool check_game_status();
