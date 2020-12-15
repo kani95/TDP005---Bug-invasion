@@ -54,3 +54,8 @@ std::vector<Spider>& SpiderSwarm::get_all_spiders()
 {
     return all_spiders;
 }
+
+int SpiderSwarm::get_size_swarm()
+{
+    return all_spiders.size();
+}

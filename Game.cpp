@@ -31,7 +31,7 @@ void Game::init_window()
 
 void Game::init_states()
 {
-    states.push(new PlayState(window, "example.txt"));
+    //states.push(new PlayState(window, "example.txt"));
     states.push(new MenuState(window));
 }
 
@@ -115,6 +115,20 @@ void Game::update()
         else if (states.top() -> get_leaderboard_status())
         {
             states.push(new LeaderboardState(window));
+        }
+        else if (states.top() -> get_playstate_status())
+        {
+            // LEAK
+            delete states.top();
+            states.pop();
+            states.push(new PlayState(window, "example.txt"));
+        }
+        else if (states.top() -> get_gameover_status())
+        {
+            bool is_game_won{states.top() -> get_is_game_won()};
+            delete states.top();
+            states.pop();
+            states.push(new GameOverState(window, is_game_won));
         }
     }
 }

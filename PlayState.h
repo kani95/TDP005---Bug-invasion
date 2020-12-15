@@ -30,12 +30,9 @@ public:
     std::vector<Spider> all_spiders;
     SpiderSwarm spider_swarm;
     std::vector<Ant> all_ants;
-    bool is_done = false;
-    bool exit_status = false;
-    bool leader_board = false;
 
-/*    void move_down() = delete;
-    void move_up() = delete;*/
+    bool check_game_status();
+
 
 
     void read_lvl(std::string const& filename);
@@ -44,6 +41,7 @@ public:
     void update(float const& frame_time) override;
     void update_total_score();
     void render(sf::RenderTarget* target) override;
+
 
 
     sf::Clock game_clock;

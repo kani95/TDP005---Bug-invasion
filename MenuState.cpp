@@ -3,8 +3,11 @@
 
 
 MenuState::MenuState(sf::RenderWindow *window)
-           : State{window}, selected_choice{}, font{}, choices{}, event{}
+           : State{window}, selected_choice{}, font{},
+           choices{},
+           event{}
 {
+    set_choices();
     init_menu(window);
 }
 
@@ -19,7 +22,7 @@ void MenuState::init_menu(sf::RenderWindow* window)
         // Handle error
     }
 
-    for (size_t i{}; i < MAX_NUMBER_OF_ITEMS; ++i)
+    for (size_t i{}; i < choices.size(); ++i)
     {
         if (i == 0)
         {
@@ -34,12 +37,10 @@ void MenuState::init_menu(sf::RenderWindow* window)
 
         choices[i].setPosition(sf::Vector2f(
                 window -> getSize().x / 2.f - 70.f,
-                (window -> getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * (i + 1.f))));
+                (window -> getSize().y / (choices.size() + 1.f) * (i + 1.f))));
     }
 
-    choices[0].setString("New game");
-    choices[1].setString("Leaderboard");
-    choices[2].setString("Exit");
+
 }
 
 
@@ -128,7 +129,8 @@ void MenuState::input()
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
         if (get_selected_choice() == 0)
         {
-            is_done = true;
+            //is_done = true;
+            playstate_status = true;
         }
         else if (get_selected_choice() == 1)
         {
@@ -144,15 +146,16 @@ void MenuState::input()
 
 void MenuState::update(float const& frame_time)
 {
+    std::cout << "pog" << std::endl;
    input();
 }
 
 
 void MenuState::render(sf::RenderTarget*  target)
 {
-    for (size_t i{}; i < MAX_NUMBER_OF_ITEMS; ++i)
+    for (size_t i{}; i < choices.size(); ++i)
     {
-        target -> draw(choices[i]);
+        window -> draw(choices[i]);
     }
 }
 
@@ -181,10 +184,22 @@ void MenuState::move_up()
 
 void MenuState::move_down()
 {
-    if (selected_choice + 1 < MAX_NUMBER_OF_ITEMS)
+    if (selected_choice + 1 < choices.size())
     {
         choices[selected_choice].setFillColor(sf::Color::Green);
         ++selected_choice;
         choices[selected_choice].setFillColor(sf::Color::Red);
     }
 }
+
+void MenuState::set_choices()
+{
+    sf::Text text;
+    choices.push_back(text);
+    choices.push_back(text);
+    choices.push_back(text);
+    choices[0].setString("New game");
+    choices[1].setString("Leaderboard");
+    choices[2].setString("Exit");
+}
+

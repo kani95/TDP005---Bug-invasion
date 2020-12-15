@@ -5,7 +5,6 @@
 #include "stack"
 #include "map"
 #include <unistd.h>
-#define GetCurrentDir getcwd
 #include<iostream>
 
 
@@ -16,10 +15,13 @@ protected:
     bool is_done;
     bool exit_status;
     bool leaderboard_status;
+    bool gameover_status;
+    bool playstate_status;
+    bool is_game_won;
 
 public:
     explicit State(sf::RenderWindow* window);
-    virtual ~State();
+    virtual ~State() = default;
 
     //
     virtual void quit_state() = 0;
@@ -30,6 +32,9 @@ public:
     bool get_is_done() const;
     bool get_exit_status() const;
     bool get_leaderboard_status() const;
+    bool get_gameover_status() const;
+    bool get_playstate_status() const;
+    bool get_is_game_won() const;
 
     /* virtual void move_down() = 0;
      virtual void move_up() = 0;*/

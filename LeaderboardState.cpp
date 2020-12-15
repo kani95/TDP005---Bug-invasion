@@ -79,7 +79,8 @@ void LeaderboardState::update(const float &frame_time)
 void LeaderboardState::render_scores(std::vector<unsigned long> const& vector_scores, sf::RenderTarget* target)
 {
 
-    std::cout << target -> getSize().x << std::endl;
+    // std::cout << target -> getSize().x << std::endl;
+    // crash if file doesnt have 10 rows
     for (int i{}; i < 11; i++)
     {
         std::string curr{std::to_string(vector_scores.at(i))};

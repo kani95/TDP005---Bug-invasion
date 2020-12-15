@@ -17,6 +17,8 @@ set (SOURCE_FILES
         Enemy.h
         Game.cpp
         Game.h
+        GameOverState.cpp
+        GameOverState.h
         LeaderboardState.cpp
         LeaderboardState.h
         Leaf.cpp
@@ -33,7 +35,11 @@ set (SOURCE_FILES
         Shot.cpp
         Shot.h
         Spider.cpp
-        Spider.h SpiderSwarm.cpp SpiderSwarm.h MenuState.cpp MenuState.h)
+        Spider.h
+        SpiderSwarm.cpp
+        SpiderSwarm.h
+        MenuState.cpp
+        MenuState.h)
 
 add_executable(game ${SOURCE_FILES})
 target_link_libraries(game sfml-graphics sfml-window sfml-system)

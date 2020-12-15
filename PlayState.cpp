@@ -3,7 +3,7 @@
 
 void PlayState::update(float const& frame_time)
 {
-
+    check_game_status();
     player -> update(leaf -> shape, player_shots);
     update_total_score();
 
@@ -228,5 +228,22 @@ void PlayState::update_total_score()
                          +  std::to_string(total_score)
                          + "\nLIVES      "
                          + std::to_string(player->get_hp()));
+}
+
+bool PlayState::check_game_status()
+{
+    if (ant_swarm.get_size_swarm() < 1 && spider_swarm.get_size_swarm() < 1)
+    {
+        // WIN
+        gameover_status = true;
+        is_game_won = true;
+        return true;
+    }
+    else if (player -> get_hp() < 1)
+    {
+        // LOSE
+        gameover_status = true;
+    }
+    return false;
 }
 

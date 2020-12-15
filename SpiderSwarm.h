@@ -23,6 +23,7 @@ public:
 
     void add_second();
     std::vector<Spider>& get_all_spiders();
+    int get_size_swarm();
 
 private:
     int timer;
