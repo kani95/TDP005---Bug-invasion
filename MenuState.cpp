@@ -83,87 +83,11 @@ void MenuState::poll_events(sf::Event & event)
         }
 }
 
-void MenuState::input()
+
+
+void MenuState::update(float const& frame_time, sf::Event & event)
 {
-
-
-    // event keypressed
-/*    while (window -> pollEvent(event))
-    {
-        if (event.type == sf::Event::KeyReleased)
-        {
-            if (event.key.code == sf::Keyboard::Down)
-            {
-                move_down();
-                std::cout << "das" << std::endl;
-            }
-        }
-    }*/
-
-
-
-
-/*    sf::Keyboard::Key
-
-    switch (key) {
-        case sf::Keyboard::Down:
-            move_down();
-            break;
-        case sf::Keyboard::Up:
-            move_up();
-            break;
-        case sf::Keyboard::Return:
-            if (get_selected_choice() == 0)
-            {
-                is_done = true;
-            }
-            else if (get_selected_choice() == 1)
-            {
-                leaderboard_status = true;
-            }
-            else if (get_selected_choice() == 2)
-            {
-                exit_status = true;
-            }
-        default:
-            break;
-    }*/
-
-
-    // https://www.sfml-dev.org/tutorials/2.5/window-events.php
-
-/*    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        move_down();
-      //  sf::sleep(sf::milliseconds(150));
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        move_up();
-       // sf::sleep(sf::milliseconds(150));
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-        if (get_selected_choice() == 0)
-        {
-            //is_done = true;
-            playstate_status = true;
-        }
-        else if (get_selected_choice() == 1)
-        {
-            leaderboard_status = true;
-        }
-        else if (get_selected_choice() == 2)
-        {
-            exit_status = true;
-        }
-    }*/
-}
-
-
-void MenuState::update(float const& frame_time)
-{
-/*<<<<<<< HEAD
-   //poll_event();
-=======
-    std::cout << "pog" << std::endl;
-   input();
->>>>>>> 43a74f38b88386bb6a90b1a87b576d043c11c7b4*/
+   poll_events(event);
 }
 
 
@@ -180,11 +104,6 @@ int MenuState::get_selected_choice() const
     return selected_choice;
 }
 
-
-void MenuState::quit_state()
-{
-
-}
 
 
 void MenuState::move_up()

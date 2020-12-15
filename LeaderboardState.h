@@ -21,13 +21,12 @@ public:
 
     // Update
     void input();
-    void update(float const& frame_time) override;
+    void update(float const& frame_time, sf::Event & event) override;
 
     // Render
     void render_scores();
     void render() override;
 
-    void quit_state() override;
 
 
 private:

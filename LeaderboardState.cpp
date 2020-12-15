@@ -119,9 +119,9 @@ void LeaderboardState::input()
 }
 
 
-void LeaderboardState::update(const float &frame_time)
+void LeaderboardState::update(const float &frame_time, sf::Event & event)
 {
-   // input();
+   poll_events(event);
 }
 
 
@@ -161,8 +161,3 @@ void LeaderboardState::render()
     render_scores();
 }
 
-
-void LeaderboardState::quit_state()
-{
-
-}

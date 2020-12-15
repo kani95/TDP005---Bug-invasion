@@ -15,7 +15,7 @@ public:
 
     void set_ui();
 
-    void update(float const& frame_time) override;
+    void update(float const& frame_time, sf::Event & event) override;
     void render() override;
     void write_score_to_file(std::string file) const;
 

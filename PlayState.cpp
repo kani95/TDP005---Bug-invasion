@@ -146,9 +146,9 @@ void PlayState::poll_events(sf::Event & event) {
 }
 
 
-void PlayState::update(float const& frame_time)
+void PlayState::update(float const& frame_time, sf::Event & event)
 {
-
+    poll_events(event);
     check_game_status();
     player -> update(leaf -> shape, player_shots, frame_time);
     update_total_score();
@@ -212,9 +212,6 @@ void PlayState::update_total_score()
 }
 
 
-void PlayState::quit_state() {
-
-}
 
 
 bool PlayState::check_game_status()

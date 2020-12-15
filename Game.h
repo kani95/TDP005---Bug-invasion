@@ -2,11 +2,11 @@
 #define MAIN_CPP_GAME_H
 
 #include "PlayState.h"
-#include "Shot.h"
-//#include "MenuState.h"
 #include "LeaderboardState.h"
 #include "GameOverState.h"
 #include <stack>
+
+
 // run game engine class
 
 class Game {
@@ -14,12 +14,11 @@ public:
     Game();
     virtual ~Game();
 
-    [[nodiscard]] bool window_status() const;
+    bool window_status() const;
     //void update_tick();
-   // void poll_events();
     void update();
-    void render();
-    void clear_stack();
+    void render() const;
+
 
 private:
     std::stack<State*> states;
@@ -29,12 +28,12 @@ private:
     sf::Clock clock;
     sf::Time tick;
 
-    int timer;
     // how long it take for the game to make one update call and one render call
     float frame_time;
     unsigned long int score;
 
     void init_window();
     void init_states();
+    void clear_stack();
 };
 #endif //MAIN_CPP_GAME_H

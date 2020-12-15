@@ -1,11 +1,9 @@
 #include "Game.h"
-#include <SFML/Graphics.hpp>
-#include <iostream>
+
 
 Game::Game()
-        :frame_time{}, window{}, timer{}, score{}
+        :frame_time{}, window{}, score{}
 {
-
     init_window();
     init_states();
 }
@@ -31,7 +29,6 @@ void Game::init_window()
 
 void Game::init_states()
 {
-    //states.push(new PlayState(window, "example.txt"));
     states.push(new MenuState(window));
 }
 
@@ -41,36 +38,6 @@ bool Game::window_status() const
     return window -> isOpen();
 }
 
-
-// ignore stupid clion warnings
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wswitch"
-/*void Game::poll_events()
-{
-
-    *//*while (window -> pollEvent( event))
-    {
-        switch (event.type)
-        {
-            case sf::Event::Closed:
-                clear_stack();
-                break;
-
-                // move to leaderbordstate maybe
-            case sf::Event::Resized:
-                sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-                window -> setView(sf::View(visibleArea));
-        }
-    }*//*
-
-
-
-*//*    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-    {
-        clear_stack();
-    }*//*
-}*/
-#pragma clang diagnostic pop
 
 /*
 void Game::update_tick()
@@ -84,38 +51,37 @@ void Game::update_tick()
 
 
 void Game::update() {
-    // poll_events();
-    states.top()->poll_events(event);
+  //  states.top()->poll_events(event);
+//Remove top function
+    states.top()->update(1.0f / tick.asSeconds(), event);
 
     if (!states.empty()) {
-        if (states.top()->get_is_done()) {
+        if (states.top() -> get_is_done()) {
             delete states.top();
             states.pop();
-        } else if (states.top()->get_exit_status()) {
+        } else if (states.top() -> get_exit_status()) {
             clear_stack();
-        } else if (states.top()->get_leaderboard_status()) {
+        } else if (states.top() -> get_leaderboard_status()) {
             states.push(new LeaderboardState(window));
-        } else if (states.top()->get_playstate_status()) {
+        } else if (states.top() -> get_playstate_status()) {
             // LEAK
             delete states.top();
             states.pop();
             states.push(new PlayState(window, "example.txt"));
-        } else if (states.top()->get_gameover_status()) {
-            bool is_game_won{states.top()->get_is_game_won()};
+        } else if (states.top() -> get_gameover_status()) {
+            bool is_game_won{states.top() -> get_is_game_won()};
             score = states.top() -> get_score();
             delete states.top();
             states.pop();
             states.push(new GameOverState(window, is_game_won, score));
-
-        } else {
-            states.top()->update(1.0f / tick.asSeconds());
-
         }
     }
+    sf::Time time = clock.getElapsedTime();
+    clock.restart().asSeconds();
 }
 
 
-void Game::render()
+void Game::render() const
 {
     window -> clear();
 
@@ -125,10 +91,8 @@ void Game::render()
     }
 
     window -> display();
-
- sf::Time time = clock.getElapsedTime();
- clock.restart().asSeconds();
 }
+
 
 void Game::clear_stack()
 {

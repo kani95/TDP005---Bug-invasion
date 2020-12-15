@@ -37,8 +37,8 @@ public:
     bool check_game_status();
 
 
-    void quit_state() override;
-    void update(float const& frame_time) override;
+
+    void update(float const& frame_time, sf::Event & event) override;
     void update_total_score();
 
     void render() override;

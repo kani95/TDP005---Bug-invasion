@@ -7,38 +7,30 @@
 class MenuState : public State
 {
 public:
-   // MenuState(float const height, float const weight);
 
     explicit MenuState(sf::RenderWindow* window);
-
     ~MenuState() override;
 
-    void init_menu();
-    void input();
-    void poll_events(sf::Event & event) override;
-
-
-    void update(float const& frame_time) override;
+    void update(float const& frame_time, sf::Event & event) override;
     void render() override;
-    void quit_state() override;
 
-    virtual void set_choices();
 
-    void move_up();
-    void move_down();
-
-    int get_selected_choice() const;
 
 protected:
-    //static int max_number_of_items;
     int selected_choice;
     sf::Font font;
    // sf::Text choices[MAX_NUMBER_OF_ITEMS];
 
-    //sf::Text choices[max_number_of_items];
     std::vector<sf::Text> choices;
-   // sf::Event event;
-    //const sf::RenderTarget(*window);
+
+    void init_menu();
+    // void input();
+    void poll_events(sf::Event & event) override;
+    virtual void set_choices();
+    void move_up();
+    void move_down();
+    int get_selected_choice() const;
+
 };
 
 

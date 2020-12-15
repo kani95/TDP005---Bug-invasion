@@ -49,9 +49,9 @@ void GameOverState::set_ui()
     }
 }
 
-void GameOverState::update(const float &frame_time)
+void GameOverState::update(const float &frame_time, sf::Event & event)
 {
-    MenuState::update(frame_time);
+    MenuState::update(frame_time, event);
 
 }
 
