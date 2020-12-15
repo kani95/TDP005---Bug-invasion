@@ -12,7 +12,7 @@
 class Game {
 public:
     Game();
-    virtual ~Game();
+    ~Game() = default;
 
     bool window_status() const;
     //void update_tick();

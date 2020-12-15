@@ -11,37 +11,17 @@ Spider::Spider(std::string const& text,
                int const score,
                int const hp)
         : Enemy(score,hp), spw_lmt_x{spawn_limit_x}, spw_lmt_y{spawn_limit_y}
-/*=======
-Spider::Spider()
-        : Enemy()
->>>>>>> 8976f9b23f7920cced92cbe7cd2093bcdd3c1c8d*/
 {
-   /* if(!texture loadFromFile("spider.png"))
-    {
-        std::cerr << "No load";
-    }
-    shape.setTexture(texture);*/
-   init_texture(text);
-   // shape.setScale(10,40);
-    //shape.setColor(sf::Color::Blue);
-   // shape.setPosition(300,200);
+    init_texture(text);
 
     direction.x = dir.x;
     direction.y = dir.y;
     shape.setScale(dim);
 
     set_start_pos(spawn_limit_x, spawn_limit_y);
-/*   speed.x = -0.5;
-   speed.y = 0.1;
-   score = 300;*/
 }
 
 
-/*
-int Spider::get_score() const
-{
- return score;
-}*/
 
 void Spider::set_start_pos(sf::Vector2f const& lmt_x,
                            sf::Vector2f const& lmt_y)
@@ -56,14 +36,11 @@ void Spider::set_start_pos(sf::Vector2f const& lmt_x,
     float start_y {dis_y(gen)};
 
     shape.setPosition(start_x,start_y);
-
-    //std::cout << start_x << ":x " << start_y << ":y ";
 }
 
 
 void Spider::check_coll_screen()
 {
-
     bool right = (shape.getPosition().x + shape.getScale().x > (spw_lmt_x.y));
     bool left = (shape.getPosition().x < spw_lmt_x.x);
     bool down = (shape.getPosition().y + shape.getScale().y > (spw_lmt_y.y));
@@ -88,45 +65,12 @@ void Spider::check_coll_screen()
     {
         direction.x = -1 * direction.x;
         direction.y = -1 * direction.y;
-       // move(direction.x, direction.y);
     }
     else if (up)
     {
         direction.x = -1 * direction.x;
         direction.y = -1 * direction.y;
-        //move(direction.x, direction.y);
     }
-}
-
-void Spider::get_movement()
-{
-
-    /*
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution dis(1,4);
-    int start {(dis(gen))};
-    //int start_y {(dis(gen))};
-    if (start == 1) {
-        speed.x = 1;
-        speed.y = -1;
-    }
-    else if (start == 2)
-    {
-        speed.x = -1;
-        speed.y = 1;
-    }
-    else if (start == 3)
-    {
-        speed.x = 0;
-        speed.y = 1;
-    }
-
-    else if (start == 4)
-    {
-        speed.x = 1;
-        speed.y = 0;
-    }*/
 }
 
 
@@ -136,44 +80,31 @@ void Spider::move( float const dirx, float const diry)
 }
 
 
-bool Spider::check_coll(sf::Sprite & enemy)
-{
-    if(shape.getGlobalBounds().intersects(enemy.getGlobalBounds()))
-    {
-        //shape.setPosition(30,30);
-        return true;
-    }
-    return false;
-}
-
-
 void Spider::check_coll_player_shots(std::vector<Shot> & player_shots, Character * player)
 {
-    for (size_t j{0}; j < player_shots.size(); ++j)
+    for (size_t i{0}; i < player_shots.size(); ++i)
     {
-        Shot & shot{player_shots.at(j)};
+        Shot & shot{player_shots.at(i)};
 
-        if (check_coll(shot.shape))
+        if (check_coll(shot.get_sprite()))
         {
-            // all_spiders.erase(begin(all_spiders) + i);
-            player_shots.erase(begin(player_shots) + j);
-            status = false;
-            //delete this;
+            player_shots.erase(begin(player_shots) + i);
+            take_damage();
         }
 
     }
-    if (check_coll(player -> shape))
+    if (check_coll(player ->get_sprite()))
     {
         player -> take_damage();
     }
 }
+
 
 void Spider::update(std::vector<Shot> & player_shots,
                     std::vector<Shot> & ant_shots,
                     Character* player)
 {
     check_coll_screen();
-    //get_movement();
     move(direction.x, direction.y);
     check_coll_player_shots(player_shots, player);
 }

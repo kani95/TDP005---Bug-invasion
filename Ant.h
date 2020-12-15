@@ -3,7 +3,6 @@
 #include "Enemy.h"
 #include "Shot.h"
 #include "Player.h"
-#include "Shot.h"
 #include <iostream>
 
 // type 1 enemy
@@ -28,7 +27,7 @@ public:
 
     bool can_shoot();
 
-    bool check_coll(Shot & shot);
+   // bool check_coll(Shot & shot);
 
 
 private:

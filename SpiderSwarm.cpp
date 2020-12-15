@@ -20,7 +20,6 @@ void SpiderSwarm::update(std::vector<Shot> & player_shots,
 {
     if (timer >= spawn_timer)
     {
-        // std::unique_ptr<Spider> spider(std::make_unique<Spider>(text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp));
         Spider spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp};
         all_spiders.push_back(spider);
         timer = 0;
@@ -32,7 +31,7 @@ void SpiderSwarm::update(std::vector<Shot> & player_shots,
 
         spider.update(player_shots, ant_shots,player);
 
-        if (!spider.status)
+        if (spider.is_dead())
         {
             player -> increase_score(spider.get_score());
             all_spiders.erase(begin(all_spiders) + i);
@@ -48,17 +47,12 @@ void SpiderSwarm::add_second()
     ++timer;
 }
 
-/*std::vector<Spider>& SpiderSwarm::get_all_spiders()
-{
-    return all_spiders;
-<<<<<<< HEAD
-}*/
 
 void SpiderSwarm::render(sf::RenderWindow* window)
 {
     for (Spider & spider : all_spiders)
     {
-        window -> draw(spider.shape);
+        spider.render(window);
     }
 }
 

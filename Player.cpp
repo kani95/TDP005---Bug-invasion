@@ -1,5 +1,5 @@
 #include "Player.h"
-#include <iostream>
+
 
 Player::Player(std::string const& text, std::string const& shot_text,
                sf::Vector2f const& pos, sf::Vector2f const& dir,
@@ -28,7 +28,7 @@ void Player::update_input(float const frame_time)
 }
 
 
-void Player::update(sf::Sprite const& box,
+void Player::update(Leaf* box,
                     std::vector<Shot> & player_shots, float const frame_time)
 {
     if (clock.getElapsedTime().asSeconds() >= 0.3)
@@ -65,7 +65,6 @@ void Player::update(sf::Sprite const& box,
     }
 
   //  std::cout << player_shots.size();
-  //  std::cout << "HP: " << hp << " ";
 }
 
 
@@ -79,46 +78,36 @@ void Player::move(float const dirx, float const diry)
 void Player::add_shot(std::vector<Shot> & player_shots)
 {
     Shot new_shot{shot_text, shot_dim};
-    new_shot.shape.setPosition(get_dirx() + (shape.getGlobalBounds().width / 2 -
-                                             (new_shot.shape.getGlobalBounds().width / 2)), get_diry());
+    sf::Vector2f pos{get_left() + ((get_right() - get_left()) / 2 ) -
+                             (new_shot.get_right() - new_shot.get_left()) / 2,
+                             get_top()};
+    new_shot.set_position(pos);
     player_shots.push_back(new_shot);
 }
 
-void Player::check_inside_leaf(sf::Sprite const& box) {
+void Player::check_inside_leaf(Leaf* box) {
 
     // LEFT
-    if (shape.getGlobalBounds().left <= box.getGlobalBounds().left)
+    if (get_left() <= box->get_left())
     {
-        shape.setPosition(box.getGlobalBounds().left, shape.getGlobalBounds().top);
+        shape.setPosition(box -> get_left(), get_top());
     }
     // RIGHT
-    if ((shape.getPosition().x + shape.getGlobalBounds().width >= box.getGlobalBounds().width + box.getPosition().x))
+    if ((get_right() >= box -> get_right()))
     {
-        shape.setPosition(box.getGlobalBounds().width + box.getPosition().x - shape.getGlobalBounds().width,
-                          shape.getGlobalBounds().top);
+        shape.setPosition(box -> get_right() - (get_right() - get_left()),
+                          get_top());
     }
     // UP
-    if (shape.getGlobalBounds().top <= box.getGlobalBounds().top)
+    if (get_top() <= box->get_top())
     {
-       shape.setPosition(shape.getGlobalBounds().left, box.getGlobalBounds().top);
+       shape.setPosition(get_left(), box->get_top());
     }
     // DOWN
-    if (shape.getGlobalBounds().height + shape.getPosition().y >= box.getPosition().y + box.getGlobalBounds().height)
+    if (get_bot() >= box -> get_bot())
     {
-        shape.setPosition(shape.getPosition().x, box.getGlobalBounds().height
-        + box.getGlobalBounds().top - shape.getGlobalBounds().height);
+        shape.setPosition(get_left(), box -> get_bot() - (get_bot() - get_top()));
     }
-}
-
-float Player::get_dirx()
-{
-    return shape.getPosition().x;
-}
-
-
-float Player::get_diry()
-{
-    return shape.getPosition().y;
 }
 
 void Player::take_damage()

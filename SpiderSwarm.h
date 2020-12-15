@@ -19,10 +19,7 @@ public:
                 std::vector<Shot> & ant_shots,
                 Character* player);
 
-    void add_second();
-   // std::vector<Spider>& get_all_spiders();
     void render(sf::RenderWindow* window);
-
     int get_size_swarm();
 
 
@@ -39,6 +36,8 @@ private:
     sf::Vector2f spawn_limit_y;
 
     std::vector<Spider> all_spiders;
+
+    void add_second();
 };
 
 

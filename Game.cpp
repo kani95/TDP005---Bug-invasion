@@ -2,17 +2,17 @@
 
 
 Game::Game()
-        :frame_time{}, window{}, score{}
+        :frame_time{}, window{nullptr}, score{}
 {
     init_window();
     init_states();
 }
 
 
-Game::~Game()
+/*Game::~Game()
 {
     clear_stack();
-}
+}*/
 
 
 void Game::init_window()
@@ -100,6 +100,8 @@ void Game::clear_stack()
         states.top() = nullptr;
         states.pop(); // removes the pointer
     }
+
+    delete window;
 
     window -> close();
 }

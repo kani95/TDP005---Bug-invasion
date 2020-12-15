@@ -14,6 +14,15 @@ public:
 
     void render(sf::RenderWindow* window);
 
+    float get_right();
+    float get_left();
+    float get_top();
+    float get_bot();
+    void set_position(sf::Vector2f const& pos); // ????
+    void set_scale(sf::Vector2f const& scale); // ???
+    bool check_coll(sf::Sprite & sprite);
+    sf::Sprite& get_sprite(); // ??????
+
 protected:
     std::shared_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
     sf::Vector2f position;

@@ -2,8 +2,7 @@
 #define MAIN_CPP_PLAYER_H
 #include "Character.h"
 #include "Shot.h"
-#include <vector>
-#include "Spider.h"
+#include "Leaf.h"
 
 class Player : public Character {
 public:
@@ -15,18 +14,8 @@ public:
            sf::Vector2f const& shot_dim,
            sf::Vector2f const& shot_dir);
 
-    void move(float dirx, float diry) override;
-
-    void update_input(float const frame_time);
-
-    void update(sf::Sprite const& box,
+    void update(Leaf* box,
                 std::vector<Shot> & player_shots, float const frame_time);
-
-    void check_inside_leaf(sf::Sprite const& box);
-
-    void add_shot(std::vector<Shot> & player_shots);
-    float get_dirx();
-    float get_diry();
     void take_damage() override;
 
 private:
@@ -37,5 +26,10 @@ private:
     sf::Vector2f shot_dim;
     sf::Vector2f shot_dir;
     std::string shot_text;
+
+    void move(float dirx, float diry) override;
+    void update_input(float const frame_time);
+    void check_inside_leaf(Leaf* box);
+    void add_shot(std::vector<Shot> & player_shots);
 };
 #endif //MAIN_CPP_PLAYER_H

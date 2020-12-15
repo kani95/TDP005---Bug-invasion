@@ -7,8 +7,6 @@ class Leaf :  public Object
 public:
     Leaf() = default;
     Leaf(std::string const& text, sf::Vector2f const& pos, sf::Vector2f const& dim);
-
-    //void render(sf::RenderWindow* window);
 };
 
 

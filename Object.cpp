@@ -1,11 +1,5 @@
 #include "Object.h"
 
-/*Object::Object(sf::RenderTarget & window)
-    :position{220,220}, area{}, speed{}, shape{}, window{window}
-{
-    shape.setSize(sf::Vector2f(10.f, 40.f));
-}*/
-
 
 Object::Object(std::string const& text, sf::Vector2f const& dim)
         : position{220,220}, direction{}, shape{}
@@ -13,7 +7,6 @@ Object::Object(std::string const& text, sf::Vector2f const& dim)
     init_texture(text);
     shape.setScale(dim);
 
-  // shape.setScale(sf::Vector2f(10.f, 40.f));
 }
 
 Object::Object(std::string const& text, sf::Vector2f const& pos, sf::Vector2f const& dim)
@@ -48,4 +41,55 @@ void Object::render(sf::RenderWindow* window)
     window -> draw(shape);
 }
 
+float Object::get_right()
+{
+    return shape.getPosition().x + shape.getGlobalBounds().width;
+}
 
+
+float Object::get_left()
+{
+    return shape.getGlobalBounds().left;
+}
+
+
+float Object::get_top()
+{
+    return shape.getGlobalBounds().top;
+}
+
+
+float Object::get_bot()
+{
+    return shape.getPosition().y + shape.getGlobalBounds().height;
+}
+
+
+void Object::set_position(sf::Vector2f const& pos)
+{
+    shape.setPosition(pos);
+}
+
+void Object::set_scale(sf::Vector2f const& scale)
+{
+    shape.setScale(scale);
+}
+
+bool Object::check_coll(sf::Sprite & sprite)
+{
+
+/*    if(shot.get_right() >= shape.getGlobalBounds().width + shape.getPosition().x
+       && shot.get_top() <= shape.getGlobalBounds().top
+       && shot.get_bot() >= shape.getPosition().y + shape.getGlobalBounds().height
+       && shot.get_left() <= shape.getGlobalBounds().left)*/
+    if(sprite.getGlobalBounds().intersects(shape.getGlobalBounds()))
+    {
+        return true;
+    }
+    return false;
+}
+
+sf::Sprite& Object::get_sprite()
+{
+    return shape;
+}

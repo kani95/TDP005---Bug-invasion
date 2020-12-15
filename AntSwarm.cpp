@@ -21,10 +21,9 @@ AntSwarm::AntSwarm(std::string const& text,
     for (unsigned short int i{0}; i < total_ants; i++)
     {
         Ant ant{text, shot_text, shot_dim, score, hp, att_timer};
-        ant.shape.setPosition(pos);
+        ant.set_position(pos);
         pos.x += dist.x;
-        ant.shape.setScale(dim);
-        //std::cout << prev_x << std::endl;
+        ant.set_scale(dim);
         ant_swarm.push_back(ant);
 
         // second row
@@ -51,15 +50,13 @@ int AntSwarm::get_size_swarm() const
 
 std::pair<float, float> AntSwarm::find_furthest_ants()
 {
-    // !!! this will crash if no ants are in the vector !!!
 
-
-    float ant_left_x{ant_swarm.at(0).shape.getPosition().x};
-    float ant_right_x{ant_swarm.at(0).shape.getPosition().x};
+    float ant_left_x{ant_swarm.at(0).get_left()};
+    float ant_right_x{ant_swarm.at(0).get_left()};
 
 
     for (unsigned int i{0}; i < get_size_swarm(); ++i) {
-        float current_ant_pos = ant_swarm.at(i).shape.getPosition().x;
+        float current_ant_pos = ant_swarm.at(i).get_left();
 
         if (current_ant_pos < ant_right_x) {
             ant_right_x = current_ant_pos;

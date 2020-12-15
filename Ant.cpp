@@ -26,27 +26,12 @@ void Ant::render(sf::RenderTarget* target) const
 
 // UPDATE HELPER FUNCTIONS
 
-bool Ant::check_coll(Shot & shot)
-{
-
-/*    if(shot.get_right() >= shape.getGlobalBounds().width + shape.getPosition().x
-       && shot.get_top() <= shape.getGlobalBounds().top
-       && shot.get_bot() >= shape.getPosition().y + shape.getGlobalBounds().height
-       && shot.get_left() <= shape.getGlobalBounds().left)*/
-    if(shot.shape.getGlobalBounds().intersects(shape.getGlobalBounds()))
-    {
-        return true;
-    }
-    return false;
-}
-
-
 bool Ant::check_collison_player_shots(std::vector<Shot> & player_shots)
 {
     for(unsigned int i{0}; i < player_shots.size(); ++i)
     {
         Shot & shot{player_shots.at(i)};
-        if (check_coll(shot))
+        if (check_coll(shot.get_sprite()))
         {
             player_shots.erase(begin(player_shots) + i);
             return true;
@@ -62,7 +47,7 @@ bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * pl
     {
         Shot & shot{ant_shots.at(i)};
 
-        if (player -> check_enemy_coll(shot.shape))
+        if (player -> check_coll(shot.get_sprite()))
         {
             ant_shots.erase(begin(ant_shots) + i);
             return true;
@@ -112,7 +97,10 @@ void Ant::update(std::vector<Shot> & player_shots,
     if (can_shoot())
     {
         Shot new_shot{shot_text, shot_dim};
-        new_shot.shape.setPosition(shape.getPosition().x + (shape.getGlobalBounds().width / 2), shape.getPosition().y);
+        sf::Vector2f pos{get_left() + ((get_right() - get_left()) / 2 ) -
+                         (new_shot.get_right() - new_shot.get_left()) / 2,
+                         get_top()};
+        new_shot.set_position(pos);
         ant_shots.push_back(new_shot);
     }
 

@@ -87,12 +87,16 @@ void PlayState::read_lvl(std::string const& filename)
                    shot_dir.x >> shot_dir.y >> shot_dim.x >> shot_dim.y >> border_limit_left >>
                    border_limit_right  >> number_of_ants >> number_of_rows >> score >> hp >> att_timer;
 
-            AntSwarm t_antswarm{texture_file, shot_texture, pos, dimensions, distance, direction,
+           /* AntSwarm t_antswarm{texture_file, shot_texture, pos, dimensions, distance, direction,
                                 shot_dir, shot_dim, border_limit_left, border_limit_right,
                                 number_of_ants, number_of_rows, score, hp,
-                                att_timer};
+                                att_timer};*/
+           ant_swarm = new AntSwarm{texture_file, shot_texture, pos, dimensions, distance, direction,
+                                    shot_dir, shot_dim, border_limit_left, border_limit_right,
+                                    number_of_ants, number_of_rows, score, hp,
+                                    att_timer};
 
-            ant_swarm = t_antswarm;
+           // ant_swarm = t_antswarm;
             infile.ignore(1000, '\n');
         }
         if (object == "SpiderSwarm")
@@ -104,10 +108,12 @@ void PlayState::read_lvl(std::string const& filename)
                    >> spawn_limit_x.x >> spawn_limit_x.y >> spawn_limit_y.x
                    >> spawn_limit_y.y >> spawn_timer >> score >> hp;
 
-            SpiderSwarm t_spiderswarm{texture_file, dimensions, direction, spawn_limit_x, spawn_limit_y,
-                                      spawn_timer, score, hp};
+           /* SpiderSwarm t_spiderswarm{texture_file, dimensions, direction, spawn_limit_x, spawn_limit_y,
+                                      spawn_timer, score, hp};*/
 
-            spider_swarm = t_spiderswarm;
+           // spider_swarm = t_spiderswarm;
+           spider_swarm = new SpiderSwarm{texture_file, dimensions, direction, spawn_limit_x, spawn_limit_y,
+                                          spawn_timer, score, hp};
         }
     }
 
@@ -119,6 +125,9 @@ PlayState::~PlayState()
 {
     delete player;
     delete leaf;
+    delete spider_swarm;
+    delete ant_swarm;
+    delete window;
 }
 
 
@@ -151,15 +160,15 @@ void PlayState::update(float const& frame_time, sf::Event & event)
 {
     poll_events(event);
     check_game_status();
-    player -> update(leaf -> shape, player_shots, frame_time);
+    player -> update(leaf, player_shots, frame_time);
     update_total_score();
 
     // send in a player reference to swarm, if it takes dmg call player take dmg
 
-   spider_swarm.update(player_shots, ant_shots, player);
+    spider_swarm -> update(player_shots, ant_shots, player);
 
     // !!! The update call should be made by each ant individually much more cleaner so
-    ant_swarm.update(player_shots, ant_shots, player);
+    ant_swarm -> update(player_shots, ant_shots, player);
 }
 
 
@@ -176,7 +185,7 @@ void PlayState::render()
         shot.render(window);
     }
 
-    ant_swarm.render(window);
+    ant_swarm -> render(window);
 
     for (Shot & ant_shot : ant_shots)
     {
@@ -185,7 +194,7 @@ void PlayState::render()
 
     player->render(window);
 
-    spider_swarm.render(window);
+    spider_swarm -> render(window);
 
     window -> draw(score_text);
 
@@ -217,7 +226,7 @@ void PlayState::update_total_score()
 
 bool PlayState::check_game_status()
 {
-    if (ant_swarm.get_size_swarm() < 1 && spider_swarm.get_size_swarm() < 1)
+    if (ant_swarm -> get_size_swarm() < 1 && spider_swarm -> get_size_swarm() < 1)
     {
         // WIN
         gameover_status = true;

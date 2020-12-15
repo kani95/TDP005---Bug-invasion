@@ -23,10 +23,10 @@ private:
     Player* player;
     Leaf* leaf;
 
-    AntSwarm ant_swarm;
+    AntSwarm* ant_swarm;
     std::vector<Shot> player_shots;
     std::vector<Shot> ant_shots;
-    SpiderSwarm spider_swarm;
+    SpiderSwarm* spider_swarm;
 
     sf::Text score_text;
     sf::Clock game_clock;
