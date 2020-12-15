@@ -1,14 +1,17 @@
 #include "LeaderboardState.h"
 
 LeaderboardState::LeaderboardState(sf::RenderWindow * window)
-        :State(window), v_score{},score_text{},
+        :State(window), v_scores{},score_text{},
         font{}, back_button{}, top_score_text{}
 {
     // load font should be defined in state
     score_text.setCharacterSize(21);
     load_font("ARCADECLASSIC.TTF");
     load_scores("Leaderboard.txt");
-    sort_scores(v_score);
+    sort_scores();
+    if (v_scores.size() > 50) {
+        overwrite_file("Leaderboard.txt");
+    }
     set_ui(window);
 }
 
@@ -34,18 +37,40 @@ void LeaderboardState::load_scores(std::string const& file_name)
         std::string line{};
         while (std::getline(file, line))
         {
-            v_score.push_back(std::stol(line));
+            v_scores.push_back(std::stol(line));
         }
+
         file.close();
     }
 }
 
 
-void LeaderboardState::sort_scores(std::vector<unsigned long int> & v_scores)
+void LeaderboardState::sort_scores()
 {
     std::sort(v_scores.begin(), v_scores.end(), std::greater<>());
 }
 
+void LeaderboardState::overwrite_file(std::string const& filename)
+{
+    while(v_scores.size() > 50)
+    {
+        v_scores.pop_back();
+    }
+
+    std::ofstream outfile{filename, std::ios::trunc};
+
+    for (size_t i{}; i < v_scores.size(); ++i)
+    {
+        outfile << std::to_string(v_scores.at(i));
+
+        if (i != v_scores.size() - 1)
+        {
+            outfile << '\n';
+        }
+    }
+
+    outfile.close();
+}
 
 void LeaderboardState::set_ui(sf::RenderWindow* target)
 {
@@ -93,22 +118,31 @@ void LeaderboardState::update(const float &frame_time)
 }
 
 
-void LeaderboardState::render_scores(std::vector<unsigned long> const& vector_scores, sf::RenderWindow* target)
+void LeaderboardState::render_scores()
 {
+    size_t max_ten{};
 
-    // std::cout << target -> getSize().x << std::endl;
+    if (v_scores.size() < 10)
+    {
+        max_ten = v_scores.size();
+    }
+    else
+    {
+        max_ten = 10;
+    }
+
     // crash if file doesnt have 10 rows
 
-    for (int i{}; i < 11; i++)
+    for (int i{}; i < max_ten; i++)
     {
-        std::string curr{std::to_string(vector_scores.at(i))};
+        std::string curr{std::to_string(v_scores.at(i))};
 
         score_text.setString(std::to_string(i) + " " + curr);
         score_text.setPosition(sf::Vector2f(
-                target -> getSize().x / 2.f - 70.f,
-                target -> getSize().y / (18.f) * ((float)i + 4.f)));
+                window -> getSize().x / 2.f - 70.f,
+                window -> getSize().y / (18.f) * ((float)i + 4.f)));
 
-        target -> draw(score_text);
+        window -> draw(score_text);
     }
 }
 
@@ -117,7 +151,7 @@ void LeaderboardState::render()
 {
     window -> draw(top_score_text);
     window -> draw(back_button);
-    render_scores(v_score, window);
+    render_scores();
 }
 
 

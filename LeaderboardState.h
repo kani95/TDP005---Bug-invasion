@@ -14,17 +14,17 @@ public:
     // Constructor functions
     void load_font(std::string const& font_name); // !! THIS CAN BE MOVED IN STATE.h
     void load_scores(std::string const& file_name);
-    static void sort_scores(std::vector<unsigned long int> & vector_scores);
+    void sort_scores();
     void set_ui(sf::RenderWindow* target);
     void poll_events(sf::Event &event) override;
+    void overwrite_file(std::string const& filename);
 
     // Update
     void input();
     void update(float const& frame_time) override;
 
     // Render
-    void render_scores(std::vector<unsigned long int> const& vector_scores,
-                       sf::RenderWindow* target);
+    void render_scores();
     void render() override;
 
     void quit_state() override;
@@ -32,7 +32,7 @@ public:
 
 private:
 
-    std::vector<unsigned long int> v_score;
+    std::vector<size_t> v_scores;
     sf::Font font;
     sf::Text score_text;
     sf::Text back_button;
