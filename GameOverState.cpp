@@ -1,12 +1,15 @@
 #include "GameOverState.h"
 
 
-GameOverState::GameOverState(sf::RenderWindow *window, bool is_game_won)
-        :MenuState(window), game_over{}, is_game_won{is_game_won}
+GameOverState::GameOverState(sf::RenderWindow *window, bool is_game_won,
+                             unsigned long int total_score)
+        :MenuState(window), game_over{}, is_game_won{is_game_won}, total_score{total_score}
 {
+
+    score = total_score;
     set_ui();
     set_choices();
-    //load_font("ARCADECLASSIC.TTF")
+    write_score_to_file("Leaderboard.txt");
 }
 
 void GameOverState::set_choices()
@@ -49,14 +52,28 @@ void GameOverState::set_ui()
 void GameOverState::update(const float &frame_time)
 {
     MenuState::update(frame_time);
+
 }
 
 void GameOverState::render()
 {
     MenuState::render();
-
     window -> draw(game_over);
 
-   // std::cout << game_over.getCharacterSize() << std::endl;
+}
+
+
+void GameOverState::write_score_to_file(std::string file) const
+{
+    std::ofstream leaderboard;
+    leaderboard.open(file,  std::ios::out | std::ios::app);
+
+    if (!leaderboard.is_open())
+    {
+        std::cerr << "FAILED TO OPEN LEADERBOARD.TXT IN GAMEOVERSTATE"
+                  << std::endl;
+    }
+    leaderboard << std::to_string(score) << "\n";
+    leaderboard.close();
 }
 
