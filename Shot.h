@@ -10,5 +10,4 @@ public:
     bool check_is_dead();
 };
 
-
 #endif //GAME_H_SHOT_H

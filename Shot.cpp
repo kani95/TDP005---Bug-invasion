@@ -7,7 +7,7 @@ Shot::Shot(std::string const& text, sf::Vector2f const& shot_dim)
 {}
 
 
-void Shot::move(float x, float y)
+void Shot::move(float const x, float const y)
 {
     shape.move(x, y);
 }
@@ -15,9 +15,6 @@ void Shot::move(float x, float y)
 
 bool Shot::check_is_dead()
 {
-    // change to rendertarget.get bla bla
-    return (shape.getPosition().y + shape.getGlobalBounds().height > (1080) ||
-            shape.getPosition().y < 0);
+    return (shape.getPosition().y + shape.getGlobalBounds().height > (1080)
+            || shape.getPosition().y < 0);
 }
-
-

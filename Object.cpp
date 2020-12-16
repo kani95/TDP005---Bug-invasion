@@ -9,6 +9,7 @@ Object::Object(std::string const& text, sf::Vector2f const& dim)
 
 }
 
+
 Object::Object(std::string const& text, sf::Vector2f const& pos, sf::Vector2f const& dim)
         : position{pos}
 {
@@ -16,6 +17,7 @@ Object::Object(std::string const& text, sf::Vector2f const& pos, sf::Vector2f co
     shape.setPosition(position);
     shape.setScale(dim);
 }
+
 
 Object::Object(std::string const& text, sf::Vector2f const& pos,
                sf::Vector2f const& dir,
@@ -27,6 +29,7 @@ Object::Object(std::string const& text, sf::Vector2f const& pos,
     shape.setScale(dim);
 }
 
+
 void Object::init_texture(std::string const& file_name)
 {
     if(!texture->loadFromFile(file_name))
@@ -36,30 +39,32 @@ void Object::init_texture(std::string const& file_name)
     shape.setTexture(*texture);
 }
 
-void Object::render(sf::RenderWindow* window)
+
+void Object::render(sf::RenderWindow* window) const
 {
     window -> draw(shape);
 }
 
-float Object::get_right()
+
+float Object::get_right() const
 {
     return shape.getPosition().x + shape.getGlobalBounds().width;
 }
 
 
-float Object::get_left()
+float Object::get_left() const
 {
     return shape.getGlobalBounds().left;
 }
 
 
-float Object::get_top()
+float Object::get_top() const
 {
     return shape.getGlobalBounds().top;
 }
 
 
-float Object::get_bot()
+float Object::get_bot() const
 {
     return shape.getPosition().y + shape.getGlobalBounds().height;
 }
@@ -70,24 +75,22 @@ void Object::set_position(sf::Vector2f const& pos)
     shape.setPosition(pos);
 }
 
+
 void Object::set_scale(sf::Vector2f const& scale)
 {
     shape.setScale(scale);
 }
 
-bool Object::check_coll(sf::Sprite & sprite)
-{
 
-/*    if(shot.get_right() >= shape.getGlobalBounds().width + shape.getPosition().x
-       && shot.get_top() <= shape.getGlobalBounds().top
-       && shot.get_bot() >= shape.getPosition().y + shape.getGlobalBounds().height
-       && shot.get_left() <= shape.getGlobalBounds().left)*/
+bool Object::check_coll(sf::Sprite & sprite) const
+{
     if(sprite.getGlobalBounds().intersects(shape.getGlobalBounds()))
     {
         return true;
     }
     return false;
 }
+
 
 sf::Sprite& Object::get_sprite()
 {

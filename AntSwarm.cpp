@@ -15,7 +15,8 @@ AntSwarm::AntSwarm(std::string const& text,
                    int const score,
                    int const hp,
                    int const att_timer)
-    :ant_swarm{}, direction{dir}, border_limit_right{border_limit_right}, border_limit_left{border_limit_left}, shot_dir{shot_dir}
+    :ant_swarm{}, direction{dir}, border_limit_right{border_limit_right},
+     border_limit_left{border_limit_left}, shot_dir{shot_dir}
 {
     float prev_x {pos.x};
     for (unsigned short int i{0}; i < total_ants; i++)
@@ -135,12 +136,14 @@ void AntSwarm::update(float const frame_time,
                       Character* player)
 {
 
-    for(unsigned int i{0}; i < ant_swarm.size(); ++i) {
+    for(unsigned int i{0}; i < ant_swarm.size(); ++i)
+    {
         Ant & ant{ant_swarm.at(i)};
 
         ant.update(player_shots, ant_shots, player);
 
-        if (ant.is_dead()) {
+        if (ant.is_dead())
+        {
 
             player -> increase_score(ant.get_score());
 
@@ -165,9 +168,3 @@ void AntSwarm::render(sf::RenderTarget* target)
       // target -> draw(ant.shape);
     }
 }
-
-
-/*std::vector<Ant>& AntSwarm::get_all_ants()
-{
-    return ant_swarm;
-}*/

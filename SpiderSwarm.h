@@ -4,7 +4,7 @@
 
 class SpiderSwarm{
 public:
-    SpiderSwarm() = default;
+    SpiderSwarm() = delete;
 
     SpiderSwarm(std::string const& text,
                 sf::Vector2f const& dim,
@@ -21,7 +21,7 @@ public:
                 Character* player);
 
     void render(sf::RenderWindow* window);
-    int get_size_swarm();
+    int get_size_swarm() const;
 
 
 private:
@@ -39,7 +39,6 @@ private:
     std::vector<Spider> all_spiders;
 
     void add_second();
+    void spawn_spider(float frame_time, Character* player);
 };
-
-
 #endif //GAME_H_SPIDERSWARM_H
