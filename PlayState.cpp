@@ -127,7 +127,7 @@ PlayState::~PlayState()
     delete leaf;
     delete spider_swarm;
     delete ant_swarm;
-    delete window;
+
 }
 
 

@@ -1,6 +1,5 @@
 #include "Game.h"
 
-
 Game::Game()
         :frame_time{}, window{nullptr}, score{}
 {
@@ -101,7 +100,8 @@ void Game::clear_stack()
         states.pop(); // removes the pointer
     }
 
+    window -> close();
     delete window;
 
-    window -> close();
+    std::exit(EXIT_SUCCESS); // ASK AXEL
 }

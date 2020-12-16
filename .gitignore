@@ -17,6 +17,9 @@ suppressions.txt
 suppressions.txt~
 .#.*
 example.txt~
+Game.cpp~
+html/
+latex/
 
 bin/
 build/

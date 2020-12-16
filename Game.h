@@ -5,6 +5,7 @@
 #include "LeaderboardState.h"
 #include "GameOverState.h"
 #include <stack>
+#include <stdlib.h>
 
 
 // run game engine class
