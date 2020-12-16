@@ -165,10 +165,10 @@ void PlayState::update(float const& frame_time, sf::Event & event)
 
     // send in a player reference to swarm, if it takes dmg call player take dmg
 
-    spider_swarm -> update(player_shots, ant_shots, player);
+    spider_swarm -> update(frame_time, player_shots, ant_shots, player);
 
     // !!! The update call should be made by each ant individually much more cleaner so
-    ant_swarm -> update(player_shots, ant_shots, player);
+    ant_swarm -> update(frame_time, player_shots, ant_shots, player);
 }
 
 

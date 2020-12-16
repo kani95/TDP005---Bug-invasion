@@ -65,7 +65,7 @@ void Game::update() {
         } else if (states.top() -> get_playstate_status()) {
             delete states.top();
             states.pop();
-            states.push(new PlayState(window, "example.txt"));
+            states.push(new PlayState(window, "Level.txt"));
         } else if (states.top() -> get_gameover_status()) {
             bool is_game_won{states.top() -> get_is_game_won()};
             score = states.top() -> get_score();

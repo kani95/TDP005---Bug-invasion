@@ -14,16 +14,16 @@ Player::Player(std::string const& text, std::string const& shot_text,
 void Player::update_input(float const frame_time)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        move(-150.f * frame_time, 0.f * frame_time);
+        move(-120.f * frame_time, 0.f * frame_time);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        move(150.f * frame_time, 0.f * frame_time);
+        move(120.f * frame_time, 0.f * frame_time);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        move(0.f * frame_time, 150.f * frame_time);
+        move(0.f * frame_time, 120.f * frame_time);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        move(0.f * frame_time, -150.f * frame_time);
+        move(0.f * frame_time, -120.f * frame_time);
     }
 }
 
@@ -57,7 +57,8 @@ void Player::update(Leaf* box,
 
     for (size_t i{0}; i < player_shots.size(); ++i)
     {
-        player_shots.at(i).move(shot_dir.x, shot_dir.y);
+        player_shots.at(i).move(shot_dir.x * frame_time,
+                                shot_dir.y * frame_time);
         if (player_shots.at(i).check_is_dead())
         {
             player_shots.erase(player_shots.begin() + i);

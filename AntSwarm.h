@@ -26,14 +26,15 @@ public:
 
     void render(sf::RenderTarget* target);
     std::pair<float, float> find_furthest_ants();
-    void move_swarm();
+    void move_swarm(float const frame_time);
 
 
     int get_size_swarm() const;
 
     //std::vector<Ant>& get_all_ants();
 
-    void update(std::vector<Shot> & player_shots,
+    void update(float const frame_time,
+                std::vector<Shot> & player_shots,
                 std::vector<Shot> & ant_shots,
                 Character* player);
 
