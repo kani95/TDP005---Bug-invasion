@@ -3,15 +3,15 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-class State {
-
+class State
+{
 public:
     explicit State(sf::RenderWindow* window);
     virtual ~State() = default;
 
     void load_font(std::string const& font_name);
     virtual void poll_events(sf::Event & event);
-    virtual void update(float const& frame_time, sf::Event & event) = 0;
+    virtual void update(float const frame_time, sf::Event & event) = 0;
     virtual void render() = 0;
 
     bool get_is_done() const;
@@ -20,6 +20,7 @@ public:
     bool get_gameover_status() const;
     bool get_playstate_status() const;
     bool get_is_game_won() const;
+
     unsigned long int get_score() const;
 
 protected:

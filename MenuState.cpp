@@ -2,11 +2,11 @@
 
 
 MenuState::MenuState(sf::RenderWindow *window)
-
-           : State{window}, selected_choice{}, choices{}
+        : State{window}, selected_choice{}, choices{}
 {
     init_menu();
 }
+
 
 MenuState::~MenuState() = default;
 
@@ -28,11 +28,32 @@ void MenuState::init_menu()
 
         choices[i].setFont(font);
 
-        choices[i].setPosition(sf::Vector2f(
-                window -> getSize().x / 2.f - 70.f,
-                (window -> getSize().y / (choices.size() + 1.f) * (i + 1.f))));
+        choices[i].setPosition(sf::Vector2f(window -> getSize().x / 2.f - 70.f,
+                                            (window -> getSize().y /
+                                            (choices.size() + 1.f) * (i + 1.f))));
     }
 }
+
+
+void MenuState::set_choices()
+{
+    sf::Text text{};
+
+    choices.push_back(text);
+    choices.push_back(text);
+    choices.push_back(text);
+
+    choices[0].setString("New game");
+    choices[1].setString("Leaderboard");
+    choices[2].setString("Exit");
+}
+
+
+void MenuState::update(float const frame_time, sf::Event & event)
+{
+    poll_events(event);
+}
+
 
 void MenuState::poll_events(sf::Event & event)
 {
@@ -60,42 +81,25 @@ void MenuState::poll_events(sf::Event & event)
                         exit_status = true;
                         break;
                     case sf::Keyboard::Enter:
-                        if (get_selected_choice() == 0) {
+                        if (get_selected_choice() == 0)
+                        {
                             playstate_status = true;
-                        } else if (get_selected_choice() == 1) {
+                        }
+                        else if (get_selected_choice() == 1)
+                        {
                             leaderboard_status = true;
-                        } else if (get_selected_choice() == 2) {
+                        }
+                        else if (get_selected_choice() == 2)
+                        {
                             exit_status = true;
                         }
                         break;
                     default:
                         break;
                 }
-            }
         }
-}
-
-
-
-void MenuState::update(float const& frame_time, sf::Event & event)
-{
-   poll_events(event);
-}
-
-
-void MenuState::render()
-{
-    for (size_t i{}; i < choices.size(); ++i)
-    {
-        window -> draw(choices[i]);
     }
 }
-
-int MenuState::get_selected_choice() const
-{
-    return selected_choice;
-}
-
 
 
 void MenuState::move_up()
@@ -119,14 +123,17 @@ void MenuState::move_down()
     }
 }
 
-void MenuState::set_choices()
+
+int MenuState::get_selected_choice() const
 {
-    sf::Text text;
-    choices.push_back(text);
-    choices.push_back(text);
-    choices.push_back(text);
-    choices[0].setString("New game");
-    choices[1].setString("Leaderboard");
-    choices[2].setString("Exit");
+    return selected_choice;
 }
 
+
+void MenuState::render()
+{
+    for (size_t i{}; i < choices.size(); ++i)
+    {
+        window -> draw(choices[i]);
+    }
+}

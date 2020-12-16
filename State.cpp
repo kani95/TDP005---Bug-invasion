@@ -11,17 +11,30 @@ State::State(sf::RenderWindow *window)
 }
 
 
+void State::load_font(std::string const& font_name)
+{
+    if (!font.loadFromFile(font_name))
+    {
+        std::cerr << "Failed to load font in state";
+    }
+}
+
+
 void State::poll_events(sf::Event & event)
 {
-    while (window -> pollEvent(event)) {
-        switch (event.type) {
+    while (window -> pollEvent(event))
+    {
+        switch (event.type)
+        {
             case sf::Event::Closed:
                 exit_status = true;
                 break;
             default:
                 break;
+
             case sf::Event::KeyReleased:
-                switch (event.key.code) {
+                switch (event.key.code)
+                {
                     case sf::Keyboard::Escape:
                         exit_status = true;
                         break;
@@ -32,13 +45,6 @@ void State::poll_events(sf::Event & event)
     }
 }
 
-void State::load_font(std::string const& font_name)
-{
-    if (!font.loadFromFile(font_name))
-    {
-        std::cerr << "Failed to load font in state";
-    }
-}
 
 bool State::get_is_done() const
 {
@@ -74,6 +80,7 @@ bool State::get_is_game_won() const
 {
     return is_game_won;
 }
+
 
 unsigned long int State::get_score() const
 {

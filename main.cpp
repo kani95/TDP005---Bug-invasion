@@ -1,5 +1,5 @@
-// #include <SFML/Graphics.hpp>
 #include "Game.h"
+
 
 int main()
 {
@@ -7,11 +7,9 @@ int main()
 
     while (game.window_status())
     {
-
         game.update();
 
         game.render();
-
     }
 
     return 0;
