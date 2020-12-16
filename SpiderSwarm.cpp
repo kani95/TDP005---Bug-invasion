@@ -14,14 +14,22 @@ SpiderSwarm::SpiderSwarm(std::string const& text,
           text{text}
 {}
 
-void SpiderSwarm::update(std::vector<Shot> & player_shots,
+void SpiderSwarm::update(float const frame_time,
+                         std::vector<Shot> & player_shots,
                          std::vector<Shot> & ant_shots,
                          Character* player)
 {
     if (timer >= spawn_timer)
     {
-        Spider spider{text, dim, dir, spawn_limit_x, spawn_limit_y, score, hp};
-        all_spiders.push_back(spider);
+        if (all_spiders.size() < 7) {
+            Spider spider{text, dim, dir * frame_time, spawn_limit_x, spawn_limit_y,
+                          score, hp};
+
+            if (!spider.check_coll(player->get_sprite())) {
+                all_spiders.push_back(spider);
+            }
+        }
+
         timer = 0;
     }
 
@@ -29,7 +37,7 @@ void SpiderSwarm::update(std::vector<Shot> & player_shots,
     {
         Spider & spider{all_spiders.at(i)};
 
-        spider.update(player_shots, ant_shots,player);
+        spider.update(player_shots, ant_shots, player);
 
         if (spider.is_dead())
         {

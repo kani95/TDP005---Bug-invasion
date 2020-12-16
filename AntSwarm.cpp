@@ -58,6 +58,7 @@ std::pair<float, float> AntSwarm::find_furthest_ants()
     for (unsigned int i{0}; i < get_size_swarm(); ++i) {
         float current_ant_pos = ant_swarm.at(i).get_left();
 
+
         if (current_ant_pos < ant_right_x) {
             ant_right_x = current_ant_pos;
         } else if (current_ant_pos > ant_left_x) {
@@ -69,7 +70,7 @@ std::pair<float, float> AntSwarm::find_furthest_ants()
 }
 
 
-void AntSwarm::move_swarm()
+void AntSwarm::move_swarm(float const frame_time)
 {
     if(!ant_swarm.empty())
     {
@@ -78,8 +79,8 @@ void AntSwarm::move_swarm()
 
         // std::cout << border_hit << std::endl;
 
-        float x_movement{direction.x};
-        float y_movement{direction.y};
+        float x_movement{direction.x * frame_time};
+        float y_movement{direction.y * frame_time};
 
         if (border_hit % 2 != 0) {
             if (border_hit <= 5) {
@@ -128,7 +129,8 @@ void AntSwarm::move_swarm()
 }
 
 
-void AntSwarm::update(std::vector<Shot> & player_shots,
+void AntSwarm::update(float const frame_time,
+                      std::vector<Shot> & player_shots,
                       std::vector<Shot> & ant_shots,
                       Character* player)
 {
@@ -148,10 +150,10 @@ void AntSwarm::update(std::vector<Shot> & player_shots,
 
     for (Shot & shot : ant_shots)
     {
-        shot.move(shot_dir.x, shot_dir.y);
+        shot.move(shot_dir.x * frame_time, shot_dir.y * frame_time);
     }
 
-    move_swarm();
+    move_swarm(frame_time);
 }
 
 

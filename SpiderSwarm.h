@@ -15,7 +15,8 @@ public:
                 int const score,
                 int const hp);
 
-    void update(std::vector<Shot> & player_shots,
+    void update(float const frame_time,
+                std::vector<Shot> & player_shots,
                 std::vector<Shot> & ant_shots,
                 Character* player);
 

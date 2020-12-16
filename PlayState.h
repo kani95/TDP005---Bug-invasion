@@ -31,6 +31,9 @@ private:
     sf::Text score_text;
     sf::Clock game_clock;
 
+    std::unique_ptr<sf::Texture> background_texture = std::make_unique<sf::Texture>();
+    sf::Sprite background;
+
     void read_lvl(std::string const& filename);
     bool check_game_status();
     void update_total_score();

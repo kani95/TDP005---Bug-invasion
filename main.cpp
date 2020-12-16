@@ -7,7 +7,6 @@ int main()
 
     while (game.window_status())
     {
-        //game.update_tick();
 
         game.update();
 

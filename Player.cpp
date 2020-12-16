@@ -4,26 +4,27 @@
 Player::Player(std::string const& text, std::string const& shot_text,
                sf::Vector2f const& pos, sf::Vector2f const& dir,
                sf::Vector2f const& dim, float const movespeed,
-               int const hp, int const att_timer, sf::Vector2f const& shot_dim,
+               int const hp, int const att_timer, float const timer_dmg,
+               sf::Vector2f const& shot_dim,
                sf::Vector2f const& shot_dir)
         :Character(text, pos, dir, dim, movespeed, hp), att_timer{att_timer}, timer{},
-         timer_dmg{}, shot_dim{shot_dim}, shot_dir{shot_dir}, shot_text{shot_text}
+        timer_dmg{timer_dmg}, shot_dim{shot_dim}, shot_dir{shot_dir}, shot_text{shot_text}
 {}
 
 
 void Player::update_input(float const frame_time)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        move(-1.f, 0.f);
+        move(-120.f * frame_time, 0.f * frame_time);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        move(1.f, 0.f);
+        move(120.f * frame_time, 0.f * frame_time);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        move(0.f, 1.f);
+        move(0.f * frame_time, 120.f * frame_time);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        move(0.f, -1);
+        move(0.f * frame_time, -120.f * frame_time);
     }
 }
 
@@ -45,9 +46,9 @@ void Player::update(Leaf* box,
     }
 
     //TAKE DAMAGE TIMER
-    if(timer_dmg < 35) {
+ /*   if(timer_dmg < 35) {
         ++timer_dmg;
-    }
+    }*/
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer >= att_timer)
     {
@@ -57,7 +58,8 @@ void Player::update(Leaf* box,
 
     for (size_t i{0}; i < player_shots.size(); ++i)
     {
-        player_shots.at(i).move(shot_dir.x, shot_dir.y);
+        player_shots.at(i).move(shot_dir.x * frame_time,
+                                shot_dir.y * frame_time);
         if (player_shots.at(i).check_is_dead())
         {
             player_shots.erase(player_shots.begin() + i);
@@ -115,21 +117,10 @@ void Player::take_damage()
     shape.setColor(sf::Color::Red);
     clock.restart().asSeconds();
 
-    if (hp == 3 && timer_dmg >= 35)
-    {
-        hp = 2;
-        timer_dmg = 0;
+    if ( last_hit.getElapsedTime().asSeconds() > timer_dmg ) {
+        --hp;
+        last_hit.restart().asSeconds();
+    }
 
-    }
-    else if (hp == 2 && timer_dmg >= 35)
-    {
-        hp = 1;
-        timer_dmg = 0;
-    }
-    else if (hp == 1 && timer_dmg >= 35)
-    {
-        hp = 0;
-        timer_dmg = 0;
-    }
 }
 

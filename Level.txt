@@ -1,0 +1,5 @@
+Player ladybug3.png player_shot.png 500 500 0 0 1 1 2 100 60 1.2 1 1 0 -900
+Leaf leafpix.png 470 600  1.4 1.4
+AntSwarm Sprites/ant2.png ant_shot.png 400 70 1 1 70 80 125 0 0 300 1 1 0 1850 30 3 100 2 1000
+SpiderSwarm Sprites/spoder2.png 1 1 100 -100 0 1800 540 1000 300 200 1
+Background background3.png 1 1

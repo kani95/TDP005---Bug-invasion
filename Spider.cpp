@@ -29,8 +29,8 @@ void Spider::set_start_pos(sf::Vector2f const& lmt_x,
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    std::uniform_real_distribution dis_x(lmt_x.x, lmt_x.y);
-    std::uniform_real_distribution dis_y(lmt_y.x, lmt_y.y - 10);
+    std::uniform_real_distribution dis_x(lmt_x.x, lmt_x.y) ;
+    std::uniform_real_distribution dis_y(lmt_y.x, lmt_y.y);
 
     float start_x {dis_x(gen)};
     float start_y {dis_y(gen)};
@@ -41,36 +41,62 @@ void Spider::set_start_pos(sf::Vector2f const& lmt_x,
 
 void Spider::check_coll_screen()
 {
-    bool right = (shape.getPosition().x + shape.getScale().x > (spw_lmt_x.y));
-    bool left = (shape.getPosition().x < spw_lmt_x.x);
-    bool down = (shape.getPosition().y + shape.getScale().y > (spw_lmt_y.y));
-    bool up = (shape.getPosition().y < spw_lmt_y.x);
+
+    if (get_left() < 0)
+    {
+        direction.x *= -1;
+        move( direction.x, direction.y);
+    }
+    // RIGHT
+   else if ((get_right() > 1920))
+    {
+        direction.x *= -1;
+        direction.y *= -1;
+        move( direction.x,  direction.y);
+    }
+    // UP
+   else if (get_top() < 540)
+    {
+
+        direction.y *= -1;
+        move(  direction.x,  direction.y);
+    }
+    // DOWN
+   else if (get_bot() > 1080)
+    {
+        direction.y *= -1;
+        move( direction.x,  direction.y);
+    }
+
+
+
+   // bool right = (get_right() > (spw_lmt_x.y));
+ /*   bool left = (get_left() < spw_lmt_x.x);
+    bool down = (get_bot()  > (spw_lmt_y.y));
+    bool up = (get_top() < spw_lmt_y.x);
 
 
     if (right)
     {
-        direction.x = -1 * direction.x;
-        direction.y += 1;
+        std::swap(direction.x, direction.y);
         move(direction.x, direction.y);
-        direction.y -= 1;
+        //direction.y -= 1;
     }
     else if (left)
     {
-        direction.x = -1 * direction.x;
-        direction.y += 1;
+        std::swap(direction.x, direction.y);
         move(direction.x, direction.y);
-        direction.y -= 1;
     }
     else if (down)
     {
-        direction.x = -1 * direction.x;
-        direction.y = -1 * direction.y;
+        std::swap(direction.x, direction.y);
+        move(direction.x, direction.y);
     }
     else if (up)
     {
-        direction.x = -1 * direction.x;
-        direction.y = -1 * direction.y;
-    }
+        std::swap(direction.x, direction.y);
+        move(direction.x, direction.y);
+    }*/
 }
 
 
@@ -93,7 +119,7 @@ void Spider::check_coll_player_shots(std::vector<Shot> & player_shots, Character
         }
 
     }
-    if (check_coll(player ->get_sprite()))
+    if (check_coll(player -> get_sprite()))
     {
         player -> take_damage();
     }
@@ -104,8 +130,8 @@ void Spider::update(std::vector<Shot> & player_shots,
                     std::vector<Shot> & ant_shots,
                     Character* player)
 {
-    check_coll_screen();
     move(direction.x, direction.y);
+    check_coll_screen();
     check_coll_player_shots(player_shots, player);
 }
 

@@ -10,7 +10,7 @@ public:
     Player(std::string const& text, std::string const& shot_text,
            sf::Vector2f const& pos, sf::Vector2f const& dir,
            sf::Vector2f const& dim, float const movespeed,
-           int const hp, int const att_timer,
+           int const hp, int const att_timer, float const timer_dmg,
            sf::Vector2f const& shot_dim,
            sf::Vector2f const& shot_dir);
 
@@ -20,7 +20,8 @@ public:
 
 private:
     int timer;
-    int timer_dmg;
+    float timer_dmg;
+    sf::Clock last_hit;
     int att_timer;
 
     sf::Vector2f shot_dim;

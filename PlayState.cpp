@@ -48,6 +48,7 @@ void PlayState::read_lvl(std::string const& filename)
     int number_of_rows{};
     int spawn_timer{};
     int att_timer{};
+    float timer_dmg{};
     int score{};
     int hp{};
 
@@ -63,11 +64,11 @@ void PlayState::read_lvl(std::string const& filename)
         if (object == "Player")
         {
             infile >> texture_file >> shot_texture >> pos.x >> pos.y >> direction.x >>
-                   direction.y >> dimensions.x >> dimensions.y >> movespeed >> hp >> att_timer
+                   direction.y >> dimensions.x >> dimensions.y >> movespeed >> hp >> att_timer >> timer_dmg
                    >> shot_dim.x >> shot_dim.y >> shot_dir.x >> shot_dir.y;
 
             player = new Player{texture_file, shot_texture, pos, direction,
-                                dimensions, movespeed, hp, att_timer, shot_dim, shot_dir};
+                                dimensions, movespeed, hp, att_timer, timer_dmg, shot_dim, shot_dir};
 
             infile.ignore(1000, '\n');
         }
@@ -114,6 +115,19 @@ void PlayState::read_lvl(std::string const& filename)
            // spider_swarm = t_spiderswarm;
            spider_swarm = new SpiderSwarm{texture_file, dimensions, direction, spawn_limit_x, spawn_limit_y,
                                           spawn_timer, score, hp};
+
+            infile.ignore(1000, '\n');
+
+        }
+        if (object == "Background")
+        {
+            infile >> texture_file >> dimensions.x >> dimensions.y;
+
+            if(!background_texture -> loadFromFile(texture_file)) {
+               std::cerr << "Could not load background";
+            }
+
+            background.setTexture(*background_texture);
         }
     }
 
@@ -165,10 +179,10 @@ void PlayState::update(float const& frame_time, sf::Event & event)
 
     // send in a player reference to swarm, if it takes dmg call player take dmg
 
-    spider_swarm -> update(player_shots, ant_shots, player);
+    spider_swarm -> update(frame_time, player_shots, ant_shots, player);
 
     // !!! The update call should be made by each ant individually much more cleaner so
-    ant_swarm -> update(player_shots, ant_shots, player);
+    ant_swarm -> update(frame_time, player_shots, ant_shots, player);
 }
 
 
@@ -177,6 +191,9 @@ void PlayState::render()
     //ant_shots = ant_swarm.get_ant_shots();
     //all_spiders = spider_swarm.get_all_spiders();
     //all_ants = ant_swarm.get_all_ants();
+
+
+    window -> draw(background);
 
     leaf->render(window);
 

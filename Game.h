@@ -26,15 +26,18 @@ private:
     sf::RenderWindow* window;
     sf::VideoMode video_mode;
     sf::Event event{};
-    sf::Clock clock;
+    sf::Clock delta_clock;
     sf::Time tick;
+    sf::Clock clock;
+    sf::Time last_update = sf::Time::Zero;
 
-    // how long it take for the game to make one update call and one render call
-    float frame_time;
+    float delta;
     unsigned long int score;
 
     void init_window();
     void init_states();
     void clear_stack();
+
+    void update_delta();
 };
 #endif //MAIN_CPP_GAME_H
