@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game()
-        :frame_time{}, window{nullptr}, score{}
+        :delta{}, window{nullptr}, score{}
 {
     init_window();
     init_states();
@@ -51,7 +51,8 @@ void Game::update_tick()
 
 void Game::update() {
 //Remove top function
-    states.top()->update(1.0f / tick.asSeconds(), event);
+    update_delta();
+    states.top()->update(delta, event);
 
     if (!states.empty()) {
         if (states.top() -> get_is_done()) {
@@ -73,8 +74,8 @@ void Game::update() {
             states.push(new GameOverState(window, is_game_won, score));
         }
     }
-    sf::Time time = clock.getElapsedTime();
-    clock.restart().asSeconds();
+    sf::Time time = delta_clock.getElapsedTime();
+    delta_clock.restart().asSeconds();
 }
 
 
@@ -104,4 +105,10 @@ void Game::clear_stack()
     delete window;
 
     std::exit(EXIT_SUCCESS); // ASK AXEL
+}
+
+void Game::update_delta()
+{
+    delta = delta_clock.restart().asSeconds();
+    std::cout << delta << std::endl;
 }

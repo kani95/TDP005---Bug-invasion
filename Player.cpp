@@ -14,16 +14,16 @@ Player::Player(std::string const& text, std::string const& shot_text,
 void Player::update_input(float const frame_time)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        move(-1.f, 0.f);
+        move(-150.f * frame_time, 0.f * frame_time);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        move(1.f, 0.f);
+        move(150.f * frame_time, 0.f * frame_time);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        move(0.f, 1.f);
+        move(0.f * frame_time, 150.f * frame_time);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        move(0.f, -1);
+        move(0.f * frame_time, -150.f * frame_time);
     }
 }
 
