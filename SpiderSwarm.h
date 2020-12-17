@@ -4,8 +4,6 @@
 
 class SpiderSwarm{
 public:
-    SpiderSwarm() = delete;
-
     SpiderSwarm(std::string const& text,
                 sf::Vector2f const& dim,
                 sf::Vector2f const& dir,
@@ -39,6 +37,6 @@ private:
     std::vector<Spider> all_spiders;
 
     void add_second();
-    void spawn_spider(float frame_time, Character* player);
+    void spawn_spider(Character* player);
 };
 #endif //GAME_H_SPIDERSWARM_H

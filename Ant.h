@@ -12,11 +12,12 @@ public:
        sf::Vector2f const& shot_dim, int const score, int const hp,
        int const att_timer);
 
-    void move(float, float) override;
+    void move(float const, float const) override;
     void render(sf::RenderTarget* target) const;
-    void update(std::vector<Shot> & player_shots,
-                std::vector<Shot> & ant_shots,
-                Character* player) override;
+    void update(float const frame_time,
+            std::vector<Shot> & player_shots,
+            std::vector<Shot> & ant_shots,
+            Character* player) override;
 
 private:
     int att_timer;

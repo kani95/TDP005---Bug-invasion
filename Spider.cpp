@@ -39,39 +39,39 @@ void Spider::set_start_pos(sf::Vector2f const& lmt_x,
 }
 
 
-void Spider::move( float const dirx, float const diry)
+void Spider::move(float const dirx, float const diry)
 {
     shape.move(dirx,diry);
 }
 
 
-void Spider::keep_inside_screen()
+void Spider::keep_inside_screen(float const frame_time)
 {
 
     if (get_left() < 0)
     {
         direction.x *= -1;
-        move( direction.x, direction.y);
+        move( direction.x * frame_time, direction.y * frame_time);
     }
         // RIGHT
     else if ((get_right() > 1920))
     {
         direction.x *= -1;
         direction.y *= -1;
-        move( direction.x,  direction.y);
+        move( direction.x * frame_time,  direction.y * frame_time);
     }
         // UP
     else if (get_top() < 540)
     {
 
         direction.y *= -1;
-        move(  direction.x,  direction.y);
+        move(  direction.x * frame_time,  direction.y * frame_time);
     }
         // DOWN
     else if (get_bot() > 1080)
     {
         direction.y *= -1;
-        move( direction.x,  direction.y);
+        move( direction.x * frame_time,  direction.y * frame_time);
     }
 }
 
@@ -103,11 +103,14 @@ void Spider::collision_player(std::vector<Shot> & player_shots,
 }
 
 
-void Spider::update(std::vector<Shot> & player_shots,
-                    std::vector<Shot> & ant_shots,
-                    Character* player)
+void Spider::update(float const frame_time,
+        std::vector<Shot> & player_shots,
+        std::vector<Shot> & ant_shots,
+        Character* player)
 {
-    move(direction.x, direction.y);
-    keep_inside_screen();
+    move(direction.x * frame_time, direction.y * frame_time);
+
+    keep_inside_screen(frame_time);
+
     collision_player(player_shots, player);
 }

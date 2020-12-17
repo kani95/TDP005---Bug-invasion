@@ -16,9 +16,10 @@ public:
            int const hp);
 
     void move(float const, float const) override;
-    void update(std::vector<Shot> & player_shots,
-                std::vector<Shot> & ant_shots,
-                Character* player) override;
+    void update(float const frame_time,
+            std::vector<Shot> & player_shots,
+            std::vector<Shot> & ant_shots,
+            Character* player) override;
 
 private:
     sf::Vector2f spawn_limit_x;
@@ -26,7 +27,7 @@ private:
 
     void set_start_pos(sf::Vector2f const& spw_lmt_x,
                        sf::Vector2f const& spw_lmt_y);
-    void keep_inside_screen();
+    void keep_inside_screen(float const);
     void collision_player(std::vector<Shot> & player_shots,
                           Character * player);
 };
