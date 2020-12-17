@@ -38,7 +38,7 @@ void Game::init_window()
 
 void Game::init_states()
 {
-    states.push(new MenuState(window));
+   states.push(new MenuState(window));
 }
 
 
@@ -50,18 +50,8 @@ bool Game::window_status() const
 
 void Game::update()
 {
-//Remove top function
-
-   /* tick = clock.restart();
-    last_update += tick;*/
     update_delta();
- /*  while (last_update < sf::seconds(delta))
-   {
-       last_update += sf::seconds(delta);
-   }*/
- // ask axel about commenting style
- // about memory leak
- // about
+
    /// Check top state on stack, call update then check if any flags are set to
    /// exit the current state then add the new state.
        states.top() -> update(delta, event);
@@ -84,6 +74,8 @@ void Game::update()
            {
                remove_top();
 
+               //To add new level, push a new playstate to the stack with the relevant filename.
+               //Or change the current file in level.txt to your hearts desire.
                states.push(new PlayState(window, "Level.txt"));
            }
            else if (states.top() -> get_gameover_status())

@@ -74,14 +74,16 @@ std::pair<float, float> AntSwarm::find_furthest_ants()
 }
 
 
-void AntSwarm::move_swarm(float const frame_time)
-{
-    /*!
+/*!
      * Moves all ants object in the same direction depending
      * if the ants on the edges of the swarm can move
      * if not they will trigger a flag that will change the
      * movement to the other side.
      */
+
+void AntSwarm::move_swarm(float const frame_time)
+{
+
 
     if(!ant_swarm.empty())
     {

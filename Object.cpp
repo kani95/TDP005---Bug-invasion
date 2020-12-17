@@ -32,7 +32,7 @@ Object::Object(std::string const& text, sf::Vector2f const& pos,
 
 void Object::init_texture(std::string const& file_name)
 {
-    if(!texture->loadFromFile(file_name))
+    if(!texture -> loadFromFile(file_name))
     {
         std::cerr << "Failed to load texture";
     }
