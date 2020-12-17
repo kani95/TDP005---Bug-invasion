@@ -1,4 +1,4 @@
-#ifndef MAIN_CPP_PLAYER_H
+ #ifndef MAIN_CPP_PLAYER_H
 #define MAIN_CPP_PLAYER_H
 #include "Character.h"
 #include "Shot.h"
@@ -6,7 +6,6 @@
 
 class Player : public Character {
 public:
-    Player() = delete;
     Player(std::string const& text, std::string const& shot_text,
            sf::Vector2f const& pos, sf::Vector2f const& dir,
            sf::Vector2f const& dim, float const movespeed,
