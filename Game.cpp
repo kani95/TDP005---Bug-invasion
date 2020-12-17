@@ -28,8 +28,8 @@ void Game::init_window()
     video_mode.height = 1080;
     video_mode.bitsPerPixel= 32;
 
-    window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game",
-                                  sf::Style::Fullscreen);
+    window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
+                                  //sf::Style::Fullscreen);
     window -> setKeyRepeatEnabled(false);
     window -> setFramerateLimit(60);
     window -> setVerticalSyncEnabled(true);

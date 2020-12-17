@@ -1,6 +1,7 @@
 #include "SpiderSwarm.h"
 #include <iostream>
 
+
 SpiderSwarm::SpiderSwarm(std::string const& text,
                          sf::Vector2f const& dim,
                          sf::Vector2f const& dir,
@@ -10,34 +11,43 @@ SpiderSwarm::SpiderSwarm(std::string const& text,
                          int const score,
                          int const hp)
         : all_spiders{}, timer{}, spawn_timer{spawn_timer}, score{score},
-          hp{hp}, dir{dir}, dim{dim}, spawn_limit_y{spawn_limit_y}, spawn_limit_x{spawn_limit_x},
-          text{text}
+          hp{hp}, dir{dir}, dim{dim}, spawn_limit_y{spawn_limit_y},
+          spawn_limit_x{spawn_limit_x}, text{text}
 {}
 
-void SpiderSwarm::update(float const frame_time,
-                         std::vector<Shot> & player_shots,
-                         std::vector<Shot> & ant_shots,
-                         Character* player)
+
+void SpiderSwarm::spawn_spider(Character* player)
 {
     if (timer >= spawn_timer)
     {
-        if (all_spiders.size() < 7) {
-            Spider spider{text, dim, dir * frame_time, spawn_limit_x, spawn_limit_y,
-                          score, hp};
+        if (all_spiders.size() < 7)
+        {
+            Spider spider{text, dim, dir, spawn_limit_x,
+                          spawn_limit_y, score, hp};
 
-            if (!spider.check_coll(player->get_sprite())) {
+            if (!spider.check_coll(player -> get_sprite()))
+            {
                 all_spiders.push_back(spider);
             }
         }
 
         timer = 0;
     }
+}
+
+
+void SpiderSwarm::update(float const frame_time,
+                         std::vector<Shot> & player_shots,
+                         std::vector<Shot> & ant_shots,
+                         Character* player)
+{
+    spawn_spider(player);
 
     for (size_t i{}; i < all_spiders.size(); ++i)
     {
         Spider & spider{all_spiders.at(i)};
 
-        spider.update(player_shots, ant_shots, player);
+        spider.update(frame_time, player_shots, ant_shots, player);
 
         if (spider.is_dead())
         {
@@ -65,8 +75,7 @@ void SpiderSwarm::render(sf::RenderWindow* window)
 }
 
 
-int SpiderSwarm::get_size_swarm()
+int SpiderSwarm::get_size_swarm() const
 {
     return all_spiders.size();
 }
-

@@ -7,14 +7,16 @@ Character::Character(int const hp)
     clock.restart().asSeconds();
 }
 
+
 Character::Character(std::string const& text, sf::Vector2f const& pos,
-                     sf::Vector2f const& dir,
-                     sf::Vector2f const& dim,
+                     sf::Vector2f const& direction,
+                     sf::Vector2f const& dimention,
                      float const movespeed,
                      int const hp)
-        : Object(text, pos, dir, dim),
+        : Object(text, pos, direction, dimention),
           score{0}, movespeed{movespeed}, hp{hp}
 {}
+
 
 void Character::take_damage()
 {
@@ -26,7 +28,6 @@ void Character::take_damage()
 
 void Character::increase_score(long unsigned int plus_score)
 {
-    //if (game_)
     score += plus_score;
 }
 
@@ -37,14 +38,13 @@ void Character::set_score(int new_score)
 }
 
 
-int Character::get_hp()
+int Character::get_hp() const
 {
-
     return hp;
 }
 
 
-bool Character::is_dead()
+bool Character::is_dead() const
 {
     if (hp <= 0)
     {
@@ -57,21 +57,9 @@ bool Character::is_dead()
 }
 
 
-/*bool Character::check_enemy_coll(sf::Sprite const& enemy)
-{
-    *//*if (shape.getPosition().x + shape.getScale().x > enemy.getPosition().x
-        && shape.getPosition().y < enemy.getPosition().y + shape.getScale().y
-        && shape.getPosition().y + shape.getScale().y > enemy.getPosition().y
-        && shape.getPosition().x < enemy.getPosition().x + shape.getScale().x)*//*
-    if(shape.getGlobalBounds().intersects(enemy.getGlobalBounds())){
-        //shape.setPosition(30, 30);
-        return true;
-    }
-    return false;
-}*/
-
-unsigned long int Character::get_score()
+unsigned long int Character::get_score() const
 {
     return score;
 }
 
+Character::Character() = default;

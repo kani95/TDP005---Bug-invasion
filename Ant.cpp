@@ -28,6 +28,9 @@ void Ant::render(sf::RenderTarget* target) const
 
 bool Ant::check_collison_player_shots(std::vector<Shot> & player_shots)
 {
+    /// Return true if player shot collides with ant
+    /// Remove the player shot from the vector
+
     for(unsigned int i{0}; i < player_shots.size(); ++i)
     {
         Shot & shot{player_shots.at(i)};
@@ -43,6 +46,9 @@ bool Ant::check_collison_player_shots(std::vector<Shot> & player_shots)
 
 bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * player)
 {
+    /// Return true if player collides with ant shots
+    /// Player takes damage, shot is removed
+
     for(unsigned int i{0}; i < ant_shots.size(); ++i)
     {
         Shot & shot{ant_shots.at(i)};
@@ -61,10 +67,10 @@ bool Ant::check_collison_ant_shots(std::vector<Shot> & ant_shots, Character * pl
 }
 
 
-bool Ant::can_shoot()
+bool Ant::can_shoot() const
 {
     int value{(std::rand() % att_timer) + 1};
-    if (value == 3)
+    if (value < 4)
     {
         return true;
     }
@@ -75,9 +81,10 @@ bool Ant::can_shoot()
 }
 
 
-void Ant::update(std::vector<Shot> & player_shots,
-                 std::vector<Shot> & ant_shots,
-                 Character* player)
+void Ant::update(float const frame_time,
+        std::vector<Shot> & player_shots,
+        std::vector<Shot> & ant_shots,
+        Character* player)
 {
     if(clock.getElapsedTime().asSeconds() >= 0.3)
     {
@@ -103,6 +110,4 @@ void Ant::update(std::vector<Shot> & player_shots,
         new_shot.set_position(pos);
         ant_shots.push_back(new_shot);
     }
-
 }
-

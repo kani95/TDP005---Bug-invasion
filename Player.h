@@ -6,7 +6,7 @@
 
 class Player : public Character {
 public:
-    Player() = default;
+    Player() = delete;
     Player(std::string const& text, std::string const& shot_text,
            sf::Vector2f const& pos, sf::Vector2f const& dir,
            sf::Vector2f const& dim, float const movespeed,
@@ -14,8 +14,8 @@ public:
            sf::Vector2f const& shot_dim,
            sf::Vector2f const& shot_dir);
 
-    void update(Leaf* box,
-                std::vector<Shot> & player_shots, float const frame_time);
+    void update(Leaf* box, std::vector<Shot> & player_shots,
+                float const frame_time);
     void take_damage() override;
 
 private:
@@ -29,8 +29,10 @@ private:
     std::string shot_text;
 
     void move(float dirx, float diry) override;
-    void update_input(float const frame_time);
-    void check_inside_leaf(Leaf* box);
+    void update_position(float const frame_time);
+    void keep_inside_leaf(Leaf* box);
+    void shooting(int const att_timer, float const frame_time,
+                  std::vector<Shot> & player_shots);
     void add_shot(std::vector<Shot> & player_shots);
 };
 #endif //MAIN_CPP_PLAYER_H

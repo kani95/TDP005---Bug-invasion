@@ -6,38 +6,30 @@
 class Character : public Object {
 public:
 
-    Character(int const hp);
+    explicit Character(int const hp);
     Character(std::string const& text ,sf::Vector2f const& pos,
-              sf::Vector2f const& dir,
-              sf::Vector2f const& dim,
+              sf::Vector2f const& direction,
+              sf::Vector2f const& dimention,
               float const movespeed,
               int const hp);
+
+    Character();
 
     virtual void move(float const, float const) = 0;
     virtual void take_damage();
 
     void increase_score(long unsigned int plus_score);
     void set_score(int new_score);
-    unsigned long int get_score();
 
-    int get_hp();
-    bool is_dead();
-
- //   bool check_enemy_coll(sf::Sprite const& enemy);
+    unsigned long int get_score() const;
+    int get_hp() const;
+    bool is_dead() const;
 
 protected:
-    long unsigned int score;
-    int hp;
-    float movespeed;
+    long unsigned int score{};
+    int hp{};
+    float movespeed{};
     sf::Clock clock;
-
-
-
-
-
-
-
-
 };
 
 
