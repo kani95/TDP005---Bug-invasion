@@ -207,7 +207,9 @@ void PlayState::update_total_score()
     }
 
     score += player -> get_score() * multiplier;
-    player -> set_score(0); //WHY???
+    // Set score to 0, otherwise the current points will be multiplied and not
+    // the acquired from eliminating an enemy.
+    player -> set_score(0);
 
     score_text.setString("SCORE      " +  std::to_string(score)
                          + "\nLIVES      " + std::to_string(player -> get_hp()));
