@@ -40,7 +40,7 @@ void Object::init_texture(std::string const& file_name)
 }
 
 
-void Object::render(sf::RenderWindow* window) const
+void Object::render(sf::RenderTarget* window) const
 {
     window -> draw(shape);
 }

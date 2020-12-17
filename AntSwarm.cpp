@@ -28,13 +28,13 @@ AntSwarm::AntSwarm(std::string const& text,
         ant_swarm.push_back(ant);
 
         // second row
-        if (i == total_ants/number_of_rows - 1)
+        if (i == total_ants / number_of_rows - 1)
         {
             pos.x = prev_x;
             pos.y += (dist.y + dim.y);
         }
         // third row
-        else if (i == (total_ants/number_of_rows) * 2 - 1)
+        else if (i == (total_ants / number_of_rows) * 2 - 1)
         {
             pos.x = prev_x;
             pos.y += (dist.y + dim.y);
@@ -56,13 +56,16 @@ std::pair<float, float> AntSwarm::find_furthest_ants()
     float ant_right_x{ant_swarm.at(0).get_left()};
 
 
-    for (unsigned int i{0}; i < get_size_swarm(); ++i) {
+    for (unsigned int i{0}; i < get_size_swarm(); ++i)
+    {
         float current_ant_pos = ant_swarm.at(i).get_left();
 
 
-        if (current_ant_pos < ant_right_x) {
+        if (current_ant_pos < ant_right_x)
+        {
             ant_right_x = current_ant_pos;
-        } else if (current_ant_pos > ant_left_x) {
+        } else if (current_ant_pos > ant_left_x)
+        {
             ant_left_x = current_ant_pos;
         }
 
@@ -90,31 +93,41 @@ void AntSwarm::move_swarm(float const frame_time)
         float x_movement{direction.x * frame_time};
         float y_movement{direction.y * frame_time};
 
-        if (border_hit % 2 != 0) {
-            if (border_hit <= 5) {
+        if (border_hit % 2 != 0)
+        {
+            if (border_hit <= 5)
+            {
                 y_movement = 10.f;
                 x_movement = 0.f;
                 border_hit += 1;
-            } else {
+            }
+            else
+            {
                 y_movement = -10.f;
                 x_movement = 0.f;
                 border_hit += 1;
             }
 
-            if (border_hit > 11) {
+            if (border_hit > 11)
+            {
                 border_hit = 0;
             }
         }
 
         // calculate the new x coordnates if the ant furthes right and left
         // were to move, if the new postion is outside the screen border change direction
-        if (is_swarm_right) {
-            if (x_value_right + x_movement > border_limit_right) {
+        if (is_swarm_right)
+        {
+            if (x_value_right + x_movement > border_limit_right)
+            {
                 is_swarm_right = false;
                 border_hit += 1;
             }
-        } else {
-            if (x_value_left + x_movement < border_limit_left) {
+        }
+        else
+        {
+            if (x_value_left + x_movement < border_limit_left)
+            {
                 is_swarm_right = true;
                 border_hit += 1;
             }
@@ -123,12 +136,14 @@ void AntSwarm::move_swarm(float const frame_time)
 
         // check which way the swarm is going to move, move each ant
         if (is_swarm_right) {
-            for (unsigned int i{0}; i < get_size_swarm(); ++i) {
+            for (unsigned int i{0}; i < get_size_swarm(); ++i)
+            {
                 Ant &ant{ant_swarm.at(i)};
                 ant.move(x_movement, y_movement);
             }
         } else {
-            for (unsigned int i{0}; i < get_size_swarm(); ++i) {
+            for (unsigned int i{0}; i < get_size_swarm(); ++i)
+            {
                 Ant &ant{ant_swarm.at(i)};
                 ant.move(-x_movement, y_movement);
             }

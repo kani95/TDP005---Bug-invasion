@@ -15,7 +15,7 @@ public:
     Enemy(int const score, int const hp);
     //virtual ~Enemy() = 0;
 
-    virtual int get_score() const;
+    int get_score() const;
 
     virtual void move(float const, float const) = 0;
     virtual void update(float const frame_time,

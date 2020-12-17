@@ -28,10 +28,7 @@ public:
     std::pair<float, float> find_furthest_ants();
     void move_swarm(float const frame_time);
 
-
     int get_size_swarm() const;
-
-    //std::vector<Ant>& get_all_ants();
 
     void update(float const frame_time,
                 std::vector<Shot> & player_shots,
@@ -39,15 +36,13 @@ public:
                 Character* player);
 
 private:
-    //std::vector<Shot> ant_shots;
     std::vector<Ant> ant_swarm;
     bool is_swarm_right{true};
     short int border_hit{};
-    sf::Vector2f direction;
     int border_limit_left;
     int border_limit_right;
+    sf::Vector2f direction;
     sf::Vector2f shot_dir;
-
 };
 
 #endif //GAME_ANTSWARM_H

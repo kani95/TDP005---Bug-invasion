@@ -18,10 +18,7 @@ void Ant::move(float const x, float const y)
 }
 
 
-void Ant::render(sf::RenderTarget* target) const
-{
-    target -> draw(shape);
-}
+
 
 
 // UPDATE HELPER FUNCTIONS

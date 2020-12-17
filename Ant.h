@@ -13,7 +13,6 @@ public:
        int const att_timer);
 
     void move(float const, float const) override;
-    void render(sf::RenderTarget* target) const;
     void update(float const frame_time,
             std::vector<Shot> & player_shots,
             std::vector<Shot> & ant_shots,
