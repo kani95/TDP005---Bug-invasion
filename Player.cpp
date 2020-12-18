@@ -18,8 +18,15 @@ Player::Player(std::string const& text,
 {}
 
 
-void Player::update_position(float const frame_time)
+void Player::update_position(float frame_time)
 {
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+    {
+        frame_time = frame_time / 2;
+    }
+
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         move(-120.f * frame_time, 0.f * frame_time);

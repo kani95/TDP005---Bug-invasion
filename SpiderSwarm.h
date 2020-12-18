@@ -37,6 +37,6 @@ private:
     std::vector<Spider> all_spiders;
 
     void add_second();
-    void spawn_spider(Character* player);
+    void spawn_spider(Character* player, std::vector<Shot> & ant_shots);
 };
 #endif //GAME_H_SPIDERSWARM_H
