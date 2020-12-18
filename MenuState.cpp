@@ -28,9 +28,14 @@ void MenuState::init_menu()
 
         choices[i].setFont(font);
 
-        choices[i].setPosition(sf::Vector2f(window -> getSize().x / 2.f - 70.f,
-                                            (window -> getSize().y /
-                                            (choices.size() + 1.f) * (i + 1.f))));
+        choices[i].setPosition(sf::Vector2f(
+                (window -> getSize().x / 2.f) -
+                (choices[i].getGlobalBounds().width / 2),
+                (window -> getSize().y / (choices.size() +
+                                          1.f) * (i + 1.f))));
+
+   /*     score_text.setPosition(sf::Vector2f((window -> getSize().x / 2.f) -
+                                            (score_text.getGlobalBounds().width / 2),130));*/
     }
 }
 

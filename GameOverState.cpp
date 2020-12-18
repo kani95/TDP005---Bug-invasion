@@ -3,7 +3,7 @@
 
 GameOverState::GameOverState(sf::RenderWindow *window, bool is_game_won,
                              size_t total_score)
-        : MenuState(window), game_over{}, is_game_won{is_game_won}
+        : MenuState(window), game_over{}, is_game_won{is_game_won}, score_text{}
 {
     score = total_score;
 
@@ -20,9 +20,10 @@ void GameOverState::set_ui()
     game_over.setFont(font);
     game_over.setCharacterSize(99);
 
+
     if(!is_game_won)
     {
-        game_over.setString("GAME OVER!");
+        game_over.setString("GAME OVER");
         game_over.setFillColor(sf::Color::Red);
 
         game_over.setPosition(sf::Vector2f((window -> getSize().x / 2.f) -
@@ -36,6 +37,15 @@ void GameOverState::set_ui()
                 (window -> getSize().x / 2.f) -
                 (game_over.getGlobalBounds().width / 2),10));
     }
+
+    // Displays the player's score
+    score_text.setFont(font);
+    score_text.setFillColor(sf::Color::Yellow);
+    score_text.setCharacterSize(55);
+    score_text.setString("YOUR SCORE    " + std::to_string(score));
+    score_text.setPosition(sf::Vector2f((window -> getSize().x / 2.f) -
+                                        (score_text.getGlobalBounds().width / 2),130));
+
 }
 
 
@@ -74,4 +84,5 @@ void GameOverState::render()
 {
     MenuState::render();
     window -> draw(game_over);
+    window -> draw(score_text);
 }

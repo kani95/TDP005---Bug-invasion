@@ -4,6 +4,7 @@
 #include "MenuState.h"
 #include <fstream>
 
+
 class GameOverState : public MenuState
 {
 public:
@@ -16,6 +17,7 @@ public:
 private:
     sf::Text game_over;
     bool is_game_won;
+    sf::Text score_text;
 
     void set_ui();
     void set_choices() override;
