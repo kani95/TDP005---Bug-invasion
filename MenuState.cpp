@@ -82,7 +82,7 @@ void MenuState::poll_events(sf::Event & event)
                     case sf::Keyboard::Escape:
                         exit_status = true;
                         break;
-                    case sf::Keyboard::Enter:
+                    case sf::Keyboard::Return:
                         if (get_selected_choice() == 0)
                         {
                             playstate_status = true;
