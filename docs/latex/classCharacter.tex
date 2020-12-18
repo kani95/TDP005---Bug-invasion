@@ -1,0 +1,67 @@
+\hypertarget{classCharacter}{}\doxysection{Character Class Reference}
+\label{classCharacter}\index{Character@{Character}}
+Inheritance diagram for Character\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classCharacter}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCharacter_aeb72236aaa6e2bb74fa051d7b30125d9}\label{classCharacter_aeb72236aaa6e2bb74fa051d7b30125d9}} 
+{\bfseries Character} (int const hp)
+\item 
+\mbox{\Hypertarget{classCharacter_a7f8898abec80ca1672d0cb420333b07b}\label{classCharacter_a7f8898abec80ca1672d0cb420333b07b}} 
+{\bfseries Character} (std\+::string const \&text, sf\+::\+Vector2f const \&pos, sf\+::\+Vector2f const \&direction, sf\+::\+Vector2f const \&dimention, float const movespeed, int const hp)
+\item 
+\mbox{\Hypertarget{classCharacter_a05f27de15f7bac05d596b9dadbf71c30}\label{classCharacter_a05f27de15f7bac05d596b9dadbf71c30}} 
+virtual void {\bfseries move} (float const, float const)=0
+\item 
+\mbox{\Hypertarget{classCharacter_a6a06c51c81fb8561842972af42d9a362}\label{classCharacter_a6a06c51c81fb8561842972af42d9a362}} 
+virtual void {\bfseries take\+\_\+damage} ()
+\item 
+\mbox{\Hypertarget{classCharacter_ae68f6bc7d793c9f47588ed727001d7f6}\label{classCharacter_ae68f6bc7d793c9f47588ed727001d7f6}} 
+void {\bfseries increase\+\_\+score} (long unsigned int plus\+\_\+score)
+\item 
+\mbox{\Hypertarget{classCharacter_a15aae0580192bdea6cddcea0b8c07dd3}\label{classCharacter_a15aae0580192bdea6cddcea0b8c07dd3}} 
+void {\bfseries set\+\_\+score} (int new\+\_\+score)
+\item 
+\mbox{\Hypertarget{classCharacter_a9f730e3e4c82c59a5360048bdd0735c9}\label{classCharacter_a9f730e3e4c82c59a5360048bdd0735c9}} 
+virtual unsigned long int {\bfseries get\+\_\+score} () const
+\item 
+\mbox{\Hypertarget{classCharacter_a2505da59bef541d2224af270010d03b5}\label{classCharacter_a2505da59bef541d2224af270010d03b5}} 
+int {\bfseries get\+\_\+hp} () const
+\item 
+\mbox{\Hypertarget{classCharacter_accceca831995302957a3a4634e4537f1}\label{classCharacter_accceca831995302957a3a4634e4537f1}} 
+bool {\bfseries is\+\_\+dead} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCharacter_a44a68a97784b1d66d265999ca78d23d0}\label{classCharacter_a44a68a97784b1d66d265999ca78d23d0}} 
+long unsigned int {\bfseries score} \{\}
+\item 
+\mbox{\Hypertarget{classCharacter_a273353643988a87a0ce03cff3870b2d9}\label{classCharacter_a273353643988a87a0ce03cff3870b2d9}} 
+int {\bfseries hp} \{\}
+\item 
+\mbox{\Hypertarget{classCharacter_a0ab5b7a06d1c91bf572194c770503fba}\label{classCharacter_a0ab5b7a06d1c91bf572194c770503fba}} 
+float {\bfseries movespeed} \{\}
+\item 
+\mbox{\Hypertarget{classCharacter_a868e3fee18993dcc7926a87155123dd0}\label{classCharacter_a868e3fee18993dcc7926a87155123dd0}} 
+sf\+::\+Clock {\bfseries clock}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 5 of file Character.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Character.\+h\item 
+Character.\+cpp\end{DoxyCompactItemize}

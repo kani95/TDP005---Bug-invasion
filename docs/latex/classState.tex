@@ -1,0 +1,90 @@
+\hypertarget{classState}{}\doxysection{State Class Reference}
+\label{classState}\index{State@{State}}
+Inheritance diagram for State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classState}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classState_a02d5f0207c19c47f231ed10e12764e2e}\label{classState_a02d5f0207c19c47f231ed10e12764e2e}} 
+{\bfseries State} (sf\+::\+Render\+Window $\ast$window)
+\item 
+\mbox{\Hypertarget{classState_a47fba63dccadb185560e63a2fd7fda54}\label{classState_a47fba63dccadb185560e63a2fd7fda54}} 
+void {\bfseries load\+\_\+font} (std\+::string const \&font\+\_\+name)
+\item 
+\mbox{\Hypertarget{classState_a48a9a1598edba75d5b2fe2343732b1cf}\label{classState_a48a9a1598edba75d5b2fe2343732b1cf}} 
+virtual void {\bfseries poll\+\_\+events} (sf\+::\+Event \&event)
+\item 
+\mbox{\Hypertarget{classState_a387af2ac090de6f94d489445966bd2cb}\label{classState_a387af2ac090de6f94d489445966bd2cb}} 
+virtual void {\bfseries update} (float const frame\+\_\+time, sf\+::\+Event \&event)=0
+\item 
+\mbox{\Hypertarget{classState_a71f5105bcdc39481be7684d853fe12e9}\label{classState_a71f5105bcdc39481be7684d853fe12e9}} 
+virtual void {\bfseries render} ()=0
+\item 
+\mbox{\Hypertarget{classState_a0b8a792f079df246f5347f46dfcf0b48}\label{classState_a0b8a792f079df246f5347f46dfcf0b48}} 
+bool {\bfseries get\+\_\+is\+\_\+done} () const
+\item 
+\mbox{\Hypertarget{classState_a03fd4248b2e8b940c9ac3ab78843857e}\label{classState_a03fd4248b2e8b940c9ac3ab78843857e}} 
+bool {\bfseries get\+\_\+exit\+\_\+status} () const
+\item 
+\mbox{\Hypertarget{classState_af0be4f3103732fdd6275a1ffce604991}\label{classState_af0be4f3103732fdd6275a1ffce604991}} 
+bool {\bfseries get\+\_\+leaderboard\+\_\+status} () const
+\item 
+\mbox{\Hypertarget{classState_a0d90154ad15ac76b84b8bd3b3b1c5baa}\label{classState_a0d90154ad15ac76b84b8bd3b3b1c5baa}} 
+bool {\bfseries get\+\_\+gameover\+\_\+status} () const
+\item 
+\mbox{\Hypertarget{classState_a98b04074678dc60371f950c1af7c6508}\label{classState_a98b04074678dc60371f950c1af7c6508}} 
+bool {\bfseries get\+\_\+playstate\+\_\+status} () const
+\item 
+\mbox{\Hypertarget{classState_a42455c9c5ffb13b606f09268d8b4155d}\label{classState_a42455c9c5ffb13b606f09268d8b4155d}} 
+bool {\bfseries get\+\_\+is\+\_\+game\+\_\+won} () const
+\item 
+\mbox{\Hypertarget{classState_acc49a3a5fb5db4e7cf1819663a2e235c}\label{classState_acc49a3a5fb5db4e7cf1819663a2e235c}} 
+unsigned long int {\bfseries get\+\_\+score} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classState_ae6259a383c98ae7496266a76a9daf478}\label{classState_ae6259a383c98ae7496266a76a9daf478}} 
+sf\+::\+Render\+Window $\ast$ {\bfseries window}
+\item 
+\mbox{\Hypertarget{classState_ac01e57d52a3bf0d9b24c02daecd79e30}\label{classState_ac01e57d52a3bf0d9b24c02daecd79e30}} 
+sf\+::\+Font {\bfseries font}
+\item 
+\mbox{\Hypertarget{classState_a8b50493863cebff2388b6dc357c3c0ee}\label{classState_a8b50493863cebff2388b6dc357c3c0ee}} 
+bool {\bfseries is\+\_\+done}
+\item 
+\mbox{\Hypertarget{classState_a4f91648b42f8d07d3034011102f4ebee}\label{classState_a4f91648b42f8d07d3034011102f4ebee}} 
+bool {\bfseries exit\+\_\+status}
+\item 
+\mbox{\Hypertarget{classState_a6008600a8ad0a7abd72f3842d79c0f85}\label{classState_a6008600a8ad0a7abd72f3842d79c0f85}} 
+bool {\bfseries leaderboard\+\_\+status}
+\item 
+\mbox{\Hypertarget{classState_ace41960643a8afd0355b656f79cea56a}\label{classState_ace41960643a8afd0355b656f79cea56a}} 
+bool {\bfseries gameover\+\_\+status}
+\item 
+\mbox{\Hypertarget{classState_a90bc6b80381f482baa17c9c730f69554}\label{classState_a90bc6b80381f482baa17c9c730f69554}} 
+bool {\bfseries playstate\+\_\+status}
+\item 
+\mbox{\Hypertarget{classState_a77642e203014ec3b989945181eaf7a55}\label{classState_a77642e203014ec3b989945181eaf7a55}} 
+bool {\bfseries is\+\_\+game\+\_\+won}
+\item 
+\mbox{\Hypertarget{classState_abaf91a7c9b2b991904c5eeb4b78eb731}\label{classState_abaf91a7c9b2b991904c5eeb4b78eb731}} 
+unsigned long int {\bfseries score}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 6 of file State.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+State.\+h\item 
+State.\+cpp\end{DoxyCompactItemize}

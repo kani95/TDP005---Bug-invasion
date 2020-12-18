@@ -1,0 +1,71 @@
+\begin{theindex}
+
+  \item {$\sim$Game}
+    \subitem {Game}, \hyperpage{9}
+
+  \indexspace
+
+  \item {Ant}, \hyperpage{5}
+  \item {AntSwarm}, \hyperpage{6}
+    \subitem {move\_swarm}, \hyperpage{6}
+
+  \indexspace
+
+  \item {Character}, \hyperpage{7}
+
+  \indexspace
+
+  \item {Enemy}, \hyperpage{8}
+
+  \indexspace
+
+  \item {Game}, \hyperpage{9}
+    \subitem {$\sim$Game}, \hyperpage{9}
+    \subitem {render}, \hyperpage{9}
+    \subitem {update}, \hyperpage{10}
+  \item {GameOverState}, \hyperpage{11}
+
+  \indexspace
+
+  \item {LeaderboardState}, \hyperpage{11}
+  \item {Leaf}, \hyperpage{12}
+
+  \indexspace
+
+  \item {MenuState}, \hyperpage{12}
+  \item {move\_swarm}
+    \subitem {AntSwarm}, \hyperpage{6}
+
+  \indexspace
+
+  \item {Object}, \hyperpage{13}
+
+  \indexspace
+
+  \item {Player}, \hyperpage{14}
+    \subitem {take\_damage}, \hyperpage{15}
+  \item {PlayState}, \hyperpage{15}
+
+  \indexspace
+
+  \item {render}
+    \subitem {Game}, \hyperpage{9}
+
+  \indexspace
+
+  \item {Shot}, \hyperpage{16}
+  \item {Spider}, \hyperpage{17}
+  \item {SpiderSwarm}, \hyperpage{17}
+  \item {State}, \hyperpage{18}
+
+  \indexspace
+
+  \item {take\_damage}
+    \subitem {Player}, \hyperpage{15}
+
+  \indexspace
+
+  \item {update}
+    \subitem {Game}, \hyperpage{10}
+
+\end{theindex}

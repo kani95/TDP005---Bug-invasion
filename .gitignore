@@ -1,11 +1,8 @@
 cmake-build-debug*
 *~
-
 *
 !*.*
 !*/
-Makefile
-
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
@@ -17,9 +14,6 @@ suppressions.txt~
 .#.*
 example.txt~
 Game.cpp~
-html/
-latex/
-
 bin/
 build/
 *.o

@@ -10,8 +10,7 @@ Spider::Spider(std::string const& text,
                sf::Vector2f const& spawn_limit_y,
                int const score,
                int const hp)
-        : Enemy(score,hp), spawn_limit_x{spawn_limit_x},
-          spawn_limit_y{spawn_limit_y}
+        : Enemy(score,hp)
 {
     init_texture(text);
 

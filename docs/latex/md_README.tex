@@ -1,0 +1,53 @@
+HOW TO RUN GAME\+:
+
+1 clone the repo ~\newline
+
+
+In linux terminal run\+: ~\newline
+
+
+2 cmake . ~\newline
+ 3 make ~\newline
+ 4 ./game ~\newline
+
+
+HOW TO PLAY\+: ~\newline
+
+
+Arrow keys are used for navigation both in menu and in the game. ~\newline
+ Use enter for selecting options in the menus. ~\newline
+ Escape will either take you back to the previous menu or quit the game if in Playstate. ~\newline
+ Lshift will half the movement of the player making it easier to dodge bullets. ~\newline
+ Spacebar shoots projectiles. ~\newline
+
+
+HOW TO CREATE LEVELS\+: ~\newline
+
+
+In order to edit the level you could either edit the Level.\+txt file or ~\newline
+ create your own level and push it on the state stack in \mbox{\hyperlink{Game_8cpp_source}{Game.\+cpp}} in the update() ~\newline
+ function. ~\newline
+
+
+Here is what each parameter in the file means\+: ~\newline
+
+
+PLAYER\+: ~\newline
+ \mbox{\hyperlink{classObject}{Object}} type$\vert$texture\+\_\+file$\vert$shot\+\_\+texture$\vert$pos.x$\vert$pos.y$\vert$dir.x$\vert$dir.y$\vert$size.x$\vert$size.y$\vert$ ~\newline
+ Movespd$\vert$hp$\vert$attack\+\_\+tmr$\vert$shot\+\_\+dim.x$\vert$shot\+\_\+dim.y$\vert$shot\+\_\+dir.x$\vert$shot\+\_\+dir.y$\vert$ ~\newline
+
+
+LEAF\+: ~\newline
+ \mbox{\hyperlink{classObject}{Object}} type$\vert$texture\+\_\+file$\vert$pos.x$\vert$pos.y$\vert$size.x$\vert$size.y$\vert$ ~\newline
+
+
+ANTSWARM\+: ~\newline
+ \mbox{\hyperlink{classObject}{Object}} type$\vert$texture\+\_\+file$\vert$shot\+\_\+texture$\vert$pos.x$\vert$pos.y$\vert$size.x$\vert$size.y$\vert$dist.x$\vert$ ~\newline
+ dist.\+y$\vert$dir.x$\vert$dir.y$\vert$shot\+\_\+dir.x$\vert$shot\+\_\+dir.y$\vert$shot\+\_\+dim.x$\vert$shot\+\_\+dir.y$\vert$ ~\newline
+ border\+\_\+limit\+\_\+left$\vert$border\+\_\+limit\+\_\+right$\vert$number\+\_\+of\+\_\+ants$\vert$number\+\_\+of\+\_\+rows$\vert$score$\vert$hp$\vert$attack\+\_\+tmr$\vert$ ~\newline
+
+
+SPIDERSWARM\+: ~\newline
+ \mbox{\hyperlink{classObject}{Object}} type$\vert$texture\+\_\+file$\vert$dim.x$\vert$dim.y$\vert$dir.x$\vert$dir.y$\vert$spw\+\_\+lim\+\_\+x.x$\vert$spw\+\_\+lim\+\_\+x.y$\vert$ ~\newline
+ spw\+\_\+lim\+\_\+y.\+x$\vert$spw\+\_\+lim\+\_\+y.y$\vert$spw\+\_\+timer$\vert$score$\vert$hp$\vert$ ~\newline
+ 

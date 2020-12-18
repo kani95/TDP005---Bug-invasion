@@ -1,0 +1,63 @@
+\hypertarget{classMenuState}{}\doxysection{Menu\+State Class Reference}
+\label{classMenuState}\index{MenuState@{MenuState}}
+Inheritance diagram for Menu\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classMenuState}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenuState_a2740fee6e2a21f282c896f5d005f0b63}\label{classMenuState_a2740fee6e2a21f282c896f5d005f0b63}} 
+{\bfseries Menu\+State} (sf\+::\+Render\+Window $\ast$window)
+\item 
+\mbox{\Hypertarget{classMenuState_ae015b53bffe3c07ce35be73d9af635b0}\label{classMenuState_ae015b53bffe3c07ce35be73d9af635b0}} 
+void {\bfseries update} (float const frame\+\_\+time, sf\+::\+Event \&event) override
+\item 
+\mbox{\Hypertarget{classMenuState_ac216e0b4c7f5c5d39520165c45af0da6}\label{classMenuState_ac216e0b4c7f5c5d39520165c45af0da6}} 
+void {\bfseries render} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenuState_afa287ffd0e1b8b7fa2e9fcb4517e6de3}\label{classMenuState_afa287ffd0e1b8b7fa2e9fcb4517e6de3}} 
+void {\bfseries init\+\_\+menu} ()
+\item 
+\mbox{\Hypertarget{classMenuState_ac791e84444506fa2c4953d9d01838353}\label{classMenuState_ac791e84444506fa2c4953d9d01838353}} 
+void {\bfseries poll\+\_\+events} (sf\+::\+Event \&event) override
+\item 
+\mbox{\Hypertarget{classMenuState_aedd60680f0e4131a2dc1b03818cd06be}\label{classMenuState_aedd60680f0e4131a2dc1b03818cd06be}} 
+virtual void {\bfseries set\+\_\+choices} ()
+\item 
+\mbox{\Hypertarget{classMenuState_a7afa9bf0a5e4888b1d76156f983e0742}\label{classMenuState_a7afa9bf0a5e4888b1d76156f983e0742}} 
+void {\bfseries move\+\_\+up} ()
+\item 
+\mbox{\Hypertarget{classMenuState_a6d37b401a70fefc78d2983989b32d218}\label{classMenuState_a6d37b401a70fefc78d2983989b32d218}} 
+void {\bfseries move\+\_\+down} ()
+\item 
+\mbox{\Hypertarget{classMenuState_ab6063e9dbce552922d2c65569493829a}\label{classMenuState_ab6063e9dbce552922d2c65569493829a}} 
+int {\bfseries get\+\_\+selected\+\_\+choice} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenuState_acceaa1c015c8d83e279d04e89752653b}\label{classMenuState_acceaa1c015c8d83e279d04e89752653b}} 
+int {\bfseries selected\+\_\+choice}
+\item 
+\mbox{\Hypertarget{classMenuState_a47bb228dfb5bcb6c67f862b69bba4981}\label{classMenuState_a47bb228dfb5bcb6c67f862b69bba4981}} 
+std\+::vector$<$ sf\+::\+Text $>$ {\bfseries choices}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 5 of file Menu\+State.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Menu\+State.\+h\item 
+Menu\+State.\+cpp\end{DoxyCompactItemize}

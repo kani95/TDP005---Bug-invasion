@@ -1,0 +1,120 @@
+\hypertarget{classAntSwarm}{}\doxysection{Ant\+Swarm Class Reference}
+\label{classAntSwarm}\index{AntSwarm@{AntSwarm}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAntSwarm_a963de0fc9ee431a959022f5d6f886c2c}\label{classAntSwarm_a963de0fc9ee431a959022f5d6f886c2c}} 
+{\bfseries Ant\+Swarm} (std\+::string const \&text, std\+::string const \&shot\+\_\+text, sf\+::\+Vector2f \&pos, sf\+::\+Vector2f const \&dim, sf\+::\+Vector2f const \&dist, sf\+::\+Vector2f const \&dir, sf\+::\+Vector2f const \&shot\+\_\+dir, sf\+::\+Vector2f const \&shot\+\_\+dim, float const border\+\_\+limit\+\_\+left, float const border\+\_\+limit\+\_\+right, unsigned short int const total\+\_\+ants, int const number\+\_\+of\+\_\+rows, int const score, int const hp, int const att\+\_\+timer)
+\item 
+\mbox{\Hypertarget{classAntSwarm_a8cb031313651c2f7a60d27024660f5bb}\label{classAntSwarm_a8cb031313651c2f7a60d27024660f5bb}} 
+void {\bfseries render} (sf\+::\+Render\+Target $\ast$target)
+\item 
+\mbox{\Hypertarget{classAntSwarm_ad75445ad004eec5a21ba2b1ab62c854a}\label{classAntSwarm_ad75445ad004eec5a21ba2b1ab62c854a}} 
+std\+::pair$<$ float, float $>$ {\bfseries find\+\_\+furthest\+\_\+ants} ()
+\item 
+void \mbox{\hyperlink{classAntSwarm_abdf67666663d6d3f39b6407ee16baac1}{move\+\_\+swarm}} (float const frame\+\_\+time)
+\item 
+\mbox{\Hypertarget{classAntSwarm_ac7383bf2adce5e580c9b9a49379bca57}\label{classAntSwarm_ac7383bf2adce5e580c9b9a49379bca57}} 
+int {\bfseries get\+\_\+size\+\_\+swarm} () const
+\item 
+\mbox{\Hypertarget{classAntSwarm_a770c27072351e68aa48f012cfc2be519}\label{classAntSwarm_a770c27072351e68aa48f012cfc2be519}} 
+void {\bfseries update} (float const frame\+\_\+time, std\+::vector$<$ \mbox{\hyperlink{classShot}{Shot}} $>$ \&player\+\_\+shots, std\+::vector$<$ \mbox{\hyperlink{classShot}{Shot}} $>$ \&ant\+\_\+shots, \mbox{\hyperlink{classCharacter}{Character}} $\ast$player)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 6 of file Ant\+Swarm.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAntSwarm_abdf67666663d6d3f39b6407ee16baac1}\label{classAntSwarm_abdf67666663d6d3f39b6407ee16baac1}} 
+\index{AntSwarm@{AntSwarm}!move\_swarm@{move\_swarm}}
+\index{move\_swarm@{move\_swarm}!AntSwarm@{AntSwarm}}
+\doxysubsubsection{\texorpdfstring{move\_swarm()}{move\_swarm()}}
+{\footnotesize\ttfamily void Ant\+Swarm\+::move\+\_\+swarm (\begin{DoxyParamCaption}\item[{float const}]{frame\+\_\+time }\end{DoxyParamCaption})}
+
+Moves all ants object in the same direction depending if the ants on the edges of the swarm can move if not they will trigger a flag that will change the movement to the other side. 
+
+Definition at line 85 of file Ant\+Swarm.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{86 \{}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keywordflow}{if}(!ant\_swarm.empty())}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         \textcolor{keywordtype}{float} x\_value\_left\{find\_furthest\_ants().second\};}
+\DoxyCodeLine{92         \textcolor{keywordtype}{float} x\_value\_right\{find\_furthest\_ants().first\};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94         \textcolor{keywordtype}{float} x\_movement\{direction.x * frame\_time\};}
+\DoxyCodeLine{95         \textcolor{keywordtype}{float} y\_movement\{direction.y * frame\_time\};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \textcolor{keywordflow}{if} (border\_hit \% 2 != 0)}
+\DoxyCodeLine{98         \{}
+\DoxyCodeLine{99             \textcolor{keywordflow}{if} (border\_hit <= 5)}
+\DoxyCodeLine{100             \{}
+\DoxyCodeLine{101                 y\_movement = 10.f;}
+\DoxyCodeLine{102                 x\_movement = 0.f;}
+\DoxyCodeLine{103                 border\_hit += 1;}
+\DoxyCodeLine{104             \}}
+\DoxyCodeLine{105             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{106             \{}
+\DoxyCodeLine{107                 y\_movement = -\/10.f;}
+\DoxyCodeLine{108                 x\_movement = 0.f;}
+\DoxyCodeLine{109                 border\_hit += 1;}
+\DoxyCodeLine{110             \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112             \textcolor{keywordflow}{if} (border\_hit > 11)}
+\DoxyCodeLine{113             \{}
+\DoxyCodeLine{114                 border\_hit = 0;}
+\DoxyCodeLine{115             \}}
+\DoxyCodeLine{116         \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         \textcolor{comment}{// calculate the new x coordnates if the ant furthes right and left}}
+\DoxyCodeLine{119         \textcolor{comment}{// were to move, if the new postion is outside the screen border change direction}}
+\DoxyCodeLine{120         \textcolor{keywordflow}{if} (is\_swarm\_right)}
+\DoxyCodeLine{121         \{}
+\DoxyCodeLine{122             \textcolor{keywordflow}{if} (x\_value\_right + x\_movement > border\_limit\_right)}
+\DoxyCodeLine{123             \{}
+\DoxyCodeLine{124                 is\_swarm\_right = \textcolor{keyword}{false};}
+\DoxyCodeLine{125                 border\_hit += 1;}
+\DoxyCodeLine{126             \}}
+\DoxyCodeLine{127         \}}
+\DoxyCodeLine{128         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{129         \{}
+\DoxyCodeLine{130             \textcolor{keywordflow}{if} (x\_value\_left + x\_movement < border\_limit\_left)}
+\DoxyCodeLine{131             \{}
+\DoxyCodeLine{132                 is\_swarm\_right = \textcolor{keyword}{true};}
+\DoxyCodeLine{133                 border\_hit += 1;}
+\DoxyCodeLine{134             \}}
+\DoxyCodeLine{135         \}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138         \textcolor{comment}{// check which way the swarm is going to move, move each ant}}
+\DoxyCodeLine{139         \textcolor{keywordflow}{if} (is\_swarm\_right) \{}
+\DoxyCodeLine{140             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i\{0\}; i < get\_size\_swarm(); ++i)}
+\DoxyCodeLine{141             \{}
+\DoxyCodeLine{142                 \mbox{\hyperlink{classAnt}{Ant}} \&ant\{ant\_swarm.at(i)\};}
+\DoxyCodeLine{143                 ant.move(x\_movement, y\_movement);}
+\DoxyCodeLine{144             \}}
+\DoxyCodeLine{145         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{146             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i\{0\}; i < get\_size\_swarm(); ++i)}
+\DoxyCodeLine{147             \{}
+\DoxyCodeLine{148                 \mbox{\hyperlink{classAnt}{Ant}} \&ant\{ant\_swarm.at(i)\};}
+\DoxyCodeLine{149                 ant.move(-\/x\_movement, y\_movement);}
+\DoxyCodeLine{150             \}}
+\DoxyCodeLine{151         \}}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Ant\+Swarm.\+h\item 
+Ant\+Swarm.\+cpp\end{DoxyCompactItemize}

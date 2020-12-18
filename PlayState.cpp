@@ -12,7 +12,7 @@ PlayState::PlayState(sf::RenderWindow* window, std::string const& filename)
     read_lvl(filename);
 }
 
-
+/// Modify the objects in the level
 void PlayState::read_lvl(std::string const& filename)
 {
 // IN LEVEL-FILE TYPE IN THE FOLLOWING ORDER:
@@ -46,9 +46,9 @@ void PlayState::read_lvl(std::string const& filename)
 
     float timer_dmg{};
     float movespeed{};
+    float border_limit_left{};
+    float border_limit_right{};
     unsigned short int number_of_ants{};
-    int border_limit_left{};
-    int border_limit_right{};
     int number_of_rows{};
     int spawn_timer{};
     int att_timer{};
@@ -83,7 +83,7 @@ void PlayState::read_lvl(std::string const& filename)
             infile >> texture_file >> pos.x >> pos.y >> dimensions.x >>
             dimensions.y;
 
-            leaf = new Leaf{texture_file,pos,dimensions};
+            leaf = new Leaf{texture_file, pos, dimensions};
 
             infile.ignore(1000, '\n');
         }

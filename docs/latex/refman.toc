@@ -1,0 +1,48 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Hierarchical Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Class Hierarchy}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Class Documentation}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Ant Class Reference}{5}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Detailed Description}{5}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}Ant\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Swarm Class Reference}{6}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Detailed Description}{6}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Member Function Documentation}{6}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}move\_swarm()}{6}{subsubsection.3.2.2.1}%
+\contentsline {section}{\numberline {3.3}Character Class Reference}{7}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Detailed Description}{8}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}Enemy Class Reference}{8}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Detailed Description}{9}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Game Class Reference}{9}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Detailed Description}{9}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Constructor \& Destructor Documentation}{9}{subsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.1}$\sim $Game()}{9}{subsubsection.3.5.2.1}%
+\contentsline {subsection}{\numberline {3.5.3}Member Function Documentation}{9}{subsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.3.1}render()}{10}{subsubsection.3.5.3.1}%
+\contentsline {subsubsection}{\numberline {3.5.3.2}update()}{10}{subsubsection.3.5.3.2}%
+\contentsline {section}{\numberline {3.6}Game\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Over\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Class Reference}{11}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Detailed Description}{11}{subsection.3.6.1}%
+\contentsline {section}{\numberline {3.7}Leaderboard\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Class Reference}{11}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Detailed Description}{12}{subsection.3.7.1}%
+\contentsline {section}{\numberline {3.8}Leaf Class Reference}{12}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Detailed Description}{12}{subsection.3.8.1}%
+\contentsline {section}{\numberline {3.9}Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Class Reference}{12}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Detailed Description}{13}{subsection.3.9.1}%
+\contentsline {section}{\numberline {3.10}Object Class Reference}{13}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Detailed Description}{14}{subsection.3.10.1}%
+\contentsline {section}{\numberline {3.11}Player Class Reference}{14}{section.3.11}%
+\contentsline {subsection}{\numberline {3.11.1}Detailed Description}{15}{subsection.3.11.1}%
+\contentsline {subsection}{\numberline {3.11.2}Member Function Documentation}{15}{subsection.3.11.2}%
+\contentsline {subsubsection}{\numberline {3.11.2.1}take\_damage()}{15}{subsubsection.3.11.2.1}%
+\contentsline {section}{\numberline {3.12}Play\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Class Reference}{15}{section.3.12}%
+\contentsline {subsection}{\numberline {3.12.1}Detailed Description}{16}{subsection.3.12.1}%
+\contentsline {section}{\numberline {3.13}Shot Class Reference}{16}{section.3.13}%
+\contentsline {subsection}{\numberline {3.13.1}Detailed Description}{16}{subsection.3.13.1}%
+\contentsline {section}{\numberline {3.14}Spider Class Reference}{17}{section.3.14}%
+\contentsline {subsection}{\numberline {3.14.1}Detailed Description}{17}{subsection.3.14.1}%
+\contentsline {section}{\numberline {3.15}Spider\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Swarm Class Reference}{17}{section.3.15}%
+\contentsline {subsection}{\numberline {3.15.1}Detailed Description}{18}{subsection.3.15.1}%
+\contentsline {section}{\numberline {3.16}State Class Reference}{18}{section.3.16}%
+\contentsline {subsection}{\numberline {3.16.1}Detailed Description}{18}{subsection.3.16.1}%
+\contentsline {chapter}{Index}{19}{section*.47}%

@@ -20,11 +20,13 @@ void SpiderSwarm::spawn_spider(Character* player, std::vector<Shot> & ant_shots)
 {
     if (timer >= spawn_timer)
     {
-        if (all_spiders.size() < 7 && !ant_shots.empty())
+        // Max 6 spiders at the same time
+        if (all_spiders.size() < 7)
         {
             Spider spider{text, dim, dir, spawn_limit_x,
                           spawn_limit_y, score, hp};
 
+            //Spider cant collide with player when spawning
             if (!spider.check_coll(player -> get_sprite()))
             {
                 all_spiders.push_back(spider);

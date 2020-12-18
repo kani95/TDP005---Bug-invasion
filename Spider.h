@@ -22,8 +22,6 @@ public:
             Character* player) override;
 
 private:
-    sf::Vector2f spawn_limit_x;
-    sf::Vector2f spawn_limit_y;
 
     void set_start_pos(sf::Vector2f const& spw_lmt_x,
                        sf::Vector2f const& spw_lmt_y);

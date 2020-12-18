@@ -4,19 +4,20 @@ AntSwarm::AntSwarm(std::string const& text,
                    std::string const& shot_text,
                    sf::Vector2f & pos,
                    sf::Vector2f const& dim,
-                   sf::Vector2f & dist,
-                   sf::Vector2f & dir,
-                   sf::Vector2f & shot_dir,
-                   sf::Vector2f & shot_dim,
-                   int const border_limit_left,
-                   int const border_limit_right,
+                   sf::Vector2f const& dist,
+                   sf::Vector2f const& dir,
+                   sf::Vector2f const& shot_dir,
+                   sf::Vector2f const& shot_dim,
+                   float const border_limit_left,
+                   float const border_limit_right,
                    unsigned short int const total_ants,
                    int const number_of_rows,
                    int const score,
                    int const hp,
                    int const att_timer)
-    :ant_swarm{}, direction{dir}, border_limit_right{border_limit_right},
-     border_limit_left{border_limit_left}, shot_dir{shot_dir}
+        : ant_swarm{}, direction{dir}, border_limit_right{border_limit_right},
+     border_limit_left{border_limit_left}, shot_dir{shot_dir},
+     is_swarm_right{true}, border_hit{}
 {
     float prev_x {pos.x};
     for (unsigned short int i{0}; i < total_ants; i++)
@@ -89,8 +90,6 @@ void AntSwarm::move_swarm(float const frame_time)
     {
         float x_value_left{find_furthest_ants().second};
         float x_value_right{find_furthest_ants().first};
-
-        // std::cout << border_hit << std::endl;
 
         float x_movement{direction.x * frame_time};
         float y_movement{direction.y * frame_time};
@@ -168,7 +167,6 @@ void AntSwarm::update(float const frame_time,
 
         if (ant.is_dead())
         {
-
             player -> increase_score(ant.get_score());
 
             ant_swarm.erase(begin(ant_swarm) + i);
@@ -189,6 +187,5 @@ void AntSwarm::render(sf::RenderTarget* target)
     for (Ant const& ant : ant_swarm)
     {
        ant.render(target);
-      // target -> draw(ant.shape);
     }
 }

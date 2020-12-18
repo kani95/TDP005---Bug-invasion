@@ -1,0 +1,65 @@
+\hypertarget{classPlayer}{}\doxysection{Player Class Reference}
+\label{classPlayer}\index{Player@{Player}}
+Inheritance diagram for Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classPlayer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlayer_aa8e8bcadfdc4d84fb33653e72033340b}\label{classPlayer_aa8e8bcadfdc4d84fb33653e72033340b}} 
+{\bfseries Player} (std\+::string const \&text, std\+::string const \&shot\+\_\+text, sf\+::\+Vector2f const \&pos, sf\+::\+Vector2f const \&dir, sf\+::\+Vector2f const \&dim, float const movespeed, int const hp, int const att\+\_\+timer, float const timer\+\_\+dmg, sf\+::\+Vector2f const \&shot\+\_\+dim, sf\+::\+Vector2f const \&shot\+\_\+dir)
+\item 
+\mbox{\Hypertarget{classPlayer_acc1693944e05078eed8fe1cd47da1ddc}\label{classPlayer_acc1693944e05078eed8fe1cd47da1ddc}} 
+void {\bfseries update} (\mbox{\hyperlink{classLeaf}{Leaf}} $\ast$box, std\+::vector$<$ \mbox{\hyperlink{classShot}{Shot}} $>$ \&player\+\_\+shots, float const frame\+\_\+time)
+\item 
+void \mbox{\hyperlink{classPlayer_a91c9ce94cd074a1dfc03922e3680d527}{take\+\_\+damage}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 7 of file Player.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPlayer_a91c9ce94cd074a1dfc03922e3680d527}\label{classPlayer_a91c9ce94cd074a1dfc03922e3680d527}} 
+\index{Player@{Player}!take\_damage@{take\_damage}}
+\index{take\_damage@{take\_damage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{take\_damage()}{take\_damage()}}
+{\footnotesize\ttfamily void Player\+::take\+\_\+damage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Flicker player red and reset the timer for when player can turn back to it\textquotesingle{}s original color
+
+Check if it has been longer then timer\+\_\+dmg time since player took damage. Otherwise when player will collide with an enemy player will drop to 0 hp instantly.
+
+Reimplemented from \mbox{\hyperlink{classCharacter}{Character}}.
+
+
+
+Definition at line 148 of file Player.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{149 \{}
+\DoxyCodeLine{160     shape.setColor(sf::Color::Red);}
+\DoxyCodeLine{161     clock.restart().asSeconds();}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{keywordflow}{if} ( last\_hit.getElapsedTime().asSeconds() > timer\_dmg ) \{}
+\DoxyCodeLine{164         -\/-\/hp;}
+\DoxyCodeLine{165         last\_hit.restart().asSeconds();}
+\DoxyCodeLine{166     \}}
+\DoxyCodeLine{167 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Player.\+h\item 
+Player.\+cpp\end{DoxyCompactItemize}

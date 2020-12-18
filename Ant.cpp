@@ -5,7 +5,7 @@ Ant::Ant(std::string const& text,
          std::string const& shot_text,
          sf::Vector2f const& shot_dim,
          int const score, int const hp, int const att_timer)
-:Enemy(score, hp), shot_dim{shot_dim}, att_timer{att_timer}, shot_text{shot_text}
+:Enemy(score, hp), att_timer{att_timer}, shot_dim{shot_dim}, shot_text{shot_text}
 {
     init_texture(text);
     clock.restart().asSeconds();
@@ -18,11 +18,7 @@ void Ant::move(float const x, float const y)
 }
 
 
-
-
-
 // UPDATE HELPER FUNCTIONS
-
 bool Ant::check_collison_player_shots(std::vector<Shot> & player_shots)
 {
     /// Return true if player shot collides with ant
@@ -78,7 +74,7 @@ bool Ant::can_shoot() const
 }
 
 
-void Ant::update(float const frame_time,
+void Ant::update(float const,
         std::vector<Shot> & player_shots,
         std::vector<Shot> & ant_shots,
         Character* player)

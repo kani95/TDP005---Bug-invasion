@@ -1,0 +1,137 @@
+\hypertarget{classGame}{}\doxysection{Game Class Reference}
+\label{classGame}\index{Game@{Game}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGame_ae3d112ca6e0e55150d2fdbc704474530}{$\sim$\+Game}} ()
+\item 
+\mbox{\Hypertarget{classGame_a34de1c0fd19b386183bdefd45c432c33}\label{classGame_a34de1c0fd19b386183bdefd45c432c33}} 
+bool {\bfseries window\+\_\+status} () const
+\item 
+void \mbox{\hyperlink{classGame_a79df6376b332d63c9eca0dcee30305c3}{update}} ()
+\item 
+void \mbox{\hyperlink{classGame_abf2fac472592fa615bdd61b1404bdf16}{render}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 10 of file Game.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGame_ae3d112ca6e0e55150d2fdbc704474530}\label{classGame_ae3d112ca6e0e55150d2fdbc704474530}} 
+\index{Game@{Game}!````~Game@{$\sim$Game}}
+\index{````~Game@{$\sim$Game}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{$\sim$Game()}{~Game()}}
+{\footnotesize\ttfamily Game\+::$\sim$\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Delete the states on the stack and pops them.
+
+Definition at line 11 of file Game.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{14     \textcolor{keywordflow}{while} (!states.empty())}
+\DoxyCodeLine{15     \{}
+\DoxyCodeLine{16         \textcolor{keyword}{delete} states.top();}
+\DoxyCodeLine{17         states.top() = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{18         states.pop();}
+\DoxyCodeLine{19     \}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keyword}{delete} window;}
+\DoxyCodeLine{22 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGame_abf2fac472592fa615bdd61b1404bdf16}\label{classGame_abf2fac472592fa615bdd61b1404bdf16}} 
+\index{Game@{Game}!render@{render}}
+\index{render@{render}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Game\+::render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Call the render function for the state at the top of the stack
+
+Definition at line 111 of file Game.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{112 \{}
+\DoxyCodeLine{114     window -\/> clear();}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116     \textcolor{keywordflow}{if} (!states.empty())}
+\DoxyCodeLine{117     \{}
+\DoxyCodeLine{118         states.top() -\/> \mbox{\hyperlink{classGame_abf2fac472592fa615bdd61b1404bdf16}{render}}();}
+\DoxyCodeLine{119     \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     window -\/> display();}
+\DoxyCodeLine{122 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classGame_a79df6376b332d63c9eca0dcee30305c3}\label{classGame_a79df6376b332d63c9eca0dcee30305c3}} 
+\index{Game@{Game}!update@{update}}
+\index{update@{update}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Game\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Check top state on stack, call update then check if any flags are set to exit the current state then add the new state.
+
+Definition at line 50 of file Game.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{51 \{}
+\DoxyCodeLine{52     update\_delta();}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{56        states.top() -\/> \mbox{\hyperlink{classGame_a79df6376b332d63c9eca0dcee30305c3}{update}}(delta, event);}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58        \textcolor{keywordflow}{if} (!states.empty())}
+\DoxyCodeLine{59        \{}
+\DoxyCodeLine{60            \textcolor{keywordflow}{if} (states.top() -\/> get\_is\_done())}
+\DoxyCodeLine{61            \{}
+\DoxyCodeLine{62                remove\_top();}
+\DoxyCodeLine{63            \}}
+\DoxyCodeLine{64            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (states.top() -\/> get\_exit\_status())}
+\DoxyCodeLine{65            \{}
+\DoxyCodeLine{66               window -\/> close();}
+\DoxyCodeLine{67            \}}
+\DoxyCodeLine{68            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (states.top() -\/> get\_leaderboard\_status())}
+\DoxyCodeLine{69            \{}
+\DoxyCodeLine{70                states.push(\textcolor{keyword}{new} \mbox{\hyperlink{classLeaderboardState}{LeaderboardState}}(window));}
+\DoxyCodeLine{71            \}}
+\DoxyCodeLine{72            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (states.top() -\/> get\_playstate\_status())}
+\DoxyCodeLine{73            \{}
+\DoxyCodeLine{74                remove\_top();}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76                \textcolor{comment}{//To add new level, push a new playstate to the stack with the relevant filename.}}
+\DoxyCodeLine{77                \textcolor{comment}{//Or change the current file in level.txt to your hearts desire.}}
+\DoxyCodeLine{78                states.push(\textcolor{keyword}{new} \mbox{\hyperlink{classPlayState}{PlayState}}(window, \textcolor{stringliteral}{"{}Level.txt"{}}));}
+\DoxyCodeLine{79            \}}
+\DoxyCodeLine{80            \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (states.top() -\/> get\_gameover\_status())}
+\DoxyCodeLine{81            \{}
+\DoxyCodeLine{82                \textcolor{keywordtype}{bool} is\_game\_won\{states.top() -\/> get\_is\_game\_won()\};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84                score = states.top() -\/> get\_score();}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86                remove\_top();}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88                states.push(\textcolor{keyword}{new} \mbox{\hyperlink{classGameOverState}{GameOverState}}(window, is\_game\_won, score));}
+\DoxyCodeLine{89            \}}
+\DoxyCodeLine{90        \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     sf::Time time = delta\_clock.getElapsedTime();}
+\DoxyCodeLine{93     delta\_clock.restart().asSeconds();}
+\DoxyCodeLine{94 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game.\+h\item 
+Game.\+cpp\end{DoxyCompactItemize}

@@ -6,7 +6,6 @@ Object::Object(std::string const& text, sf::Vector2f const& dim)
 {
     init_texture(text);
     shape.setScale(dim);
-
 }
 
 

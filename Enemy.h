@@ -1,12 +1,8 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #ifndef GAME_ENEMY_H
 #define GAME_ENEMY_H
 #include "Character.h"
-#include "vector"
 #include "Shot.h"
-//#include "Player.h"
-#include <memory>
+
 
 class Enemy : public Character {
 public:

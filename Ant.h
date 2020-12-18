@@ -3,7 +3,6 @@
 #include "Enemy.h"
 #include "Shot.h"
 #include "Player.h"
-#include <iostream>
 
 
 class Ant : public Enemy {
@@ -13,7 +12,7 @@ public:
        int const att_timer);
 
     void move(float const, float const) override;
-    void update(float const frame_time,
+    void update(float const,
             std::vector<Shot> & player_shots,
             std::vector<Shot> & ant_shots,
             Character* player) override;

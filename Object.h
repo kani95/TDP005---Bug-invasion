@@ -28,9 +28,6 @@ protected:
     sf::Vector2f position;
     sf::Vector2f direction;
     sf::Sprite shape;
-
-
 };
-
 
 #endif //MAIN_CPP_OBJECT_H

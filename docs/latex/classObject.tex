@@ -1,0 +1,81 @@
+\hypertarget{classObject}{}\doxysection{Object Class Reference}
+\label{classObject}\index{Object@{Object}}
+Inheritance diagram for Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classObject}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classObject_a715761616304b022fd6c4dc715ea1edd}\label{classObject_a715761616304b022fd6c4dc715ea1edd}} 
+{\bfseries Object} (std\+::string const \&text, sf\+::\+Vector2f const \&dim)
+\item 
+\mbox{\Hypertarget{classObject_a8144a1b059cb0dee86b67725244b62ce}\label{classObject_a8144a1b059cb0dee86b67725244b62ce}} 
+{\bfseries Object} (std\+::string const \&text, sf\+::\+Vector2f const \&pos, sf\+::\+Vector2f const \&dim)
+\item 
+\mbox{\Hypertarget{classObject_a25d00061f497749ffaf0a3b548960d51}\label{classObject_a25d00061f497749ffaf0a3b548960d51}} 
+{\bfseries Object} (std\+::string const \&text, sf\+::\+Vector2f const \&pos, sf\+::\+Vector2f const \&dir, sf\+::\+Vector2f const \&dim)
+\item 
+\mbox{\Hypertarget{classObject_a477ee6fecb7b67b722a0d0c4ea43b4b0}\label{classObject_a477ee6fecb7b67b722a0d0c4ea43b4b0}} 
+void {\bfseries render} (sf\+::\+Render\+Target $\ast$window) const
+\item 
+\mbox{\Hypertarget{classObject_aa531c076991811ee6501e03928910284}\label{classObject_aa531c076991811ee6501e03928910284}} 
+float {\bfseries get\+\_\+right} () const
+\item 
+\mbox{\Hypertarget{classObject_ace27de8d1dda449add1bc147f167def0}\label{classObject_ace27de8d1dda449add1bc147f167def0}} 
+float {\bfseries get\+\_\+left} () const
+\item 
+\mbox{\Hypertarget{classObject_a9853033012f5f343118d37487b4d21ec}\label{classObject_a9853033012f5f343118d37487b4d21ec}} 
+float {\bfseries get\+\_\+top} () const
+\item 
+\mbox{\Hypertarget{classObject_a0f6c64b2b55eaabae0cd545802b8d08f}\label{classObject_a0f6c64b2b55eaabae0cd545802b8d08f}} 
+float {\bfseries get\+\_\+bot} () const
+\item 
+\mbox{\Hypertarget{classObject_a11c16e9655ae2995a6005f65ba590ed6}\label{classObject_a11c16e9655ae2995a6005f65ba590ed6}} 
+void {\bfseries set\+\_\+position} (sf\+::\+Vector2f const \&pos)
+\item 
+\mbox{\Hypertarget{classObject_a119ad33f09605b36f3d78ee4e25d6aa9}\label{classObject_a119ad33f09605b36f3d78ee4e25d6aa9}} 
+void {\bfseries set\+\_\+scale} (sf\+::\+Vector2f const \&scale)
+\item 
+\mbox{\Hypertarget{classObject_a664ff080840c628667a526e39264a27b}\label{classObject_a664ff080840c628667a526e39264a27b}} 
+bool {\bfseries check\+\_\+coll} (sf\+::\+Sprite \&sprite) const
+\item 
+\mbox{\Hypertarget{classObject_a8aaea14ccc56e69a949b9fc0f617e83d}\label{classObject_a8aaea14ccc56e69a949b9fc0f617e83d}} 
+sf\+::\+Sprite \& {\bfseries get\+\_\+sprite} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classObject_aa7ab9db56d297b6871ba6a11b314b9ba}\label{classObject_aa7ab9db56d297b6871ba6a11b314b9ba}} 
+void {\bfseries init\+\_\+texture} (std\+::string const \&file\+\_\+name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classObject_a8ff6491b841d0f48da3d98041fbca934}\label{classObject_a8ff6491b841d0f48da3d98041fbca934}} 
+std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$ {\bfseries texture} = std\+::make\+\_\+shared$<$sf\+::\+Texture$>$()
+\item 
+\mbox{\Hypertarget{classObject_acaeaf024e444c21a4f2e273a49829e8b}\label{classObject_acaeaf024e444c21a4f2e273a49829e8b}} 
+sf\+::\+Vector2f {\bfseries position}
+\item 
+\mbox{\Hypertarget{classObject_a5d33f020fcf7352f0a07cc1880c37cfe}\label{classObject_a5d33f020fcf7352f0a07cc1880c37cfe}} 
+sf\+::\+Vector2f {\bfseries direction}
+\item 
+\mbox{\Hypertarget{classObject_a563c6c058bb3549ef8bc8cbc01c4e7e1}\label{classObject_a563c6c058bb3549ef8bc8cbc01c4e7e1}} 
+sf\+::\+Sprite {\bfseries shape}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 7 of file Object.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Object.\+h\item 
+Object.\+cpp\end{DoxyCompactItemize}

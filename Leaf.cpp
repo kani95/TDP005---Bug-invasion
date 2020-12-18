@@ -1,6 +1,4 @@
 #include "Leaf.h"
-#include <iostream>
-
 
 
 Leaf::Leaf(std::string const& text, sf::Vector2f const& pos, sf::Vector2f const& dim)
