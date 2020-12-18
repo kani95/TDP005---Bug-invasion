@@ -20,12 +20,11 @@ Player::Player(std::string const& text,
 
 void Player::update_position(float frame_time)
 {
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
     {
         frame_time = frame_time / 2;
     }
-
+    
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {

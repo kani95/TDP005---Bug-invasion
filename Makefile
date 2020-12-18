@@ -68,10 +68,10 @@ RM = /home/andrei/Downloads/clion-2020.2.4/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/andrei/school/tdp005/GAME/tdp005-projekt
+CMAKE_SOURCE_DIR = tdp005-projekt
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/andrei/school/tdp005/GAME/tdp005-projekt
+CMAKE_BINARY_DIR = tdp005-projekt
 
 #=============================================================================
 # Targets provided globally by CMake.
