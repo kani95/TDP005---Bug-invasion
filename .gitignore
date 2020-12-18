@@ -4,7 +4,7 @@ cmake-build-debug*
 *
 !*.*
 !*/
-!Makefile
+Makefile
 
 CMakeCache.txt
 CMakeFiles/

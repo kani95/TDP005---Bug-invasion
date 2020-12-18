@@ -70,16 +70,40 @@ foreach(i ${SFML_MODULES})
 endforeach(i)
 endif()
 set (SOURCE_FILES
+        Ant.cpp
+        Ant.h
+        AntSwarm.cpp
+        AntSwarm.h
         Character.cpp
         Character.h
+        Enemy.cpp
+        Enemy.h
         Game.cpp
         Game.h
+        GameOverState.cpp
+        GameOverState.h
+        LeaderboardState.cpp
+        LeaderboardState.h
         Leaf.cpp
         Leaf.h
         main.cpp
         Object.cpp
         Object.h
         Player.cpp
-        Player.h)
+        Player.h
+        PlayState.cpp
+        PlayState.h
+        State.cpp
+        State.h
+        Shot.cpp
+        Shot.h
+        Spider.cpp
+        Spider.h
+        SpiderSwarm.cpp
+        SpiderSwarm.h
+        MenuState.cpp
+        MenuState.h)
+
 add_executable(game main.cpp)
-target_link_libraries(game ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})]]
+target_link_libraries(game ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+]]
