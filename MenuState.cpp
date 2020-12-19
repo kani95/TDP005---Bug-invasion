@@ -70,7 +70,7 @@ void MenuState::poll_events(sf::Event & event)
             case sf::Event::Closed:
                 exit_status = true;
                 break;
-            case sf::Event::KeyReleased:
+            case sf::Event::KeyPressed:
                 switch(event.key.code)
                 {
                     case sf::Keyboard::Down:
