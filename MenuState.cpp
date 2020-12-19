@@ -99,6 +99,8 @@ void MenuState::poll_events(sf::Event & event)
                     default:
                         break;
                 }
+            default:
+                break;
         }
     }
 }
