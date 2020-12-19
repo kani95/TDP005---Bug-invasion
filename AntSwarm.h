@@ -34,10 +34,10 @@ public:
 
 private:
     std::vector<Ant> ant_swarm;
-    bool is_swarm_right{true};
-    short int border_hit{};
-    float border_limit_left{};
-    float border_limit_right{};
+    bool is_swarm_right;
+    short int border_hit;
+    float border_limit_left;
+    float border_limit_right;
     sf::Vector2f direction;
     sf::Vector2f shot_dir;
 };

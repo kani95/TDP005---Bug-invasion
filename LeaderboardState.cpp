@@ -99,7 +99,7 @@ void LeaderboardState::set_ui(sf::RenderWindow* target)
 }
 
 
-void LeaderboardState::update(float const frame_time, sf::Event & event)
+void LeaderboardState::update(float const, sf::Event & event)
 {
     poll_events(event);
 }
@@ -153,7 +153,7 @@ void LeaderboardState::render_scores()
         max_ten = 10;
     }
 
-    for (int i{}; i < max_ten; i++)
+    for (size_t i{}; i < max_ten; i++)
     {
         std::string curr{std::to_string(v_scores.at(i))};
 

@@ -14,6 +14,7 @@ public:
               int const hp);
 
     Character();
+    virtual ~Character() = default;
 
     virtual void move(float const, float const) = 0;
     virtual void take_damage();

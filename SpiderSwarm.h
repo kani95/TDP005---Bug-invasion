@@ -31,12 +31,13 @@ private:
     std::string text;
     sf::Vector2f dir;
     sf::Vector2f dim;
-    sf::Vector2f spawn_limit_x;
     sf::Vector2f spawn_limit_y;
+    sf::Vector2f spawn_limit_x;
+
 
     std::vector<Spider> all_spiders;
 
     void add_second();
-    void spawn_spider(Character* player, std::vector<Shot> & ant_shots);
+    void spawn_spider(Character* player);
 };
 #endif //GAME_H_SPIDERSWARM_H

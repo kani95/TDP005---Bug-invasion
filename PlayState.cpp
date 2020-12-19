@@ -2,8 +2,8 @@
 
 
 PlayState::PlayState(sf::RenderWindow* window, std::string const& filename)
-        : State{window}, game_clock{}, score_text{}, player{}, leaf{},
-          ant_swarm{}, spider_swarm{}
+        : State{window},player{}, leaf{}, ant_swarm{}, spider_swarm{},
+          player_shots{}, ant_shots{}, score_text{}, game_clock{}
 {
     score_text.setFont(font);
     score_text.setCharacterSize(30);
@@ -163,6 +163,7 @@ void PlayState::update(float const frame_time, sf::Event & event)
     spider_swarm -> update(frame_time, player_shots, ant_shots, player);
 
     ant_swarm -> update(frame_time, player_shots, ant_shots, player);
+
 }
 
 

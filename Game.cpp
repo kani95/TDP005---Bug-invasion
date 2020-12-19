@@ -2,7 +2,7 @@
 
 
 Game::Game()
-        :delta{}, window{nullptr}, score{}
+        : states{}, window{}, video_mode{}, event{}, delta_clock{}, delta{}, score{}
 {
     init_window();
     init_states();
@@ -28,7 +28,7 @@ void Game::init_window()
     video_mode.height = 1080;
     video_mode.bitsPerPixel= 32;
 
-    window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game", sf::Style::Fullscreen);
+    window = new sf::RenderWindow(sf::VideoMode(video_mode), "Game");
     window -> setKeyRepeatEnabled(false);
     window -> setFramerateLimit(60);
     window -> setVerticalSyncEnabled(true);
@@ -89,7 +89,6 @@ void Game::update()
            }
        }
 
-    sf::Time time = delta_clock.getElapsedTime();
     delta_clock.restart().asSeconds();
 }
 

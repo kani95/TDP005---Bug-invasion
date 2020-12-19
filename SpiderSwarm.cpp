@@ -10,13 +10,13 @@ SpiderSwarm::SpiderSwarm(std::string const& text,
                          int const spawn_timer,
                          int const score,
                          int const hp)
-        : all_spiders{}, timer{}, spawn_timer{spawn_timer}, score{score},
-          hp{hp}, dir{dir}, dim{dim}, spawn_limit_y{spawn_limit_y},
-          spawn_limit_x{spawn_limit_x}, text{text}
+        : timer{}, spawn_timer{spawn_timer}, score{score},
+          hp{hp}, text{text},  dir{dir}, dim{dim}, spawn_limit_y{spawn_limit_y},
+          spawn_limit_x{spawn_limit_x}, all_spiders{}
 {}
 
 
-void SpiderSwarm::spawn_spider(Character* player, std::vector<Shot> & ant_shots)
+void SpiderSwarm::spawn_spider(Character* player)
 {
     if (timer >= spawn_timer)
     {
@@ -43,7 +43,7 @@ void SpiderSwarm::update(float const frame_time,
                          std::vector<Shot> & ant_shots,
                          Character* player)
 {
-    spawn_spider(player, ant_shots);
+    spawn_spider(player);
 
     for (size_t i{}; i < all_spiders.size(); ++i)
     {

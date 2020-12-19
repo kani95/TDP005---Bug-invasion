@@ -23,6 +23,7 @@ private:
     Leaf* leaf;
     AntSwarm* ant_swarm;
     SpiderSwarm* spider_swarm;
+
     std::vector<Shot> player_shots;
     std::vector<Shot> ant_shots;
 

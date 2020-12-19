@@ -8,7 +8,7 @@ class LeaderboardState : public State
 public:
     explicit LeaderboardState(sf::RenderWindow * window);
 
-    void update(float const frame_time, sf::Event & event) override;
+    void update(float const, sf::Event & event) override;
     void render() override;
 
 private:

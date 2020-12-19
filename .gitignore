@@ -2,6 +2,9 @@ cmake-build-debug*
 *~
 !*.*
 !*/
+*Makefile*
+dconfig-tmp
+game
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake

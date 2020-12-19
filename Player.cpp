@@ -13,7 +13,7 @@ Player::Player(std::string const& text,
                sf::Vector2f const& shot_dim,
                sf::Vector2f const& shot_dir)
         :Character(text, pos, direction, dimension, movespeed, hp),
-         att_timer{att_timer}, timer{}, timer_dmg{timer_dmg},
+         timer{}, timer_dmg{timer_dmg}, att_timer{att_timer},
          shot_dim{shot_dim}, shot_dir{shot_dir}, shot_text{shot_text}
 {}
 

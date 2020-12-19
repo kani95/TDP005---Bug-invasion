@@ -104,7 +104,7 @@ void Spider::collision_player(std::vector<Shot> & player_shots,
 
 void Spider::update(float const frame_time,
         std::vector<Shot> & player_shots,
-        std::vector<Shot> & ant_shots,
+        std::vector<Shot> &,
         Character* player)
 {
     move(direction.x * frame_time, direction.y * frame_time);

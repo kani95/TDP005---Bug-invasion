@@ -18,7 +18,7 @@ public:
     void move(float const, float const) override;
     void update(float const frame_time,
             std::vector<Shot> & player_shots,
-            std::vector<Shot> & ant_shots,
+            std::vector<Shot> &,
             Character* player) override;
 
 private:

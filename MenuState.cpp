@@ -51,7 +51,7 @@ void MenuState::set_choices()
 }
 
 
-void MenuState::update(float const frame_time, sf::Event & event)
+void MenuState::update(float const, sf::Event & event)
 {
     poll_events(event);
 }
@@ -117,7 +117,7 @@ void MenuState::move_up()
 
 void MenuState::move_down()
 {
-    if (selected_choice + 1 < choices.size())
+    if (selected_choice + 1 < (int)choices.size())
     {
         choices[selected_choice].setFillColor(sf::Color::Green);
         ++selected_choice;

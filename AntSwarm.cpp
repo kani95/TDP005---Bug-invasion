@@ -15,9 +15,9 @@ AntSwarm::AntSwarm(std::string const& text,
                    int const score,
                    int const hp,
                    int const att_timer)
-        : ant_swarm{}, direction{dir}, border_limit_right{border_limit_right},
-     border_limit_left{border_limit_left}, shot_dir{shot_dir},
-     is_swarm_right{true}, border_hit{}
+        : ant_swarm{}, is_swarm_right{true}, border_hit{},
+        border_limit_left{border_limit_left}, border_limit_right{border_limit_right},
+        direction{dir}, shot_dir{shot_dir}
 {
     float prev_x {pos.x};
     for (unsigned short int i{0}; i < total_ants; i++)
@@ -57,7 +57,7 @@ std::pair<float, float> AntSwarm::find_furthest_ants()
     float ant_right_x{ant_swarm.at(0).get_left()};
 
 
-    for (unsigned int i{0}; i < get_size_swarm(); ++i)
+    for (int i{0}; i < get_size_swarm(); ++i)
     {
         float current_ant_pos = ant_swarm.at(i).get_left();
 
@@ -137,13 +137,13 @@ void AntSwarm::move_swarm(float const frame_time)
 
         // check which way the swarm is going to move, move each ant
         if (is_swarm_right) {
-            for (unsigned int i{0}; i < get_size_swarm(); ++i)
+            for (int i{0}; i < get_size_swarm(); ++i)
             {
                 Ant &ant{ant_swarm.at(i)};
                 ant.move(x_movement, y_movement);
             }
         } else {
-            for (unsigned int i{0}; i < get_size_swarm(); ++i)
+            for (int i{0}; i < get_size_swarm(); ++i)
             {
                 Ant &ant{ant_swarm.at(i)};
                 ant.move(-x_movement, y_movement);

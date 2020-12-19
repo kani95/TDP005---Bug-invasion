@@ -14,7 +14,7 @@ Character::Character(std::string const& text, sf::Vector2f const& pos,
                      float const movespeed,
                      int const hp)
         : Object(text, pos, direction, dimention),
-          score{0}, movespeed{movespeed}, hp{hp}
+          score{0}, hp{hp}, movespeed{movespeed}
 {}
 
 

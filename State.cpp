@@ -2,10 +2,10 @@
 
 
 State::State(sf::RenderWindow *window)
-        :window{window}, is_done{false}, exit_status{false},
+        :window{window}, font{}, is_done{false}, exit_status{false},
         leaderboard_status{false}, gameover_status{false},
         playstate_status{false}, is_game_won{false},
-        score{}, font{}
+        score{}
 {
     load_font("ARCADECLASSIC.TTF");
 }
